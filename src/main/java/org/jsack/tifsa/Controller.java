@@ -1,4 +1,4 @@
-package tifsa;
+package org.jsack.tifsa;
 
 public class Controller {
 }
