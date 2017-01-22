@@ -1,4 +1,4 @@
-package sample;
+package tifsa;
 
 public class Controller {
 }
