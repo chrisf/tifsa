@@ -25,20 +25,20 @@ public class Main extends Application {
 
             private void setProgress(double step) {
                 // Send progress to preloader
-                final int maxSteps = 2;
-                notifyPreloader(new Preloader.ProgressNotification(((double) i)/maxSteps));
+                notifyPreloader(new Preloader.ProgressNotification(step));
             }
 
             private void connectToDatabase() {
-                
+                TestConnect testConnect = new TestConnect();
             }
 
             @Override
             protected Void call() throws Exception {
-                setProgress(0);
+                setProgress(1);
 
                 connectToDatabase();
-                setProgress(1);
+
+                setProgress(2);
 
                 // After init is ready, the app is ready to be shown
                 // Do this before hiding the preloader stage to prevent the
