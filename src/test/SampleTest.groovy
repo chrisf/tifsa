@@ -1,4 +1,4 @@
-package org.jsack.tifsa.Sql
+package org.jsack.tifsa;
 
 /**
  * Created by cfitz on 1/29/17.
