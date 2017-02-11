@@ -5,15 +5,17 @@
 <?import javafx.scene.layout.GridPane?>
 <?import javafx.scene.layout.RowConstraints?>
 
-<GridPane alignment="center" hgap="10" vgap="10" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/8.0.111" fx:controller="org.jsack.tifsa.Controller">
-    <Button id="helloWorld" alignment="BOTTOM_CENTER" prefHeight="31.0" prefWidth="120.0" GridPane.rowIndex="2">Hello world</Button>
-    <Button id="helloWorld2" alignment="TOP_CENTER" GridPane.rowIndex="1">Hello World #2</Button>
-   <columnConstraints>
-      <ColumnConstraints />
-   </columnConstraints>
-   <rowConstraints>
-      <RowConstraints />
-      <RowConstraints />
-      <RowConstraints />
-   </rowConstraints>
+<GridPane alignment="center" hgap="10" stylesheets="menu.css" vgap="10" xmlns="http://javafx.com/javafx/8.0.112" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.jsack.tifsa.MainWindowController">
+    <columnConstraints>
+        <ColumnConstraints />
+    </columnConstraints>
+    <rowConstraints>
+        <RowConstraints />
+        <RowConstraints />
+        <RowConstraints />
+    </rowConstraints>
+
+    <Button fx:id="salesButton" GridPane.rowIndex="0" GridPane.columnIndex="0">Sales</Button>
+    <Button fx:id="reportsButton" GridPane.rowIndex="1" GridPane.columnIndex="0">Reports</Button>
+    <Button fx:id="adminButton" GridPane.rowIndex="2" GridPane.columnIndex="0">Administration</Button>
 </GridPane>
