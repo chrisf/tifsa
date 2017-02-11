@@ -36,7 +36,8 @@ public class Main extends Application {
             protected Void call() throws Exception {
                 setProgress(1);
 
-                connectToDatabase();
+                // ignore for now because takes too long on startup
+                //connectToDatabase();
 
                 setProgress(2);
 
@@ -64,20 +65,26 @@ public class Main extends Application {
                 if (Boolean.TRUE.equals(t1)) {
                     Platform.runLater(new Runnable() {
                         public void run() {
-                            Parent root = null;
-                            try {
-                                root = FXMLLoader.load(getClass().getResource("/main_window.fxml"));
-                            } catch (IOException e) {
-                                e.printStackTrace();
-                            }
-                            primaryStage.setTitle("Hello World");
-                            primaryStage.setScene(new Scene(root, 300, 275));
-                            primaryStage.show();
+                            showMainScreen(primaryStage);
                         }
                     });
                 }
             }
         });
+    }
+
+    public void showMainScreen(Stage primaryStage) {
+        Parent root = null;
+        try {
+            root = FXMLLoader.load(getClass().getResource("/main_window.fxml"));
+            primaryStage.setTitle("Tifsa");
+            Scene mainWindowScene = new Scene(root, 300, 275);
+
+            primaryStage.setScene(mainWindowScene);
+            primaryStage.show();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
 
