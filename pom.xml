@@ -16,8 +16,22 @@ For more information please access fxapps.blogspot.com
       <jar.final.name>tifsa</jar.final.name>
       <!--  the default class that has the public static void main(String[]) method -->
       <main.class>org.jsack.tifsa.Main</main.class>
+      <maven.compiler.source>1.8</maven.compiler.source>
+      <maven.compiler.target>1.8</maven.compiler.target>
    </properties>
    <dependencies>
+      <dependency>
+         <groupId>mysql</groupId>
+         <artifactId>mysql-connector-java</artifactId>
+         <version>6.0.5</version>
+      </dependency>
+      <!-- https://mvnrepository.com/artifact/org.spockframework/spock-core -->
+      <dependency>
+         <groupId>org.spockframework</groupId>
+         <artifactId>spock-core</artifactId>
+         <version>1.0-groovy-2.4</version>
+      </dependency>
+
       <!-- Add your dependencies here
     <dependency>
       <groupId>{groupId}</groupId>
