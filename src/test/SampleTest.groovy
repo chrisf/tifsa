@@ -1,5 +1,4 @@
-package org.jsack.tifsa;
-
+package org.jsack.tifsa
 /**
  * Created by cfitz on 1/29/17.
  */
@@ -14,4 +13,5 @@ class SampleTest extends spock.lang.Specification {
         3 | 4 | 7
         -1 | 2 | 1
     }
+
 }

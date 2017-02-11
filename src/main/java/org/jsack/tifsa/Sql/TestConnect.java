@@ -8,15 +8,10 @@ import java.sql.DriverManager;
  */
 public class TestConnect {
     public TestConnect() {
-        String azureConnectionString =
-                "jdbc:sqlserver://tista.database.windows.net:1433;"
-                        + "database=Tista;"
-                        + "user=whataburger@tista;"
-                        + "password=p6I3i8lU6rol;"
-                        + "encrypt=true;"
-                        + "trustServerCertificate=false;"
-                        + "hostNameInCertificate=*.database.windows.net;"
-                        + "loginTimeout=30;";
+        String mysqlConnectionString = "jdbc:mysql://35.184.3.121/mysql"
+               + "";
+
+
         String localConnectionString = "jdbc:sqlserver://localhost:32770;user=sa;password=Password1!";
         try {
             // Load SQL Server JDBC driver and establish connection.
