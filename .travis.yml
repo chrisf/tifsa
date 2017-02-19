@@ -2,6 +2,12 @@ language: java
 jdk:
   - oraclejdk8
 
+services: mysql
+
+script:
+  - mvn clean test
+  - MYSQL_HOST=localhost MYSQL_USER=root MYSQL_PASSWORD='' MYSQL_DATABASE=tifsa python src/main/sql/run_all_sql.py
+
 sudo: false
 addons:
   apt:
