@@ -38,7 +38,7 @@ CREATE TABLE `Customer` (
   `CustLast` varchar(255) DEFAULT NULL,
   `CustBillFirst` varchar(255) DEFAULT NULL,
   `CustBillMidInt` varchar(255) DEFAULT NULL,
-  `CustBIllLast` varchar(255) DEFAULT NULL,
+  `CustBillLast` varchar(255) DEFAULT NULL,
   `CustAddedOn` datetime DEFAULT NULL,
   `CustAddStreet` varchar(255) DEFAULT NULL,
   `CustAddStreet2` varchar(255) DEFAULT NULL,
