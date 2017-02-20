@@ -1,7 +1,11 @@
 .button {
     -fx-fill-width: true;
     -fx-fit-to-width: true;
-    -fx-alignment: center;
-    -fx-min-width: 100%;
     -fx-border-color: red;
+    -fx-border-width: 10px;
+    -fx-background-color: cyan;
+}
+
+.root {
+    -fx-background-color: green;
 }

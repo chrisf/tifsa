@@ -2,6 +2,15 @@ language: java
 jdk:
   - oraclejdk8
 
+services: mysql
+
+before_install:
+  - mysql -e 'CREATE DATABASE IF NOT EXISTS tifsa;'
+
+script:
+  - mvn clean test
+  - MYSQL_HOST=localhost MYSQL_USER=root MYSQL_PASSWORD='' MYSQL_DATABASE=tifsa python src/main/sql/run_all_sql.py
+
 sudo: false
 addons:
   apt:
