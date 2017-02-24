@@ -48,6 +48,7 @@ public class SqlConnect {
                 //Embedded try/catches for optimal bug catching
                 try {
                     Statement sqlStmt = conn.createStatement();
+
                     //This statement is MySQL Only and just selects all the tables in the DB using the information schema.. google this if you need to.
                     ResultSet rs = sqlStmt.executeQuery("SELECT TABLE_NAME,TABLE_SCHEMA FROM information_schema.TABLES WHERE TABLE_SCHEMA=\"tifsa\"");
 
@@ -64,6 +65,9 @@ public class SqlConnect {
             }
         }
 
+    }
+    public Connection getConnection(){
+        return conn;
     }
 
 
