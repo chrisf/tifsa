@@ -13,7 +13,6 @@
         <property name = "password" value = "jSack-Tech"/>
     </bean>
 
-    <!-- Definition for studentJDBCTemplate bean -->
 
 
 </beans>

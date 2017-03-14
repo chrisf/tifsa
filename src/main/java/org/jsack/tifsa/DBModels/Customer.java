@@ -150,4 +150,8 @@ public class Customer {
     public void setCustomerStatusId(int customerStatusId) {
         this.customerStatusId = customerStatusId;
     }
+
+    public String getFullName(){
+        return getCustomerFirst() + " " + getCustomerLast();
+    }
 }
