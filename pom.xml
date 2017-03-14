@@ -65,6 +65,16 @@ For more information please access fxapps.blogspot.com
            <artifactId>mssql-jdbc</artifactId>
            <version>6.1.4.jre8-preview</version>
        </dependency>
+       <dependency>
+           <groupId>org.springframework</groupId>
+           <artifactId>spring-context</artifactId>
+           <version>4.3.7.RELEASE</version>
+       </dependency>
+       <dependency>
+           <groupId>junit</groupId>
+           <artifactId>junit</artifactId>
+           <version>4.12</version>
+       </dependency>
 
       <!-- Add your dependencies here
     <dependency>
