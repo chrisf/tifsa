@@ -22,11 +22,8 @@ public class CustomerDAO extends CustomerBase {
     @Override
     public Customer findById(int id) {
         String sql = "SELECT * FROM Customer Where (CustomerID = ?)";
-        List<Customer> customers = getTemplate().query(sql, new Object[] { id }, new CustomerWrapper());
-        if(!customers.isEmpty()) {
-            return customers.get(0);
-        }
-        return null;
+        Customer customer = getTemplate().queryForObject(sql, new Object[] { id }, new CustomerWrapper());
+        return customer;
     }
 
     @Override
@@ -43,7 +40,25 @@ public class CustomerDAO extends CustomerBase {
     }
 
     @Override
-    public void addNew(String businessName, String first, String middle, String last, String billingFirst, String billingMiddle, String billingLast, String address1, String address2, String addressCity, int state, String zip, int typeId, int statusId) {
+    public void addNew(String businessName, String first, String middle, String last,
+                       String billingFirst, String billingMiddle, String billingLast,
+                       String address1, String address2, String addressCity, int state,
+                       String zip, int typeId, int statusId) {
+        Customer customer = new Customer();
+        customer.setCustomerBusinessName(businessName);
+        customer.setCustomerFirst(first);
+        customer.setCustomerLast(last);
+        customer.setCustomerMiddleInitial(middle);
+        customer.setCustomerBillingFirst(billingFirst);
+        customer.setCustomerBillingMiddleInitial(billingMiddle);
+        customer.setCustomerBillingLast(billingLast);
+        customer.setCustomerAddressStreet(address1);
+        customer.setCustomerAddressStreet2(address2);
+        customer.setCustomerAddressCity(addressCity);
+        customer.setStateId(state);
+        customer.setCustomerAddressZip(zip);
+        customer.setCustomerTypeId(typeId);
+        customer.setStateId(statusId);
 
     }
 
@@ -59,6 +74,36 @@ public class CustomerDAO extends CustomerBase {
 
     @Override
     public void addNew(String first, String last) {
+
+    }
+
+    @Override
+    public void delete(int id) {
+
+    }
+
+    @Override
+    public void update(int id, Customer c){
+        String sqlInsert = "INSERT INTO Customer VALUES (DEFAULT,:business, :first, :middle, :last, :billingFirst" +
+                ",:billingMiddle, :billingLast,DEFAULT,:street, :street2, :city, :state, :zip, :type, :status)";
+
+        Map<String, Object> values = new HashMap<>();
+        values.put("business", c.getCustomerBusinessName());
+        values.put("first", c.getCustomerFirst());
+        values.put("middle", c.getCustomerMiddleInitial());
+        values.put("last", c.getCustomerLast());
+        values.put("billingFirst", c.getCustomerBillingFirst());
+        values.put("billingMiddle", c.getCustomerBillingMiddleInitial());
+        values.put("billingLast", c.getCustomerBillingLast());
+        values.put("street", c.getCustomerAddressStreet());
+        values.put("street2", c.getCustomerAddressStreet2());
+        values.put("city", c.getCustomerAddressCity());
+        values.put("state", c.getStateId());
+        values.put("zip", c.getCustomerAddressZip());
+        values.put("type", c.getCustomerTypeId());
+        values.put("status", c.getCustomerStatusId());
+
+       //Not finished yet.
 
     }
 }

@@ -55,4 +55,12 @@ public class CustomerTest {
         customers.forEach( c -> System.out.println(c.getFullName()));
         assert(!customers.isEmpty());
     }
+
+    @Test
+    public void testCustomerDAOFindById() {
+        CustomerDAO cust = new CustomerDAO();
+        Customer c = cust.findById(1);
+        System.out.println(c.toString());
+        assert(c != null);
+    }
 }

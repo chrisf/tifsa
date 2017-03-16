@@ -18,5 +18,6 @@ public abstract class CustomerBase extends ModelBase {
     public abstract void addNew(String businessName, String first, String last, String street1, String street2, String city, String zip, String state);
     public abstract void addNew(String first, String last);
 
-
+    public abstract void delete(int id);
+    public abstract void update(int id, Customer c);
 }

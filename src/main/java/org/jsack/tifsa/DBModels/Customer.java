@@ -154,4 +154,7 @@ public class Customer {
     public String getFullName(){
         return getCustomerFirst() + " " + getCustomerLast();
     }
+    public String toString() {
+        return String.format("%d %s %s %s", getId(), getCustomerFirst(), getCustomerMiddleInitial(), getCustomerLast());
+    }
 }
