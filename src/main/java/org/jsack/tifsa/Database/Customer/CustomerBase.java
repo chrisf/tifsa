@@ -1,6 +1,6 @@
-package org.jsack.tifsa.ModelBase;
+package org.jsack.tifsa.Database.Customer;
 
-import org.jsack.tifsa.DBModels.Customer;
+import org.jsack.tifsa.Database.ModelBase;
 
 import java.util.List;
 

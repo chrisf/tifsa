@@ -1,8 +1,8 @@
 package org.jsack.tifsa.core;
 
-import org.jsack.tifsa.DBModelWrappers.CustomerWrapper;
-import org.jsack.tifsa.DBModels.Customer;
-import org.jsack.tifsa.ModelDAOs.CustomerDAO;
+import org.jsack.tifsa.Database.Customer.CustomerWrapper;
+import org.jsack.tifsa.Database.Customer.Customer;
+import org.jsack.tifsa.Database.Customer.CustomerDAO;
 import org.junit.Test;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;

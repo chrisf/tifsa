@@ -1,4 +1,4 @@
-package org.jsack.tifsa.DBModels;
+package org.jsack.tifsa.Database.Brand;
 
 /**
  * Created by aaron on 3/16/17.

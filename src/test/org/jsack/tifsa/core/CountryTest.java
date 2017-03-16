@@ -1,13 +1,9 @@
 package org.jsack.tifsa.core;
 
-import org.jsack.tifsa.DBModelWrappers.CountryWrapper;
-import org.jsack.tifsa.DBModels.Country;
-import org.jsack.tifsa.ModelDAOs.CountryDAO;
+import org.jsack.tifsa.Database.Country.Country;
+import org.jsack.tifsa.Database.Country.CountryDAO;
 import org.junit.Ignore;
 import org.junit.Test;
-import org.springframework.context.ApplicationContext;
-import org.springframework.context.support.ClassPathXmlApplicationContext;
-import org.springframework.jdbc.core.JdbcTemplate;
 
 import java.util.List;
 

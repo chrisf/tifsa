@@ -1,6 +1,4 @@
-package org.jsack.tifsa.DBModelWrappers;
-
-import org.jsack.tifsa.DBModels.Customer;
+package org.jsack.tifsa.Database.Customer;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;

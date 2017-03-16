@@ -1,6 +1,4 @@
-package org.jsack.tifsa.DBModelWrappers;
-
-import org.jsack.tifsa.DBModels.Country;
+package org.jsack.tifsa.Database.Country;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
