@@ -1,4 +1,4 @@
-package org.jsack.tifsa.ModelBase;
+package org.jsack.tifsa.Database;
 
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;

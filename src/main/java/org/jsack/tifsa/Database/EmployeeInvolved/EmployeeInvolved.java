@@ -1,4 +1,4 @@
-package org.jsack.tifsa.DBModels;
+package org.jsack.tifsa.Database.EmployeeInvolved;
 
 /**
  * Created by aaron on 3/16/17.

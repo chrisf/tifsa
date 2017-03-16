@@ -1,4 +1,4 @@
-package org.jsack.tifsa.DBModels;
+package org.jsack.tifsa.Database.CustomerIncident;
 
 import java.sql.Date;
 

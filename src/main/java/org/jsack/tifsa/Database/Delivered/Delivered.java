@@ -1,4 +1,4 @@
-package org.jsack.tifsa.DBModels;
+package org.jsack.tifsa.Database.Delivered;
 
 import java.sql.Date;
 

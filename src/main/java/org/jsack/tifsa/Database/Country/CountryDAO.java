@@ -1,8 +1,8 @@
-package org.jsack.tifsa.ModelDAOs;
+package org.jsack.tifsa.Database.Country;
 
-import org.jsack.tifsa.DBModelWrappers.CountryWrapper;
-import org.jsack.tifsa.DBModels.Country;
-import org.jsack.tifsa.ModelBase.CountryBase;
+import org.jsack.tifsa.Database.Country.CountryWrapper;
+import org.jsack.tifsa.Database.Country.Country;
+import org.jsack.tifsa.Database.Country.CountryBase;
 
 import java.util.List;
 

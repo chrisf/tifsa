@@ -1,8 +1,8 @@
-package org.jsack.tifsa.ModelDAOs;
+package org.jsack.tifsa.Database.Customer;
 
-import org.jsack.tifsa.DBModelWrappers.CustomerWrapper;
-import org.jsack.tifsa.DBModels.Customer;
-import org.jsack.tifsa.ModelBase.CustomerBase;
+import org.jsack.tifsa.Database.Customer.CustomerWrapper;
+import org.jsack.tifsa.Database.Customer.Customer;
+import org.jsack.tifsa.Database.Customer.CustomerBase;
 
 import java.util.HashMap;
 import java.util.List;
