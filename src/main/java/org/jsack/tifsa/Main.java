@@ -13,7 +13,6 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
-import org.jsack.tifsa.Sql.TestConnect;
 
 import java.io.IOException;
 
@@ -26,10 +25,6 @@ public class Main extends Application {
             private void setProgress(double step) {
                 // Send progress to preloader
                 notifyPreloader(new Preloader.ProgressNotification(step));
-            }
-
-            private void connectToDatabase() {
-                TestConnect testConnect = new TestConnect();
             }
 
             @Override
