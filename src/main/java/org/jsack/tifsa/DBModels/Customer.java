@@ -6,7 +6,7 @@ import java.sql.Date;
  * Created by aaron on 3/13/17.
  */
 public class Customer {
-    private int id;
+    private int customerId;
     private String customerBusinessName;
     private String customerFirst;
     private String customerMiddleInitial;
@@ -23,14 +23,13 @@ public class Customer {
     private int customerTypeId;
     private int customerStatusId;
 
-    public int getId() {
-        return id;
+    public int getCustomerId() {
+        return customerId;
     }
 
-    public void setId(int id) {
-        this.id = id;
+    public void setCustomerId(int customerId) {
+        this.customerId = customerId;
     }
-
     public String getCustomerBusinessName() {
         return customerBusinessName;
     }
@@ -155,6 +154,6 @@ public class Customer {
         return getCustomerFirst() + " " + getCustomerLast();
     }
     public String toString() {
-        return String.format("%d %s %s %s", getId(), getCustomerFirst(), getCustomerMiddleInitial(), getCustomerLast());
+        return String.format("%d %s %s %s", getCustomerId(), getCustomerFirst(), getCustomerMiddleInitial(), getCustomerLast());
     }
 }
