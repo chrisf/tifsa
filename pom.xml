@@ -111,5 +111,6 @@ For more information please access fxapps.blogspot.com
             </configuration>
          </plugin>
       </plugins>
+      <testSourceDirectory>src/test</testSourceDirectory>
    </build>
 </project>
