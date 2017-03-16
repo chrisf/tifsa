@@ -1,9 +1,5 @@
 package org.jsack.tifsa.Database.Customer;
 
-import org.jsack.tifsa.Database.Customer.CustomerWrapper;
-import org.jsack.tifsa.Database.Customer.Customer;
-import org.jsack.tifsa.Database.Customer.CustomerBase;
-
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;

@@ -1,7 +1,5 @@
 package org.jsack.tifsa.Database.Country;
 
-import org.jsack.tifsa.Database.Country.Country;
-
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
