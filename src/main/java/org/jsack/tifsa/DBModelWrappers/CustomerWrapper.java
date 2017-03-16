@@ -11,7 +11,7 @@ import java.sql.SQLException;
 public class CustomerWrapper implements org.springframework.jdbc.core.RowMapper<Customer>{
     public Customer mapRow(ResultSet rs, int rowNum) throws SQLException {
         Customer customer = new Customer();
-        customer.setId(rs.getInt("CustomerID"));
+        customer.setCustomerId(rs.getInt("CustomerID"));
         customer.setCustomerBusinessName(rs.getString("CustomerBusinessName"));
         customer.setCustomerFirst(rs.getString("CustomerFirst"));
         customer.setCustomerLast(rs.getString("CustomerLast"));
