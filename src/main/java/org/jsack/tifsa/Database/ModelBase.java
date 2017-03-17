@@ -36,5 +36,4 @@ public abstract class ModelBase {
     public void setNamedTemplate(NamedParameterJdbcTemplate namedParameterJdbcTemplate) {
         this.namedTemplate = namedParameterJdbcTemplate;
     }
-
 }
