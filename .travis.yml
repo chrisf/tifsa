@@ -7,9 +7,6 @@ services:
 
 before_install:
   - docker pull microsoft/mssql-server-linux
-  - apt-get update
-  - apt-get install mssql-tools unixodbc-dev
-  - export PATH="$PATH:/opt/mssql-tools/bin"
 
 install:
   - docker run -e 'ACCEPT_EULA=Y' -e 'SA_PASSWORD=Password1!' -p 1433:1433 --name=localhost -d microsoft/mssql-server-linux
@@ -26,6 +23,8 @@ addons:
   apt:
     packages:
       - oracle-java8-installer
+      - mssql-tools
+      - unixodbc-dev
 
 notifications:
   email: false
