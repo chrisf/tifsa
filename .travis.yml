@@ -2,6 +2,12 @@ language: java
 jdk:
   - oraclejdk8
 
+before_install:
+  - docker pull microsoft/mssql-server-linux
+
+install:
+  - docker run -e 'ACCEPT_EULA=Y' -e 'SA_PASSWORD=Password1!' -p 1433:1433 --name=localhost -d microsoft/mssql-server-linux
+
 script:
   - mvn clean test
 
