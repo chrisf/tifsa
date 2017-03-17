@@ -16,7 +16,7 @@ public abstract class ModelBase {
     private NamedParameterJdbcTemplate namedTemplate;
 
     public ModelBase() {
-        String dataSource = System.getenv("dataSource");
+        String dataSource = System.getProperty("dataSource");
 
         // set default data source bean
         if(dataSource == null) {
