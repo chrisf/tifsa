@@ -5,6 +5,8 @@ jdk:
 env:
   global:
     - SQLSERVERHOSTNAME=sql
+    - SQLCMD=/opt/mssql-tools/bin/sqlcmd
+    - WORKING_DIR=/tifsa-build/
 
 services:
   - docker
@@ -16,12 +18,12 @@ install:
   - docker network create docker_net
   - docker build -t sql-server-client -f Dockerfile-travis .
   - docker run --name=$SQLSERVERHOSTNAME --net=docker_net -e 'ACCEPT_EULA=Y' -e 'SA_PASSWORD=Password1!' -p 1433:1433 --name=localhost -d microsoft/mssql-server-linux
-  - docker run --name=client --net=docker_net -t -d sql-server-client
+  - docker run --name=client --net=docker_net -t -d -w $WORKING_DIR sql-server-client
   - docker ps -a
 
 before_script:
-  - docker exec client sqlcmd -S $SQLSERVERHOSTNAME -U sa -P 'Password1!' -Q "CREATE DATABASE tifsadb"
-  - git clone git@github.com:chrisf/tifsa-sql.git
+  - docker exec client $SQLCMD -S $SQLSERVERHOSTNAME -U sa -P 'Password1!' -Q "CREATE DATABASE tifsadb"
+  - docker exec client git clone git@github.com:chrisf/tifsa-sql.git
 
 script:
   - mvn -DdataSource=testDataSource clean test
