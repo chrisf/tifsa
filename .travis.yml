@@ -7,9 +7,13 @@ services:
 
 before_install:
   - docker pull microsoft/mssql-server-linux
+  - apt-get update
+  - apt-get install mssql-tools unixodbc-dev
+  - export PATH="$PATH:/opt/mssql-tools/bin"
 
 install:
   - docker run -e 'ACCEPT_EULA=Y' -e 'SA_PASSWORD=Password1!' -p 1433:1433 --name=localhost -d microsoft/mssql-server-linux
+  - sqlcmd -S localhost -U sa -P 'Password1!' -Q "CREATE DATABASE tifsadb"
 
 before_script:
   - git clone git@github.com:chrisf/tifsa-sql.git
