@@ -9,6 +9,9 @@ import java.util.List;
  */
 public abstract class EmployeeBase extends ModelBase
 {
+    public EmployeeBase(){
+        setSimpleInsert("Employee", "EmployeeID");
+    }
     public abstract List<Employee> selectAll();
     public abstract int update(Employee employee);
     public abstract int delete(Employee employee);

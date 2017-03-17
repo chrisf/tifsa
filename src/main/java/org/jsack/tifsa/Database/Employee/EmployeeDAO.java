@@ -1,7 +1,5 @@
 package org.jsack.tifsa.Database.Employee;
 
-import org.springframework.jdbc.core.simple.SimpleJdbcInsert;
-
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -10,12 +8,6 @@ import java.util.Map;
  * Created by aaron on 3/16/17.
  */
 public class EmployeeDAO extends EmployeeBase{
-
-    private SimpleJdbcInsert insertActor;
-
-    public EmployeeDAO(){
-        insertActor = new SimpleJdbcInsert(getTemplate().getDataSource()).withTableName("Employee").usingGeneratedKeyColumns("EmployeeID");
-    }
     @Override
     public List<Employee> selectAll() {
         String sql = "SELECT * From Employee";
@@ -51,7 +43,7 @@ public class EmployeeDAO extends EmployeeBase{
         attributes.put("EmployeeMiddleInitial", employeeMiddleInitial);
         attributes.put("EmployeeLast", employeeLast);
 
-        Number id = insertActor.executeAndReturnKey(attributes);
+        Number id = getSimpleInsert().executeAndReturnKey(attributes);
         return getById(id.intValue());
     }
 
