@@ -20,6 +20,7 @@ install:
   - docker run --name=$SQLSERVERHOSTNAME --net=docker_net -e 'ACCEPT_EULA=Y' -e 'SA_PASSWORD=Password1!' -p 1433:1433 --name=$SQLSERVERHOSTNAME -d microsoft/mssql-server-linux
   - docker run --name=client --net=docker_net -t -d -w $WORKING_DIR sql-server-client
   - docker ps -a
+  - sleep 10 # allow sql server to spin up
 
 before_script:
   - docker exec client $SQLCMD -S $SQLSERVERHOSTNAME -U sa -P 'Password1!' -Q "CREATE DATABASE tifsadb"
