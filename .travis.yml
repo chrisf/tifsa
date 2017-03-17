@@ -2,6 +2,10 @@ language: java
 jdk:
   - oraclejdk8
 
+env:
+  global:
+    - SQLSERVERHOSTNAME=sql
+
 services:
   - docker
 
@@ -11,14 +15,24 @@ before_install:
 
 install:
   - docker network create docker_net
-  - docker run --name=sql-server --net=docker_net -e 'ACCEPT_EULA=Y' -e 'SA_PASSWORD=Password1!' -p 1433:1433 --name=localhost -d microsoft/mssql-server-linux
-  - docker run --name=sql-tools --net=docker_net ubuntu:xenial /bin/bash  -c "curl https://packages.microsoft.com/keys/microsoft.asc | sudo apt-key add -; curl https://packages.microsoft.com/config/ubuntu/16.04/prod.list | sudo tee /etc/apt/sources.list.d/msprod.list; sudo apt-get update; sudo apt-get install mssql-tools unixodbc-dev; sqlcmd -S sql-server -U sa -P 'Password1!' -Q "CREATE DATABASE tifsadb""
+  - docker run --name=$SQLSERVERHOSTNAME --net=docker_net -e 'ACCEPT_EULA=Y' -e 'SA_PASSWORD=Password1!' -p 1433:1433 --name=localhost -d microsoft/mssql-server-linux
+  - docker run --name=client --net=docker_net ubuntu:xenial -t -d
+  - docker ps -a
+  - docker exec client curl https://packages.microsoft.com/keys/microsoft.asc | sudo apt-key add -
+  - docker exec client curl https://packages.microsoft.com/config/ubuntu/16.04/prod.list | sudo tee /etc/apt/sources.list.d/msprod.list
+  - docker exec client sudo apt-get update
+  - docker exec client sudo apt-get install mssql-tools unixodbc-dev
+  - docker exec client sqlcmd -S sql-server -U sa -P 'Password1!' -Q "CREATE DATABASE tifsadb"
 
 before_script:
   - git clone git@github.com:chrisf/tifsa-sql.git
 
 script:
   - mvn -DdataSource=testDataSource clean test
+
+after_script:
+  - docker stop client
+  - docker ps -a
 
 addons:
   apt:
