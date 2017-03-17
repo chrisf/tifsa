@@ -12,7 +12,7 @@ before_install:
   - curl https://packages.microsoft.com/keys/microsoft.asc | sudo apt-key add -
   - curl https://packages.microsoft.com/config/ubuntu/16.04/prod.list | sudo tee /etc/apt/sources.list.d/msprod.list
   - sudo apt-get update
-  - sudo apt-get install mssql-tools
+  - sudo apt-get install mssql-tools unixodbc-dev
   - docker pull microsoft/mssql-server-linux
 
 install:
@@ -29,7 +29,6 @@ addons:
   apt:
     packages:
       - oracle-java8-installer
-      - unixodbc-dev
 
 notifications:
   email: false
