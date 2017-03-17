@@ -16,8 +16,15 @@ public abstract class ModelBase {
     private NamedParameterJdbcTemplate namedTemplate;
 
     public ModelBase() {
+        String dataSource = System.getenv("dataSource");
+
+        // set default data source bean
+        if(dataSource == null) {
+            dataSource = "dataSource";
+        }
+
         this.context = new ClassPathXmlApplicationContext("applicationContext.xml");
-        setTemplate((javax.sql.DataSource)this.context.getBean("dataSource"));
+        setTemplate((javax.sql.DataSource)this.context.getBean(dataSource));
         setNamedTemplate(new NamedParameterJdbcTemplate(this.getTemplate()));
     }
 
