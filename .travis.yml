@@ -11,7 +11,6 @@ services:
 
 before_install:
   - docker pull microsoft/mssql-server-linux
-  - docker pull ubuntu:xenial
 
 install:
   - docker network create docker_net
@@ -19,7 +18,7 @@ install:
   - docker run --name=$SQLSERVERHOSTNAME --net=docker_net -e 'ACCEPT_EULA=Y' -e 'SA_PASSWORD=Password1!' -p 1433:1433 --name=localhost -d microsoft/mssql-server-linux
   - docker run --name=client --net=docker_net -t -d sql-server-client
   - docker ps -a
-  
+
 before_script:
   - docker exec client sqlcmd -S $SQLSERVERHOSTNAME -U sa -P 'Password1!' -Q "CREATE DATABASE tifsadb"
   - git clone git@github.com:chrisf/tifsa-sql.git
