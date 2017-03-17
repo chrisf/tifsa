@@ -23,7 +23,7 @@ install:
 
 before_script:
   - docker exec client $SQLCMD -S $SQLSERVERHOSTNAME -U sa -P 'Password1!' -Q "CREATE DATABASE tifsadb"
-  - docker exec client git clone git@github.com:chrisf/tifsa-sql.git
+  - docker exec client git clone https://$GIT_USER_TOKEN@github.com:chrisf/tifsa-sql.git
 
 script:
   - mvn -DdataSource=testDataSource clean test
