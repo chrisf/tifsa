@@ -32,4 +32,8 @@ RUN curl https://packages.microsoft.com/config/ubuntu/16.04/prod.list > /etc/apt
 #RUN apt-key adv --keyserver apt-mo.trafficmanager.net --recv-keys 417A0893
 RUN export DEBIAN_FRONTEND=noninteractive && apt-get update && ACCEPT_EULA=Y apt-get install -y msodbcsql mssql-tools
 
+# run a check that the sql server port is exposed
+HEALTHCHECK --interval=5m --timeout=10s \
+  CMD nc -z -v -w5 localhost 1433 || exit 1
+
 ENV REPORT_EXIT_STATUS 1
