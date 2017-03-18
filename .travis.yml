@@ -8,6 +8,7 @@ env:
     - SQLCMD=/opt/mssql-tools/bin/sqlcmd
     - WORKING_DIR=/tifsa-build/
     - DB_PASSWORD=Password1!
+    - EXECSQL=docker exec client $SQLCMD -S $SQLSERVERHOSTNAME -U sa -P $DB_PASSWORD
 
 services:
   - docker
@@ -25,15 +26,16 @@ install:
 
 before_script:
   # create database
-  - docker exec client $SQLCMD -S $SQLSERVERHOSTNAME -U sa -P $DB_PASSWORD -Q "CREATE DATABASE tifsadb"
+  - $EXECSQL -Q "CREATE DATABASE tifsadb"
   # download sql scripts for tifsa db
   - docker exec client git clone https://$GIT_USER_TOKEN@github.com/chrisf/tifsa-sql.git
-  # run create scripts
-  - docker exec client $SQLCMD -S $SQLSERVERHOSTNAME -U sa -P $DB_PASSWORD -i "tifsa-sql/Scripts/Create Scripts/Master Create.sql"
-  # run alter scripts
-  # run insert scripts
 
 script:
+  # run create scripts
+  - $EXECSQL -i "tifsa-sql/Scripts/Create Scripts/Master Create.sql"
+  # run alter scripts
+  - $EXECSQL -i "tifsa-sql/Scripts/Alter Scripts/Master Alter.sql"
+  # run insert scripts
   - mvn -DdataSource=testDataSource clean test
 
 after_script:
