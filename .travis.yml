@@ -8,7 +8,7 @@ env:
     - SQLCMD=/opt/mssql-tools/bin/sqlcmd
     - WORKING_DIR=/tifsa-build/
     - DB_PASSWORD=Password1!
-    - EXECSQL=docker exec client $SQLCMD -S $SQLSERVERHOSTNAME -U sa -P $DB_PASSWORD
+    - EXECSQL="docker exec client $SQLCMD -S $SQLSERVERHOSTNAME -U sa -P $DB_PASSWORD"
 
 services:
   - docker
