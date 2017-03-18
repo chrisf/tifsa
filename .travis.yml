@@ -9,7 +9,7 @@ env:
     - WORKING_DIR=/tifsa-build/
     - DB_NAME=tifsadb
     - DB_PASSWORD=Password1!
-    - EXECSQL="docker exec client $SQLCMD -S $SQLSERVERHOSTNAME -U sa -P $DB_PASSWORD" -d $DB_NAME
+    - EXECSQL="docker exec client $SQLCMD -S $SQLSERVERHOSTNAME -U sa -P $DB_PASSWORD"
 
 services:
   - docker
@@ -23,7 +23,6 @@ install:
   - docker run --name=$SQLSERVERHOSTNAME --net=docker_net -e 'ACCEPT_EULA=Y' -e 'SA_PASSWORD=Password1!' -p 1433:1433 --name=$SQLSERVERHOSTNAME -d microsoft/mssql-server-linux
   - docker run --name=client --net=docker_net -t -d -w $WORKING_DIR sql-server-client
   - docker ps -a
-  - sleep 10 # allow sql server time to spin up
 
 before_script:
   # create database
@@ -33,9 +32,9 @@ before_script:
 
 script:
   # run create scripts
-  - $EXECSQL -i "tifsa-sql/Scripts/Create Scripts/Master Create.sql"
+  - $EXECSQL -d $DB_NAME -i "tifsa-sql/Scripts/Create Scripts/Master Create.sql"
   # run alter scripts
-  - $EXECSQL -i "tifsa-sql/Scripts/Alter Scripts/Master Alter.sql"
+  - $EXECSQL -d $DB_NAME -i "tifsa-sql/Scripts/Alter Scripts/Master Alter.sql"
   # run insert scripts
   - mvn -DdataSource=testDataSource clean test
 
