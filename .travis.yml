@@ -31,6 +31,7 @@ before_script:
   - $EXECSQL -d master -Q "CREATE DATABASE $DB_NAME"
   # download sql scripts for tifsa db
   - docker exec client git clone https://$GIT_USER_TOKEN@github.com/chrisf/tifsa-sql.git
+  - docker exec client python tifsa-sql/Scripts/replace_insert_script_dir.py 
 
 script:
   # run create scripts
@@ -38,6 +39,7 @@ script:
   # run alter scripts
   - $EXECSQL -d $DB_NAME -i "tifsa-sql/Scripts/Alter Scripts/Master Alter.sql"
   # run insert scripts
+  - $EXECSQL -d $DB_NAME -i "tifsa-sql/Scripts/Insert Scripts/MASTER_INSERT.sql"
   # -q=hide [info] line, -X=show debug messages
   - mvn -q -DdataSource=testDataSource clean test
 
