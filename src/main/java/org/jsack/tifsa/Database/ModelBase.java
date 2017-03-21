@@ -18,10 +18,13 @@ public abstract class ModelBase {
     private SimpleJdbcInsert simpleInsert;
 
     public ModelBase() {
-        String dataSource = System.getenv("dataSource");
-        if(dataSource == null){
+        String dataSource = System.getProperty("dataSource");
+
+        // set default data source bean
+        if(dataSource == null) {
             dataSource = "dataSource";
         }
+
         this.context = new ClassPathXmlApplicationContext("applicationContext.xml");
         setTemplate((javax.sql.DataSource)this.context.getBean(dataSource));
     }

@@ -2,10 +2,43 @@ language: java
 jdk:
   - oraclejdk8
 
-script:
-  - mvn clean test
+env:
+  global:
+    - SQLSERVERHOSTNAME=sql-server
+    - SQLCMD=/opt/mssql-tools/bin/sqlcmd
+    - WORKING_DIR=/tifsa-build/
+    - IMAGE_NAME=tifsa-test-sql-server
+    - DB_NAME=tifsadb
+    - DB_PASSWORD=Password1!
+    - EXECSQL="docker exec -t $SQLSERVERHOSTNAME $SQLCMD -S localhost -U sa -P $DB_PASSWORD"
 
-sudo: false
+services:
+  - docker
+
+install:
+  - docker build -t $IMAGE_NAME -f Dockerfile-travis .
+  - docker run --name=$SQLSERVERHOSTNAME -e 'ACCEPT_EULA=Y' -e "SA_PASSWORD=$DB_PASSWORD" -p 1433:1433 -d -w $WORKING_DIR $IMAGE_NAME
+  - docker ps -a
+  - sleep 10
+  - docker ps -a
+
+before_script:
+  # create database
+  - $EXECSQL -d master -Q "CREATE DATABASE $DB_NAME"
+  # download sql scripts for tifsa db
+  - docker exec $SQLSERVERHOSTNAME git clone https://$GIT_USER_TOKEN@github.com/chrisf/tifsa-sql.git
+  - docker exec $SQLSERVERHOSTNAME python2.7 tifsa-sql/Scripts/replace_insert_script_dir.py "tifsa-sql/Scripts/Insert Scripts/MASTER_INSERT.sql"
+
+script:
+  # run create scripts
+  - $EXECSQL -d $DB_NAME -i "tifsa-sql/Scripts/Create Scripts/Master Create.sql"
+  # run alter scripts
+  - $EXECSQL -d $DB_NAME -i "tifsa-sql/Scripts/Alter Scripts/Master Alter.sql"
+  # run insert scripts
+  - $EXECSQL -d $DB_NAME -i "tifsa-sql/Scripts/Insert Scripts/MASTER_INSERT.sql"
+  # -q=hide [info] line, -X=show debug messages
+  - mvn -q -DdataSource=testDataSource clean test
+
 addons:
   apt:
     packages:

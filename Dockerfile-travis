@@ -1,0 +1,32 @@
+#Download base image ubuntu 16.04
+
+FROM microsoft/mssql-server-linux
+
+# Update Ubuntu Software repository
+RUN export DEBIAN_FRONTEND=noninteractive && apt-get update && \
+	apt-get -y install \
+	apt-transport-https	 \
+	apt-utils \
+	autoconf \
+	curl \
+	git \
+	locales \
+	make \
+	python2.7 \
+	re2c \
+        unixodbc-dev \
+	unzip && apt-get clean
+
+# set locale to utf-8
+RUN locale-gen en_US.UTF-8
+ENV LANG='en_US.UTF-8' LANGUAGE='en_US:en' LC_ALL='en_US.UTF-8'
+
+#install ODBC driver
+RUN curl https://packages.microsoft.com/keys/microsoft.asc | apt-key add -
+RUN curl https://packages.microsoft.com/config/ubuntu/16.04/prod.list > /etc/apt/sources.list.d/mssql-release.list
+
+#RUN echo "deb [arch=amd64] https://apt-mo.trafficmanager.net/repos/mssql-ubuntu-xenial-release/ xenial main" > /etc/apt/sources.list.d/mssqlpreview.list
+#RUN apt-key adv --keyserver apt-mo.trafficmanager.net --recv-keys 417A0893
+RUN export DEBIAN_FRONTEND=noninteractive && apt-get update && ACCEPT_EULA=Y apt-get install -y msodbcsql mssql-tools
+
+ENV REPORT_EXIT_STATUS 1
