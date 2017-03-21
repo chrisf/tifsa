@@ -28,7 +28,6 @@ public abstract class ModelBase {
         this.context = new ClassPathXmlApplicationContext("applicationContext.xml");
         setTemplate((javax.sql.DataSource)this.context.getBean(dataSource));
     }
-
     public void setTemplate(DataSource ds) {
         this.template = new JdbcTemplate(ds);
         setNamedTemplate(new NamedParameterJdbcTemplate(this.getTemplate()));

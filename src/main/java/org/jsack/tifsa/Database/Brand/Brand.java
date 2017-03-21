@@ -4,24 +4,24 @@ package org.jsack.tifsa.Database.Brand;
  * Created by aaron on 3/16/17.
  */
 public class Brand {
-    private int brandId;
-    private int manufacturerId;
+    private long brandId;
+    private long manufacturerId;
     private String brandName;
 
-    public int getBrandID() {
+    public long getBrandID() {
         return brandId;
     }
 
-    public void setBrandID(int brandId) {
-        brandId = brandId;
+    public void setBrandID(long brandId) {
+        this.brandId = brandId;
     }
 
-    public int getManufacturerID() {
+    public long getManufacturerID() {
         return manufacturerId;
     }
 
-    public void setManufacturerID(int manufacturerId) {
-        manufacturerId = manufacturerId;
+    public void setManufacturerID(long manufacturerId) {
+        this.manufacturerId = manufacturerId;
     }
 
     public String getBrandName() {
@@ -29,7 +29,7 @@ public class Brand {
     }
 
     public void setBrandName(String brandName) {
-        brandName = brandName;
+        this.brandName = brandName;
     }
 
 }
