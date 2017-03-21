@@ -11,7 +11,7 @@ public class CountryWrapper implements org.springframework.jdbc.core.RowMapper<C
         Country country = new Country();
 
         country.setCountryID(rs.getInt("CountryID"));
-        country.setCountryName(rs.getString("CustomerName"));
+        country.setCountryName(rs.getString("CountryName"));
 
         return country;
     }
