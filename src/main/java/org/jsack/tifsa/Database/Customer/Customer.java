@@ -1,12 +1,12 @@
 package org.jsack.tifsa.Database.Customer;
 
-import java.sql.Date;
+import java.sql.Timestamp;
 
 /**
  * Created by aaron on 3/13/17.
  */
 public class Customer {
-    private int customerId;
+    private long customerId;
     private String customerBusinessName;
     private String customerFirst;
     private String customerMiddleInitial;
@@ -14,22 +14,47 @@ public class Customer {
     private String customerBillingFirst;
     private String customerBillingMiddleInitial;
     private String customerBillingLast;
-    private java.sql.Date customerAddedOn;
+    private java.sql.Timestamp customerAddedOn;
     private String customerAddressStreet;
     private String customerAddressStreet2;
     private String customerAddressCity;
-    private int stateId;
+    private long stateId;
     private String customerAddressZip;
-    private int customerTypeId;
-    private int customerStatusId;
+    private long customerTypeId;
+    private long customerStatusId;
 
-    public int getCustomerId() {
+    public long getCustomerId() {
         return customerId;
     }
 
-    public void setCustomerId(int customerId) {
+    public long getStateId() {
+        return stateId;
+    }
+
+    public long getCustomerTypeId() {
+        return customerTypeId;
+    }
+
+    public long getCustomerStatusId() {
+        return customerStatusId;
+    }
+
+    public void setCustomerId(long customerId) {
         this.customerId = customerId;
     }
+
+    public void setStateId(long stateId) {
+        this.stateId = stateId;
+    }
+
+    public void setCustomerTypeId(long customerTypeId) {
+        this.customerTypeId = customerTypeId;
+    }
+
+    public void setCustomerStatusId(long customerStatusId) {
+        this.customerStatusId = customerStatusId;
+    }
+
     public String getCustomerBusinessName() {
         return customerBusinessName;
     }
@@ -86,11 +111,11 @@ public class Customer {
         this.customerBillingLast = customerBillingLast;
     }
 
-    public Date getCustomerAddedOn() {
+    public Timestamp getCustomerAddedOn() {
         return customerAddedOn;
     }
 
-    public void setCustomerAddedOn(Date customerAddedOn) {
+    public void setCustomerAddedOn(Timestamp customerAddedOn) {
         this.customerAddedOn = customerAddedOn;
     }
 
@@ -118,14 +143,6 @@ public class Customer {
         this.customerAddressCity = customerAddressCity;
     }
 
-    public int getStateId() {
-        return stateId;
-    }
-
-    public void setStateId(int stateId) {
-        this.stateId = stateId;
-    }
-
     public String getCustomerAddressZip() {
         return customerAddressZip;
     }
@@ -134,26 +151,11 @@ public class Customer {
         this.customerAddressZip = customerAddressZip;
     }
 
-    public int getCustomerTypeId() {
-        return customerTypeId;
-    }
-
-    public void setCustomerTypeId(int customerTypeId) {
-        this.customerTypeId = customerTypeId;
-    }
-
-    public int getCustomerStatusId() {
-        return customerStatusId;
-    }
-
-    public void setCustomerStatusId(int customerStatusId) {
-        this.customerStatusId = customerStatusId;
-    }
-
-    public String getFullName(){
+    public String getFullName() {
         return getCustomerFirst() + " " + getCustomerLast();
     }
+
     public String toString() {
-        return String.format("%d %s %s %s", getCustomerId(), getCustomerFirst(), getCustomerMiddleInitial(), getCustomerLast());
+        return String.format("%d %s %s %s %s", getCustomerId(), getCustomerFirst(), getCustomerMiddleInitial(), getCustomerLast(), getCustomerAddedOn().toString());
     }
 }
