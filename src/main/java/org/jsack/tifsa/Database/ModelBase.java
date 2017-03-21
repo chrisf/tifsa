@@ -47,4 +47,13 @@ public abstract class ModelBase {
     public void setNamedTemplate(NamedParameterJdbcTemplate namedParameterJdbcTemplate) {
         this.namedTemplate = namedParameterJdbcTemplate;
     }
+
+    public int delete(String table, String column, long id) {
+        // create delete statement
+        String sql = "DELETE FROM ?" +
+                     "WHERE ? = ?";
+
+        // execute sql statement and return rows affected
+        return this.getTemplate().update(sql, new Object[] { table, column, id});
+    }
 }

@@ -11,13 +11,13 @@ public abstract class CountryBase extends ModelBase {
 
     public abstract List<Country> selectAll();
 
-    public abstract Country findById(int id);
+    public abstract Country selectById(long id);
 
-    public abstract List<Country> findByName(String countryName);
+    public abstract Country selectByName(String countryName);
 
-    public abstract void addNew(String countryName);
+    public abstract long create(Country c);
 
-    public abstract void delete(int id);
+    public abstract int delete(long id);
 
-    public abstract void update(int id, Country c);
+    public abstract int update(Country c);
 }
