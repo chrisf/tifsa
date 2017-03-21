@@ -6,6 +6,7 @@ import java.util.Map;
 
 public class CustomerDAO extends CustomerBase {
     public CustomerDAO(){
+        this.setSimpleInsert("Customer", "CustomerID");
     }
 
     @Override
@@ -16,90 +17,81 @@ public class CustomerDAO extends CustomerBase {
     }
 
     @Override
-    public Customer findById(int id) {
+    public Customer selectById(long id) {
         String sql = "SELECT * FROM Customer Where (CustomerID = ?)";
         Customer customer = getTemplate().queryForObject(sql, new Object[] { id }, new CustomerWrapper());
         return customer;
     }
 
     @Override
-    public List<Customer> findByName(String firstName, String lastName, boolean exclusive) {
-        Map<String, Object> values = new HashMap<String,Object>();
-        values.put("firstname", firstName);
-        values.put("lastname", lastName);
-
+    public List<Customer> selectByName(String firstName, String lastName, boolean exclusive) {
         String sql = exclusive ? "SELECT * FROM Customer WHERE (CustomerFirst = :firstname AND CustomerLast = :lastname)" :
                 "SELECT * FROM Customer WHERE (CustomerFirst = :firstname) OR (CustomerLast = :lastname)";
+        Map<String, Object> attributes = new HashMap<String,Object>();
 
-        List<Customer> customers = getNamedTemplate().query(sql, values, new CustomerWrapper());
+        attributes.put("firstname", firstName);
+        attributes.put("lastname", lastName);
+
+        List<Customer> customers = getNamedTemplate().query(sql, attributes, new CustomerWrapper());
         return customers;
     }
 
     @Override
-    public void addNew(String businessName, String first, String middle, String last,
+    public long create(String businessName, String first, String middle, String last,
                        String billingFirst, String billingMiddle, String billingLast,
-                       String address1, String address2, String addressCity, int state,
-                       String zip, int typeId, int statusId) {
-        Customer customer = new Customer();
-        customer.setCustomerBusinessName(businessName);
-        customer.setCustomerFirst(first);
-        customer.setCustomerLast(last);
-        customer.setCustomerMiddleInitial(middle);
-        customer.setCustomerBillingFirst(billingFirst);
-        customer.setCustomerBillingMiddleInitial(billingMiddle);
-        customer.setCustomerBillingLast(billingLast);
-        customer.setCustomerAddressStreet(address1);
-        customer.setCustomerAddressStreet2(address2);
-        customer.setCustomerAddressCity(addressCity);
-        customer.setStateId(state);
-        customer.setCustomerAddressZip(zip);
-        customer.setCustomerTypeId(typeId);
-        customer.setStateId(statusId);
+                       String address1, String address2, String addressCity, long state,
+                       String zip, long typeId, long statusId) {
+        Map<String, Object> attributes = new HashMap<>();
 
+        attributes.put("CustomerBusinessName", businessName);
+        attributes.put("CustomerFirst", first);
+        attributes.put("CustomerMiddleInitial", middle);
+        attributes.put("CustomerLast", last);
+        attributes.put("CustomerBillingFirst", billingFirst);
+        attributes.put("CustomerBillingMiddleInitial", billingMiddle);
+        attributes.put("CustomerBillingLast", billingLast);
+        attributes.put("CustomerAddressStreet", address1);
+        attributes.put("CustomerAddressStreet2", address2);
+        attributes.put("StateID", state);
+        attributes.put("CustomerAddressCity", addressCity);
+        attributes.put("CustomerAddressZip", zip);
+        attributes.put("CustomerTypeID", typeId);
+        attributes.put("CustomerStatusID", statusId);
+
+        return this.getSimpleInsert().executeAndReturnKey(attributes).longValue();
+    }
+    /*
+     Will need to return to these create methods after we get more DAOs created.
+     TODO: Lookups for stateIds
+     TODO: Set default status/types for the two different creates. Depends on what data is in the database.
+     */
+
+    @Override
+    public long create(String first, String last, String street1, String street2, String city, String zip, String state) {
+        long stateId = 0; //when StateDAO is created, we can set this to State.getIdByName or something.
+        return create(null, first, null, last, first, null, last, street1, street2, city, stateId, zip, 2, 0);
     }
 
     @Override
-    public void addNew(String first, String last, String street1, String street2, String city, String zip, String state) {
-
+    public long create(String businessName, String first, String last, String street1, String street2, String city, String zip, String state) {
+        long stateId = 0; //same thing here
+        //
+        return create(businessName, first, null, last, first, null, last, street1, street2, city, stateId, zip, 1, 0);
     }
 
     @Override
-    public void addNew(String businessName, String first, String last, String street1, String street2, String city, String zip, String state) {
-
+    public long create(String first, String last) {
+        return create(null, first, null, last, first, null, last, null, null, null, 0, null, 1, 0);
     }
 
     @Override
-    public void addNew(String first, String last) {
-
+    public int delete() {
+        return 0;
     }
 
     @Override
-    public void delete(int id) {
-
-    }
-
-    @Override
-    public void update(int id, Customer c){
-        String sqlInsert = "INSERT INTO Customer VALUES (DEFAULT,:business, :first, :middle, :last, :billingFirst" +
-                ",:billingMiddle, :billingLast,DEFAULT,:street, :street2, :city, :state, :zip, :type, :status)";
-
-        Map<String, Object> values = new HashMap<>();
-        values.put("business", c.getCustomerBusinessName());
-        values.put("first", c.getCustomerFirst());
-        values.put("middle", c.getCustomerMiddleInitial());
-        values.put("last", c.getCustomerLast());
-        values.put("billingFirst", c.getCustomerBillingFirst());
-        values.put("billingMiddle", c.getCustomerBillingMiddleInitial());
-        values.put("billingLast", c.getCustomerBillingLast());
-        values.put("street", c.getCustomerAddressStreet());
-        values.put("street2", c.getCustomerAddressStreet2());
-        values.put("city", c.getCustomerAddressCity());
-        values.put("state", c.getStateId());
-        values.put("zip", c.getCustomerAddressZip());
-        values.put("type", c.getCustomerTypeId());
-        values.put("status", c.getCustomerStatusId());
-
-       //Not finished yet.
-
+    public int update(long id, Customer c){
+       //not writing this update yet >_>
+        return 0;
     }
 }

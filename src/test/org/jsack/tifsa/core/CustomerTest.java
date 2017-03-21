@@ -36,14 +36,14 @@ public class CustomerTest {
     public void testCustomerDAOSelectAll(){
         CustomerDAO cust = new CustomerDAO();
         List<Customer> customers = cust.selectAll();
-        customers.forEach(c -> System.out.println(c.getFullName()));
+        customers.forEach(c -> System.out.println(c.toString()));
         assert(!customers.isEmpty());
     }
 
     @Test
     public void testCustomerDAOFindByNameExclusive() {
         CustomerDAO cust = new CustomerDAO();
-        List<Customer> customers = cust.findByName("Aaron", "Rubesh", true);
+        List<Customer> customers = cust.selectByName("Aaron", "Rubesh", true);
         customers.forEach( c -> System.out.println(c.getFullName()));
         assert(!customers.isEmpty());
     }
@@ -51,7 +51,7 @@ public class CustomerTest {
     @Test
     public void testCustomerDAOFindByNameInclusive() {
         CustomerDAO cust = new CustomerDAO();
-        List<Customer> customers = cust.findByName("", "Rubesh", false);
+        List<Customer> customers = cust.selectByName("", "Rubesh", false);
         customers.forEach( c -> System.out.println(c.getFullName()));
         assert(!customers.isEmpty());
     }
@@ -59,7 +59,7 @@ public class CustomerTest {
     @Test
     public void testCustomerDAOFindById() {
         CustomerDAO cust = new CustomerDAO();
-        Customer c = cust.findById(1);
+        Customer c = cust.selectById(1);
         System.out.println(c.toString());
         assert(c != null);
     }
