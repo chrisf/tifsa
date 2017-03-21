@@ -12,7 +12,6 @@
         <property name = "username" value = "sa"/>
         <property name = "password" value = "jSack-Tech"/>
     </bean>
-
     <bean id="testDataSource"
           class = "org.springframework.jdbc.datasource.DriverManagerDataSource">
         <property name = "driverClassName" value = "com.microsoft.sqlserver.jdbc.SQLServerDriver"/>
@@ -20,7 +19,4 @@
         <property name = "username" value = "sa"/>
         <property name = "password" value = "Password1!"/>
     </bean>
-
-
-
 </beans>
