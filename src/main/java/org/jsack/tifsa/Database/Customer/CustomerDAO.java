@@ -85,13 +85,13 @@ public class CustomerDAO extends CustomerBase {
     }
 
     @Override
-    public int delete() {
-        return 0;
+    public int delete(long id) {
+        return this.delete("Customer", "CustomerID", id);
     }
 
     @Override
     public int update(long id, Customer c){
-       //not writing this update yet >_>
+
         return 0;
     }
 }

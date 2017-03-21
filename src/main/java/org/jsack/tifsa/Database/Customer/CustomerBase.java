@@ -18,7 +18,7 @@ public abstract class CustomerBase extends ModelBase {
     public abstract long create(String businessName, String first, String last, String street1, String street2, String city, String zip, String state);
     public abstract long create(String first, String last);
 
-    public abstract int delete();
+    public abstract int delete(long id);
 
     public abstract int update(long id, Customer c);
 }
