@@ -10,7 +10,7 @@ public class ManufacturerWrapper implements org.springframework.jdbc.core.RowMap
     public Manufacturer mapRow(ResultSet rs, int rowNum) throws SQLException{
         Manufacturer manufacturer = new Manufacturer();
 
-        manufacturer.setManufacturerID(rs.getInt("countryID"));
+        manufacturer.setManufacturerID(rs.getInt("manufacturerID"));
         manufacturer.setManufacturerName(rs.getString("ManufacturerName"));
 
         return manufacturer;
