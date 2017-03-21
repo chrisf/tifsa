@@ -10,16 +10,17 @@ env:
     - IMAGE_NAME=tifsa-test-sql-server
     - DB_NAME=tifsadb
     - DB_PASSWORD=Password1!
-    - EXECSQL="docker exec $SQLSERVERHOSTNAME $SQLCMD -S localhost -U sa -P $DB_PASSWORD"
+    - EXECSQL="docker exec -t $SQLSERVERHOSTNAME $SQLCMD -S localhost -U sa -P $DB_PASSWORD"
 
 services:
   - docker
 
 install:
   - docker build -t $IMAGE_NAME -f Dockerfile-travis .
-  - docker run --name=$SQLSERVERHOSTNAME -e 'ACCEPT_EULA=Y' -e 'SA_PASSWORD=$DB_PASSWORD' -p 1433:1433 -t -d -w $WORKING_DIR $IMAGE_NAME
+  - docker run --name=$SQLSERVERHOSTNAME -e 'ACCEPT_EULA=Y' -e 'SA_PASSWORD=$DB_PASSWORD' -p 1433:1433 -d -w $WORKING_DIR $IMAGE_NAME
   - docker ps -a
   - sleep 10
+  - docker ps -a
 
 before_script:
   # create database
