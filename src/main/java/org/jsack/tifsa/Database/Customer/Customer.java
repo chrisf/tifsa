@@ -23,6 +23,10 @@ public class Customer {
     private long customerTypeId;
     private long customerStatusId;
 
+    public Customer() {
+        setCustomerAddedOn(new java.sql.Timestamp(new java.util.Date().getTime()));
+    }
+
     public long getCustomerId() {
         return customerId;
     }

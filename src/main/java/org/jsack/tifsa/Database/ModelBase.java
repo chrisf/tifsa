@@ -7,7 +7,6 @@ import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
 import org.springframework.jdbc.core.simple.SimpleJdbcInsert;
 
 import javax.sql.DataSource;
-import java.util.HashMap;
 import java.util.Map;
 
 /**
@@ -52,19 +51,19 @@ public abstract class ModelBase {
 
     public int delete(String table, String column, long id) {
         // create delete statement
-        String sql = "DELETE FROM ?" +
+        String sql = "DELETE FROM ? " +
                      "WHERE ? = ?";
 
         // execute sql statement and return rows affected
         return this.getTemplate().update(sql, new Object[] { table, column, id});
     }
 
-    public int update(String table, String idColumn, long id, HashMap<String, Object> attributes) {
+    public int update(String table, String idColumn, long id, Map<String, Object> attributes) {
         //creates our initial sql statement
         StringBuilder sql = new StringBuilder(String.format("UPDATE %s SET ", table));
 
         //loops over our attributes, since we have named templates available, we can build a statement using the column
-        //as the named variable 
+        //as the named variable
 
         //creates an index, so we know when to stop adding commas
         int i = 0;
