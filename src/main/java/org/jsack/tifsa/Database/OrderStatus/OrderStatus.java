@@ -4,14 +4,14 @@ package org.jsack.tifsa.Database.OrderStatus;
  * Created by chris on 3/20/17.
  */
 public class OrderStatus {
-    private int orderStatusId;
+    private long orderStatusId;
     private String orderStatusDescription;
 
-    public int getOrderStatusId() {
+    public long getOrderStatusId() {
         return orderStatusId;
     }
 
-    public void setOrderStatusId(int orderStatusId) {
+    public void setOrderStatusId(long orderStatusId) {
         this.orderStatusId = orderStatusId;
     }
 
