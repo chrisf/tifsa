@@ -55,7 +55,6 @@ public class CustomerContactTest {
         Assert.assertTrue(ccDao.selectById(id) == null);
         if(ccDao.selectById(id) != null) {
             System.out.println("CustomerContact test failed at delete.");
-            Assert.assertFalse(true);
             return;
         }
     }
