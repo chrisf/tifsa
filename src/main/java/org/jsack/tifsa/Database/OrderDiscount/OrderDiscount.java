@@ -1,4 +1,4 @@
-package org.jsack.tifsa.OrderDiscount;
+package org.jsack.tifsa.Database.OrderDiscount;
 
 /**
  * Created by Katie on 3/22/2017.
