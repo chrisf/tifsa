@@ -11,7 +11,7 @@ public class NoteTypeWrapper implements org.springframework.jdbc.core.RowMapper<
         NoteType noteType = new NoteType();
 
         noteType.setNoteTypeId(rs.getInt("NoteTypeID"));
-        noteType.setNoteTypeId(rs.getString("NoteTypeDescription"));
+        noteType.setNoteTypeDescription(rs.getString("NoteTypeDescription"));
 
         return noteType;
     }
