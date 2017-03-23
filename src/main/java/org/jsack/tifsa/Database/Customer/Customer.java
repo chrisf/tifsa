@@ -7,6 +7,7 @@ import java.sql.Date;
  */
 public class Customer {
     private int customerId;
+    int a;
     private String customerBusinessName;
     private String customerFirst;
     private String customerMiddleInitial;
