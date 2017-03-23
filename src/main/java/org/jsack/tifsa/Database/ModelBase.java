@@ -7,6 +7,7 @@ import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
 import org.springframework.jdbc.core.simple.SimpleJdbcInsert;
 
 import javax.sql.DataSource;
+import java.util.Map;
 
 /**
  * Created by aaron on 3/14/17.
@@ -50,10 +51,39 @@ public abstract class ModelBase {
 
     public int delete(String table, String column, long id) {
         // create delete statement
-        String sql = "DELETE FROM ?" +
+        String sql = "DELETE FROM ? " +
                      "WHERE ? = ?";
 
         // execute sql statement and return rows affected
         return this.getTemplate().update(sql, new Object[] { table, column, id});
+    }
+
+    public int update(String table, String idColumn, long id, Map<String, Object> attributes) {
+        //creates our initial sql statement
+        StringBuilder sql = new StringBuilder(String.format("UPDATE %s SET ", table));
+
+        //loops over our attributes, since we have named templates available, we can build a statement using the column
+        //as the named variable
+
+        //creates an index, so we know when to stop adding commas
+        int i = 0;
+        for(Map.Entry<String, Object> entry : attributes.entrySet()) {
+
+            //this will add something like CustomerFirst = :CustomerFirst
+            sql.append(String.format("%s = :%s",
+                    entry.getKey(), entry.getKey()));
+
+            //If there are more than one attribute, add a comma
+            if(i != attributes.size() - 1) {
+                sql.append(", ");
+            }
+            i++;
+        }
+
+        //add the WHERE part of the statement
+        sql.append(String.format(" WHERE %s = %d", idColumn, id));
+
+        //run our named template with the same attribute map
+        return this.getNamedTemplate().update(sql.toString(), attributes);
     }
 }

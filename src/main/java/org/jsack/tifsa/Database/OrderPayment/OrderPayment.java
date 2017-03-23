@@ -1,36 +1,34 @@
 package org.jsack.tifsa.Database.OrderPayment;
 
-import java.math.BigDecimal;
-
 /**
  * Created by chris on 3/20/17.
  */
 public class OrderPayment {
-    private int paymentId;
-    private int orderId;
-    private BigDecimal orderPaymentAmount;
+    private long paymentId;
+    private long orderId;
+    private double orderPaymentAmount;
 
-    public int getPaymentId() {
+    public long getPaymentId() {
         return paymentId;
     }
 
-    public void setPaymentId(int paymentId) {
+    public void setPaymentId(long paymentId) {
         this.paymentId = paymentId;
     }
 
-    public int getOrderId() {
+    public long getOrderId() {
         return orderId;
     }
 
-    public void setOrderId(int orderId) {
+    public void setOrderId(long orderId) {
         this.orderId = orderId;
     }
 
-    public BigDecimal getOrderPaymentAmount() {
+    public double getOrderPaymentAmount() {
         return orderPaymentAmount;
     }
 
-    public void setOrderPaymentAmount(BigDecimal orderPaymentAmount) {
+    public void setOrderPaymentAmount(double orderPaymentAmount) {
         this.orderPaymentAmount = orderPaymentAmount;
     }
 }
