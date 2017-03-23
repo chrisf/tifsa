@@ -34,7 +34,7 @@ public class ManufacturerDAO extends ManufacturerBase{
 
         attributes.put("ManufacturerName", m.getManufacturerName());
 
-        return this.getSimpleInsert().executeAndReturnKey(attributes).intValue();
+        return this.getSimpleInsert().executeAndReturnKey(attributes).longValue();
     }
 
     @Override

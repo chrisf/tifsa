@@ -9,10 +9,10 @@ import java.util.List;
  */
 public abstract class ManufacturerBase extends ModelBase{
     public abstract List<Manufacturer> selectAll();
-    public abstract Manufacturer selectById(int id);
+    public abstract Manufacturer selectById(long id);
     public abstract Manufacturer selectByName(String manufacturerName);
 
-    public abstract int create (Manufacturer m);
-    public abstract int delete(int id);
+    public abstract long create (Manufacturer m);
+    public abstract int delete(long id);
     public abstract int update(Manufacturer m);
 }
