@@ -4,24 +4,24 @@ package org.jsack.tifsa.Database.State;
  * Created by chris on 3/20/17.
  */
 public class State {
-    private int stateId;
-    private int countryId;
+    private long stateId;
+    private long countryId;
     private String stateName;
     private String stateAbbreviation;
 
-    public int getStateId() {
+    public long getStateId() {
         return stateId;
     }
 
-    public void setStateId(int stateId) {
+    public void setStateId(long stateId) {
         this.stateId = stateId;
     }
 
-    public int getCountryId() {
+    public long getCountryId() {
         return countryId;
     }
 
-    public void setCountryId(int countryId) {
+    public void setCountryId(long countryId) {
         this.countryId = countryId;
     }
 
