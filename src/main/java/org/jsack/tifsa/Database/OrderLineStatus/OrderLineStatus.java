@@ -4,10 +4,10 @@ package org.jsack.tifsa.Database.OrderLineStatus;
  * Created by chris on 3/20/17.
  */
 public class OrderLineStatus {
-    private int orderLineStatusId;
+    private long orderLineStatusId;
     private String orderLineStatusDescription;
 
-    public int getOrderLineStatusId() {
+    public long getOrderLineStatusId() {
         return orderLineStatusId;
     }
 

@@ -4,14 +4,14 @@ package org.jsack.tifsa.Database.PaymentType;
  * Created by chris on 3/20/17.
  */
 public class PaymentType {
-    private int paymentTypeId;
+    private long paymentTypeId;
     private String paymentTypeDescription;
 
-    public int getPaymentTypeId() {
+    public long getPaymentTypeId() {
         return paymentTypeId;
     }
 
-    public void setPaymentTypeId(int paymentTypeId) {
+    public void setPaymentTypeId(long paymentTypeId) {
         this.paymentTypeId = paymentTypeId;
     }
 

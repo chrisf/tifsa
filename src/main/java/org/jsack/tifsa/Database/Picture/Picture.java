@@ -4,23 +4,23 @@ package org.jsack.tifsa.Database.Picture;
  * Created by chris on 3/20/17.
  */
 public class Picture {
-    private int productId;
-    private int pictureId;
+    private long productId;
+    private long pictureId;
     private byte[] pictureData;
 
-    public int getProductId() {
+    public long getProductId() {
         return productId;
     }
 
-    public void setProductId(int productId) {
+    public void setProductId(long productId) {
         this.productId = productId;
     }
 
-    public int getPictureId() {
+    public long getPictureId() {
         return pictureId;
     }
 
-    public void setPictureId(int pictureId) {
+    public void setPictureId(long pictureId) {
         this.pictureId = pictureId;
     }
 
