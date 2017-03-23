@@ -4,22 +4,22 @@ package org.jsack.tifsa.Database.VendorContactCategoryMember;
  * Created by chris on 3/20/17.
  */
 public class VendorContactCategoryMember {
-    private int vendorContactId;
-    private int vendorContactCategoryId;
+    private long vendorContactId;
+    private long vendorContactCategoryId;
 
-    public int getVendorContactId() {
+    public long getVendorContactId() {
         return vendorContactId;
     }
 
-    public void setVendorContactId(int vendorContactId) {
+    public void setVendorContactId(long vendorContactId) {
         this.vendorContactId = vendorContactId;
     }
 
-    public int getVendorContactCategoryId() {
+    public long getVendorContactCategoryId() {
         return vendorContactCategoryId;
     }
 
-    public void setVendorContactCategoryId(int vendorContactCategoryId) {
+    public void setVendorContactCategoryId(long vendorContactCategoryId) {
         this.vendorContactCategoryId = vendorContactCategoryId;
     }
 }

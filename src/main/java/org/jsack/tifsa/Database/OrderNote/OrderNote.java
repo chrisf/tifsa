@@ -1,39 +1,38 @@
 package org.jsack.tifsa.Database.OrderNote;
 
-import java.sql.Date;
-import java.time.LocalDateTime;
+import java.sql.Timestamp;
 
 /**
  * Created by chris on 3/20/17.
  */
 public class OrderNote {
-    private int orderNoteId;
-    private int noteTypeId;
-    private int orderId;
+    private long orderNoteId;
+    private long noteTypeId;
+    private long orderId;
     private String orderNoteDescription;
-    private Date orderNoteDate;
+    private Timestamp orderNoteDate;
 
-    public int getOrderNoteId() {
+    public long getOrderNoteId() {
         return orderNoteId;
     }
 
-    public void setOrderNoteId(int orderNoteId) {
+    public void setOrderNoteId(long orderNoteId) {
         this.orderNoteId = orderNoteId;
     }
 
-    public int getNoteTypeId() {
+    public long getNoteTypeId() {
         return noteTypeId;
     }
 
-    public void setNoteTypeId(int noteTypeId) {
+    public void setNoteTypeId(long noteTypeId) {
         this.noteTypeId = noteTypeId;
     }
 
-    public int getOrderId() {
+    public long getOrderId() {
         return orderId;
     }
 
-    public void setOrderId(int orderId) {
+    public void setOrderId(long orderId) {
         this.orderId = orderId;
     }
 
@@ -45,11 +44,11 @@ public class OrderNote {
         this.orderNoteDescription = orderNoteDescription;
     }
 
-    public Date getOrderNoteDate() {
+    public Timestamp getOrderNoteDate() {
         return orderNoteDate;
     }
 
-    public void setOrderNoteDate(Date orderNoteDate) {
+    public void setOrderNoteDate(Timestamp orderNoteDate) {
         this.orderNoteDate = orderNoteDate;
     }
 }
