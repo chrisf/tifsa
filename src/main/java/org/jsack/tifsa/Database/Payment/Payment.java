@@ -1,46 +1,45 @@
 package org.jsack.tifsa.Database.Payment;
 
-import java.math.BigDecimal;
-import java.sql.Date;
+import java.sql.Timestamp;
 
 /**
  * Created by chris on 3/20/17.
  */
 public class Payment {
-    private int paymentId;
-    private int paymentTypeId;
-    private BigDecimal paymentAmount;
-    private Date paymentDate;
+    private long paymentId;
+    private long paymentTypeId;
+    private double paymentAmount;
+    private Timestamp paymentDate;
 
-    public int getPaymentId() {
+    public long getPaymentId() {
         return paymentId;
     }
 
-    public void setPaymentId(int paymentId) {
+    public void setPaymentId(long paymentId) {
         this.paymentId = paymentId;
     }
 
-    public int getPaymentTypeId() {
+    public long getPaymentTypeId() {
         return paymentTypeId;
     }
 
-    public void setPaymentTypeId(int paymentTypeId) {
+    public void setPaymentTypeId(long paymentTypeId) {
         this.paymentTypeId = paymentTypeId;
     }
 
-    public BigDecimal getPaymentAmount() {
+    public double getPaymentAmount() {
         return paymentAmount;
     }
 
-    public void setPaymentAmount(BigDecimal paymentAmount) {
+    public void setPaymentAmount(double paymentAmount) {
         this.paymentAmount = paymentAmount;
     }
 
-    public Date getPaymentDate() {
+    public Timestamp getPaymentDate() {
         return paymentDate;
     }
 
-    public void setPaymentDate(Date paymentDate) {
+    public void setPaymentDate(Timestamp paymentDate) {
         this.paymentDate = paymentDate;
     }
 }

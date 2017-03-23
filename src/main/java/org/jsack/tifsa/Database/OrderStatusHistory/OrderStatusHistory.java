@@ -1,46 +1,46 @@
 package org.jsack.tifsa.Database.OrderStatusHistory;
 
-import java.sql.Date;
+import java.sql.Timestamp;
 
 /**
  * Created by chris on 3/20/17.
  */
 public class OrderStatusHistory {
-    private int orderStatusId;
-    private int orderId;
-    private Date orderStatusHistoryDate;
-    private Date orderStatusHistoryEndDate;
+    private long orderStatusId;
+    private long orderId;
+    private Timestamp orderStatusHistoryDate;
+    private Timestamp orderStatusHistoryEndDate;
     private int orderStatusHistoryId;
 
-    public int getOrderStatusId() {
+    public long getOrderStatusId() {
         return orderStatusId;
     }
 
-    public void setOrderStatusId(int orderStatusId) {
+    public void setOrderStatusId(long orderStatusId) {
         this.orderStatusId = orderStatusId;
     }
 
-    public int getOrderId() {
+    public long getOrderId() {
         return orderId;
     }
 
-    public void setOrderId(int orderId) {
+    public void setOrderId(long orderId) {
         this.orderId = orderId;
     }
 
-    public Date getOrderStatusHistoryDate() {
+    public Timestamp getOrderStatusHistoryDate() {
         return orderStatusHistoryDate;
     }
 
-    public void setOrderStatusHistoryDate(Date orderStatusHistoryDate) {
+    public void setOrderStatusHistoryDate(Timestamp orderStatusHistoryDate) {
         this.orderStatusHistoryDate = orderStatusHistoryDate;
     }
 
-    public Date getOrderStatusHistoryEndDate() {
+    public Timestamp getOrderStatusHistoryEndDate() {
         return orderStatusHistoryEndDate;
     }
 
-    public void setOrderStatusHistoryEndDate(Date orderStatusHistoryEndDate) {
+    public void setOrderStatusHistoryEndDate(Timestamp orderStatusHistoryEndDate) {
         this.orderStatusHistoryEndDate = orderStatusHistoryEndDate;
     }
 

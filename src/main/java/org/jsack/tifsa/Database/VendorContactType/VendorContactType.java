@@ -4,14 +4,14 @@ package org.jsack.tifsa.Database.VendorContactType;
  * Created by chris on 3/20/17.
  */
 public class VendorContactType {
-    private int vendorContactTypeId;
+    private long vendorContactTypeId;
     private String vendorContactTypeDescription;
 
-    public int getVendorContactTypeId() {
+    public long getVendorContactTypeId() {
         return vendorContactTypeId;
     }
 
-    public void setVendorContactTypeId(int vendorContactTypeId) {
+    public void setVendorContactTypeId(long vendorContactTypeId) {
         this.vendorContactTypeId = vendorContactTypeId;
     }
 
