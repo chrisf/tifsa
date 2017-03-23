@@ -6,6 +6,7 @@ import java.util.Map;
 
 public class CustomerDAO extends CustomerBase {
     public CustomerDAO(){
+        this.setSimpleInsert("Customer", "CustomerID");
     }
 
     @Override
@@ -16,90 +17,56 @@ public class CustomerDAO extends CustomerBase {
     }
 
     @Override
-    public Customer findById(int id) {
+    public Customer selectById(long id) {
         String sql = "SELECT * FROM Customer Where (CustomerID = ?)";
         Customer customer = getTemplate().queryForObject(sql, new Object[] { id }, new CustomerWrapper());
         return customer;
     }
 
     @Override
-    public List<Customer> findByName(String firstName, String lastName, boolean exclusive) {
-        Map<String, Object> values = new HashMap<String,Object>();
-        values.put("firstname", firstName);
-        values.put("lastname", lastName);
-
+    public List<Customer> selectByName(String firstName, String lastName, boolean exclusive) {
         String sql = exclusive ? "SELECT * FROM Customer WHERE (CustomerFirst = :firstname AND CustomerLast = :lastname)" :
                 "SELECT * FROM Customer WHERE (CustomerFirst = :firstname) OR (CustomerLast = :lastname)";
+        Map<String, Object> attributes = new HashMap<String,Object>();
 
-        List<Customer> customers = getNamedTemplate().query(sql, values, new CustomerWrapper());
+        attributes.put("firstname", firstName);
+        attributes.put("lastname", lastName);
+
+        List<Customer> customers = getNamedTemplate().query(sql, attributes, new CustomerWrapper());
         return customers;
     }
 
     @Override
-    public void addNew(String businessName, String first, String middle, String last,
-                       String billingFirst, String billingMiddle, String billingLast,
-                       String address1, String address2, String addressCity, int state,
-                       String zip, int typeId, int statusId) {
-        Customer customer = new Customer();
-        customer.setCustomerBusinessName(businessName);
-        customer.setCustomerFirst(first);
-        customer.setCustomerLast(last);
-        customer.setCustomerMiddleInitial(middle);
-        customer.setCustomerBillingFirst(billingFirst);
-        customer.setCustomerBillingMiddleInitial(billingMiddle);
-        customer.setCustomerBillingLast(billingLast);
-        customer.setCustomerAddressStreet(address1);
-        customer.setCustomerAddressStreet2(address2);
-        customer.setCustomerAddressCity(addressCity);
-        customer.setStateId(state);
-        customer.setCustomerAddressZip(zip);
-        customer.setCustomerTypeId(typeId);
-        customer.setStateId(statusId);
+    public long create(Customer customer) {
+        Map<String, Object> attributes = new HashMap<>();
 
+        attributes.put("CustomerBusinessName", customer.getCustomerBusinessName());
+        attributes.put("CustomerFirst", customer.getCustomerFirst());
+        attributes.put("CustomerMiddleInitial", customer.getCustomerMiddleInitial());
+        attributes.put("CustomerLast", customer.getCustomerLast());
+        attributes.put("CustomerBillingFirst", customer.getCustomerBillingFirst());
+        attributes.put("CustomerBillingMiddleInitial", customer.getCustomerBillingMiddleInitial());
+        attributes.put("CustomerBillingLast", customer.getCustomerBillingLast());
+        attributes.put("CustomerAddressStreet", customer.getCustomerAddressStreet());
+        attributes.put("CustomerAddressStreet2", customer.getCustomerAddressStreet2());
+        attributes.put("CustomerAddedOn", customer.getCustomerAddedOn());
+        attributes.put("StateID", customer.getStateId());
+        attributes.put("CustomerAddressCity", customer.getCustomerAddressCity());
+        attributes.put("CustomerAddressZip", customer.getCustomerAddressZip());
+        attributes.put("CustomerTypeID", customer.getCustomerTypeId());
+        attributes.put("CustomerStatusID", customer.getCustomerStatusId());
+
+        return this.getSimpleInsert().executeAndReturnKey(attributes).longValue();
     }
 
     @Override
-    public void addNew(String first, String last, String street1, String street2, String city, String zip, String state) {
-
+    public int delete(long id) {
+        String sql = "DELETE FROM Customer WHERE CustomerID = ?";
+        return this.getTemplate().update(sql, new Object[] { id });
     }
 
     @Override
-    public void addNew(String businessName, String first, String last, String street1, String street2, String city, String zip, String state) {
-
-    }
-
-    @Override
-    public void addNew(String first, String last) {
-
-    }
-
-    @Override
-    public void delete(int id) {
-
-    }
-
-    @Override
-    public void update(int id, Customer c){
-        String sqlInsert = "INSERT INTO Customer VALUES (DEFAULT,:business, :first, :middle, :last, :billingFirst" +
-                ",:billingMiddle, :billingLast,DEFAULT,:street, :street2, :city, :state, :zip, :type, :status)";
-
-        Map<String, Object> values = new HashMap<>();
-        values.put("business", c.getCustomerBusinessName());
-        values.put("first", c.getCustomerFirst());
-        values.put("middle", c.getCustomerMiddleInitial());
-        values.put("last", c.getCustomerLast());
-        values.put("billingFirst", c.getCustomerBillingFirst());
-        values.put("billingMiddle", c.getCustomerBillingMiddleInitial());
-        values.put("billingLast", c.getCustomerBillingLast());
-        values.put("street", c.getCustomerAddressStreet());
-        values.put("street2", c.getCustomerAddressStreet2());
-        values.put("city", c.getCustomerAddressCity());
-        values.put("state", c.getStateId());
-        values.put("zip", c.getCustomerAddressZip());
-        values.put("type", c.getCustomerTypeId());
-        values.put("status", c.getCustomerStatusId());
-
-       //Not finished yet.
-
+    public int update(long id, Map<String, Object> attributes){
+       return this.update("Customer", "CustomerID", id, attributes);
     }
 }
