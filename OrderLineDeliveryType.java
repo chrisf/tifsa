@@ -5,15 +5,15 @@ package org.jsack.tifsa.Database.OrderLineDeliveryType;
  */
 
 public class OrderLineDeliveryType {
-    private int orderLineDeliveryTypeId;
+    private long orderLineDeliveryTypeId;
     private String orderLineDeliveryTypeDescription;
 
 
-    public int getOrderLineDeliveryTypeId() {
+    public long getOrderLineDeliveryTypeId() {
         return orderLineDeliveryTypeId;
     }
 
-    public void setOrderLineDeliveryTypeId(int orderLineDeliveryTypeId) {
+    public void setOrderLineDeliveryTypeId(long orderLineDeliveryTypeId) {
         this.orderLineDeliveryTypeId = orderLineDeliveryTypeId;
     }
 
