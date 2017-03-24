@@ -38,12 +38,12 @@ public class ManufacturerDAO extends ManufacturerBase{
     }
 
     @Override
-    public long delete(int id) {
+    public int delete(int id) {
         return this.delete("Manufacturer","ManufacturerID", id);
     }
 
     @Override
-    public long update(Manufacturer m) {
+    public int update(Manufacturer m) {
         String sql = "UPDATE Manufacturer" +
                     "SET ManufacturerName = :manufacturerName" +
                     "WHERE ManufacturerID = :id";
