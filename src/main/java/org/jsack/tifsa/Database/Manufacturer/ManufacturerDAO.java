@@ -38,7 +38,7 @@ public class ManufacturerDAO extends ManufacturerBase{
     }
 
     @Override
-    public int delete(int id) {
+    public int delete(long id) {
         return this.delete("Manufacturer","ManufacturerID", id);
     }
 
