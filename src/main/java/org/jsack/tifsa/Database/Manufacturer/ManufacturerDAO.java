@@ -29,7 +29,7 @@ public class ManufacturerDAO extends ManufacturerBase{
     }
 
     @Override
-    public int create(Manufacturer m) {
+    public long create(Manufacturer m) {
         Map<String, Object> attributes = new HashMap();
 
         attributes.put("ManufacturerName", m.getManufacturerName());
@@ -38,18 +38,18 @@ public class ManufacturerDAO extends ManufacturerBase{
     }
 
     @Override
-    public int delete(int id) {
+    public long delete(int id) {
         return this.delete("Manufacturer","ManufacturerID", id);
     }
 
     @Override
-    public int update(Manufacturer m) {
+    public long update(Manufacturer m) {
         String sql = "UPDATE Manufacturer" +
                     "SET ManufacturerName = :manufacturerName" +
                     "WHERE ManufacturerID = :id";
         Map<String, Object> attributes = new HashMap();
         attributes.put("manufacturerName", m.getManufacturerName());
-        attributes.put("manufacturerID", m.getManufacturerID());
+        attributes.put("manufacturerID", m.getManufacturerId());
 
         return this.getNamedTemplate().update(sql, attributes);
     }
