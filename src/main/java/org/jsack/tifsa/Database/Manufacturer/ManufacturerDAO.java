@@ -17,7 +17,7 @@ public class ManufacturerDAO extends ManufacturerBase{
     }
 
     @Override
-    public Manufacturer selectById(int id) {
+    public Manufacturer selectById(long id) {
         String sql = "SELECT * FROM Manufacturer WHERE ManufacturerID = ?";
         return getTemplate().queryForObject(sql, new Object[] {id}, new ManufacturerWrapper());
 }

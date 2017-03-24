@@ -15,6 +15,7 @@ public class NoteTypeDAO extends NoteTypeBase{
         return noteTypes;
     }
 
+
     @Override
     public NoteType selectById(long id) {
         String sql = "SELECT * FROM NoteType WHERE NoteTypeID = ?";
