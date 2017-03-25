@@ -4,7 +4,7 @@ package org.jsack.tifsa.Database.OrderLineIncident;
  * Created by steven on 3/24/17.
  */
 
-public class OrderLineDeliveryType {
+public class OrderLineIncident {
     private long orderLineIncidentId;
     private String incidentTypeId;
     private String orderLineIncidentDescription;
