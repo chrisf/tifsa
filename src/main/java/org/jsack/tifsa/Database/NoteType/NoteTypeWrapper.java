@@ -10,7 +10,7 @@ public class NoteTypeWrapper implements org.springframework.jdbc.core.RowMapper<
     public NoteType mapRow(ResultSet rs, int rowNum) throws SQLException {
         NoteType noteType = new NoteType();
 
-        noteType.setNoteTypeId(rs.getInt("NoteTypeID"));
+        noteType.setNoteTypeId(rs.getLong("NoteTypeID"));
         noteType.setNoteTypeDescription(rs.getString("NoteTypeDescription"));
 
         return noteType;
