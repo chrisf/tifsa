@@ -1,4 +1,4 @@
-package org.jsack.tifsa.Database.EmployeerRole;
+package org.jsack.tifsa.Database.EmployeeRole;
 
 /**
  * Created by anil gupta on 3/21/2017.
