@@ -4,25 +4,27 @@ package org.jsack.tifsa.Database.CustomerContact;
  * Created by aaron on 3/16/17.
  */
 public class CustomerContact {
-    private int customerContactId;
-    private int customerContactTypeId;
+
+
+    private long customerContactId;
+    private long customerContactTypeId;
     private String customerContactInfo;
     private boolean customerContactPrimary;
 
-    public int getCustomerContactId() {
-        return customerContactId;
-    }
-
-    public void setCustomerContactId(int customerContactId) {
+    public void setCustomerContactId(long customerContactId) {
         this.customerContactId = customerContactId;
     }
 
-    public int getCustomerContactTypeId() {
-        return customerContactTypeId;
+    public void setCustomerContactTypeId(long customerContactTypeId) {
+        this.customerContactTypeId = customerContactTypeId;
     }
 
-    public void setCustomerContactTypeId(int customerContactTypeId) {
-        this.customerContactTypeId = customerContactTypeId;
+    public long getCustomerContactId() {
+        return customerContactId;
+    }
+
+    public long getCustomerContactTypeId() {
+        return customerContactTypeId;
     }
 
     public String getCustomerContactInfo() {
@@ -40,9 +42,4 @@ public class CustomerContact {
     public void setCustomerContactPrimary(boolean customerContactPrimary) {
         this.customerContactPrimary = customerContactPrimary;
     }
-
-
-
-
-
 }

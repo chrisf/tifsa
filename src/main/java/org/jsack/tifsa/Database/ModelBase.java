@@ -49,6 +49,7 @@ public abstract class ModelBase {
         this.namedTemplate = namedParameterJdbcTemplate;
     }
 
+
     public int delete(String table, String column, long id) {
         // create delete statement
         String sql = "DELETE FROM ? " +
@@ -57,7 +58,6 @@ public abstract class ModelBase {
         // execute sql statement and return rows affected
         return this.getTemplate().update(sql, new Object[] { table, column, id});
     }
-
     public int update(String table, String idColumn, long id, Map<String, Object> attributes) {
         //creates our initial sql statement
         StringBuilder sql = new StringBuilder(String.format("UPDATE %s SET ", table));
