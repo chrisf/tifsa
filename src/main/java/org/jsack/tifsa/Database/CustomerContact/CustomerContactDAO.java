@@ -1,5 +1,7 @@
 package org.jsack.tifsa.Database.CustomerContact;
 
+import org.jsack.tifsa.Database.Customer.Customer;
+
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;

@@ -35,7 +35,13 @@ public class CustomerDAO extends CustomerBase {
         List<Customer> customers = getNamedTemplate().query(sql, attributes, new CustomerWrapper());
         return customers;
     }
-
+    @Override
+    public List<Customer> selectCustomersByInfo(String info) {
+        String sql = "SELECT * " +
+                "FROM Customer INNER JOIN CustomerContact ON CustomerContact.CustomerID = Customer.CustomerID " +
+                "WHERE CustomerContact.CustomerContactInfo = ?";
+        return getTemplate().query(sql, new Object[] { info }, new CustomerWrapper());
+    }
     @Override
     public long create(Customer customer) {
         Map<String, Object> attributes = new HashMap<>();

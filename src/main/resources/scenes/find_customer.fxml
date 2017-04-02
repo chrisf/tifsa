@@ -1,14 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import java.lang.*?>
-<?import java.util.*?>
-<?import javafx.scene.*?>
-<?import javafx.scene.control.*?>
-<?import javafx.scene.layout.*?>
-
 <?import javafx.geometry.Insets?>
-<AnchorPane xmlns="http://javafx.com/javafx"
-            xmlns:fx="http://javafx.com/fxml"
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+<AnchorPane xmlns:fx="http://javafx.com/fxml"
+            xmlns="http://javafx.com/javafx"
             fx:controller="org.jsack.tifsa.Controllers.FindCustomer"
             prefHeight="400.0" prefWidth="600.0">
 
@@ -18,18 +16,18 @@
             <TextField text="" fx:id="contactInfoField" minWidth="150.0"/>
         </HBox>
         <HBox spacing="20.0" alignment="TOP_LEFT">
-            <Label text="First Name" />
+            <Label text="First Name"/>
             <TextField fx:id="customerFirstField" minWidth="150.0"/>
-            <Label text="Last Name" />
-            <TextField fx:id="customerLastField" minWidth="150.0" />
+            <Label text="Last Name"/>
+            <TextField fx:id="customerLastField" minWidth="150.0"/>
             <Button text="Search" fx:id="searchButton" onAction="#search"/>
         </HBox>
         <TableView maxHeight="300.0" maxWidth="600.0" fx:id="resultTable">
             <columns>
-                <TableColumn fx:id="businessNameColumn" text="Business Name" minWidth="150" />
-                <TableColumn fx:id="firstNameColumn" text="First" minWidth="150" />
-                <TableColumn fx:id="lastNameColumn" text="Last" minWidth="150" />
-                <TableColumn fx:id="address1Column" text="Address" minWidth="150" />
+                <TableColumn fx:id="businessNameColumn" text="Business Name" minWidth="150"/>
+                <TableColumn fx:id="firstNameColumn" text="First" minWidth="150"/>
+                <TableColumn fx:id="lastNameColumn" text="Last" minWidth="150"/>
+                <TableColumn fx:id="address1Column" text="Address" minWidth="150"/>
             </columns>
         </TableView>
         <padding>

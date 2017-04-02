@@ -13,6 +13,7 @@ public abstract class CustomerBase extends ModelBase {
     public abstract List<Customer> selectAll();
     public abstract  Customer selectById(long id);
     public abstract List<Customer> selectByName(String firstName, String lastName, boolean exclusive);
+    public abstract List<Customer> selectCustomersByInfo(String info);
 
     public abstract long create(Customer customer);
 
