@@ -7,6 +7,7 @@ public class CustomerContact {
 
 
     private long customerContactId;
+    private long customerId;
     private long customerContactTypeId;
     private String customerContactInfo;
     private boolean customerContactPrimary;
@@ -18,7 +19,13 @@ public class CustomerContact {
     public void setCustomerContactTypeId(long customerContactTypeId) {
         this.customerContactTypeId = customerContactTypeId;
     }
+    public long getCustomerId() {
+        return customerId;
+    }
 
+    public void setCustomerId(long customerId) {
+        this.customerId = customerId;
+    }
     public long getCustomerContactId() {
         return customerContactId;
     }

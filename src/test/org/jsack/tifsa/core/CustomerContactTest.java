@@ -6,6 +6,7 @@ import org.junit.Assert;
 import org.junit.Test;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -57,5 +58,12 @@ public class CustomerContactTest {
             System.out.println("CustomerContact test failed at delete.");
             return;
         }
+    }
+
+    @Test
+    public void selectByInfoTest(){
+        CustomerContactDAO ccd = new CustomerContactDAO();
+        List<CustomerContact> results =  ccd.selectByInfo("713-250-4967");
+        results.forEach(r -> System.out.println(r.getCustomerId()));
     }
 }

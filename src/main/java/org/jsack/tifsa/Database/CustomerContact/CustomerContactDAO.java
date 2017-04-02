@@ -30,6 +30,12 @@ public class CustomerContactDAO extends CustomerContactBase {
     }
 
     @Override
+    public List<CustomerContact> selectByInfo(String info) {
+        String sql = "SELECT * FROM CustomerContact WHERE CustomerContactInfo = ?";
+        return getTemplate().query(sql, new Object[] { info }, new CustomerContactWrapper());
+    }
+
+    @Override
     public long create(CustomerContact m) {
         Map<String, Object> attributes = new HashMap<>();
 
