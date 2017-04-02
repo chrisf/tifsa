@@ -1,4 +1,4 @@
-package org.jsack.tifsa.controllers;
+package org.jsack.tifsa.Controllers;
 
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;

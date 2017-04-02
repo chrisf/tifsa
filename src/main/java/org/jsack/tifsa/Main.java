@@ -58,11 +58,7 @@ public class Main extends Application {
             public void changed(
                     ObservableValue<? extends Boolean> ov, Boolean t, Boolean t1) {
                 if (Boolean.TRUE.equals(t1)) {
-                    Platform.runLater(new Runnable() {
-                        public void run() {
-                            showMainScreen(primaryStage);
-                        }
-                    });
+                    Platform.runLater(() -> showMainScreen(primaryStage));
                 }
             }
         });
@@ -71,7 +67,7 @@ public class Main extends Application {
     public void showMainScreen(Stage primaryStage) {
         Parent root = null;
         try {
-            root = FXMLLoader.load(getClass().getResource("/main_window.fxml"));
+            root = FXMLLoader.load(getClass().getResource("/scenes/main_window.fxml"));
             primaryStage.setTitle("Tifsa");
             Scene mainWindowScene = new Scene(root, 300, 275);
 

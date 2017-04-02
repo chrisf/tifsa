@@ -1,4 +1,4 @@
-package org.jsack.tifsa;
+package org.jsack.tifsa.Controllers;
 
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
