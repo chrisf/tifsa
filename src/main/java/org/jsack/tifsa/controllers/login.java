@@ -1,4 +1,4 @@
-package org.jsack.tifsa.scenes;
+package org.jsack.tifsa.controllers;
 
 /**
  * Created by aaron on 1/27/17.
