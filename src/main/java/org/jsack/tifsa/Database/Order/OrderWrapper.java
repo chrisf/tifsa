@@ -33,6 +33,8 @@ public class OrderWrapper implements org.springframework.jdbc.core.RowMapper<Ord
         order.setOrdershippingstreet(resultSet.getString("OrderShippingStreet"));
         order.setOrdershippingstreet2(resultSet.getString("OrderShippingStreet2"));
         order.setOrdershippingstate(resultSet.getLong("OrderShippingState"));
-        
+        order.setOrdershippingcity(resultSet.getString("OrderShippingCity"));
+        order.setOrdershippingzip(resultSet.getString("OrderShippingZip"));
+        return order;
     }
 }
