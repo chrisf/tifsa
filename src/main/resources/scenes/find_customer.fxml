@@ -8,12 +8,12 @@
 <AnchorPane xmlns:fx="http://javafx.com/fxml"
             xmlns="http://javafx.com/javafx"
             fx:controller="org.jsack.tifsa.Controllers.FindCustomer"
-            prefHeight="400.0" prefWidth="600.0">
+            prefHeight="400.0" prefWidth="850.0">
 
     <VBox spacing="10.0" alignment="CENTER">
         <HBox spacing="20.0">
             <Label text="Contact Info"/>
-            <TextField text="" fx:id="contactInfoField" minWidth="150.0"/>
+            <TextField text="XXX-XXX-XXXX" fx:id="contactInfoField" minWidth="150.0" />
         </HBox>
         <HBox spacing="20.0" alignment="TOP_LEFT">
             <Label text="First Name"/>
@@ -22,12 +22,12 @@
             <TextField fx:id="customerLastField" minWidth="150.0"/>
             <Button text="Search" fx:id="searchButton" onAction="#search"/>
         </HBox>
-        <TableView maxHeight="300.0" maxWidth="600.0" fx:id="resultTable">
+        <TableView maxHeight="300.0" maxWidth="850.0" minWidth="850.0" fx:id="resultTable">
             <columns>
-                <TableColumn fx:id="businessNameColumn" text="Business Name" minWidth="150"/>
+                <TableColumn fx:id="businessNameColumn" text="Business Name" minWidth="200"/>
                 <TableColumn fx:id="firstNameColumn" text="First" minWidth="150"/>
                 <TableColumn fx:id="lastNameColumn" text="Last" minWidth="150"/>
-                <TableColumn fx:id="address1Column" text="Address" minWidth="150"/>
+                <TableColumn fx:id="address1Column" text="Address" minWidth="350"/>
             </columns>
         </TableView>
         <padding>
