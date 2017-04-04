@@ -12,8 +12,6 @@ public abstract class OrderBase extends ModelBase {
 
     public abstract Order selectById(long id);
 
-    public abstract Order selectByName(String countryName);
-
     public abstract long create(Order c);
 
     public abstract int delete(long id);

@@ -29,7 +29,31 @@ public class OrderDAO extends OrderBase {
         Map<String, Object> attributes = new HashMap<>();
         attributes.put("OrderTotal", c.getOrdertotal());
         attributes.put("OrderDate", c.getOrderdate());
+        attributes.put("OrderBillingFirst", c.getOrderbillingfirst());
+        attributes.put("OrderBillingLast", c.getOrderbillinglast());
+        attributes.put("OrderBillingStreet", c.getOrderbillingstreet());
+        attributes.put("OrderBillingStreet2", c.getOrderbillingstreet2());
+        attributes.put("OrderBillingState", c.getOrderbillingstate());
+        attributes.put("OrderBillingCity", c.getOrderbillingcity());
+        attributes.put("OrderBillingZip", c.getOrderbillingzip());
+        attributes.put("OrderPaid", c.getOrderpaid());
+        attributes.put("OrderBalance", c.getOrderbalance());
+        attributes.put("OrderCashOnDelivery", c.getOrdercashondelivery());
+        attributes.put("OrderStatusID", c.getOrderstatusid());
+        attributes.put("OrderStatusDate", c.getOrderstatusdate());
+        attributes.put("OrderTax", c.getOrdertax());
+        attributes.put("OrderFee", c.getOrderfee());
+        attributes.put("SoldByEmployeeID", c.getSoldbyemployeeid());
+        attributes.put("OrderCompletedOn", c.getOrdercompletedon());
+        attributes.put("OrderShippingStreet", c.getOrdershippingstreet());
+        attributes.put("OrderShippingStreet2", c.getOrdershippingstreet2());
+        attributes.put("OrderShippingState", c.getOrdershippingstate());
+        attributes.put("OrderShippingCity", c.getOrdershippingcity());
+        attributes.put("OrderShippingZip", c.getOrdershippingzip());
         
+        return getSimpleInsert().executeAndReturnKey(attributes).longValue();
+    }
+
     public int delete(long id) {
         return 0;
     }
