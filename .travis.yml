@@ -32,10 +32,10 @@ before_script:
 script:
   # run create scripts
   - $EXECSQL -d $DB_NAME -i "tifsa-sql/Scripts/Create Scripts/Master Create.sql"
-  # run alter scripts
-  - $EXECSQL -d $DB_NAME -i "tifsa-sql/Scripts/Alter Scripts/Master Alter.sql"
   # run insert scripts
   - $EXECSQL -d $DB_NAME -i "tifsa-sql/Scripts/Insert Scripts/MASTER_INSERT.sql"
+  # run alter scripts
+  - $EXECSQL -d $DB_NAME -i "tifsa-sql/Scripts/Alter Scripts/Master Alter.sql"
   # -q=hide [info] line, -X=show debug messages
   - mvn -q -DdataSource=testDataSource clean test
 
