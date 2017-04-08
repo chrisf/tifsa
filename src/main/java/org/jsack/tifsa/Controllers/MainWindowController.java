@@ -1,5 +1,6 @@
 package org.jsack.tifsa.Controllers;
 
+import com.jfoenix.controls.JFXButton;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -18,7 +19,7 @@ import java.util.ResourceBundle;
 public class MainWindowController implements Initializable {
 
     @FXML //  fx:id="salesButton"
-    private Button salesButton; // Value injected by FXMLLoader
+    private JFXButton salesButton; // Value injected by FXMLLoader
     @FXML
     private Button reportsButton; // Value injected by FXMLLoader
     @FXML
@@ -32,7 +33,7 @@ public class MainWindowController implements Initializable {
         assert reportsButton != null : "fx:id=\"reportsButton\" was not injected: check your FXML file 'main_window.fxml'.";
         assert adminButton != null : "fx:id=\"adminButton\" was not injected: check your FXML file 'main_window.fxml'.";
 
-        // set handler for when sales button is clicked
+        // set handler for when sales button is clicked;
         salesButton.setOnMouseClicked(new EventHandler<MouseEvent>() {
             @Override
             public void handle(MouseEvent event) {
