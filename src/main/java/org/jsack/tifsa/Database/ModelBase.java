@@ -17,6 +17,7 @@ public abstract class ModelBase {
     private JdbcTemplate template;
     private NamedParameterJdbcTemplate namedTemplate;
     private SimpleJdbcInsert simpleInsert;
+    private String tableName;
 
     public ModelBase() {
         String dataSource = System.getProperty("dataSource");
@@ -28,6 +29,12 @@ public abstract class ModelBase {
 
         this.context = new ClassPathXmlApplicationContext("applicationContext.xml");
         setTemplate((javax.sql.DataSource)this.context.getBean(dataSource));
+    }
+    public String getTableName() {
+        return tableName;
+    }
+    public void setTableName(String tableName) {
+        this.tableName = tableName;
     }
     public void setTemplate(DataSource ds) {
         this.template = new JdbcTemplate(ds);
