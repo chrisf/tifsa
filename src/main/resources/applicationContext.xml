@@ -8,7 +8,7 @@
     <bean id="dataSource"
           class = "org.springframework.jdbc.datasource.DriverManagerDataSource">
         <property name = "driverClassName" value = "com.microsoft.sqlserver.jdbc.SQLServerDriver"/>
-        <property name = "url" value = "jdbc:sqlserver://73.115.59.7:1433;databaseName=tifsadb"/>
+        <property name = "url" value = "jdbc:sqlserver://73.115.59.7:1433;databaseName=tifsa_db"/>
         <property name = "username" value = "sa"/>
         <property name = "password" value = "jSack-Tech"/>
     </bean>

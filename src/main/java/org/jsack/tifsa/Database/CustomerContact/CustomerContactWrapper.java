@@ -15,6 +15,7 @@ public class CustomerContactWrapper implements RowMapper<CustomerContact> {
         CustomerContact customerContact = new CustomerContact();
 
         customerContact.setCustomerContactId(resultSet.getLong("CustomerContactID"));
+        customerContact.setCustomerId(resultSet.getLong("CustomerID"));
         customerContact.setCustomerContactTypeId(resultSet.getLong("CustomerContactTypeID"));
         customerContact.setCustomerContactInfo(resultSet.getString("CustomerContactInfo"));
         customerContact.setCustomerContactPrimary(resultSet.getBoolean("CustomerContactPrimary"));

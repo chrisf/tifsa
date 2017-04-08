@@ -11,6 +11,7 @@ import java.util.Map;
 public abstract class CustomerContactBase extends ModelBase {
     public abstract List<CustomerContact> selectAll();
     public abstract CustomerContact selectById(long id);
+    public abstract List<CustomerContact> selectByInfo(String info);
     public abstract long create(CustomerContact m);
     public abstract int update(long id, Map<String, Object> attributes);
     public abstract int delete(long id);

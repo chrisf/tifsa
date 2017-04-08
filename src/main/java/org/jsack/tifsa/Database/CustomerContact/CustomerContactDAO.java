@@ -1,5 +1,7 @@
 package org.jsack.tifsa.Database.CustomerContact;
 
+import org.jsack.tifsa.Database.Customer.Customer;
+
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -27,6 +29,12 @@ public class CustomerContactDAO extends CustomerContactBase {
         catch(Exception ex){
             return null;
         }
+    }
+
+    @Override
+    public List<CustomerContact> selectByInfo(String info) {
+        String sql = "SELECT * FROM CustomerContact WHERE CustomerContactInfo = ?";
+        return getTemplate().query(sql, new Object[] { info }, new CustomerContactWrapper());
     }
 
     @Override
