@@ -1,15 +1,13 @@
 package org.jsack.tifsa.Controllers;
 
-import javafx.event.EventHandler;
+import com.jfoenix.controls.JFXButton;
+import com.jfoenix.controls.JFXSnackbar;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.Alert;
-import javafx.scene.control.Button;
-import javafx.scene.control.ButtonType;
-import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.GridPane;
 import javafx.stage.Stage;
 
 import java.net.URL;
@@ -17,57 +15,34 @@ import java.util.ResourceBundle;
 
 public class MainWindowController implements Initializable {
 
-    @FXML //  fx:id="salesButton"
-    private Button salesButton; // Value injected by FXMLLoader
     @FXML
-    private Button reportsButton; // Value injected by FXMLLoader
+    JFXButton salesButton;
     @FXML
-    private Button adminButton; // Value injected by FXMLLoader
+    GridPane mainPane;
+    @FXML
+    JFXSnackbar snacky;
 
+    @Override
+    public void initialize(URL location, ResourceBundle resources) {
 
-    @Override // This method is called by the FXMLLoader when initialization is complete
-    public void initialize(URL fxmlFileLocation, ResourceBundle resources) {
-        // make sure all the buttons were found on the form
-        assert salesButton != null : "fx:id=\"salesButton\" was not injected: check your FXML file 'main_window.fxml'.";
-        assert reportsButton != null : "fx:id=\"reportsButton\" was not injected: check your FXML file 'main_window.fxml'.";
-        assert adminButton != null : "fx:id=\"adminButton\" was not injected: check your FXML file 'main_window.fxml'.";
+    }
 
-        // set handler for when sales button is clicked
-        salesButton.setOnMouseClicked(new EventHandler<MouseEvent>() {
-            @Override
-            public void handle(MouseEvent event) {
-                //Alert alert = new Alert(Alert.AlertType.NONE, "Open Sales Menu", ButtonType.OK);
-                //alert.showAndWait();
-                Parent root;
-                try {
-                    root = FXMLLoader.load(getClass().getResource("/scenes/find_customer.fxml"));
-                    Stage stage = new Stage();
-                    stage.setScene(new Scene(root));
-                    stage.setTitle("Find Customer");
-                    stage.show();
-                }
-                catch(Exception ex) {
-                    //????
-                }
-            }
-        });
+    public MainWindowController() {
+    }
 
-        // set handler for when reports button is clicked
-        reportsButton.setOnMouseClicked(new EventHandler<MouseEvent>() {
-            @Override
-            public void handle(MouseEvent event) {
-                Alert alert = new Alert(Alert.AlertType.NONE, "Open Reports Menu", ButtonType.OK);
-                alert.showAndWait();
-            }
-        });
+    @FXML
+    public void salesButtonClick() {
+        Parent salesMenu = null;
 
-        // set handler for when admin button is clicked
-        adminButton.setOnMouseClicked(new EventHandler<MouseEvent>() {
-            @Override
-            public void handle(MouseEvent event) {
-                Alert alert = new Alert(Alert.AlertType.NONE, "Open Administration Menu", ButtonType.OK);
-                alert.showAndWait();
-            }
-        });
+        try {
+             salesMenu = FXMLLoader.load(getClass().getResource("/scenes/sales_menu.fxml"));
+             Stage stage = new Stage();
+             stage.setScene(new Scene(salesMenu));
+             stage.show();
+            salesButton.getScene().getWindow().hide();
+        }
+        catch(Exception ex) {
+            ex.printStackTrace();
+        }
     }
 }
