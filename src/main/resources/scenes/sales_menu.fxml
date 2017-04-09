@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXButton?>
+<?import com.jfoenix.controls.JFXSnackbar?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.paint.LinearGradient?>
+<?import javafx.scene.paint.Stop?>
+
+<GridPane prefHeight="227.0" prefWidth="373.0" stylesheets="@../styles.css" vgap="5" xmlns="http://javafx.com/javafx/8.0.121" xmlns:fx="http://javafx.com/fxml/1">
+    <columnConstraints>
+        <ColumnConstraints hgrow="ALWAYS" percentWidth="33" />
+        <ColumnConstraints hgrow="ALWAYS" percentWidth="33" />
+        <ColumnConstraints hgrow="ALWAYS" percentWidth="33" />
+    </columnConstraints>
+    <rowConstraints>
+        <RowConstraints percentHeight="25" />
+    </rowConstraints>
+    <ImageView GridPane.columnIndex="1" GridPane.rowIndex="0">
+        <Image url="@../IMGS/tlogo.png" />
+    </ImageView>
+    <JFXButton buttonType="RAISED" maxWidth="Infinity" text="New Order" GridPane.columnIndex="1" GridPane.rowIndex="10">
+    </JFXButton>
+    <JFXButton buttonType="RAISED" maxWidth="Infinity" text="Previous Order" GridPane.columnIndex="1" GridPane.rowIndex="15" />
+    <JFXButton buttonType="RAISED" maxWidth="Infinity" text="Customer Lookup" GridPane.columnIndex="1" GridPane.rowIndex="20" />
+
+    <rowConstraints>
+        <RowConstraints />
+        <RowConstraints />
+        <RowConstraints />
+        <RowConstraints />
+        <RowConstraints />
+        <RowConstraints />
+        <RowConstraints />
+        <RowConstraints />
+        <RowConstraints />
+        <RowConstraints />
+        <RowConstraints />
+      <RowConstraints />
+      <RowConstraints />
+      <RowConstraints />
+      <RowConstraints />
+      <RowConstraints />
+      <RowConstraints />
+      <RowConstraints />
+      <RowConstraints />
+      <RowConstraints />
+      <RowConstraints />
+    </rowConstraints>
+</GridPane>

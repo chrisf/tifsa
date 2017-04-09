@@ -1,13 +1,52 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import com.jfoenix.controls.JFXButton?>
-<?import javafx.scene.layout.AnchorPane?>
-<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.RowConstraints?>
 
-<AnchorPane stylesheets="@../menu.css" xmlns="http://javafx.com/javafx/8.0.121" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.jsack.tifsa.Controllers.MainWindowController">
-    <VBox alignment="CENTER">
-        <JFXButton fx:id="reportsButton" buttonType="RAISED" ripplerFill="WHITE" text="Reports" />
-        <JFXButton fx:id="adminButton" text="Administrative Functions" />
-        <JFXButton fx:id="salesButton" mnemonicParsing="false" text="Sales" />
-    </VBox>
-</AnchorPane>
+<?import com.jfoenix.controls.JFXToolbar?>
+<?import javafx.scene.control.ToolBar?>
+<GridPane fx:id="mainPane" prefHeight="227.0" prefWidth="373.0" stylesheets="@../styles.css" vgap="5" xmlns="http://javafx.com/javafx/8.0.121" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.jsack.tifsa.Controllers.MainWindowController">
+    <columnConstraints>
+        <ColumnConstraints hgrow="ALWAYS" percentWidth="33" />
+        <ColumnConstraints hgrow="ALWAYS" percentWidth="33" />
+        <ColumnConstraints hgrow="ALWAYS" percentWidth="33" />
+    </columnConstraints>
+    <rowConstraints>
+        <RowConstraints percentHeight="25" />
+    </rowConstraints>
+    <ImageView GridPane.columnIndex="1" GridPane.rowIndex="0">
+        <Image url="@../IMGS/tlogo.png" />
+    </ImageView>
+    <JFXButton fx:id="salesButton" buttonType="RAISED" maxWidth="Infinity" onMouseClicked="#salesButtonClick" text="Sales" GridPane.columnIndex="1" GridPane.rowIndex="10">
+</JFXButton>
+    <JFXButton buttonType="RAISED" maxWidth="Infinity" text="Reports" GridPane.columnIndex="1" GridPane.rowIndex="15" />
+    <JFXButton buttonType="RAISED" maxWidth="Infinity" text="Administrative Functions" GridPane.columnIndex="1" GridPane.rowIndex="20" />
+
+    <rowConstraints>
+      <RowConstraints />
+      <RowConstraints />
+      <RowConstraints />
+      <RowConstraints />
+      <RowConstraints />
+      <RowConstraints />
+      <RowConstraints />
+      <RowConstraints />
+      <RowConstraints />
+      <RowConstraints />
+      <RowConstraints />
+      <RowConstraints />
+      <RowConstraints />
+      <RowConstraints />
+      <RowConstraints />
+      <RowConstraints />
+      <RowConstraints />
+      <RowConstraints />
+      <RowConstraints />
+      <RowConstraints />
+      <RowConstraints />
+   </rowConstraints>
+</GridPane>
