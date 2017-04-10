@@ -4,8 +4,10 @@ package org.jsack.tifsa.Database.Reports.ReportModels;
  * Created by aaron on 4/9/17.
  */
 
-import javafx.beans.property.SimpleStringProperty;
-import javafx.scene.control.TableColumn;
+import org.jsack.tifsa.Database.Reports.ReportBase;
+import org.jsack.tifsa.Database.Reports.ReportCategory;
+import org.jsack.tifsa.Database.Reports.ReportWrappers.CustomerUnpaidBalancesWrapper;
+import org.springframework.jdbc.core.RowMapper;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -14,95 +16,68 @@ import java.util.List;
  * This is the class that models each individual row of our reports.
  * All this class does is hold data.
  */
-public class CustomerUnpaidBalances {
+public class CustomerUnpaidBalances implements ReportBase {
 
-    /**
-     * Create all your variables based on the column's in your report.
-     * There should be a variable for EACH column header.
-     * Make sure the datatypes match the column datatypes in the database.
-     * Once you create the variables, highlight them, press alt+insert (or right-click -> generate) and click Getter & Setter
-     * Then select all the variables and click ok. All your Getter and Setter's should be created.
-     */
-    public String customerFirst;
-    public String customerLast;
-    public String customerContactInfo;
-    public String customerContactTypeDescription;
-    public Double orderBalance;
+    public final String sql = "SELECT " +
+            "dbo.Customer.CustomerFirst, dbo.Customer.CustomerLast," +
+            "dbo.CustomerContact.CustomerContactInfo," +
+            "dbo.CustomerContactType.CustomerContactTypeDescription," +
+            "dbo.[Order].OrderBalance " +
+            "FROM Customer " +
+            "INNER JOIN CustomerContact ON Customer.CustomerID = CustomerContact.CustomerID " +
+            "INNER JOIN CustomerContactType ON CustomerContactType.CustomerContactTypeID = CustomerContact.CustomerContactTypeID " +
+            "INNER JOIN [Order] ON [Order].CustomerID = CustomerContact.CustomerContactID " +
+            "WHERE CustomerContact.[CustomerContactPrimary] = 1 AND OrderBalance > 0";
 
+    public final String reportName = "Customers with Unpaid Balances";
+    private List<String> row;
+    private List<String> columns;
+    private ReportCategory category;
 
-    public String getCustomerFirst() {
-        return customerFirst;
+    public CustomerUnpaidBalances() {
+        row = new ArrayList<>();
+        columns = new ArrayList<>();
+
+        category = ReportCategory.Customer;
+
+        columns.add("CustomerFirst");
+        columns.add("CustomerLast");
+        columns.add("CustomerContactInfo");
+        columns.add("CustomerContactTypeDescription");
+        columns.add("OrderBalance");
     }
 
-    public void setCustomerFirst(String customerFirst) {
-        this.customerFirst = customerFirst;
+    @Override
+    public String getName() {
+        return reportName;
     }
 
-    public String getCustomerLast() {
-        return customerLast;
+    @Override
+    public String getSql() {
+
+        return sql;
     }
 
-    public void setCustomerLast(String customerLast) {
-        this.customerLast = customerLast;
+    @Override
+    public RowMapper<CustomerUnpaidBalances> getMapper() {
+
+        return new CustomerUnpaidBalancesWrapper();
     }
 
-    public String getCustomerContactInfo() {
-        return customerContactInfo;
+    @Override
+    public ReportCategory getCategory() {
+        return category;
     }
 
-    public void setCustomerContactInfo(String customerContactInfo) {
-        this.customerContactInfo = customerContactInfo;
+    @Override
+    public List<String> getRow() {
+        return row;
     }
 
-    public String getCustomerContactTypeDescription() {
-        return customerContactTypeDescription;
+    @Override
+    public List<String> getColumns() {
+        return columns;
     }
 
-    public void setCustomerContactTypeDescription(String customerContactTypeDescription) {
-        this.customerContactTypeDescription = customerContactTypeDescription;
-    }
-
-    public Double getOrderBalance() {
-        return orderBalance;
-    }
-
-    public void setOrderBalance(Double orderBalance) {
-        this.orderBalance = orderBalance;
-    }
-
-    /*
-        This is how we will return the columns for our table.
-     */
-    public List<TableColumn<CustomerUnpaidBalances, String>> getColumns() {
-
-            //Create an array list using your model as the first type, and a string as the second.
-            List<TableColumn<CustomerUnpaidBalances, String>> columns = new ArrayList<>();
-
-            //Create a TableColumn object for each column in your report, using the TableHeader as the text argument (ex: FirstName is what will show up as the table Header)
-            TableColumn<CustomerUnpaidBalances, String> firstName = new TableColumn<>("FirstName");
-            TableColumn<CustomerUnpaidBalances, String> lastName = new TableColumn<>("LastName");
-            TableColumn<CustomerUnpaidBalances, String> customerContactInfo = new TableColumn<>("CustomerContactInfo");
-            TableColumn<CustomerUnpaidBalances, String> customerContactTypeDescription = new TableColumn<>("CustomerContactTypeDescription");
-            TableColumn<CustomerUnpaidBalances, String> orderBalance = new TableColumn<>("OrderBalance");
-
-            //Create the "CellValueFactories" these are what will return the values associated with our model.
-            //These should ALL be Strings. So if the value in the Model is not a string you must convert it. Look at the 5th column here, OrderTotal, as an Example.
-            //If the value is already a string, there is no need for conversion. You just create a SimpleStringProperty using that value.
-            firstName.setCellValueFactory(c -> new SimpleStringProperty(c.getValue().getCustomerFirst()));
-            lastName.setCellValueFactory(c -> new SimpleStringProperty(c.getValue().getCustomerLast()));
-            customerContactInfo.setCellValueFactory(c -> new SimpleStringProperty(c.getValue().getCustomerContactInfo()));
-            customerContactTypeDescription.setCellValueFactory(c -> new SimpleStringProperty(c.getValue().getCustomerContactTypeDescription()));
-            orderBalance.setCellValueFactory(c -> new SimpleStringProperty(String.valueOf(c.getValue().getOrderBalance())));
-
-            //Add all the columns to our array
-            columns.add(firstName);
-            columns.add(lastName);
-            columns.add(customerContactInfo);
-            columns.add(customerContactTypeDescription);
-            columns.add(orderBalance);
-
-            //Return the array of columns.
-            return columns;
-    }
 
 }
