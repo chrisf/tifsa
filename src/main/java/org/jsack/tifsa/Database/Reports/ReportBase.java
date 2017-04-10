@@ -16,7 +16,9 @@ public interface ReportBase {
 
     RowMapper getMapper();
 
+
     List<String> getRow();
     List<String> getColumns();
     List<Control> getControls();
+    List<ReportBase> get();
 }

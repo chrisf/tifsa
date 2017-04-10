@@ -60,6 +60,10 @@ public class ReportsController implements Initializable{
 
     }
     public void onReportChange() {
+        refreshClick();
+    }
+
+    public void refreshClick() {
         reportTable.getColumns().clear();
 
         ReportBase reportBase = reportDAO.getReportByName((String)reportSelection2.getSelectionModel().getSelectedItem());
@@ -72,8 +76,7 @@ public class ReportsController implements Initializable{
             idx++;
         }
 
-        List<ReportBase> results = reportDAO.getData(reportBase);
-        System.out.println(results.size());
+        List<ReportBase> results = reportBase.get();
 
         reportTable.setItems(FXCollections.observableArrayList(results));
         if(reportBase.getColumns().size() > 0) {
@@ -82,5 +85,6 @@ public class ReportsController implements Initializable{
             }
         }
     }
+
 
 }

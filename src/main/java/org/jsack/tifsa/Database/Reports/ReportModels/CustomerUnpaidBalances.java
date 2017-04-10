@@ -84,4 +84,9 @@ public class CustomerUnpaidBalances implements ReportBase {
     public List<Control> getControls() {
         return null;
     }
+
+    @Override
+    public List<ReportBase> get() {
+        return null;
+    }
 }

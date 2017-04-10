@@ -39,6 +39,6 @@
     </VBox>
     <VBox GridPane.rowIndex="1" GridPane.columnIndex="0" fx:id="customControls" />
     <VBox GridPane.rowIndex="2" GridPane.columnIndex="0">
-        <JFXButton text="Refresh" fx:id="refreshButton" buttonType="RAISED" style="-fx-background-color: #00bcd4" maxWidth="Infinity"/>
+        <JFXButton text="Refresh" fx:id="refreshButton" buttonType="RAISED" style="-fx-background-color: #00bcd4" maxWidth="Infinity" onAction="#refreshClick"/>
     </VBox>
 </GridPane>
