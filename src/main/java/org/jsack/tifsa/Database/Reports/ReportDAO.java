@@ -1,6 +1,7 @@
 package org.jsack.tifsa.Database.Reports;
 
 import org.jsack.tifsa.Database.ModelBase;
+import org.jsack.tifsa.Database.Reports.ReportModels.CustomerIncidentReport;
 import org.jsack.tifsa.Database.Reports.ReportModels.CustomerUnpaidBalances;
 import org.jsack.tifsa.Database.Reports.ReportModels.EmployeeRevenueByYear;
 
@@ -19,7 +20,7 @@ public class ReportDAO extends ModelBase {
 
         reports.add(new CustomerUnpaidBalances());
         reports.add(new EmployeeRevenueByYear());
-
+        reports.add(new CustomerIncidentReport());
     }
 
     public List<String> getReportCategories() {

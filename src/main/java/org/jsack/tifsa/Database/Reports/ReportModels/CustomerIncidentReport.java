@@ -1,6 +1,7 @@
 package org.jsack.tifsa.Database.Reports.ReportModels;
 
 import javafx.scene.control.Control;
+import org.jsack.tifsa.Database.ModelBase;
 import org.jsack.tifsa.Database.Reports.ReportBase;
 import org.jsack.tifsa.Database.Reports.ReportCategory;
 import org.jsack.tifsa.Database.Reports.ReportWrappers.CustomerIncidentReportWrapper;
@@ -12,7 +13,7 @@ import java.util.List;
 /**
  * Created by aaron on 4/10/17.
  */
-public class CustomerIncidentReport implements ReportBase {
+public class CustomerIncidentReport extends ModelBase implements ReportBase {
 
     private final String sql = "SELECT dbo.CustomerType.CustomerTypeName,dbo.Customer.CustomerFirst, dbo.Customer.CustomerLast, dbo.CustomerIncident.CustomerIncidentDescription, dbo.IncidentType.IncidentTypeDescription " +
             "FROM Customer " +
@@ -24,6 +25,8 @@ public class CustomerIncidentReport implements ReportBase {
     private ReportCategory category;
     private List<String> row;
     private List<String> columns;
+
+
 
     public CustomerIncidentReport() {
         columns = new ArrayList<>();
@@ -80,7 +83,7 @@ public class CustomerIncidentReport implements ReportBase {
 
     @Override
     public List<ReportBase> get() {
-        return null;
+        return this.getTemplate().query(this.getSql(), this.getMapper());
     }
 
 }
