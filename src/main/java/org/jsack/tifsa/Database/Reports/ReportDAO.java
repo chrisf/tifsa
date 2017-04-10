@@ -19,6 +19,7 @@ public class ReportDAO extends ModelBase {
 
         reports.add(new CustomerUnpaidBalances());
         reports.add(new EmployeeRevenueByYear());
+
     }
 
     public List<String> getReportCategories() {

@@ -12,6 +12,8 @@
 <?import javafx.scene.control.Separator?>
 <?import com.jfoenix.controls.JFXTextField?>
 <?import javafx.scene.layout.VBox?>
+<?import javafx.scene.layout.RowConstraints?>
+<?import com.jfoenix.controls.JFXButton?>
 <GridPane xmlns="http://javafx.com/javafx"
           xmlns:fx="http://javafx.com/fxml"
           fx:controller="org.jsack.tifsa.Controllers.ReportsController"
@@ -23,11 +25,20 @@
         <ColumnConstraints percentWidth="25" />
         <ColumnConstraints percentWidth="75" />
     </columnConstraints>
+    <rowConstraints>
+        <RowConstraints percentHeight="35" />
+        <RowConstraints percentHeight="45" />
+        <RowConstraints percentHeight="20" />
+    </rowConstraints>
     <VBox GridPane.rowIndex="0" GridPane.columnIndex="0" GridPane.vgrow="ALWAYS" spacing="25" >
         <JFXComboBox maxWidth="Infinity" promptText="Report Type" fx:id="reportSelection1" onAction="#onReportTypeChange" GridPane.vgrow="ALWAYS"/>
         <JFXComboBox maxWidth="Infinity" promptText="Report" fx:id="reportSelection2" onAction="#onReportChange"/>
     </VBox>
-    <VBox GridPane.rowIndex="0" GridPane.columnIndex="1" >
-        <TableView fx:id="reportTable" GridPane.vgrow="SOMETIMES"/>
+    <VBox GridPane.rowIndex="0" GridPane.columnIndex="1" GridPane.rowSpan="3" >
+        <TableView fx:id="reportTable"  GridPane.rowSpan="4" />
+    </VBox>
+    <VBox GridPane.rowIndex="1" GridPane.columnIndex="0" fx:id="customControls" />
+    <VBox GridPane.rowIndex="2" GridPane.columnIndex="0">
+        <JFXButton text="Refresh" fx:id="refreshButton" buttonType="RAISED" style="-fx-background-color: #00bcd4" maxWidth="Infinity"/>
     </VBox>
 </GridPane>

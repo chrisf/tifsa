@@ -4,6 +4,7 @@ package org.jsack.tifsa.Database.Reports.ReportModels;
  * Created by aaron on 4/9/17.
  */
 
+import javafx.scene.control.Control;
 import org.jsack.tifsa.Database.Reports.ReportBase;
 import org.jsack.tifsa.Database.Reports.ReportCategory;
 import org.jsack.tifsa.Database.Reports.ReportWrappers.CustomerUnpaidBalancesWrapper;
@@ -79,5 +80,8 @@ public class CustomerUnpaidBalances implements ReportBase {
         return columns;
     }
 
-
+    @Override
+    public List<Control> getControls() {
+        return null;
+    }
 }

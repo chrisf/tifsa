@@ -1,5 +1,6 @@
 package org.jsack.tifsa.Database.Reports.ReportModels;
 
+import javafx.scene.control.Control;
 import org.jsack.tifsa.Database.Reports.ReportBase;
 import org.jsack.tifsa.Database.Reports.ReportCategory;
 import org.springframework.jdbc.core.RowMapper;
@@ -49,5 +50,10 @@ public class ReportModelTemplate implements ReportBase {
     @Override
     public List<String> getColumns() {
         return columns;
+    }
+
+    @Override
+    public List<Control> getControls() {
+        return null;
     }
 }

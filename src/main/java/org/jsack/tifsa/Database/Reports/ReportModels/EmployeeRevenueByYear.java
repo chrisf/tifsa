@@ -1,5 +1,9 @@
 package org.jsack.tifsa.Database.Reports.ReportModels;
 
+import com.jfoenix.controls.JFXComboBox;
+import javafx.collections.FXCollections;
+import javafx.scene.control.Control;
+import org.jsack.tifsa.Database.ModelBase;
 import org.jsack.tifsa.Database.Reports.ReportBase;
 import org.jsack.tifsa.Database.Reports.ReportCategory;
 import org.jsack.tifsa.Database.Reports.ReportWrappers.EmployeeRevenueByYearWrapper;
@@ -11,7 +15,7 @@ import java.util.List;
 /**
  * Created by aaron on 4/9/17.
  */
-public class EmployeeRevenueByYear implements ReportBase {
+public class EmployeeRevenueByYear extends ModelBase implements ReportBase {
 
     private final String sql = "SELECT dbo.EmployeeType.EmployeeTypeDescription, e1.EmployeeFirst, e1.EmployeeLast, o1.Total " +
             "FROM Employee e1 " +
@@ -20,27 +24,71 @@ public class EmployeeRevenueByYear implements ReportBase {
             "INNER JOIN (" +
             "    SELECT SUM([Order].OrderBalance) AS Total, [Order].SoldByEmployeeID " +
             "    FROM dbo.[Order] " +
-            "    WHERE [Order].OrderDate > '2017' " +
+            "    WHERE [Order].OrderDate > ? " +
             "    GROUP BY [Order].SoldByEmployeeID " +
             "    ) AS o1 ON e1.EmployeeID = o1.SoldByEmployeeID " +
-            "WHERE EmployeeType.EmployeeTypeID = 2";
+            "WHERE EmployeeType.EmployeeTypeID = ?";
 
 
     private final String name = "Employee Revenue By Year";
     private ReportCategory category;
     private List<String> row;
     private List<String> columns;
+    private List<Control> controls;
+
+    /*
+        Create all your custom controls here.
+     */
+
+    JFXComboBox years;
+    JFXComboBox employeeType;
 
     public EmployeeRevenueByYear() {
-        category = ReportCategory.Employee;
-
         row = new ArrayList<>();
+        controls = new ArrayList<>();
         columns = new ArrayList<>();
+        years = new JFXComboBox();
+        employeeType = new JFXComboBox();
+
+        category = ReportCategory.Employee;
 
         columns.add("EmployeeTypeDescription");
         columns.add("EmployeeFirst");
         columns.add("EmployeeLast");
         columns.add("Total");
+
+        years.setItems(FXCollections.observableArrayList(
+                "2017",
+                "2016",
+                "2015",
+                "2014",
+                "2013",
+                "2012",
+                "2011",
+                "2010"
+        ));
+
+        employeeType.setItems(FXCollections.observableArrayList(
+                "1",
+                "2",
+                "3",
+                "4",
+                "5",
+                "6",
+                "7"
+        ));
+
+        controls.add(years);
+        controls.add(employeeType);
+    }
+
+    public List<ReportBase> get() {
+        return getTemplate().query(this.getSql(),
+                new Object[]{
+                        years.getSelectionModel().getSelectedItem(),
+                        employeeType.getSelectionModel().getSelectedItem()
+                },
+                this.getMapper());
     }
 
     @Override
@@ -76,4 +124,10 @@ public class EmployeeRevenueByYear implements ReportBase {
     public List<String> getColumns() {
         return columns;
     }
+
+    @Override
+    public List<Control> getControls() {
+        return controls;
+    }
+
 }

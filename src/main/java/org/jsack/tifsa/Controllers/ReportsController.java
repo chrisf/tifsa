@@ -1,13 +1,16 @@
 package org.jsack.tifsa.Controllers;
 
+import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXComboBox;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.Control;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
+import javafx.scene.layout.VBox;
 import org.jsack.tifsa.Database.Reports.ReportBase;
 import org.jsack.tifsa.Database.Reports.ReportDAO;
 
@@ -24,6 +27,10 @@ public class ReportsController implements Initializable{
     JFXComboBox reportSelection1, reportSelection2;
     @FXML
     TableView reportTable;
+    @FXML
+    VBox customControls;
+    @FXML
+    JFXButton refreshButton;
 
     //Lists for report types
     ObservableList<String> mainReportList, customerReports, orderReports, vendorReports, salesReports, deliveryReports, employeeReports, productReports;
@@ -64,10 +71,16 @@ public class ReportsController implements Initializable{
             reportTable.getColumns().add(column);
             idx++;
         }
+
         List<ReportBase> results = reportDAO.getData(reportBase);
         System.out.println(results.size());
 
         reportTable.setItems(FXCollections.observableArrayList(results));
+        if(reportBase.getColumns().size() > 0) {
+            for(Control c : reportBase.getControls()){
+                customControls.getChildren().add(c);
+            }
+        }
     }
 
 }
