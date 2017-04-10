@@ -5,6 +5,7 @@ package org.jsack.tifsa.Database.Reports.ReportModels;
  */
 
 import javafx.scene.control.Control;
+import org.jsack.tifsa.Database.ModelBase;
 import org.jsack.tifsa.Database.Reports.ReportBase;
 import org.jsack.tifsa.Database.Reports.ReportCategory;
 import org.jsack.tifsa.Database.Reports.ReportWrappers.CustomerUnpaidBalancesWrapper;
@@ -17,7 +18,7 @@ import java.util.List;
  * This is the class that models each individual row of our reports.
  * All this class does is hold data.
  */
-public class CustomerUnpaidBalances implements ReportBase {
+public class CustomerUnpaidBalances extends ModelBase implements ReportBase {
 
     public final String sql = "SELECT " +
             "dbo.Customer.CustomerFirst, dbo.Customer.CustomerLast," +
@@ -55,13 +56,11 @@ public class CustomerUnpaidBalances implements ReportBase {
 
     @Override
     public String getSql() {
-
         return sql;
     }
 
     @Override
-    public RowMapper<CustomerUnpaidBalances> getMapper() {
-
+    public RowMapper getMapper() {
         return new CustomerUnpaidBalancesWrapper();
     }
 
@@ -87,6 +86,6 @@ public class CustomerUnpaidBalances implements ReportBase {
 
     @Override
     public List<ReportBase> get() {
-        return null;
+        return this.getTemplate().query(this.getSql(), this.getMapper());
     }
 }

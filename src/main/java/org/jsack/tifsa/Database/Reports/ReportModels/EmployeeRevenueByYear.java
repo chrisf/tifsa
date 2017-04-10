@@ -57,16 +57,9 @@ public class EmployeeRevenueByYear extends ModelBase implements ReportBase {
         columns.add("EmployeeLast");
         columns.add("Total");
 
-        years.setItems(FXCollections.observableArrayList(
-                "2017",
-                "2016",
-                "2015",
-                "2014",
-                "2013",
-                "2012",
-                "2011",
-                "2010"
-        ));
+        List<String> orderYears = new ArrayList<>();
+
+        this.years.setItems(FXCollections.observableArrayList(orderYears));
 
         employeeType.setItems(FXCollections.observableArrayList(
                 "1",
@@ -77,7 +70,7 @@ public class EmployeeRevenueByYear extends ModelBase implements ReportBase {
                 "6",
                 "7"
         ));
-
+        years.setItems(FXCollections.observableArrayList(orderYears));
         controls.add(years);
         controls.add(employeeType);
     }
