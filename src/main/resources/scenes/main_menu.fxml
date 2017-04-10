@@ -23,7 +23,7 @@
     </ImageView>
     <JFXButton fx:id="salesButton" buttonType="RAISED" maxWidth="Infinity" onMouseClicked="#salesButtonClick" text="Sales" GridPane.columnIndex="1" GridPane.rowIndex="10">
 </JFXButton>
-    <JFXButton buttonType="RAISED" maxWidth="Infinity" text="Reports" GridPane.columnIndex="1" GridPane.rowIndex="15" />
+    <JFXButton buttonType="RAISED" maxWidth="Infinity" text="Reports" GridPane.columnIndex="1" GridPane.rowIndex="15" onMouseClicked="#reportsButtonClick" />
     <JFXButton buttonType="RAISED" maxWidth="Infinity" text="Administrative Functions" GridPane.columnIndex="1" GridPane.rowIndex="20" />
 
     <rowConstraints>

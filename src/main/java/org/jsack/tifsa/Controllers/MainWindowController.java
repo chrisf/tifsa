@@ -39,10 +39,21 @@ public class MainWindowController implements Initializable {
              Stage stage = new Stage();
              stage.setScene(new Scene(salesMenu));
              stage.show();
-            salesButton.getScene().getWindow().hide();
+             salesButton.getScene().getWindow().hide();
         }
         catch(Exception ex) {
             ex.printStackTrace();
         }
+    }
+    @FXML
+    public void reportsButtonClick() {
+        Parent salesMenu = null;
+        try {
+            salesMenu = FXMLLoader.load(getClass().getResource("/scenes/reports.fxml"));
+            Stage stage = new Stage();
+            stage.setScene(new Scene(salesMenu));
+            stage.show();
+        }
+        catch (Exception ex) {}
     }
 }
