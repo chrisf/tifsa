@@ -4,7 +4,8 @@ package org.jsack.tifsa.Database.Reports.ReportModels;
  * Created by aaron on 4/9/17.
  */
 
-import javafx.scene.control.Control;
+import javafx.scene.layout.VBox;
+import org.jsack.tifsa.Controllers.Reports.ReportControllerBase;
 import org.jsack.tifsa.Database.ModelBase;
 import org.jsack.tifsa.Database.Reports.ReportBase;
 import org.jsack.tifsa.Database.Reports.ReportCategory;
@@ -80,12 +81,17 @@ public class CustomerUnpaidBalances extends ModelBase implements ReportBase {
     }
 
     @Override
-    public List<Control> getControls() {
+    public List<ReportBase> get() {
+        return this.getTemplate().query(this.getSql(), this.getMapper());
+    }
+
+    @Override
+    public VBox getControlLayout() {
         return null;
     }
 
     @Override
-    public List<ReportBase> get() {
-        return this.getTemplate().query(this.getSql(), this.getMapper());
+    public ReportControllerBase getControlBase() {
+        return null;
     }
 }

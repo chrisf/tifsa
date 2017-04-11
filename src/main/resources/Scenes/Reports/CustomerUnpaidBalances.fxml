@@ -7,5 +7,5 @@
 <?import javafx.scene.layout.*?>
 
 <VBox>
-    <TextField />
+
 </VBox>

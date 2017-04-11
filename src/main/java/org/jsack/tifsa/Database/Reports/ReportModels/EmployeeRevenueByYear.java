@@ -3,6 +3,8 @@ package org.jsack.tifsa.Database.Reports.ReportModels;
 import com.jfoenix.controls.JFXComboBox;
 import javafx.collections.FXCollections;
 import javafx.scene.control.Control;
+import javafx.scene.layout.VBox;
+import org.jsack.tifsa.Controllers.Reports.ReportControllerBase;
 import org.jsack.tifsa.Database.ModelBase;
 import org.jsack.tifsa.Database.Reports.ReportBase;
 import org.jsack.tifsa.Database.Reports.ReportCategory;
@@ -119,8 +121,12 @@ public class EmployeeRevenueByYear extends ModelBase implements ReportBase {
     }
 
     @Override
-    public List<Control> getControls() {
-        return controls;
+    public VBox getControlLayout() {
+        return null;
     }
 
+    @Override
+    public ReportControllerBase getControlBase() {
+        return null;
+    }
 }
