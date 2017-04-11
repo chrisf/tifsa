@@ -15,7 +15,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * This is the class that models each individual row of our reports.
+ * This is the class that models each individual row of our Reports.
  * All this class does is hold data.
  */
 public class CustomerUnpaidBalances extends ModelBase implements ReportBase {
