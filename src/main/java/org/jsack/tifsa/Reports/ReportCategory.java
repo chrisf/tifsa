@@ -1,4 +1,4 @@
-package org.jsack.tifsa.Database.Reports;
+package org.jsack.tifsa.Reports;
 
 /**
  * Created by aaron on 4/9/17.

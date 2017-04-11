@@ -54,6 +54,6 @@ public class MainWindowController implements Initializable {
             stage.setScene(new Scene(salesMenu));
             stage.show();
         }
-        catch (Exception ex) {}
+        catch (Exception ex) { ex.printStackTrace(); }
     }
 }
