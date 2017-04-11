@@ -67,7 +67,7 @@ public class Main extends Application {
     public void showMainScreen(Stage primaryStage) {
         Parent root = null;
         try {
-            root = FXMLLoader.load(getClass().getResource("/scenes/main_menu.fxml"));
+            root = FXMLLoader.load(getClass().getResource("/Scenes/main_menu.fxml"));
             primaryStage.setTitle("Tifsa");
             Scene mainWindowScene = new Scene(root, 300, 275);
 
