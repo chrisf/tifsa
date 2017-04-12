@@ -6,17 +6,17 @@ import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
-import javafx.scene.control.Control;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
+import javafx.scene.layout.GridPane;
 import javafx.scene.layout.VBox;
-import org.jsack.tifsa.Database.Reports.ReportBase;
-import org.jsack.tifsa.Database.Reports.ReportDAO;
+import org.jsack.tifsa.Reports.Interfaces.IControl;
+import org.jsack.tifsa.Reports.Interfaces.IReport;
+import org.jsack.tifsa.Reports.Interfaces.IReportModel;
 
 import java.net.URL;
-import java.util.ArrayList;
-import java.util.List;
 import java.util.ResourceBundle;
 
 /**
@@ -28,62 +28,76 @@ public class ReportsController implements Initializable{
     @FXML
     TableView reportTable;
     @FXML
+    GridPane gridPane;
+    @FXML
     VBox customControls;
     @FXML
     JFXButton refreshButton;
 
     //Lists for report types
-    ObservableList<String> mainReportList, customerReports, orderReports, vendorReports, salesReports, deliveryReports, employeeReports, productReports;
+    ObservableList<String> categorySelectionList, reportSelectionList;
+    IReport currentReport;
+    FXMLLoader currentLoader;
+    IControl currentController;
 
-
-    ReportDAO reportDAO;
-    List<ReportBase> reports;
-
-
+    private org.jsack.tifsa.Reports.ReportsController reports;
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        reportDAO = new ReportDAO();
-        reports = new ArrayList<>();
+        reports = new org.jsack.tifsa.Reports.ReportsController();
 
-        mainReportList = FXCollections.observableArrayList(
-                reportDAO.getReportCategories()
+        categorySelectionList = FXCollections.observableArrayList(
+                reports.getReportCategories()
         );
-        reportSelection1.setItems(mainReportList);
-        reportSelection1.setValue(mainReportList.get(0));
+        reportSelection1.setItems(categorySelectionList);
+        reportSelection1.setValue(categorySelectionList.get(0));
 
        onReportTypeChange();
-
     }
 
     public void onReportTypeChange() {
-       reportSelection2.setItems(FXCollections.observableArrayList(reportDAO.getReportNamesByCategory((String)reportSelection1.getSelectionModel().getSelectedItem())));
-
+        reportSelectionList = FXCollections.observableArrayList(
+                reports.getReportsByCategory((String)reportSelection1.getSelectionModel().getSelectedItem())
+        );
+        reportSelection2.setItems(reportSelectionList);
     }
     public void onReportChange() {
+        currentReport = reports.getReportByName((String)reportSelection2.getSelectionModel().getSelectedItem());
+        reportTable.getColumns().clear();
+
+        int idx = 0;
+        for(String columnName : currentReport.getModel().getColumns()) {
+            final int i = idx;
+            TableColumn<IReportModel,String> column = new TableColumn<>(columnName);
+            column.setMaxWidth(Double.MAX_VALUE);
+            column.setCellValueFactory(model -> new SimpleStringProperty(model.getValue().getRow().get(i)));
+            idx++;
+            reportTable.getColumns().add(column);
+        }
+
+        try {
+            currentLoader = currentReport.getControls();
+            customControls = currentLoader.load();
+            gridPane.add(customControls, 0, 1);
+        }
+        catch (Exception ex) {
+            ex.printStackTrace();
+        }
         refreshClick();
     }
 
     public void refreshClick() {
-        reportTable.getColumns().clear();
-
-        ReportBase reportBase = reportDAO.getReportByName((String)reportSelection2.getSelectionModel().getSelectedItem());
-        int idx = 0;
-        for(String columnName : reportBase.getColumns()) {
-            final int i = idx;
-            TableColumn<ReportBase, String> column = new TableColumn<>(columnName);
-            column.setCellValueFactory(r -> new SimpleStringProperty(r.getValue().getRow().get(i)));
-            reportTable.getColumns().add(column);
-            idx++;
+        try {
+            reportTable.setItems(FXCollections.observableArrayList(
+                    reports.runReport(currentReport, currentLoader.<IControl>getController().getAttributes())
+                ));
+        }
+        catch (Exception ex) {
+                ex.printStackTrace();
+                reportTable.setItems(FXCollections.observableArrayList(
+                    reports.runReport(currentReport)
+        ));
         }
 
-        List<ReportBase> results = reportBase.get();
-
-        reportTable.setItems(FXCollections.observableArrayList(results));
-        if(reportBase.getColumns().size() > 0) {
-            for(Control c : reportBase.getControls()){
-                customControls.getChildren().add(c);
-            }
-        }
     }
 
 

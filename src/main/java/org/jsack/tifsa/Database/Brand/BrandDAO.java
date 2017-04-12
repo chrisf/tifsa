@@ -45,7 +45,6 @@ public class BrandDAO extends BrandModel {
 
     @Override
     public int delete(long id) {
-
         //create our delete statement
         String sql = "DELETE FROM Brand" +
                     " WHERE BrandID = ?";

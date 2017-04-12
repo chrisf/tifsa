@@ -35,7 +35,7 @@ public class MainWindowController implements Initializable {
         Parent salesMenu = null;
 
         try {
-             salesMenu = FXMLLoader.load(getClass().getResource("/scenes/sales_menu.fxml"));
+             salesMenu = FXMLLoader.load(getClass().getResource("/Scenes/Sales.fxml"));
              Stage stage = new Stage();
              stage.setScene(new Scene(salesMenu));
              stage.show();
@@ -49,11 +49,11 @@ public class MainWindowController implements Initializable {
     public void reportsButtonClick() {
         Parent salesMenu = null;
         try {
-            salesMenu = FXMLLoader.load(getClass().getResource("/scenes/reports.fxml"));
+            salesMenu = FXMLLoader.load(getClass().getResource("/Scenes/ReportsMain.fxml"));
             Stage stage = new Stage();
             stage.setScene(new Scene(salesMenu));
             stage.show();
         }
-        catch (Exception ex) {}
+        catch (Exception ex) { ex.printStackTrace(); }
     }
 }

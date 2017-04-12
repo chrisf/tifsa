@@ -14,7 +14,7 @@ public class OrderDAO extends OrderBase {
     }
     @Override
     public List<Order> selectAll() {
-        String sql = "SELECT * FROM ?";
+        String sql = "SELECT * FROM Order";
         return getTemplate().query(sql, new Object[] { this.getTableName() }, new OrderWrapper());
     }
 
