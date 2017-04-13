@@ -19,6 +19,6 @@ public class DeliveredSchema implements ISchema {
 
     @Override
     public RowMapper getWrapper() {
-        return null;
+        return new DeliveredWrapper();
     }
 }

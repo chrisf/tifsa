@@ -8,6 +8,7 @@ public class Employee {
     private String employeeFirst;
     private String employeeMiddleInitial;
     private String employeeLast;
+    private boolean deleted;
 
     public int getEmployeeId() {
         return employeeId;
@@ -39,5 +40,13 @@ public class Employee {
 
     public void setEmployeeLast(String employeeLast) {
         this.employeeLast = employeeLast;
+    }
+
+    public boolean isDeleted() {
+        return deleted;
+    }
+
+    public void setDeleted(boolean deleted) {
+        this.deleted = deleted;
     }
 }

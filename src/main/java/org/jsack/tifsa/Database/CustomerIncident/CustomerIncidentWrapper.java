@@ -13,6 +13,7 @@ public class CustomerIncidentWrapper implements RowMapper<CustomerIncident> {
     public CustomerIncident mapRow(ResultSet rs, int rowNum) throws SQLException {
         CustomerIncident customerIncident = new CustomerIncident();
 
+        customerIncident.setCustomerIncidentId(rs.getLong("CustomerIncidentID"));
         customerIncident.setOrderId(rs.getLong("OrderID"));
         customerIncident.setCustomerIncidentDate(rs.getDate("CustomerIncidentDate"));
         customerIncident.setCustomerIncidentDescription(rs.getString("CustomerIncidentDescription"));

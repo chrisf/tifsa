@@ -13,6 +13,7 @@ public class CustomerStatusWrapper implements RowMapper<CustomerStatus> {
     public CustomerStatus mapRow(ResultSet rs, int rowNum) throws SQLException {
         CustomerStatus customerStatus = new CustomerStatus();
 
+        customerStatus.setCustomerStatusId(rs.getLong("CustomerStatusID"));
         customerStatus.setCustomerStatusDescription(rs.getString("CustomerStatusDescription"));
         customerStatus.setDeleted(Boolean.parseBoolean(rs.getString("Deleted")));
 
