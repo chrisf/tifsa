@@ -7,8 +7,8 @@ import java.util.Map;
 /**
  * Created by aaron on 3/21/17.
  */
-public class BrandDAO extends BrandModel {
-    public BrandDAO() {
+public class BrandSchema extends BrandModel {
+    public BrandSchema() {
         this.setSimpleInsert("Brand", "BrandID");
     }
     @Override
@@ -22,7 +22,7 @@ public class BrandDAO extends BrandModel {
         attributes.put("BrandName", brandName);
 
         //execute the simple insert and return the newly created primary key
-        return this.getSimpleInsert().executeAndReturnKey(attributes).longValue();
+        return this.getSimpleInsert().usingColumns("ManufacturerID", "BrandName").executeAndReturnKey(attributes).longValue();
     }
 
     @Override
