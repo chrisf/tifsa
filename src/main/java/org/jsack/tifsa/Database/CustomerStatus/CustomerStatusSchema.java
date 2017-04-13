@@ -19,6 +19,6 @@ public class CustomerStatusSchema implements ISchema {
 
     @Override
     public RowMapper getWrapper() {
-        return null;
+        return new CustomerStatusWrapper();
     }
 }

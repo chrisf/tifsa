@@ -4,26 +4,35 @@ package org.jsack.tifsa.Database.Country;
  * Created by aaron on 3/16/17.
  */
 public class Country {
-    private long CountryID;
-    private String CountryName;
+    private long countryId;
+    private String countryName;
+    private boolean deleted;
 
-    public long getCountryID() {
-        return CountryID;
+    public long getCountryId() {
+        return countryId;
     }
 
-    public void setCountryID(long countryID) {
-        CountryID = countryID;
+    public void setCountryId(long countryId) {
+        this.countryId = countryId;
     }
 
     public String getCountryName() {
-        return CountryName;
+        return countryName;
     }
 
     public void setCountryName(String countryName) {
-        CountryName = countryName;
+        this.countryName = countryName;
+    }
+
+    public boolean isDeleted() {
+        return deleted;
+    }
+
+    public void setDeleted(boolean deleted) {
+        this.deleted = deleted;
     }
 
     public String toString() {
-        return getCountryID() + " - " + getCountryName();
+        return getCountryId() + " - " + getCountryName();
     }
 }

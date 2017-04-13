@@ -1,5 +1,6 @@
 package org.jsack.tifsa.Database.CustomerContactType;
 
+import org.jsack.tifsa.Database.CustomerContact.CustomerContactWrapper;
 import org.jsack.tifsa.Database.Interfaces.ISchema;
 import org.springframework.jdbc.core.RowMapper;
 
@@ -19,6 +20,6 @@ public class CustomerContactTypeSchema implements ISchema {
 
     @Override
     public RowMapper getWrapper() {
-        return null;
+        return new CustomerContactWrapper();
     }
 }
