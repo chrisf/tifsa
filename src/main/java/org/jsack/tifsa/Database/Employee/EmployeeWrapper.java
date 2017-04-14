@@ -13,10 +13,13 @@ public class EmployeeWrapper implements RowMapper<Employee> {
     @Override
     public Employee mapRow(ResultSet resultSet, int i) throws SQLException {
         Employee employee = new Employee();
+
         employee.setEmployeeId(resultSet.getInt("EmployeeID"));
         employee.setEmployeeFirst(resultSet.getString("EmployeeFirst"));
         employee.setEmployeeMiddleInitial(resultSet.getString("EmployeeMiddleInitial"));
         employee.setEmployeeLast(resultSet.getString("EmployeeLast"));
+        employee.setDeleted(Boolean.getBoolean(resultSet.getString("Deleted")));
+
         return employee;
     }
 }

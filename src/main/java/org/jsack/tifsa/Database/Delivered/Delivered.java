@@ -6,17 +6,18 @@ import java.sql.Date;
  * Created by aaron on 3/16/17.
  */
 public class Delivered {
-    private int deliveryId;
+    private long deliveryId;
     private java.sql.Date deliveryDate;
-    private int orderLineDeliveryType;
-    private int orderLineId;
-    private int employeeId;
+    private long orderLineDeliveryType;
+    private long orderLineId;
+    private long employeeId;
+    private boolean deleted;
 
-    public int getDeliveryId() {
+    public long getDeliveryId() {
         return deliveryId;
     }
 
-    public void setDeliveryId(int deliveryId) {
+    public void setDeliveryId(long deliveryId) {
         this.deliveryId = deliveryId;
     }
 
@@ -28,27 +29,35 @@ public class Delivered {
         this.deliveryDate = deliveryDate;
     }
 
-    public int getOrderLineDeliveryType() {
+    public long getOrderLineDeliveryType() {
         return orderLineDeliveryType;
     }
 
-    public void setOrderLineDeliveryType(int orderLineDeliveryType) {
+    public void setOrderLineDeliveryType(long orderLineDeliveryType) {
         this.orderLineDeliveryType = orderLineDeliveryType;
     }
 
-    public int getOrderLineId() {
+    public long getOrderLineId() {
         return orderLineId;
     }
 
-    public void setOrderLineId(int orderLineId) {
+    public void setOrderLineId(long orderLineId) {
         this.orderLineId = orderLineId;
     }
 
-    public int getEmployeeId() {
+    public long getEmployeeId() {
         return employeeId;
     }
 
-    public void setEmployeeId(int employeeId) {
+    public void setEmployeeId(long employeeId) {
         this.employeeId = employeeId;
+    }
+
+    public boolean isDeleted() {
+        return deleted;
+    }
+
+    public void setDeleted(boolean deleted) {
+        this.deleted = deleted;
     }
 }

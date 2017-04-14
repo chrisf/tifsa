@@ -6,27 +6,28 @@ import java.sql.Date;
  * Created by aaron on 3/16/17.
  */
 public class CustomerIncident {
-    private int customerIncidentId;
-    private int ordersId;
+    private long customerIncidentId;
+    private long orderId;
     private java.sql.Date customerIncidentDate;
     private String customerIncidentDescription;
-    private int incidentTypeId;
-    private int customerId;
+    private long incidentTypeId;
+    private long customerId;
+    private boolean deleted;
 
-    public int getCustomerIncidentId() {
+    public long getCustomerIncidentId() {
         return customerIncidentId;
     }
 
-    public void setCustomerIncidentId(int customerIncidentId) {
+    public void setCustomerIncidentId(long customerIncidentId) {
         this.customerIncidentId = customerIncidentId;
     }
 
-    public int getOrdersId() {
-        return ordersId;
+    public long getOrderId() {
+        return orderId;
     }
 
-    public void setOrdersId(int ordersId) {
-        this.ordersId = ordersId;
+    public void setOrderId(long orderId) {
+        this.orderId = orderId;
     }
 
     public Date getCustomerIncidentDate() {
@@ -45,20 +46,28 @@ public class CustomerIncident {
         this.customerIncidentDescription = customerIncidentDescription;
     }
 
-    public int getIncidentTypeId() {
+    public long getIncidentTypeId() {
         return incidentTypeId;
     }
 
-    public void setIncidentTypeId(int incidentTypeId) {
+    public void setIncidentTypeId(long incidentTypeId) {
         this.incidentTypeId = incidentTypeId;
     }
 
-    public int getCustomerId() {
+    public long getCustomerId() {
         return customerId;
     }
 
-    public void setCustomerId(int customerId) {
+    public void setCustomerId(long customerId) {
         this.customerId = customerId;
+    }
+
+    public boolean isDeleted() {
+        return deleted;
+    }
+
+    public void setDeleted(boolean deleted) {
+        this.deleted = deleted;
     }
 
 }

@@ -11,6 +11,7 @@ public class CustomerContact {
     private long customerContactTypeId;
     private String customerContactInfo;
     private boolean customerContactPrimary;
+    private boolean deleted;
 
     public void setCustomerContactId(long customerContactId) {
         this.customerContactId = customerContactId;
@@ -48,5 +49,13 @@ public class CustomerContact {
 
     public void setCustomerContactPrimary(boolean customerContactPrimary) {
         this.customerContactPrimary = customerContactPrimary;
+    }
+
+    public boolean isDeleted() {
+        return deleted;
+    }
+
+    public void setDeleted(boolean deleted) {
+        this.deleted = deleted;
     }
 }

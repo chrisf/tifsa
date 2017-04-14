@@ -10,8 +10,9 @@ public class CountryWrapper implements org.springframework.jdbc.core.RowMapper<C
     public Country mapRow(ResultSet rs, int rowNum) throws SQLException {
         Country country = new Country();
 
-        country.setCountryID(rs.getInt("CountryID"));
+        country.setCountryId(rs.getInt("CountryID"));
         country.setCountryName(rs.getString("CountryName"));
+        country.setDeleted(Boolean.parseBoolean(rs.getString("Deleted")));
 
         return country;
     }

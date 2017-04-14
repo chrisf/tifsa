@@ -54,7 +54,7 @@ public class CountryDAO extends CountryBase
         Map<String, Object> attributes = new HashMap();
 
         attributes.put("countryName", c.getCountryName());
-        attributes.put("countryId", c.getCountryID());
+        attributes.put("countryId", c.getCountryId());
 
         return this.getNamedTemplate().update(sql, attributes);
     }

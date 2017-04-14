@@ -4,14 +4,15 @@ package org.jsack.tifsa.Database.CustomerStatus;
  * Created by aaron on 3/16/17.
  */
 public class CustomerStatus {
-    private int customerStatusId;
+    private long customerStatusId;
     private String customerStatusDescription;
+    private boolean deleted;
 
-    public int getCustomerStatusId() {
+    public long getCustomerStatusId() {
         return customerStatusId;
     }
 
-    public void setCustomerStatusId(int customerStatusId) {
+    public void setCustomerStatusId(long customerStatusId) {
         this.customerStatusId = customerStatusId;
     }
 
@@ -21,5 +22,13 @@ public class CustomerStatus {
 
     public void setCustomerStatusDescription(String customerStatusDescription) {
         this.customerStatusDescription = customerStatusDescription;
+    }
+
+    public boolean isDeleted() {
+        return deleted;
+    }
+
+    public void setDeleted(boolean deleted) {
+        this.deleted = deleted;
     }
 }
