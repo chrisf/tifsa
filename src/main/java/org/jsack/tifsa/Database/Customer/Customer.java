@@ -22,6 +22,7 @@ public class Customer {
     private String customerAddressZip;
     private long customerTypeId;
     private long customerStatusId;
+    private boolean deleted;
 
     public Customer() {
         setCustomerAddedOn(new java.sql.Timestamp(new java.util.Date().getTime()));
@@ -153,6 +154,14 @@ public class Customer {
 
     public void setCustomerAddressZip(String customerAddressZip) {
         this.customerAddressZip = customerAddressZip;
+    }
+
+    public boolean isDeleted() {
+        return deleted;
+    }
+
+    public void setDeleted(boolean deleted) {
+        this.deleted = deleted;
     }
 
     public String getFullName() {

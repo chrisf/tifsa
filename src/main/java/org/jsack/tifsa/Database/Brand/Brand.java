@@ -7,6 +7,7 @@ public class Brand {
     private long brandId;
     private long manufacturerId;
     private String brandName;
+    private boolean deleted;
 
     public long getBrandID() {
         return brandId;
@@ -32,4 +33,11 @@ public class Brand {
         this.brandName = brandName;
     }
 
+    public boolean isDeleted() {
+        return deleted;
+    }
+
+    public void setDeleted(boolean deleted) {
+        this.deleted = deleted;
+    }
 }
