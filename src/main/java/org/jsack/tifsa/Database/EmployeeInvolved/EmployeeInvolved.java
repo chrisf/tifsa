@@ -4,22 +4,31 @@ package org.jsack.tifsa.Database.EmployeeInvolved;
  * Created by aaron on 3/16/17.
  */
 public class EmployeeInvolved {
-    private int employeeId;
-    private int employeeIncidentId;
+    private long employeeId;
+    private long employeeIncidentId;
+    private boolean deleted;
 
-    public int getEmployeeId() {
+    public long getEmployeeId() {
         return employeeId;
     }
 
-    public void setEmployeeId(int employeeId) {
+    public void setEmployeeId(long employeeId) {
         this.employeeId = employeeId;
     }
 
-    public int getEmployeeIncidentId() {
+    public long getEmployeeIncidentId() {
         return employeeIncidentId;
     }
 
-    public void setEmployeeIncidentId(int employeeIncidentId) {
+    public void setEmployeeIncidentId(long employeeIncidentId) {
         this.employeeIncidentId = employeeIncidentId;
+    }
+
+    public boolean isDeleted() {
+        return deleted;
+    }
+
+    public void setDeleted(boolean deleted) {
+        this.deleted = deleted;
     }
 }

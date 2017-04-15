@@ -25,7 +25,7 @@ public class CustomerWrapper implements org.springframework.jdbc.core.RowMapper<
         customer.setCustomerAddressZip(resultSet.getString("CustomerAddressZip"));
         customer.setCustomerTypeId(resultSet.getLong("CustomerTypeID"));
         customer.setCustomerStatusId(resultSet.getLong("CustomerStatusID"));
-        customer.setDeleted(Boolean.parseBoolean(resultSet.getString("Deleted")));
+        customer.setDeleted(resultSet.getString("Deleted").equalsIgnoreCase("1"));
 
         return customer;
     }
