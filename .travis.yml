@@ -6,7 +6,7 @@ sudo: false
 
 script:
   # -q=hide [info] line, -X=show debug messages
-  - mvn -q clean test
+  - mvn -q clean install -DskipTests
 
 addons:
   apt:
