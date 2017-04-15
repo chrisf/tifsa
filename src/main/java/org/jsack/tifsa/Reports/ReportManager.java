@@ -14,13 +14,13 @@ import java.util.Map;
 /**
  * Created by aaron on 4/11/17.
  */
-public class ReportsController {
+public class ReportManager {
     private List<IReport> reports;
     private ApplicationContext context;
     private JdbcTemplate template;
     private NamedParameterJdbcTemplate namedTemplate;
 
-    public ReportsController() {
+    public ReportManager() {
         String dataSource = System.getProperty("dataSource");
 
         // set default data source bean
