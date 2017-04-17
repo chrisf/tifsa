@@ -85,6 +85,7 @@ public class ReportsController implements Initializable{
             selectedReportName.set(reportSelectionList.get(0));
         }
     }
+    
     public void onReportSelectionChange(ObservableValue obs, Object oldVal, Object newVal) {
         if(reportSelectionList.size() == 0)
         {
