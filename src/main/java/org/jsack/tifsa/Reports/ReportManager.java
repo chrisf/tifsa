@@ -40,7 +40,7 @@ public class ReportManager {
     }
 
     public IReport getReportByName(String name) {
-        return reports.stream().filter(r -> r.getName() == name).findFirst().get();
+        return reports.stream().filter(r -> r.getName().equals(name)).findFirst().get();
     }
 
     public List<String> getReportCategories() {

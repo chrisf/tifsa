@@ -2,8 +2,12 @@ package org.jsack.tifsa.Controllers;
 
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXComboBox;
+import javafx.beans.Observable;
+import javafx.beans.property.SimpleStringProperty;
+import javafx.beans.property.StringProperty;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
+import javafx.collections.ListChangeListener;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -44,6 +48,9 @@ public class ReportsController implements Initializable{
     FXMLLoader currentLoader;
     IControl currentController;
 
+    StringProperty selectedCategory = new SimpleStringProperty();
+    StringProperty selectedReportName = new SimpleStringProperty();
+
     private ReportManager reports;
     @Override
     public void initialize(URL location, ResourceBundle resources) {
@@ -52,32 +59,48 @@ public class ReportsController implements Initializable{
         categorySelectionList = FXCollections.observableArrayList(
                 reports.getReportCategories()
         );
+
+        reportSelectionList = FXCollections.observableArrayList();
+
         reportType.setItems(categorySelectionList);
-        reportType.setValue(reportType.getItems().get(0));
-
-        onReportTypeChange();
-    }
-
-    public void onReportTypeChange() {
-        reportSelectionList = FXCollections.observableArrayList(
-                reports.getReportsByCategory((String) reportType.getSelectionModel().getSelectedItem())
-        );
         reportSelection.setItems(reportSelectionList);
-        reportSelection.setValue(reportSelection.getItems().get(0));
 
-        onReportSelectionChange();
+        reportType.valueProperty().bindBidirectional(selectedCategory);
+        reportSelection.valueProperty().bindBidirectional(selectedReportName);
+
+        reportType.valueProperty().addListener(this::onReportTypeChange);
+        reportSelection.valueProperty().addListener(this::onReportSelectionChange);
     }
-    public void onReportSelectionChange() {
-        if(reportSelection.getSelectionModel().getSelectedItem() == null)
+
+    public void onReportTypeChange(ObservableValue obs, Object oldVal, Object newVal) {
+        reportSelectionList.clear();
+
+        // load all reports for the selected category
+        reportSelectionList.addAll(
+                reports.getReportsByCategory(newVal.toString())
+        );
+
+        if(reportSelectionList.size() > 0)
+        {
+            selectedReportName.set(reportSelectionList.get(0));
+        }
+    }
+    public void onReportSelectionChange(ObservableValue obs, Object oldVal, Object newVal) {
+        if(reportSelectionList.size() == 0)
         {
             return;
         }
 
-        currentReport = reports.getReportByName((String) reportSelection.getSelectionModel().getSelectedItem());
+        // set the current report to the selected one
+        currentReport = reports.getReportByName(newVal.toString());
+
+        // clear columns and rows
         reportTable.getColumns().clear();
+        reportTable.getItems().clear();
 
         int idx = 0;
 
+        // load all the columns for the table based on the selected report
         for(Map.Entry<String, Class> entry : currentReport.getModel().getColumns().entrySet()) {
             final int i = idx;
             final TableColumn<IReportModel,String> column = new TableColumn<>(entry.getKey());
@@ -101,6 +124,7 @@ public class ReportsController implements Initializable{
             reportTable.getColumns().add(column);
         }
 
+        // load controls for the report
         try {
             currentLoader = currentReport.getControls();
             customControls.getChildren().clear();
@@ -108,11 +132,6 @@ public class ReportsController implements Initializable{
         }
         catch (Exception ex) {
             ex.printStackTrace();
-        }
-
-        if(currentReport != null && customControls.getChildren().size() == 0)
-        {
-            refreshClick();
         }
     }
 
