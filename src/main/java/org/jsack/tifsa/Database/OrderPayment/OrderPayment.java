@@ -7,6 +7,7 @@ public class OrderPayment {
     private long paymentId;
     private long orderId;
     private double orderPaymentAmount;
+    private boolean deleted;
 
     public long getPaymentId() {
         return paymentId;
@@ -30,5 +31,12 @@ public class OrderPayment {
 
     public void setOrderPaymentAmount(double orderPaymentAmount) {
         this.orderPaymentAmount = orderPaymentAmount;
+    }
+    public boolean isDeleted() {
+        return deleted;
+    }
+
+    public void setDeleted(boolean deleted) {
+        this.deleted = deleted;
     }
 }

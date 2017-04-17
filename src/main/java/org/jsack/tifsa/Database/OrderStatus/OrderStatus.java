@@ -6,6 +6,7 @@ package org.jsack.tifsa.Database.OrderStatus;
 public class OrderStatus {
     private long orderStatusId;
     private String orderStatusDescription;
+    private boolean deleted;
 
     public long getOrderStatusId() {
         return orderStatusId;
@@ -21,5 +22,12 @@ public class OrderStatus {
 
     public void setOrderStatusDescription(String orderStatusDescription) {
         this.orderStatusDescription = orderStatusDescription;
+    }
+    public boolean isDeleted() {
+        return deleted;
+    }
+
+    public void setDeleted(boolean deleted) {
+        this.deleted = deleted;
     }
 }

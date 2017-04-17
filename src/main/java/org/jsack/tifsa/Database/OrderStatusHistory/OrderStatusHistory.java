@@ -10,7 +10,8 @@ public class OrderStatusHistory {
     private long orderId;
     private Timestamp orderStatusHistoryDate;
     private Timestamp orderStatusHistoryEndDate;
-    private int orderStatusHistoryId;
+    private long orderStatusHistoryId;
+    private boolean deleted;
 
     public long getOrderStatusId() {
         return orderStatusId;
@@ -44,11 +45,18 @@ public class OrderStatusHistory {
         this.orderStatusHistoryEndDate = orderStatusHistoryEndDate;
     }
 
-    public int getOrderStatusHistoryId() {
+    public long getOrderStatusHistoryId() {
         return orderStatusHistoryId;
     }
 
-    public void setOrderStatusHistoryId(int orderStatusHistoryId) {
+    public void setOrderStatusHistoryId(long orderStatusHistoryId) {
         this.orderStatusHistoryId = orderStatusHistoryId;
+    }
+    public boolean isDeleted() {
+        return deleted;
+    }
+
+    public void setDeleted(boolean deleted) {
+        this.deleted = deleted;
     }
 }
