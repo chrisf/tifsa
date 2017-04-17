@@ -19,7 +19,7 @@ public class CustomerIncidentWrapper implements RowMapper<CustomerIncident> {
         customerIncident.setCustomerIncidentDescription(rs.getString("CustomerIncidentDescription"));
         customerIncident.setIncidentTypeId(rs.getLong("IncidentTypeID"));
         customerIncident.setCustomerId(rs.getLong("CustomerID"));
-        customerIncident.setDeleted(Boolean.parseBoolean(rs.getString("Deleted")));
+        customerIncident.setDeleted(rs.getString("Deleted").equalsIgnoreCase("1"));
 
         return customerIncident;
     }

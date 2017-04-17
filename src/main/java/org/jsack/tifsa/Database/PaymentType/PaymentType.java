@@ -6,6 +6,7 @@ package org.jsack.tifsa.Database.PaymentType;
 public class PaymentType {
     private long paymentTypeId;
     private String paymentTypeDescription;
+    private boolean deleted;
 
     public long getPaymentTypeId() {
         return paymentTypeId;
@@ -21,5 +22,12 @@ public class PaymentType {
 
     public void setPaymentTypeDescription(String paymentTypeDescription) {
         this.paymentTypeDescription = paymentTypeDescription;
+    }
+    public boolean isDeleted() {
+        return deleted;
+    }
+
+    public void setDeleted(boolean deleted) {
+        this.deleted = deleted;
     }
 }

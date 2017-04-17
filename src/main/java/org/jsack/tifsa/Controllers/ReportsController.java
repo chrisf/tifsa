@@ -15,6 +15,7 @@ import javafx.scene.layout.VBox;
 import org.jsack.tifsa.Reports.Interfaces.IControl;
 import org.jsack.tifsa.Reports.Interfaces.IReport;
 import org.jsack.tifsa.Reports.Interfaces.IReportModel;
+import org.jsack.tifsa.Reports.ReportManager;
 
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -40,10 +41,10 @@ public class ReportsController implements Initializable{
     FXMLLoader currentLoader;
     IControl currentController;
 
-    private org.jsack.tifsa.Reports.ReportsController reports;
+    private ReportManager reports;
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        reports = new org.jsack.tifsa.Reports.ReportsController();
+        reports = new ReportManager();
 
         categorySelectionList = FXCollections.observableArrayList(
                 reports.getReportCategories()

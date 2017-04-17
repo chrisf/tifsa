@@ -6,9 +6,10 @@ package org.jsack.tifsa.Database.VendorContact;
 public class VendorContact {
     private long vendorContactId;
     private long vendorContactTypeId;
-    private long vendorContactInfo;
+    private String vendorContactInfo;
     private boolean vendorContactPrimary;
     private long vendorId;
+    private boolean deleted;
 
     public long getVendorContactId() {
         return vendorContactId;
@@ -26,11 +27,11 @@ public class VendorContact {
         this.vendorContactTypeId = vendorContactTypeId;
     }
 
-    public long getVendorContactInfo() {
+    public String getVendorContactInfo() {
         return vendorContactInfo;
     }
 
-    public void setVendorContactInfo(long vendorContactInfo) {
+    public void setVendorContactInfo(String vendorContactInfo) {
         this.vendorContactInfo = vendorContactInfo;
     }
 
@@ -48,5 +49,12 @@ public class VendorContact {
 
     public void setVendorId(long vendorId) {
         this.vendorId = vendorId;
+    }
+    public boolean isDeleted() {
+        return deleted;
+    }
+
+    public void setDeleted(boolean deleted) {
+        this.deleted = deleted;
     }
 }

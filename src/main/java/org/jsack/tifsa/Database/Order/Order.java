@@ -3,126 +3,127 @@ package org.jsack.tifsa.Database.Order;
 import java.sql.Timestamp;
 
 public class Order {
-  private Long orderid;
-  private Long customerid;
-  private Double ordertotal;
-  private java.sql.Timestamp orderdate;
-  private String orderbillingfirst;
-  private String orderbillinglast;
-  private String orderbillingstreet;
-  private String orderbillingstreet2;
-  private Long orderbillingstate;
-  private String orderbillingcity;
-  private String orderbillingzip;
-  private Double orderpaid;
+  private Long orderId;
+  private Long customerId;
+  private Double orderTotal;
+  private java.sql.Timestamp orderDate;
+  private String orderBillingFirst;
+  private String orderBillingLast;
+  private String orderBillingStreet;
+  private String orderBillingStreet2;
+  private Long orderBillingState;
+  private String orderBillingCity;
+  private String orderBillingZip;
+  private Double orderPaid;
   private Double orderbalance;
-  private String ordercashondelivery;
-  private Long orderstatusid;
-  private java.sql.Timestamp orderstatusdate;
-  private Double ordertax;
-  private Double orderfee;
-  private Long soldbyemployeeid;
-  private Timestamp ordercompletedon;
-  private String ordershippingstreet;
-  private String ordershippingstreet2;
-  private Long ordershippingstate;
-  private String ordershippingcity;
-  private String ordershippingzip;
+  private String orderCashOnDelivery;
+  private Long orderStatusId;
+  private java.sql.Timestamp orderStatusDate;
+  private Double orderTax;
+  private Double orderFee;
+  private Long soldByEmployeeId;
+  private Timestamp orderCompletedOn;
+  private String orderShippingStreet;
+  private String orderShippingStreet2;
+  private Long orderShippingState;
+  private String orderShippingCity;
+  private String orderShippingZip;
+  private boolean deleted;
 
-  public Long getOrderid() {
-    return orderid;
+  public Long getOrderId() {
+    return orderId;
   }
 
-  public void setOrderid(Long orderid) {
-    this.orderid = orderid;
+  public void setOrderId(Long orderId) {
+    this.orderId = orderId;
   }
 
-  public Long getCustomerid() {
-    return customerid;
+  public Long getCustomerId() {
+    return customerId;
   }
 
-  public void setCustomerid(Long customerid) {
-    this.customerid = customerid;
+  public void setCustomerId(Long customerId) {
+    this.customerId = customerId;
   }
 
-  public Double getOrdertotal() {
-    return ordertotal;
+  public Double getOrderTotal() {
+    return orderTotal;
   }
 
-  public void setOrdertotal(Double ordertotal) {
-    this.ordertotal = ordertotal;
+  public void setOrderTotal(Double orderTotal) {
+    this.orderTotal = orderTotal;
   }
 
-  public java.sql.Timestamp getOrderdate() {
-    return orderdate;
+  public java.sql.Timestamp getOrderDate() {
+    return orderDate;
   }
 
-  public void setOrderdate(java.sql.Timestamp orderdate) {
-    this.orderdate = orderdate;
+  public void setOrderDate(java.sql.Timestamp orderDate) {
+    this.orderDate = orderDate;
   }
 
-  public String getOrderbillingfirst() {
-    return orderbillingfirst;
+  public String getOrderBillingFirst() {
+    return orderBillingFirst;
   }
 
-  public void setOrderbillingfirst(String orderbillingfirst) {
-    this.orderbillingfirst = orderbillingfirst;
+  public void setOrderBillingFirst(String orderBillingFirst) {
+    this.orderBillingFirst = orderBillingFirst;
   }
 
-  public String getOrderbillinglast() {
-    return orderbillinglast;
+  public String getOrderBillingLast() {
+    return orderBillingLast;
   }
 
-  public void setOrderbillinglast(String orderbillinglast) {
-    this.orderbillinglast = orderbillinglast;
+  public void setOrderBillingLast(String orderBillingLast) {
+    this.orderBillingLast = orderBillingLast;
   }
 
-  public String getOrderbillingstreet() {
-    return orderbillingstreet;
+  public String getOrderBillingStreet() {
+    return orderBillingStreet;
   }
 
-  public void setOrderbillingstreet(String orderbillingstreet) {
-    this.orderbillingstreet = orderbillingstreet;
+  public void setOrderBillingStreet(String orderBillingStreet) {
+    this.orderBillingStreet = orderBillingStreet;
   }
 
-  public String getOrderbillingstreet2() {
-    return orderbillingstreet2;
+  public String getOrderBillingStreet2() {
+    return orderBillingStreet2;
   }
 
-  public void setOrderbillingstreet2(String orderbillingstreet2) {
-    this.orderbillingstreet2 = orderbillingstreet2;
+  public void setOrderBillingStreet2(String orderBillingStreet2) {
+    this.orderBillingStreet2 = orderBillingStreet2;
   }
 
-  public Long getOrderbillingstate() {
-    return orderbillingstate;
+  public Long getOrderBillingState() {
+    return orderBillingState;
   }
 
-  public void setOrderbillingstate(Long orderbillingstate) {
-    this.orderbillingstate = orderbillingstate;
+  public void setOrderBillingState(Long orderBillingState) {
+    this.orderBillingState = orderBillingState;
   }
 
-  public String getOrderbillingcity() {
-    return orderbillingcity;
+  public String getOrderBillingCity() {
+    return orderBillingCity;
   }
 
-  public void setOrderbillingcity(String orderbillingcity) {
-    this.orderbillingcity = orderbillingcity;
+  public void setOrderBillingCity(String orderBillingCity) {
+    this.orderBillingCity = orderBillingCity;
   }
 
-  public String getOrderbillingzip() {
-    return orderbillingzip;
+  public String getOrderBillingZip() {
+    return orderBillingZip;
   }
 
-  public void setOrderbillingzip(String orderbillingzip) {
-    this.orderbillingzip = orderbillingzip;
+  public void setOrderBillingZip(String orderBillingZip) {
+    this.orderBillingZip = orderBillingZip;
   }
 
-  public Double getOrderpaid() {
-    return orderpaid;
+  public Double getOrderPaid() {
+    return orderPaid;
   }
 
-  public void setOrderpaid(Double orderpaid) {
-    this.orderpaid = orderpaid;
+  public void setOrderPaid(Double orderPaid) {
+    this.orderPaid = orderPaid;
   }
 
   public Double getOrderbalance() {
@@ -133,99 +134,106 @@ public class Order {
     this.orderbalance = orderbalance;
   }
 
-  public String getOrdercashondelivery() {
-    return ordercashondelivery;
+  public String getOrderCashOnDelivery() {
+    return orderCashOnDelivery;
   }
 
-  public void setOrdercashondelivery(String ordercashondelivery) {
-    this.ordercashondelivery = ordercashondelivery;
+  public void setOrderCashOnDelivery(String orderCashOnDelivery) {
+    this.orderCashOnDelivery = orderCashOnDelivery;
   }
 
-  public Long getOrderstatusid() {
-    return orderstatusid;
+  public Long getOrderStatusId() {
+    return orderStatusId;
   }
 
-  public void setOrderstatusid(Long orderstatusid) {
-    this.orderstatusid = orderstatusid;
+  public void setOrderStatusId(Long orderStatusId) {
+    this.orderStatusId = orderStatusId;
   }
 
-  public java.sql.Timestamp getOrderstatusdate() {
-    return orderstatusdate;
+  public java.sql.Timestamp getOrderStatusDate() {
+    return orderStatusDate;
   }
 
-  public void setOrderstatusdate(java.sql.Timestamp orderstatusdate) {
-    this.orderstatusdate = orderstatusdate;
+  public void setOrderStatusDate(java.sql.Timestamp orderStatusDate) {
+    this.orderStatusDate = orderStatusDate;
   }
 
-  public Double getOrdertax() {
-    return ordertax;
+  public Double getOrderTax() {
+    return orderTax;
   }
 
-  public void setOrdertax(Double ordertax) {
-    this.ordertax = ordertax;
+  public void setOrderTax(Double orderTax) {
+    this.orderTax = orderTax;
   }
 
-  public Double getOrderfee() {
-    return orderfee;
+  public Double getOrderFee() {
+    return orderFee;
   }
 
-  public void setOrderfee(Double orderfee) {
-    this.orderfee = orderfee;
+  public void setOrderFee(Double orderFee) {
+    this.orderFee = orderFee;
   }
 
-  public Long getSoldbyemployeeid() {
-    return soldbyemployeeid;
+  public Long getSoldByEmployeeId() {
+    return soldByEmployeeId;
   }
 
-  public void setSoldbyemployeeid(Long soldbyemployeeid) {
-    this.soldbyemployeeid = soldbyemployeeid;
+  public void setSoldByEmployeeId(Long soldByEmployeeId) {
+    this.soldByEmployeeId = soldByEmployeeId;
   }
 
-  public Timestamp getOrdercompletedon() {
-    return ordercompletedon;
+  public Timestamp getOrderCompletedOn() {
+    return orderCompletedOn;
   }
 
-  public void setOrdercompletedon(Timestamp ordercompletedon) {
-    this.ordercompletedon = ordercompletedon;
+  public void setOrderCompletedOn(Timestamp orderCompletedOn) {
+    this.orderCompletedOn = orderCompletedOn;
   }
 
-  public String getOrdershippingstreet() {
-    return ordershippingstreet;
+  public String getOrderShippingStreet() {
+    return orderShippingStreet;
   }
 
-  public void setOrdershippingstreet(String ordershippingstreet) {
-    this.ordershippingstreet = ordershippingstreet;
+  public void setOrderShippingStreet(String orderShippingStreet) {
+    this.orderShippingStreet = orderShippingStreet;
   }
 
-  public String getOrdershippingstreet2() {
-    return ordershippingstreet2;
+  public String getOrderShippingStreet2() {
+    return orderShippingStreet2;
   }
 
-  public void setOrdershippingstreet2(String ordershippingstreet2) {
-    this.ordershippingstreet2 = ordershippingstreet2;
+  public void setOrderShippingStreet2(String orderShippingStreet2) {
+    this.orderShippingStreet2 = orderShippingStreet2;
   }
 
-  public Long getOrdershippingstate() {
-    return ordershippingstate;
+  public Long getOrderShippingState() {
+    return orderShippingState;
   }
 
-  public void setOrdershippingstate(Long ordershippingstate) {
-    this.ordershippingstate = ordershippingstate;
+  public void setOrderShippingState(Long orderShippingState) {
+    this.orderShippingState = orderShippingState;
   }
 
-  public String getOrdershippingcity() {
-    return ordershippingcity;
+  public String getOrderShippingCity() {
+    return orderShippingCity;
   }
 
-  public void setOrdershippingcity(String ordershippingcity) {
-    this.ordershippingcity = ordershippingcity;
+  public void setOrderShippingCity(String orderShippingCity) {
+    this.orderShippingCity = orderShippingCity;
   }
 
-  public String getOrdershippingzip() {
-    return ordershippingzip;
+  public String getOrderShippingZip() {
+    return orderShippingZip;
   }
 
-  public void setOrdershippingzip(String ordershippingzip) {
-    this.ordershippingzip = ordershippingzip;
+  public void setOrderShippingZip(String orderShippingZip) {
+    this.orderShippingZip = orderShippingZip;
+  }
+public boolean isDeleted() {
+    return deleted;
+  }
+
+  public void setDeleted(boolean deleted) {
+    this.deleted = deleted;
   }
 }

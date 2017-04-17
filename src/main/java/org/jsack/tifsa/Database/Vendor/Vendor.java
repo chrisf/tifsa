@@ -6,6 +6,7 @@ package org.jsack.tifsa.Database.Vendor;
 public class Vendor {
     private long vendorId;
     private String vendorName;
+    private boolean deleted;
 
     public long getVendorId() {
         return vendorId;
@@ -21,5 +22,12 @@ public class Vendor {
 
     public void setVendorName(String vendorName) {
         this.vendorName = vendorName;
+    }
+    public boolean isDeleted() {
+        return deleted;
+    }
+
+    public void setDeleted(boolean deleted) {
+        this.deleted = deleted;
     }
 }

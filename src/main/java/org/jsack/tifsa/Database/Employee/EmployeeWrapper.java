@@ -18,7 +18,7 @@ public class EmployeeWrapper implements RowMapper<Employee> {
         employee.setEmployeeFirst(resultSet.getString("EmployeeFirst"));
         employee.setEmployeeMiddleInitial(resultSet.getString("EmployeeMiddleInitial"));
         employee.setEmployeeLast(resultSet.getString("EmployeeLast"));
-        employee.setDeleted(Boolean.getBoolean(resultSet.getString("Deleted")));
+        employee.setDeleted(resultSet.getString("Deleted").equalsIgnoreCase("1"));
 
         return employee;
     }

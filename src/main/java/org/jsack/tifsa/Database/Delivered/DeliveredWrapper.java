@@ -18,7 +18,7 @@ public class DeliveredWrapper implements RowMapper<Delivered> {
         delivered.setOrderLineDeliveryType(rs.getLong("OrderLineDeliveryTypeID"));
         delivered.setOrderLineId(rs.getLong("OrderLineID"));
         delivered.setEmployeeId(rs.getLong("EmployeeID"));
-        delivered.setDeleted(Boolean.getBoolean(rs.getString("Deleted")));
+        delivered.setDeleted(rs.getString("Deleted").equalsIgnoreCase("1"));
 
         return delivered;
     }

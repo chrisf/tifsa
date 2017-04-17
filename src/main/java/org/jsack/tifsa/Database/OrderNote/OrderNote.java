@@ -11,6 +11,7 @@ public class OrderNote {
     private long orderId;
     private String orderNoteDescription;
     private Timestamp orderNoteDate;
+    private boolean deleted;
 
     public long getOrderNoteId() {
         return orderNoteId;
@@ -50,5 +51,12 @@ public class OrderNote {
 
     public void setOrderNoteDate(Timestamp orderNoteDate) {
         this.orderNoteDate = orderNoteDate;
+    }
+    public boolean isDeleted() {
+        return deleted;
+    }
+
+    public void setDeleted(boolean deleted) {
+        this.deleted = deleted;
     }
 }

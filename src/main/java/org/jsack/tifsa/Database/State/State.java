@@ -8,6 +8,7 @@ public class State {
     private long countryId;
     private String stateName;
     private String stateAbbreviation;
+    private boolean deleted;
 
     public long getStateId() {
         return stateId;
@@ -40,4 +41,15 @@ public class State {
     public void setStateAbbreviation(String stateAbbreviation) {
         this.stateAbbreviation = stateAbbreviation;
     }
+ public boolean isDeleted() {
+        return deleted;
+    }
+
+    public void setDeleted(boolean deleted) {
+        this.deleted = deleted;
+    }
+
+
+
+
 }

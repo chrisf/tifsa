@@ -10,6 +10,7 @@ public class Product {
     private String productSku;
     private double productPrice;
     private long brandId;
+    private boolean deleted;
 
     public long getProductId() {
         return productId;
@@ -57,5 +58,12 @@ public class Product {
 
     public void setBrandId(long brandId) {
         this.brandId = brandId;
+    }
+    public boolean isDeleted() {
+        return deleted;
+    }
+
+    public void setDeleted(boolean deleted) {
+        this.deleted = deleted;
     }
 }

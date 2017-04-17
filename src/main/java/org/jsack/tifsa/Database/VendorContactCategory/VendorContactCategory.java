@@ -6,6 +6,7 @@ package org.jsack.tifsa.Database.VendorContactCategory;
 public class VendorContactCategory {
     private long vendorContactCategoryId;
     private String vendorContactCategoryDescription;
+    private boolean deleted;
 
     public long getVendorContactCategoryId() {
         return vendorContactCategoryId;
@@ -21,5 +22,12 @@ public class VendorContactCategory {
 
     public void setVendorContactCategoryDescription(String vendorContactCategoryDescription) {
         this.vendorContactCategoryDescription = vendorContactCategoryDescription;
+    }
+    public boolean isDeleted() {
+        return deleted;
+    }
+
+    public void setDeleted(boolean deleted) {
+        this.deleted = deleted;
     }
 }

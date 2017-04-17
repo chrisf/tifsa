@@ -6,24 +6,25 @@ import java.sql.Date;
  * Created by aaron on 3/16/17.
  */
 public class EmployeeIncident {
-    private int employeeIncidentId;
-    private int incidentTypeId;
+    private long employeeIncidentId;
+    private long incidentTypeId;
     private String employeeIncidentDescription;
     private java.sql.Date employeeIncidentDate;
+    private boolean deleted;
 
-    public int getEmployeeIncidentId() {
+    public long getEmployeeIncidentId() {
         return employeeIncidentId;
     }
 
-    public void setEmployeeIncidentId(int employeeIncidentId) {
+    public void setEmployeeIncidentId(long employeeIncidentId) {
         this.employeeIncidentId = employeeIncidentId;
     }
 
-    public int getIncidentTypeId() {
+    public long getIncidentTypeId() {
         return incidentTypeId;
     }
 
-    public void setIncidentTypeId(int incidentTypeId) {
+    public void setIncidentTypeId(long incidentTypeId) {
         this.incidentTypeId = incidentTypeId;
     }
 
@@ -41,5 +42,13 @@ public class EmployeeIncident {
 
     public void setEmployeeIncidentDate(Date employeeIncidentDate) {
         this.employeeIncidentDate = employeeIncidentDate;
+    }
+
+    public boolean isDeleted() {
+        return deleted;
+    }
+
+    public void setDeleted(boolean deleted) {
+        this.deleted = deleted;
     }
 }

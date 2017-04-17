@@ -16,7 +16,7 @@ public class CustomerTypeWrapper implements RowMapper<CustomerType> {
 
        customerType.setCustomerTypeId(rs.getLong("CustomerTypeID"));
        customerType.setCustomerTypeName(rs.getString("CustomerTypeName"));
-       customerType.setDeleted(Boolean.getBoolean(rs.getString("Deleted")));
+       customerType.setDeleted(rs.getString("Deleted").equalsIgnoreCase("1"));
 
        return customerType;
     }
