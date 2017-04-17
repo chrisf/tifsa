@@ -1,22 +1,30 @@
-package com.my.db;
+package org.jsack.tifsa.Database.Manufacturer;
 
 public class Manufacturer {
-  private Long manufacturerid;
-  private String manufacturername;
+  private Long manufacturerId;
+  private String manufacturerName;
+  private boolean deleted;
 
-  public Long getManufacturerid() {
-    return manufacturerid;
+  public Long getManufacturerId() {
+    return manufacturerId;
   }
 
-  public void setManufacturerid(Long manufacturerid) {
-    this.manufacturerid = manufacturerid;
+  public void setManufacturerId(Long manufacturerId) {
+    this.manufacturerId = manufacturerId;
   }
 
-  public String getManufacturername() {
-    return manufacturername;
+  public String getManufacturerName() {
+    return manufacturerName;
   }
 
-  public void setManufacturername(String manufacturername) {
-    this.manufacturername = manufacturername;
+  public void setManufacturerName(String manufacturerName) {
+    this.manufacturerName = manufacturerName;
+  }
+public boolean isDeleted() {
+    return deleted;
+  }
+
+  public void setDeleted(boolean deleted) {
+    this.deleted = deleted;
   }
 }

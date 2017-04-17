@@ -6,6 +6,7 @@ package org.jsack.tifsa.Database.VendorContactType;
 public class VendorContactType {
     private long vendorContactTypeId;
     private String vendorContactTypeDescription;
+    private boolean deleted;
 
     public long getVendorContactTypeId() {
         return vendorContactTypeId;
@@ -21,5 +22,12 @@ public class VendorContactType {
 
     public void setVendorContactTypeDescription(String vendorContactTypeDescription) {
         this.vendorContactTypeDescription = vendorContactTypeDescription;
+    }
+    public boolean isDeleted() {
+        return deleted;
+    }
+
+    public void setDeleted(boolean deleted) {
+        this.deleted = deleted;
     }
 }

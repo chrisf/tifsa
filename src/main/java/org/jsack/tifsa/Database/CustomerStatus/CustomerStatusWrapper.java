@@ -15,7 +15,7 @@ public class CustomerStatusWrapper implements RowMapper<CustomerStatus> {
 
         customerStatus.setCustomerStatusId(rs.getLong("CustomerStatusID"));
         customerStatus.setCustomerStatusDescription(rs.getString("CustomerStatusDescription"));
-        customerStatus.setDeleted(Boolean.parseBoolean(rs.getString("Deleted")));
+        customerStatus.setDeleted(rs.getString("Deleted").equalsIgnoreCase("1"));
 
         return customerStatus;
     }

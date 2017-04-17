@@ -8,6 +8,8 @@ public class OrderDiscount {
     private long orderDiscountId;
     private long orderId;
     private double orderDiscountAmount;
+    private boolean deleted;
+
 
     public long getOrderDiscountId() {
         return orderDiscountId;
@@ -31,6 +33,13 @@ public class OrderDiscount {
 
     public void setOrderDiscountAmount(double orderDiscountAmount) {
         this.orderDiscountAmount = orderDiscountAmount;
+    }
+        public boolean isDeleted() {
+        return deleted;
+    }
+
+    public void setDeleted(boolean deleted) {
+        this.deleted = deleted;
     }
 }
 

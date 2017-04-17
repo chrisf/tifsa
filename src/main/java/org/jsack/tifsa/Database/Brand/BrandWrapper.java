@@ -17,7 +17,7 @@ public class BrandWrapper implements RowMapper<Brand> {
         brand.setBrandID(resultSet.getLong("BrandID"));
         brand.setManufacturerID(resultSet.getLong("ManufacturerID"));
         brand.setBrandName(resultSet.getString("BrandName"));
-        brand.setDeleted(Boolean.valueOf(resultSet.getString("Deleted")));
+        brand.setDeleted(resultSet.getString("Deleted").equalsIgnoreCase("1"));
 
         return brand;
     }

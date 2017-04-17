@@ -4,14 +4,15 @@ package org.jsack.tifsa.Database.EmployeeHistoryType;
  * Created by aaron on 3/16/17.
  */
 public class EmployeeHistoryType {
-    private int employeeHistoryTypeId;
+    private long employeeHistoryTypeId;
     private String employeeHistoryTypeDescription;
+    private boolean deleted;
 
-    public int getEmployeeHistoryTypeId() {
+    public long getEmployeeHistoryTypeId() {
         return employeeHistoryTypeId;
     }
 
-    public void setEmployeeHistoryTypeId(int employeeHistoryTypeId) {
+    public void setEmployeeHistoryTypeId(long employeeHistoryTypeId) {
         this.employeeHistoryTypeId = employeeHistoryTypeId;
     }
 
@@ -23,6 +24,13 @@ public class EmployeeHistoryType {
         this.employeeHistoryTypeDescription = employeeHistoryTypeDescription;
     }
 
+    public boolean isDeleted() {
+        return deleted;
+    }
+
+    public void setDeleted(boolean deleted) {
+        this.deleted = deleted;
+    }
 
 
 }

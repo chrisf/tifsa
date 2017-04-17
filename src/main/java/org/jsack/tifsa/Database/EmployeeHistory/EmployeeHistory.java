@@ -6,33 +6,34 @@ import java.sql.Date;
  * Created by aaron on 3/16/17.
  */
 public class EmployeeHistory {
-    private int employeeHistoryId;
-    private int employeeHistoryTypeId;
-    private int employeeId;
+    private long employeeHistoryId;
+    private long employeeHistoryTypeId;
+    private long employeeId;
     private java.sql.Date employeeHistoryBeginDate;
     private java.sql.Date employeeHistoryEndDate;
+    private boolean deleted;
 
-    public int getEmployeeHistoryId() {
+    public long getEmployeeHistoryId() {
         return employeeHistoryId;
     }
 
-    public void setEmployeeHistoryId(int employeeHistoryId) {
+    public void setEmployeeHistoryId(long employeeHistoryId) {
         this.employeeHistoryId = employeeHistoryId;
     }
 
-    public int getEmployeeHistoryTypeId() {
+    public long getEmployeeHistoryTypeId() {
         return employeeHistoryTypeId;
     }
 
-    public void setEmployeeHistoryTypeId(int employeeHistoryTypeId) {
+    public void setEmployeeHistoryTypeId(long employeeHistoryTypeId) {
         this.employeeHistoryTypeId = employeeHistoryTypeId;
     }
 
-    public int getEmployeeId() {
+    public long getEmployeeId() {
         return employeeId;
     }
 
-    public void setEmployeeId(int employeeId) {
+    public void setEmployeeId(long employeeId) {
         this.employeeId = employeeId;
     }
 
@@ -50,5 +51,13 @@ public class EmployeeHistory {
 
     public void setEmployeeHistoryEndDate(Date employeeHistoryEndDate) {
         this.employeeHistoryEndDate = employeeHistoryEndDate;
+    }
+
+    public boolean isDeleted() {
+        return deleted;
+    }
+
+    public void setDeleted(boolean deleted) {
+        this.deleted = deleted;
     }
 }

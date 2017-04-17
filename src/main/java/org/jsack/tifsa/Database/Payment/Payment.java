@@ -10,6 +10,7 @@ public class Payment {
     private long paymentTypeId;
     private double paymentAmount;
     private Timestamp paymentDate;
+    private boolean deleted;
 
     public long getPaymentId() {
         return paymentId;
@@ -41,5 +42,12 @@ public class Payment {
 
     public void setPaymentDate(Timestamp paymentDate) {
         this.paymentDate = paymentDate;
+    }
+    public boolean isDeleted() {
+        return deleted;
+    }
+
+    public void setDeleted(boolean deleted) {
+        this.deleted = deleted;
     }
 }
