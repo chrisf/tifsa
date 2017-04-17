@@ -18,7 +18,7 @@ public class Report implements IReport{
             "INNER JOIN EmployeeRole ON EmployeeRole.EmployeeID = e1.EmployeeID " +
             "INNER JOIN EmployeeType ON EmployeeRole.EmployeeTypeID = EmployeeType.EmployeeTypeID " +
             "INNER JOIN (" +
-            "    SELECT SUM([Order].OrderBalance) AS Total, [Order].SoldByEmployeeID " +
+            "    SELECT SUM([Order].OrderTotal) AS Total, [Order].SoldByEmployeeID " +
             "    FROM dbo.[Order] " +
             "    WHERE [Order].OrderDate > :yearSelection " +
             "    GROUP BY [Order].SoldByEmployeeID " +

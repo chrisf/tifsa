@@ -2,7 +2,7 @@ package org.jsack.tifsa.Controllers;
 
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXComboBox;
-import javafx.beans.property.SimpleStringProperty;
+import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
@@ -15,8 +15,12 @@ import javafx.scene.layout.VBox;
 import org.jsack.tifsa.Reports.Interfaces.IControl;
 import org.jsack.tifsa.Reports.Interfaces.IReport;
 import org.jsack.tifsa.Reports.Interfaces.IReportModel;
+import org.jsack.tifsa.Reports.ReportManager;
 
+import java.lang.reflect.Constructor;
+import java.lang.reflect.InvocationTargetException;
 import java.net.URL;
+import java.util.Map;
 import java.util.ResourceBundle;
 
 /**
@@ -24,7 +28,7 @@ import java.util.ResourceBundle;
  */
 public class ReportsController implements Initializable{
     @FXML
-    JFXComboBox reportSelection1, reportSelection2;
+    JFXComboBox reportType, reportSelection;
     @FXML
     TableView reportTable;
     @FXML
@@ -40,62 +44,94 @@ public class ReportsController implements Initializable{
     FXMLLoader currentLoader;
     IControl currentController;
 
-    private org.jsack.tifsa.Reports.ReportsController reports;
+    private ReportManager reports;
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        reports = new org.jsack.tifsa.Reports.ReportsController();
+        reports = new ReportManager();
 
         categorySelectionList = FXCollections.observableArrayList(
                 reports.getReportCategories()
         );
-        reportSelection1.setItems(categorySelectionList);
-        reportSelection1.setValue(categorySelectionList.get(0));
+        reportType.setItems(categorySelectionList);
+        reportType.setValue(reportType.getItems().get(0));
 
-       onReportTypeChange();
+        onReportTypeChange();
     }
 
     public void onReportTypeChange() {
         reportSelectionList = FXCollections.observableArrayList(
-                reports.getReportsByCategory((String)reportSelection1.getSelectionModel().getSelectedItem())
+                reports.getReportsByCategory((String) reportType.getSelectionModel().getSelectedItem())
         );
-        reportSelection2.setItems(reportSelectionList);
+        reportSelection.setItems(reportSelectionList);
+        reportSelection.setValue(reportSelection.getItems().get(0));
+
+        onReportSelectionChange();
     }
-    public void onReportChange() {
-        currentReport = reports.getReportByName((String)reportSelection2.getSelectionModel().getSelectedItem());
+    public void onReportSelectionChange() {
+        if(reportSelection.getSelectionModel().getSelectedItem() == null)
+        {
+            return;
+        }
+
+        currentReport = reports.getReportByName((String) reportSelection.getSelectionModel().getSelectedItem());
         reportTable.getColumns().clear();
 
         int idx = 0;
-        for(String columnName : currentReport.getModel().getColumns()) {
+
+        for(Map.Entry<String, Class> entry : currentReport.getModel().getColumns().entrySet()) {
             final int i = idx;
-            TableColumn<IReportModel,String> column = new TableColumn<>(columnName);
-            column.setMaxWidth(Double.MAX_VALUE);
-            column.setCellValueFactory(model -> new SimpleStringProperty(model.getValue().getRow().get(i)));
+            final TableColumn<IReportModel,String> column = new TableColumn<>(entry.getKey());
+            column.setCellValueFactory(model ->
+            {
+                try {
+                    Constructor<ObservableValue> ctor = entry.getValue().getConstructor(String.class);
+                    return ctor.newInstance(model.getValue().getRow().get(i));
+                } catch (NoSuchMethodException e) {
+                    e.printStackTrace();
+                } catch (IllegalAccessException e) {
+                    e.printStackTrace();
+                } catch (InstantiationException e) {
+                    e.printStackTrace();
+                } catch (InvocationTargetException e) {
+                    e.printStackTrace();
+                }
+                return null;
+            });
             idx++;
             reportTable.getColumns().add(column);
         }
 
         try {
             currentLoader = currentReport.getControls();
-            customControls = currentLoader.load();
-            gridPane.add(customControls, 0, 1);
+            customControls.getChildren().clear();
+            customControls.getChildren().add(currentLoader.load());
         }
         catch (Exception ex) {
             ex.printStackTrace();
         }
-        refreshClick();
+
+        if(currentReport != null && customControls.getChildren().size() == 0)
+        {
+            refreshClick();
+        }
     }
 
     public void refreshClick() {
+        if(currentReport == null)
+        {
+            return;
+        }
+
         try {
             reportTable.setItems(FXCollections.observableArrayList(
-                    reports.runReport(currentReport, currentLoader.<IControl>getController().getAttributes())
-                ));
+                reports.runReport(currentReport, currentLoader.<IControl>getController().getAttributes())
+            ));
         }
         catch (Exception ex) {
-                ex.printStackTrace();
-                reportTable.setItems(FXCollections.observableArrayList(
-                    reports.runReport(currentReport)
-        ));
+            ex.printStackTrace();
+            reportTable.setItems(FXCollections.observableArrayList(
+                reports.runReport(currentReport)
+            ));
         }
 
     }
