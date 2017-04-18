@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<?import com.jfoenix.controls.JFXButton?>
+<?import javafx.geometry.Insets?>
+<VBox spacing="20" xmlns="http://javafx.com/javafx"
+      xmlns:fx="http://javafx.com/fxml"
+      prefHeight="400.0" prefWidth="600.0">
+<JFXButton fx:id="orderButton" text="Create Order" prefWidth="Infinity" />
+<JFXButton fx:id="lookupButton" text="Lookup Order" prefWidth="Infinity" />
+<JFXButton fx:id="reportsButton" text="Lookup Reports" prefWidth="Infinity" />
+<padding>
+    <Insets top="10" right="10" bottom="10" left="10" />
+</padding>
+</VBox>
