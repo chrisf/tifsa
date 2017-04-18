@@ -36,8 +36,8 @@ public class Report implements IReport{
     }
 
     @Override
-    public RowMapper getMapper() {
-        return new ReportWrapper(getModel());
+    public RowMapper getMapper(){
+        return new ReportWrapper(this);
     }
 
     @Override

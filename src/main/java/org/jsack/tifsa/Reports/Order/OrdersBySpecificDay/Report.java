@@ -58,7 +58,7 @@ public class Report implements IReport{
 
     @Override
     public RowMapper getMapper() {
-        return new ReportWrapper(getModel());
+        return new ReportWrapper(this);
     }
 
     @Override

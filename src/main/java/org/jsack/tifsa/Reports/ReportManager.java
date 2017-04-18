@@ -69,6 +69,7 @@ public class ReportManager {
         return reportNames;
     }
     public List<IReportModel> runReport(IReport report) {
+
         return template.query(report.getSql(), report.getMapper());
     }
     public List<IReportModel> runReport(IReport report, Map<String,Object> attributes) {
