@@ -1,25 +1,5 @@
-.button {
-    -fx-font-family: sans-serif;
-    -fx-color: #006064;
-    -fx-font-size: 150%;
-    -fx-border-color: #000000;
-    -fx-border-width: 1px;
-    -fx-background-color: #e0f7fa;
-    -fx-text-fill: #000000;
-}
-.jfx-button {
 
-}
-.jfx-snackbar-content {
-    -fx-border-width: 1px;
-    -fx-border-color: #80deea;
-    -fx-border-radius: 2%;
-}
-.jfx-snackbar-toast {
-    -fx-text-fill: white;
-    -fx-font-size: 150%;
-    -fx-border-radius: 150%;
-}
 
 .root {
+    -fx-font-family: "Roboto";
 }

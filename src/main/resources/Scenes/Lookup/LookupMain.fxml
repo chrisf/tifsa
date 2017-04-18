@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<?import com.jfoenix.controls.JFXButton?>
+<StackPane xmlns="http://javafx.com/javafx"
+           xmlns:fx="http://javafx.com/fxml"
+           prefHeight="400.0" prefWidth="600.0">
+<VBox alignment="CENTER">
+    <HBox alignment="CENTER" spacing="20">
+        <JFXButton buttonType="RAISED" fx:id="customerLookup" text="Lookup Customer" />
+        <JFXButton buttonType="RAISED" fx:id="orderLookup" text="Lookup Order" />
+        <JFXButton buttonType="RAISED" fx:id="lookupProduct" text="Lookup Product" />
+    </HBox>
+</VBox>
+</StackPane>

@@ -26,6 +26,16 @@
                           </StackPane>
                       </JFXRippler>
                   </leftItems>
+                  <rightItems>
+                      <JFXRippler maskType="CIRCLE" style="-fx-ripple-color: WHITE;">
+                          <StackPane fx:id="backButtonContainer">
+                              <padding>
+                                  <Insets left="10" bottom="10" right="10" top="10" />
+                              </padding>
+                              <JFXButton fx:id="backButton" style="-fx-text-fill:WHITE;-fx-background-color:#5264AE;-fx-font-size:14px;" text="BACK" />
+                          </StackPane>
+                      </JFXRippler>
+                  </rightItems>
               </JFXToolbar>
           </VBox>
        </top>
