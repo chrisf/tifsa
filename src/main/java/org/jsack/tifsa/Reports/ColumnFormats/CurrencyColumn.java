@@ -9,7 +9,7 @@ import sun.reflect.generics.reflectiveObjects.NotImplementedException;
 import java.text.NumberFormat;
 import java.util.Locale;
 
-public class CurrencyColumn extends SimpleStringProperty implements ObservableValue<String>
+public class CurrencyColumn extends ColumnFormat
 {
     private String value;
 

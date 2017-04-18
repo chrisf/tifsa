@@ -2,6 +2,7 @@ package org.jsack.tifsa.Reports.Customer.CustomerUnpaidBalances;
 
 import org.jsack.tifsa.Reports.ColumnFormats.CurrencyColumn;
 import org.jsack.tifsa.Reports.ColumnFormats.StringColumn;
+import org.jsack.tifsa.Reports.ColumnInfo;
 import org.jsack.tifsa.Reports.Interfaces.IReportModel;
 
 import java.util.ArrayList;
@@ -15,7 +16,7 @@ import java.util.Map;
 public class ReportModel implements IReportModel {
 
     private List<String> row;
-    private Map<String, Class> columns;
+    private Map<String, ColumnInfo> columns;
 
     public ReportModel() {
         row = new ArrayList<>();
@@ -25,11 +26,11 @@ public class ReportModel implements IReportModel {
             TODO: Add report columns
             Add all your report columns here. These must be in order and match what appears in your report on SSMS!
          */
-        columns.put("CustomerFirst", StringColumn.class);
-        columns.put("CustomerLast", StringColumn.class);
-        columns.put("CustomerContactInfo", StringColumn.class);
-        columns.put("CustomerContactTypeDescription", StringColumn.class);
-        columns.put("OrderBalance", CurrencyColumn.class);
+        columns.put("CustomerFirst", new ColumnInfo("Customer First", StringColumn.class));
+        columns.put("CustomerLast", new ColumnInfo("Customer Last", StringColumn.class));
+        columns.put("CustomerContactInfo", new ColumnInfo("Primary Contact", StringColumn.class));
+        columns.put("CustomerContactTypeDescription", new ColumnInfo("Contact Medium", StringColumn.class));
+        columns.put("OrderBalance", new ColumnInfo("Balance", CurrencyColumn.class));
     }
 
     @Override
@@ -38,7 +39,7 @@ public class ReportModel implements IReportModel {
     }
 
     @Override
-    public Map<String, Class> getColumns() {
+    public Map<String, ColumnInfo> getColumns() {
         return columns;
     }
 }

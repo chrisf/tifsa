@@ -1,6 +1,7 @@
 package org.jsack.tifsa.Reports.Customer.CustomerIncidentReport;
 
 import org.jsack.tifsa.Reports.ColumnFormats.StringColumn;
+import org.jsack.tifsa.Reports.ColumnInfo;
 import org.jsack.tifsa.Reports.Interfaces.IReportModel;
 
 import java.util.ArrayList;
@@ -14,7 +15,7 @@ import java.util.Map;
 public class ReportModel implements IReportModel {
 
     private List<String> row;
-    private Map<String, Class> columns;
+    private Map<String, ColumnInfo> columns;
 
     public ReportModel() {
         row = new ArrayList<>();
@@ -25,11 +26,11 @@ public class ReportModel implements IReportModel {
             Add all your report columns here. These must be in order and match what appears in your report on SSMS!
             If you've already done your reports, you should be able to just copy and paste the column.adds here.
          */
-        columns.put("CustomerTypeName", StringColumn.class);
-        columns.put("CustomerFirst", StringColumn.class);
-        columns.put("CustomerLast", StringColumn.class);
-        columns.put("CustomerIncidentDescription", StringColumn.class);
-        columns.put("IncidentTypeDescription", StringColumn.class);
+        columns.put("CustomerTypeName", new ColumnInfo("Customer Type", StringColumn.class));
+        columns.put("CustomerFirst", new ColumnInfo("Customer First", StringColumn.class));
+        columns.put("CustomerLast", new ColumnInfo("Customer Last", StringColumn.class));
+        columns.put("CustomerIncidentDescription", new ColumnInfo("Incident", StringColumn.class));
+        columns.put("IncidentTypeDescription", new ColumnInfo("Incident Type", StringColumn.class));
     }
 
     @Override
@@ -38,7 +39,7 @@ public class ReportModel implements IReportModel {
     }
 
     @Override
-    public Map<String, Class> getColumns() {
+    public Map<String, ColumnInfo> getColumns() {
         return columns;
     }
 }

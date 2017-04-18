@@ -4,6 +4,7 @@ import javafx.fxml.FXMLLoader;
 import org.jsack.tifsa.Reports.Interfaces.IReport;
 import org.jsack.tifsa.Reports.Interfaces.IReportModel;
 import org.jsack.tifsa.Reports.ReportCategory;
+import org.jsack.tifsa.Reports.ReportWrapper;
 import org.springframework.jdbc.core.RowMapper;
 
 import java.io.IOException;
@@ -57,7 +58,7 @@ public class Report implements IReport{
 
     @Override
     public RowMapper getMapper() {
-        return new ReportWrapper();
+        return new ReportWrapper(getModel());
     }
 
     @Override

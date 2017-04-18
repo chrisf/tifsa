@@ -3,6 +3,7 @@ package org.jsack.tifsa.Reports.Order.OrdersBySpecificDay;
 import org.jsack.tifsa.Reports.ColumnFormats.CurrencyColumn;
 import org.jsack.tifsa.Reports.ColumnFormats.DateColumn;
 import org.jsack.tifsa.Reports.ColumnFormats.StringColumn;
+import org.jsack.tifsa.Reports.ColumnInfo;
 import org.jsack.tifsa.Reports.Interfaces.IReportModel;
 
 import java.util.ArrayList;
@@ -16,7 +17,7 @@ import java.util.Map;
 public class ReportModel implements IReportModel {
 
     private List<String> row;
-    private Map<String, Class> columns;
+    private Map<String, ColumnInfo> columns;
 
     public ReportModel() {
         row = new ArrayList<>();
@@ -42,15 +43,15 @@ public class ReportModel implements IReportModel {
                 boolean => BooleanColumn.class
          */
 
-        columns.put("OrderID", StringColumn.class);
-        columns.put("EmployeeFirst", StringColumn.class);
-        columns.put("EmployeeLast", StringColumn.class);
-        columns.put("CustomerFirst", StringColumn.class);
-        columns.put("CustomerLast", StringColumn.class);
-        columns.put("OrderTotal", CurrencyColumn.class);
-        columns.put("OrderDate", DateColumn.class);
-        columns.put("OrderStatusDescription", StringColumn.class);
-        columns.put("CustomerTypeName", StringColumn.class);
+        columns.put("OrderID", new ColumnInfo("Order ID", StringColumn.class));
+        columns.put("EmployeeFirst", new ColumnInfo("Employee First", StringColumn.class));
+        columns.put("EmployeeLast", new ColumnInfo("Employee Last", StringColumn.class));
+        columns.put("CustomerFirst", new ColumnInfo("Customer First", StringColumn.class));
+        columns.put("CustomerLast", new ColumnInfo("Customer Last", StringColumn.class));
+        columns.put("OrderTotal", new ColumnInfo("Total", CurrencyColumn.class));
+        columns.put("OrderDate", new ColumnInfo("Order Date", DateColumn.class));
+        columns.put("OrderStatusDescription", new ColumnInfo("Order Status", StringColumn.class));
+        columns.put("CustomerTypeName", new ColumnInfo("Customer Type", StringColumn.class));
     }
 
     @Override
@@ -59,7 +60,7 @@ public class ReportModel implements IReportModel {
     }
 
     @Override
-    public Map<String, Class> getColumns() {
+    public Map<String, ColumnInfo> getColumns() {
         return columns;
     }
 }

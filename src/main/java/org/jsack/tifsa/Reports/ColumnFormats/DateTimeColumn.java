@@ -8,7 +8,7 @@ import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.Locale;
 
-public class DateTimeColumn extends SimpleStringProperty implements ObservableValue<String>
+public class DateTimeColumn extends ColumnFormat
 {
     private String value;
 

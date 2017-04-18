@@ -3,7 +3,7 @@ package org.jsack.tifsa.Reports.ColumnFormats;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.value.ObservableValue;
 
-public class IntegerColumn extends SimpleStringProperty implements ObservableValue<String>
+public class IntegerColumn extends ColumnFormat
 {
     private String value;
 

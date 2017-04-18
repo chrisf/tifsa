@@ -6,7 +6,7 @@ import javafx.beans.value.ObservableValue;
 import java.text.NumberFormat;
 import java.util.Locale;
 
-public class StringColumn extends SimpleStringProperty implements ObservableValue<String>
+public class StringColumn extends ColumnFormat
 {
     String value;
 

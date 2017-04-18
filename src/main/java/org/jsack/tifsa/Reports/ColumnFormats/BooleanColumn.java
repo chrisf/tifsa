@@ -3,7 +3,7 @@ package org.jsack.tifsa.Reports.ColumnFormats;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.value.ObservableValue;
 
-public class BooleanColumn extends SimpleStringProperty implements ObservableValue<String>
+public class BooleanColumn extends ColumnFormat
 {
     private String value;
 

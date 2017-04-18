@@ -16,6 +16,9 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.VBox;
+import org.jsack.tifsa.Reports.ColumnFormats.BooleanColumn;
+import org.jsack.tifsa.Reports.ColumnFormats.ColumnFormat;
+import org.jsack.tifsa.Reports.ColumnInfo;
 import org.jsack.tifsa.Reports.Interfaces.IControl;
 import org.jsack.tifsa.Reports.Interfaces.IReport;
 import org.jsack.tifsa.Reports.Interfaces.IReportModel;
@@ -87,7 +90,8 @@ public class ReportsController implements Initializable{
     }
     
     public void onReportSelectionChange(ObservableValue obs, Object oldVal, Object newVal) {
-        if(reportSelectionList.size() == 0)
+        // ignore the event if the list is blank or selected value isn't set
+        if(reportSelectionList.size() == 0 || newVal == null)
         {
             return;
         }
@@ -102,13 +106,13 @@ public class ReportsController implements Initializable{
         int idx = 0;
 
         // load all the columns for the table based on the selected report
-        for(Map.Entry<String, Class> entry : currentReport.getModel().getColumns().entrySet()) {
+        for(Map.Entry<String, ColumnInfo> entry : currentReport.getModel().getColumns().entrySet()) {
             final int i = idx;
-            final TableColumn<IReportModel,String> column = new TableColumn<>(entry.getKey());
+            final TableColumn<IReportModel,String> column = new TableColumn<>(entry.getValue().columnLabel);
             column.setCellValueFactory(model ->
             {
                 try {
-                    Constructor<ObservableValue> ctor = entry.getValue().getConstructor(String.class);
+                    Constructor<? extends ColumnFormat> ctor = (entry.getValue().columnFormat).getConstructor(String.class);
                     return ctor.newInstance(model.getValue().getRow().get(i));
                 } catch (NoSuchMethodException e) {
                     e.printStackTrace();

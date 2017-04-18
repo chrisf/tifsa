@@ -6,7 +6,7 @@ import javafx.beans.value.ObservableValue;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
-public class TimeColumn extends SimpleStringProperty implements ObservableValue<String>
+public class TimeColumn extends ColumnFormat
 {
     private String value;
 

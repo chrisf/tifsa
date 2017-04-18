@@ -1,6 +1,7 @@
 package org.jsack.tifsa.Reports.ReportTemplate;
 
 import org.jsack.tifsa.Reports.ColumnFormats.StringColumn;
+import org.jsack.tifsa.Reports.ColumnInfo;
 import org.jsack.tifsa.Reports.Interfaces.IReportModel;
 
 import java.util.ArrayList;
@@ -14,7 +15,7 @@ import java.util.Map;
 public class ReportModel implements IReportModel {
 
     private List<String> row;
-    private Map<String, Class> columns;
+    private Map<String, ColumnInfo> columns;
 
     public ReportModel() {
         row = new ArrayList<>();
@@ -25,14 +26,15 @@ public class ReportModel implements IReportModel {
             Add all your report columns here. These must be in order and match what appears in your report on SSMS!
 
             The first part is the name of the column / attribute,
-            The second part is the type of the attribute
+            The second part is the label of the column that appears in the report header
+            The third part is the type/format of the attribute
 
             If the type of attribute is a string/varchar, use StringColumn.class
 
             If the type of attribute should be formatted as currency/money, use CurrencyColumn.class
             If the type of attribute is just a regular number, use either DecimalColumn.class or IntegerColumn.class depending on if you want decimals
 
-            Examples for "PropertyType":
+            Examples for "ColumnFormat":
                 string      => StringColumn.class
                 int         => IntegerColumn.class
                 long        => IntegerColumn.class
@@ -42,7 +44,7 @@ public class ReportModel implements IReportModel {
                 time        => TimeColumn.class
                 date/time   => DateTimeColumn.class
          */
-        columns.put("NameOfColumn", StringColumn.class);
+        columns.put("NameOfColumn", new ColumnInfo("", StringColumn.class));
     }
 
     @Override
@@ -51,7 +53,7 @@ public class ReportModel implements IReportModel {
     }
 
     @Override
-    public Map<String, Class> getColumns() {
+    public Map<String, ColumnInfo> getColumns() {
         return columns;
     }
 }

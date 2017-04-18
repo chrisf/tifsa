@@ -1,6 +1,6 @@
 package org.jsack.tifsa.Reports.Interfaces;
 
-import javafx.beans.property.Property;
+import org.jsack.tifsa.Reports.ColumnInfo;
 
 import java.util.List;
 import java.util.Map;
@@ -10,6 +10,6 @@ import java.util.Map;
  */
 public interface IReportModel {
     List<String> getRow();
-    Map<String, Class> getColumns();
+    Map<String, ColumnInfo> getColumns();
 }
 

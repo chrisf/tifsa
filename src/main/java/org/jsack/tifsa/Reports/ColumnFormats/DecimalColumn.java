@@ -6,7 +6,7 @@ import javafx.beans.value.ObservableValue;
 import java.text.NumberFormat;
 import java.util.Locale;
 
-public class DecimalColumn extends SimpleStringProperty implements ObservableValue<String>
+public class DecimalColumn extends ColumnFormat
 {
     private String value;
 
