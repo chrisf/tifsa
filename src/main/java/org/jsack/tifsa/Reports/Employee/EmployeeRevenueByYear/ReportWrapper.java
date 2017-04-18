@@ -1,4 +1,4 @@
-package org.jsack.tifsa.Reports.EmployeeRevenueByYear;
+package org.jsack.tifsa.Reports.Employee.EmployeeRevenueByYear;
 
 import org.springframework.jdbc.core.RowMapper;
 

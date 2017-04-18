@@ -1,4 +1,4 @@
-package org.jsack.tifsa.Reports.CustomerIncidentReport;
+package org.jsack.tifsa.Reports.Customer.CustomerUnpaidBalances;
 
 import org.springframework.jdbc.core.RowMapper;
 
@@ -26,11 +26,11 @@ public class ReportWrapper implements RowMapper<ReportModel> {
            Make sure these headers are spelled exactly the same as what appears on your report results when running from SSMS
            and in the exact same order!
         */
-        reportModel.getRow().add(resultSet.getString("CustomerTypeName"));
         reportModel.getRow().add(resultSet.getString("CustomerFirst"));
         reportModel.getRow().add(resultSet.getString("CustomerLast"));
-        reportModel.getRow().add(resultSet.getString("CustomerIncidentDescription"));
-        reportModel.getRow().add(resultSet.getString("IncidentTypeDescription"));
+        reportModel.getRow().add(resultSet.getString("CustomerContactInfo"));
+        reportModel.getRow().add(resultSet.getString("CustomerContactTypeDescription"));
+        reportModel.getRow().add(String.valueOf(resultSet.getDouble("OrderBalance")));
 
        return reportModel;
     }

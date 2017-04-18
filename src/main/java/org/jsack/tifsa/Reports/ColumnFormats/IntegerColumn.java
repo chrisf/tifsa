@@ -3,11 +3,11 @@ package org.jsack.tifsa.Reports.ColumnFormats;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.value.ObservableValue;
 
-public class NumberFormat extends SimpleStringProperty implements ObservableValue<String>
+public class IntegerColumn extends SimpleStringProperty implements ObservableValue<String>
 {
     private String value;
 
-    public NumberFormat(String value)
+    public IntegerColumn(String value)
     {
         this.value = value;
     }

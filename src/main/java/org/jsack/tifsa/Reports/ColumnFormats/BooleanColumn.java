@@ -3,14 +3,11 @@ package org.jsack.tifsa.Reports.ColumnFormats;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.value.ObservableValue;
 
-import java.text.NumberFormat;
-import java.util.Locale;
-
-public class StringFormat extends SimpleStringProperty implements ObservableValue<String>
+public class BooleanColumn extends SimpleStringProperty implements ObservableValue<String>
 {
-    String value;
+    private String value;
 
-    public StringFormat(String value)
+    public BooleanColumn(String value)
     {
         this.value = value;
     }
@@ -18,6 +15,6 @@ public class StringFormat extends SimpleStringProperty implements ObservableValu
     @Override
     public String getValue()
     {
-        return value;
+        return value == "True" ? "Yes" : "No";
     }
 }

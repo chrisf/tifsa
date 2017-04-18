@@ -6,11 +6,11 @@ import javafx.beans.value.ObservableValue;
 import java.text.NumberFormat;
 import java.util.Locale;
 
-public class DecimalFormat extends SimpleStringProperty implements ObservableValue<String>
+public class DecimalColumn extends SimpleStringProperty implements ObservableValue<String>
 {
     private String value;
 
-    public DecimalFormat(String value)
+    public DecimalColumn(String value)
     {
         this.value = value;
     }

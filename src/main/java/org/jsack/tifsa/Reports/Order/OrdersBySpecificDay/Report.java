@@ -1,4 +1,4 @@
-package org.jsack.tifsa.Reports.CustomerIncidentReport;
+package org.jsack.tifsa.Reports.Order.OrdersBySpecificDay;
 
 import javafx.fxml.FXMLLoader;
 import org.jsack.tifsa.Reports.Interfaces.IReport;
@@ -18,17 +18,24 @@ public class Report implements IReport{
         If you already created your reports using the previous method, just copy and paste it into here.
         If you haven't, copy and paste it from Drive and replace all the "\n" with a space.
      */
-    private final String sql = "SELECT dbo.CustomerType.CustomerTypeName,dbo.Customer.CustomerFirst, dbo.Customer.CustomerLast, dbo.CustomerIncident.CustomerIncidentDescription, dbo.IncidentType.IncidentTypeDescription " +
-            "FROM Customer " +
+    private final String sql = "SELECT " +
+            "dbo.[Order].OrderID, dbo.Employee.EmployeeFirst, dbo.Employee.EmployeeLast, " +
+            "dbo.[Customer].CustomerFirst, dbo.[Customer].CustomerLast, dbo.[Order].OrderTotal, dbo.[Order].OrderDate, " +
+            "dbo.OrderStatus.OrderStatusDescription, dbo.CustomerType.CustomerTypeName " +
+            "FROM [Order] " +
+            "INNER JOIN Employee ON [Order].SoldByEmployeeID = Employee.EmployeeID " +
+            "INNER JOIN OrderStatus ON [Order].OrderStatusID = OrderStatus.OrderStatusID " +
+            "INNER JOIN Customer ON [Order].CustomerID = Customer.CustomerID " +
             "INNER JOIN CustomerType ON Customer.CustomerTypeID = CustomerType.CustomerTypeID " +
-            "INNER JOIN CustomerIncident ON Customer.CustomerID = CustomerIncident.CustomerID " +
-            "INNER JOIN IncidentType ON CustomerIncident.IncidentTypeID = IncidentType.IncidentTypeID";
+            "WHERE [Order].OrderDate >= '2009-09-14' AND OrderDate <= '2009-09-14 23:59:59' " +
+            "AND [Order].Deleted = 0 " +
+            "ORDER BY [Order].OrderID";
 
     /*
         TODO: Name your report.
         Set the name of your report here. Make it unique.
      */
-    private final String name = "Customer Incident Report";
+    private final String name = "Orders By Specific Day";
 
     /*
         TODO: Set report Category.
@@ -41,7 +48,7 @@ public class Report implements IReport{
             Employee,
             Product
      */
-    private ReportCategory reportCategory = ReportCategory.Customer;
+    private ReportCategory reportCategory = ReportCategory.Order;
 
     @Override
     public IReportModel getModel() {
@@ -69,13 +76,13 @@ public class Report implements IReport{
     }
 
     /*
-        TODO: Change the "ReportTemplate" portion of the file path to your Report Path.
-        If my report was in a new Directory called "EmployeeRevenueByYear" I would change ReportTemplate to EmployeeRevenueByYear
-        ex: ../java/org/jsack/tifsa/Reports/ReportTemplate/EmployeeRevenueByYear.fxml would translate to
-            ../java/org/jsack/tifsa/Reports/EmployeeRevenueByYear/EmployeeRevenueByYear.fxml
+        TODO: Change to the path of your .fxml file for your controls
+        This should be the FXML file you create in the /resources/ReportControls/ directory following the template there.
+        This is what enables each report to have custom controls.
+        Change the "template.fxml" to the correct name of your template. Look at reports I have created for examples.
      */
     @Override
     public FXMLLoader getControls() throws IOException {
-        return new FXMLLoader(getClass().getResource("/ReportControls/CustomerIncidentReport.fxml"));
+        return new FXMLLoader(getClass().getResource("/ReportControls/Template.fxml"));
     }
 }

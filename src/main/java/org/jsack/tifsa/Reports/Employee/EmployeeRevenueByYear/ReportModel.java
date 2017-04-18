@@ -1,8 +1,7 @@
-package org.jsack.tifsa.Reports.EmployeeRevenueByYear;
+package org.jsack.tifsa.Reports.Employee.EmployeeRevenueByYear;
 
-import javafx.beans.property.SimpleStringProperty;
-import org.jsack.tifsa.Reports.ColumnFormats.CurrencyFormat;
-import org.jsack.tifsa.Reports.ColumnFormats.StringFormat;
+import org.jsack.tifsa.Reports.ColumnFormats.CurrencyColumn;
+import org.jsack.tifsa.Reports.ColumnFormats.StringColumn;
 import org.jsack.tifsa.Reports.Interfaces.IReportModel;
 
 import java.util.*;
@@ -19,10 +18,10 @@ public class ReportModel implements IReportModel {
         row = new ArrayList<>();
         columns = new HashMap<>();
 
-        columns.put("EmployeeTypeDescription", StringFormat.class);
-        columns.put("EmployeeFirst", StringFormat.class);
-        columns.put("EmployeeLast", StringFormat.class);
-        columns.put("Total", CurrencyFormat.class);
+        columns.put("EmployeeTypeDescription", StringColumn.class);
+        columns.put("EmployeeFirst", StringColumn.class);
+        columns.put("EmployeeLast", StringColumn.class);
+        columns.put("Total", CurrencyColumn.class);
     }
 
     @Override

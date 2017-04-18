@@ -1,9 +1,6 @@
-package org.jsack.tifsa.Reports.CustomerUnpaidBalances;
+package org.jsack.tifsa.Reports.Customer.CustomerIncidentReport;
 
-import javafx.beans.property.SimpleDoubleProperty;
-import javafx.beans.property.SimpleStringProperty;
-import org.jsack.tifsa.Reports.ColumnFormats.CurrencyFormat;
-import org.jsack.tifsa.Reports.ColumnFormats.StringFormat;
+import org.jsack.tifsa.Reports.ColumnFormats.StringColumn;
 import org.jsack.tifsa.Reports.Interfaces.IReportModel;
 
 import java.util.ArrayList;
@@ -26,12 +23,13 @@ public class ReportModel implements IReportModel {
         /*
             TODO: Add report columns
             Add all your report columns here. These must be in order and match what appears in your report on SSMS!
+            If you've already done your reports, you should be able to just copy and paste the column.adds here.
          */
-        columns.put("CustomerFirst", StringFormat.class);
-        columns.put("CustomerLast", StringFormat.class);
-        columns.put("CustomerContactInfo", StringFormat.class);
-        columns.put("CustomerContactTypeDescription", StringFormat.class);
-        columns.put("OrderBalance", CurrencyFormat.class);
+        columns.put("CustomerTypeName", StringColumn.class);
+        columns.put("CustomerFirst", StringColumn.class);
+        columns.put("CustomerLast", StringColumn.class);
+        columns.put("CustomerIncidentDescription", StringColumn.class);
+        columns.put("IncidentTypeDescription", StringColumn.class);
     }
 
     @Override

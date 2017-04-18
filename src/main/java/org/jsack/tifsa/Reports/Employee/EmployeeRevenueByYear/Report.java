@@ -1,4 +1,4 @@
-package org.jsack.tifsa.Reports.EmployeeRevenueByYear;
+package org.jsack.tifsa.Reports.Employee.EmployeeRevenueByYear;
 
 import javafx.fxml.FXMLLoader;
 import org.jsack.tifsa.Reports.Interfaces.IReport;

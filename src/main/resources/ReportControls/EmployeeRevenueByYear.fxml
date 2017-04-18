@@ -9,7 +9,7 @@
 <?import com.jfoenix.controls.JFXComboBox?>
 <VBox GridPane.rowIndex="1" GridPane.columnIndex="0" xmlns="http://javafx.com/javafx"
             xmlns:fx="http://javafx.com/fxml"
-            fx:controller="org.jsack.tifsa.Reports.EmployeeRevenueByYear.Controls">
+            fx:controller="org.jsack.tifsa.Reports.Employee.EmployeeRevenueByYear.Controls">
     <JFXComboBox fx:id="yearSelection" maxWidth="Infinity" />
     <JFXComboBox fx:id="employeeSelection" maxWidth="Infinity" />
 </VBox>
