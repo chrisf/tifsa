@@ -1,4 +1,4 @@
-package org.jsack.tifsa.Reports.ReportTemplate;
+package org.jsack.tifsa.Reports.Order.OrdersBySpecificDay;
 
 import javafx.fxml.FXMLLoader;
 import org.jsack.tifsa.Reports.Interfaces.IReport;
@@ -19,13 +19,24 @@ public class Report implements IReport{
         If you already created your reports using the previous method, just copy and paste it into here.
         If you haven't, copy and paste it from Drive and replace all the "\n" with a space.
      */
-    private final String sql = "";
+    private final String sql = "SELECT " +
+            "dbo.[Order].OrderID, dbo.Employee.EmployeeFirst, dbo.Employee.EmployeeLast, " +
+            "dbo.[Customer].CustomerFirst, dbo.[Customer].CustomerLast, dbo.[Order].OrderTotal, dbo.[Order].OrderDate, " +
+            "dbo.OrderStatus.OrderStatusDescription, dbo.CustomerType.CustomerTypeName " +
+            "FROM [Order] " +
+            "INNER JOIN Employee ON [Order].SoldByEmployeeID = Employee.EmployeeID " +
+            "INNER JOIN OrderStatus ON [Order].OrderStatusID = OrderStatus.OrderStatusID " +
+            "INNER JOIN Customer ON [Order].CustomerID = Customer.CustomerID " +
+            "INNER JOIN CustomerType ON Customer.CustomerTypeID = CustomerType.CustomerTypeID " +
+            "WHERE [Order].OrderDate >= '2009-09-14' AND OrderDate <= '2009-09-14 23:59:59' " +
+            "AND [Order].Deleted = 0 " +
+            "ORDER BY [Order].OrderID";
 
     /*
         TODO: Name your report.
         Set the name of your report here. Make it unique.
      */
-    private final String name = "";
+    private final String name = "Orders By Specific Day";
 
     /*
         TODO: Set report Category.
@@ -38,7 +49,7 @@ public class Report implements IReport{
             Employee,
             Product
      */
-    private ReportCategory reportCategory = ReportCategory.Customer;
+    private ReportCategory reportCategory = ReportCategory.Order;
 
     @Override
     public IReportModel getModel() {

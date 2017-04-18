@@ -2,8 +2,12 @@ package org.jsack.tifsa.Controllers;
 
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXComboBox;
+import javafx.beans.Observable;
 import javafx.beans.property.SimpleStringProperty;
+import javafx.beans.property.StringProperty;
+import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
+import javafx.collections.ListChangeListener;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -12,12 +16,18 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.VBox;
+import org.jsack.tifsa.Reports.ColumnFormats.BooleanColumn;
+import org.jsack.tifsa.Reports.ColumnFormats.ColumnFormat;
+import org.jsack.tifsa.Reports.ColumnInfo;
 import org.jsack.tifsa.Reports.Interfaces.IControl;
 import org.jsack.tifsa.Reports.Interfaces.IReport;
 import org.jsack.tifsa.Reports.Interfaces.IReportModel;
 import org.jsack.tifsa.Reports.ReportManager;
 
+import java.lang.reflect.Constructor;
+import java.lang.reflect.InvocationTargetException;
 import java.net.URL;
+import java.util.Map;
 import java.util.ResourceBundle;
 
 /**
@@ -25,7 +35,7 @@ import java.util.ResourceBundle;
  */
 public class ReportsController implements Initializable{
     @FXML
-    JFXComboBox reportSelection1, reportSelection2;
+    JFXComboBox reportType, reportSelection;
     @FXML
     TableView reportTable;
     @FXML
@@ -41,6 +51,9 @@ public class ReportsController implements Initializable{
     FXMLLoader currentLoader;
     IControl currentController;
 
+    StringProperty selectedCategory = new SimpleStringProperty();
+    StringProperty selectedReportName = new SimpleStringProperty();
+
     private ReportManager reports;
     @Override
     public void initialize(URL location, ResourceBundle resources) {
@@ -49,54 +62,94 @@ public class ReportsController implements Initializable{
         categorySelectionList = FXCollections.observableArrayList(
                 reports.getReportCategories()
         );
-        reportSelection1.setItems(categorySelectionList);
-        reportSelection1.setValue(categorySelectionList.get(0));
 
-       onReportTypeChange();
+        reportSelectionList = FXCollections.observableArrayList();
+
+        reportType.setItems(categorySelectionList);
+        reportSelection.setItems(reportSelectionList);
+
+        reportType.valueProperty().bindBidirectional(selectedCategory);
+        reportSelection.valueProperty().bindBidirectional(selectedReportName);
+
+        reportType.valueProperty().addListener(this::onReportTypeChange);
+        reportSelection.valueProperty().addListener(this::onReportSelectionChange);
     }
 
-    public void onReportTypeChange() {
-        reportSelectionList = FXCollections.observableArrayList(
-                reports.getReportsByCategory((String)reportSelection1.getSelectionModel().getSelectedItem())
+    public void onReportTypeChange(ObservableValue obs, Object oldVal, Object newVal) {
+        reportSelectionList.clear();
+
+        // load all reports for the selected category
+        reportSelectionList.addAll(
+                reports.getReportsByCategory(newVal.toString())
         );
-        reportSelection2.setItems(reportSelectionList);
+
+        if(reportSelectionList.size() > 0)
+        {
+            selectedReportName.set(reportSelectionList.get(0));
+        }
     }
-    public void onReportChange() {
-        currentReport = reports.getReportByName((String)reportSelection2.getSelectionModel().getSelectedItem());
+    
+    public void onReportSelectionChange(ObservableValue obs, Object oldVal, Object newVal) {
+        // ignore the event if the list is blank or selected value isn't set
+        if(reportSelectionList.size() == 0 || newVal == null)
+        {
+            return;
+        }
+
+        // set the current report to the selected one
+        currentReport = reports.getReportByName(newVal.toString());
+
+        // clear columns and rows
         reportTable.getColumns().clear();
+        reportTable.getItems().clear();
 
         int idx = 0;
-        for(String columnName : currentReport.getModel().getColumns()) {
+
+        // load all the columns for the table based on the selected report
+        for(Map.Entry<String, ColumnInfo> entry : currentReport.getModel().getColumns().entrySet()) {
             final int i = idx;
-            TableColumn<IReportModel,String> column = new TableColumn<>(columnName);
-            column.setMaxWidth(Double.MAX_VALUE);
-            column.setCellValueFactory(model -> new SimpleStringProperty(model.getValue().getRow().get(i)));
+            TableColumn<IReportModel,String> column = new TableColumn<>(entry.getValue().columnLabel);
+            column.setCellValueFactory(model ->
+            {
+                try {
+                    Constructor<? extends ColumnFormat> ctor = (entry.getValue().columnFormat).getConstructor(String.class);
+                    return ctor.newInstance(model.getValue().getRow().get(i));
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+                return null;
+            });
             idx++;
             reportTable.getColumns().add(column);
         }
 
+        // load controls for the report
         try {
             currentLoader = currentReport.getControls();
-            customControls = currentLoader.load();
-            gridPane.add(customControls, 0, 1);
+            customControls.getChildren().clear();
+            customControls.getChildren().add(currentLoader.load());
         }
         catch (Exception ex) {
             ex.printStackTrace();
         }
-        refreshClick();
     }
 
     public void refreshClick() {
+        if(currentReport == null)
+        {
+            return;
+        }
+
         try {
             reportTable.setItems(FXCollections.observableArrayList(
-                    reports.runReport(currentReport, currentLoader.<IControl>getController().getAttributes())
-                ));
+                reports.runReport(currentReport, currentLoader.<IControl>getController().getAttributes())
+            ));
         }
         catch (Exception ex) {
-                ex.printStackTrace();
-                reportTable.setItems(FXCollections.observableArrayList(
-                    reports.runReport(currentReport)
-        ));
+            ex.printStackTrace();
+            reportTable.setItems(FXCollections.observableArrayList(
+                reports.runReport(currentReport)
+            ));
         }
 
     }

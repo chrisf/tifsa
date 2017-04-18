@@ -1,4 +1,4 @@
-package org.jsack.tifsa.Reports.EmployeeRevenueByYear;
+package org.jsack.tifsa.Reports.Employee.EmployeeRevenueByYear;
 
 import com.jfoenix.controls.JFXComboBox;
 import javafx.collections.FXCollections;

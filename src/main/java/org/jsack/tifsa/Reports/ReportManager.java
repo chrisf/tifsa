@@ -34,13 +34,19 @@ public class ReportManager {
 
         reports = new ArrayList<>();
 
-        reports.add(new org.jsack.tifsa.Reports.EmployeeRevenueByYear.Report());
-        reports.add(new org.jsack.tifsa.Reports.CustomerUnpaidBalances.Report());
-        reports.add(new org.jsack.tifsa.Reports.CustomerIncidentReport.Report());
+        // Employee reports
+        reports.add(new org.jsack.tifsa.Reports.Employee.EmployeeRevenueByYear.Report());
+
+        // Customer reports
+        reports.add(new org.jsack.tifsa.Reports.Customer.CustomerUnpaidBalances.Report());
+        reports.add(new org.jsack.tifsa.Reports.Customer.CustomerIncidentReport.Report());
+
+        // Order reports
+        reports.add(new org.jsack.tifsa.Reports.Order.OrdersBySpecificDay.Report());
     }
 
     public IReport getReportByName(String name) {
-        return reports.stream().filter(r -> r.getName() == name).findFirst().get();
+        return reports.stream().filter(r -> r.getName().equals(name)).findFirst().get();
     }
 
     public List<String> getReportCategories() {
@@ -63,6 +69,7 @@ public class ReportManager {
         return reportNames;
     }
     public List<IReportModel> runReport(IReport report) {
+
         return template.query(report.getSql(), report.getMapper());
     }
     public List<IReportModel> runReport(IReport report, Map<String,Object> attributes) {

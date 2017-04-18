@@ -1,4 +1,4 @@
-package org.jsack.tifsa.Reports.CustomerIncidentReport;
+package org.jsack.tifsa.Reports.Customer.CustomerIncidentReport;
 
 import javafx.fxml.Initializable;
 import org.jsack.tifsa.Reports.Interfaces.IControl;

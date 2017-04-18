@@ -1,9 +1,10 @@
-package org.jsack.tifsa.Reports.CustomerIncidentReport;
+package org.jsack.tifsa.Reports.Customer.CustomerIncidentReport;
 
 import javafx.fxml.FXMLLoader;
 import org.jsack.tifsa.Reports.Interfaces.IReport;
 import org.jsack.tifsa.Reports.Interfaces.IReportModel;
 import org.jsack.tifsa.Reports.ReportCategory;
+import org.jsack.tifsa.Reports.ReportWrapper;
 import org.springframework.jdbc.core.RowMapper;
 
 import java.io.IOException;
@@ -50,7 +51,7 @@ public class Report implements IReport{
 
     @Override
     public RowMapper getMapper() {
-        return new ReportWrapper();
+        return new ReportWrapper(this);
     }
 
     @Override
@@ -69,9 +70,9 @@ public class Report implements IReport{
     }
 
     /*
-        TODO: Change the "ReportTemplate" portion of the file path to your Report Path.
-        If my report was in a new Directory called "EmployeeRevenueByYear" I would change ReportTemplate to EmployeeRevenueByYear
-        ex: ../java/org/jsack/tifsa/Reports/ReportTemplate/EmployeeRevenueByYear.fxml would translate to
+        TODO: Change the "OrdersBySpecificDay" portion of the file path to your Report Path.
+        If my report was in a new Directory called "EmployeeRevenueByYear" I would change OrdersBySpecificDay to EmployeeRevenueByYear
+        ex: ../java/org/jsack/tifsa/Reports/OrdersBySpecificDay/EmployeeRevenueByYear.fxml would translate to
             ../java/org/jsack/tifsa/Reports/EmployeeRevenueByYear/EmployeeRevenueByYear.fxml
      */
     @Override

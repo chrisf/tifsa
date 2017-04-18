@@ -31,8 +31,8 @@
         <RowConstraints percentHeight="20" />
     </rowConstraints>
     <VBox GridPane.rowIndex="0" GridPane.columnIndex="0" GridPane.vgrow="ALWAYS" spacing="25" >
-        <JFXComboBox maxWidth="Infinity" promptText="Report Type" fx:id="reportSelection1" onAction="#onReportTypeChange" GridPane.vgrow="ALWAYS"/>
-        <JFXComboBox maxWidth="Infinity" promptText="Report" fx:id="reportSelection2" onAction="#onReportChange"/>
+        <JFXComboBox maxWidth="Infinity" promptText="Report Type" fx:id="reportType" GridPane.vgrow="ALWAYS"/>
+        <JFXComboBox maxWidth="Infinity" promptText="Report" fx:id="reportSelection"/>
     </VBox>
     <VBox GridPane.rowIndex="0" GridPane.columnIndex="1" GridPane.rowSpan="3" >
         <TableView fx:id="reportTable"  GridPane.rowSpan="4" />

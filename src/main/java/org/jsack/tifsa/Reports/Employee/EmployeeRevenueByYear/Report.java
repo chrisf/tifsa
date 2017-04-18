@@ -1,9 +1,10 @@
-package org.jsack.tifsa.Reports.EmployeeRevenueByYear;
+package org.jsack.tifsa.Reports.Employee.EmployeeRevenueByYear;
 
 import javafx.fxml.FXMLLoader;
 import org.jsack.tifsa.Reports.Interfaces.IReport;
 import org.jsack.tifsa.Reports.Interfaces.IReportModel;
 import org.jsack.tifsa.Reports.ReportCategory;
+import org.jsack.tifsa.Reports.ReportWrapper;
 import org.springframework.jdbc.core.RowMapper;
 
 import java.io.IOException;
@@ -18,7 +19,7 @@ public class Report implements IReport{
             "INNER JOIN EmployeeRole ON EmployeeRole.EmployeeID = e1.EmployeeID " +
             "INNER JOIN EmployeeType ON EmployeeRole.EmployeeTypeID = EmployeeType.EmployeeTypeID " +
             "INNER JOIN (" +
-            "    SELECT SUM([Order].OrderBalance) AS Total, [Order].SoldByEmployeeID " +
+            "    SELECT SUM([Order].OrderTotal) AS Total, [Order].SoldByEmployeeID " +
             "    FROM dbo.[Order] " +
             "    WHERE [Order].OrderDate > :yearSelection " +
             "    GROUP BY [Order].SoldByEmployeeID " +
@@ -35,8 +36,8 @@ public class Report implements IReport{
     }
 
     @Override
-    public RowMapper getMapper() {
-        return new ReportWrapper();
+    public RowMapper getMapper(){
+        return new ReportWrapper(this);
     }
 
     @Override
