@@ -108,19 +108,13 @@ public class ReportsController implements Initializable{
         // load all the columns for the table based on the selected report
         for(Map.Entry<String, ColumnInfo> entry : currentReport.getModel().getColumns().entrySet()) {
             final int i = idx;
-            final TableColumn<IReportModel,String> column = new TableColumn<>(entry.getValue().columnLabel);
+            TableColumn<IReportModel,String> column = new TableColumn<>(entry.getValue().columnLabel);
             column.setCellValueFactory(model ->
             {
                 try {
                     Constructor<? extends ColumnFormat> ctor = (entry.getValue().columnFormat).getConstructor(String.class);
                     return ctor.newInstance(model.getValue().getRow().get(i));
-                } catch (NoSuchMethodException e) {
-                    e.printStackTrace();
-                } catch (IllegalAccessException e) {
-                    e.printStackTrace();
-                } catch (InstantiationException e) {
-                    e.printStackTrace();
-                } catch (InvocationTargetException e) {
+                } catch (Exception e) {
                     e.printStackTrace();
                 }
                 return null;

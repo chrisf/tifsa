@@ -30,10 +30,9 @@ public class Report implements IReport{
 
     private ReportCategory reportCategory = ReportCategory.Employee;
 
-    private ReportModel reportModel = new ReportModel();
     @Override
     public IReportModel getModel() {
-        return reportModel;
+        return new ReportModel();
     }
 
     @Override
