@@ -35,6 +35,9 @@ public class Utility {
         }
     }
 
+    public static boolean containsIgnoreCase(final String s1, final String s2) {
+       return s1.toLowerCase().contains(s2.toLowerCase());
+    }
     public static ObservableList<String> getYears() {
         return FXCollections.observableArrayList(
                 "2017",
