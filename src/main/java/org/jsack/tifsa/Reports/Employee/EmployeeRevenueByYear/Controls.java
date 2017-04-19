@@ -4,8 +4,8 @@ import com.jfoenix.controls.JFXComboBox;
 import javafx.collections.FXCollections;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import org.jsack.tifsa.Cache;
 import org.jsack.tifsa.Reports.Interfaces.IControl;
-import org.jsack.tifsa.Utility;
 
 import java.net.URL;
 import java.util.HashMap;
@@ -21,7 +21,7 @@ public class Controls implements Initializable, IControl {
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        yearSelection.setItems(Utility.getYears());
+        yearSelection.setItems(Cache.getYears());
         employeeSelection.setItems(FXCollections.observableArrayList(
                 "Administrative",
                 "Sales",

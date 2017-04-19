@@ -1,7 +1,7 @@
 package org.jsack.tifsa.Reports;
 
+import org.jsack.tifsa.Cache;
 import org.jsack.tifsa.Reports.Interfaces.IReport;
-import org.jsack.tifsa.Utility;
 import org.springframework.context.ApplicationContext;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
@@ -20,8 +20,8 @@ public class ReportManager {
     private NamedParameterJdbcTemplate namedTemplate;
 
     public ReportManager() {
-        template = Utility.getJdbcTemplate();
-        namedTemplate = Utility.getJdbcNamedTemplat();
+        template = Cache.getJdbcTemplate();
+        namedTemplate = Cache.getJdbcNamedTemplate();
 
         reports = new ArrayList<>();
 

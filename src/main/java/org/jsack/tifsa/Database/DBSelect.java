@@ -1,7 +1,7 @@
 package org.jsack.tifsa.Database;
 
+import org.jsack.tifsa.Cache;
 import org.jsack.tifsa.Database.Interfaces.ISchema;
-import org.jsack.tifsa.Utility;
 
 import java.util.List;
 
@@ -11,12 +11,12 @@ import java.util.List;
 public class DBSelect {
     public List selectAll(ISchema schema) {
         String sql = String.format("SELECT * FROM %s", schema.getName());
-        return Utility.getJdbcTemplate().query(sql, schema.getWrapper());
+        return Cache.getJdbcTemplate().query(sql, schema.getWrapper());
     }
 
     public Object select(ISchema schema, Long id) {
         String sql = String.format("SELECT * FROM %s WHERE %s = ?", schema.getName(), schema.getIdColumn());
-        return Utility.getJdbcTemplate().queryForObject(sql, new Object[]{id}, schema.getWrapper());
+        return Cache.getJdbcTemplate().queryForObject(sql, new Object[]{id}, schema.getWrapper());
     }
 
 }

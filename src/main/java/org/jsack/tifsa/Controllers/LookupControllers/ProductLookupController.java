@@ -16,6 +16,7 @@ import javafx.fxml.FXML;
 import javafx.scene.control.TreeTableColumn;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import org.jsack.tifsa.Cache;
 import org.jsack.tifsa.Utility;
 import org.springframework.jdbc.core.RowMapper;
 
@@ -101,7 +102,7 @@ public class ProductLookupController {
         new Thread(() -> { updateProducts(); }).start();
     }
     private void updateProducts() {
-        List<ProductReportItem> newItems = Utility.getJdbcTemplate().query("SELECT ProductSKU, ProductDescription, ProductPrice, BrandName, PictureData " +
+        List<ProductReportItem> newItems = Cache.getJdbcTemplate().query("SELECT ProductSKU, ProductDescription, ProductPrice, BrandName, PictureData " +
                 "FROM Product " +
                 "INNER JOIN Brand ON Product.BrandID = Brand.BrandID "+
                 "FULL JOIN Picture ON Picture.ProductID = Product.ProductID"
