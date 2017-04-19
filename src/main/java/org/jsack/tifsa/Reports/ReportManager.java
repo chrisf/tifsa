@@ -39,6 +39,7 @@ public class ReportManager {
         // Customer reports
         reports.add(new org.jsack.tifsa.Reports.Customer.CustomerUnpaidBalances.Report());
         reports.add(new org.jsack.tifsa.Reports.Customer.CustomerIncidentReport.Report());
+        reports.add(new org.jsack.tifsa.Reports.Customer.CustomerTotalDue.Report());
 
         // Order reports
         reports.add(new org.jsack.tifsa.Reports.Order.OrdersBySpecificDay.Report());
@@ -48,6 +49,7 @@ public class ReportManager {
 
         // Revenue reports
         reports.add(new org.jsack.tifsa.Reports.Revenue.RevenueByDay.Report());
+        reports.add(new org.jsack.tifsa.Reports.Revenue.RevenueByWeek.Report());
     }
 
     public IReport getReportByName(String name) {
