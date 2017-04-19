@@ -1,12 +1,15 @@
-package org.jsack.tifsa.Reports.Order.OrdersBySpecificDay;
+package org.jsack.tifsa.Reports.Revenue.RevenueByDay;
 
 import org.jsack.tifsa.Reports.ColumnFormats.CurrencyColumn;
 import org.jsack.tifsa.Reports.ColumnFormats.DateColumn;
+import org.jsack.tifsa.Reports.ColumnFormats.IntegerColumn;
 import org.jsack.tifsa.Reports.ColumnFormats.StringColumn;
 import org.jsack.tifsa.Reports.ColumnInfo;
 import org.jsack.tifsa.Reports.ReportModelBase;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.LinkedHashMap;
+import java.util.List;
 
 /**
  * Created by aaron on 4/11/17.
@@ -40,15 +43,11 @@ public class ReportModel extends ReportModelBase {
                 boolean => BooleanColumn.class
          */
 
-        columns.put("OrderID", new ColumnInfo("Order ID", StringColumn.class));
-        columns.put("EmployeeFirst", new ColumnInfo("Employee First", StringColumn.class));
-        columns.put("EmployeeLast", new ColumnInfo("Employee Last", StringColumn.class));
-        columns.put("CustomerFirst", new ColumnInfo("Customer First", StringColumn.class));
-        columns.put("CustomerLast", new ColumnInfo("Customer Last", StringColumn.class));
-        columns.put("OrderTotal", new ColumnInfo("Total", CurrencyColumn.class));
-        columns.put("OrderDate", new ColumnInfo("Order Date", DateColumn.class));
-        columns.put("OrderStatusDescription", new ColumnInfo("Order Status", StringColumn.class));
-        columns.put("CustomerTypeName", new ColumnInfo("Customer Type", StringColumn.class));
+        columns.put("Total Orders", new ColumnInfo("Total Orders", IntegerColumn.class));
+        columns.put("Total Customers", new ColumnInfo("Total Customers", IntegerColumn.class));
+        columns.put("Total Revenue", new ColumnInfo("Total Revenue", CurrencyColumn.class));
+        columns.put("Products Sold", new ColumnInfo("Products Sold", IntegerColumn.class));
+        columns.put("Total Employees", new ColumnInfo("Total Employees", IntegerColumn.class));
     }
 
     @Override

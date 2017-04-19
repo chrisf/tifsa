@@ -10,5 +10,6 @@ public enum ReportCategory {
     Sales,
     Delivery,
     Employee,
-    Product
+    Product,
+    Revenue
 }

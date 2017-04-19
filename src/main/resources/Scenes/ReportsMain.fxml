@@ -14,6 +14,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.layout.RowConstraints?>
 <?import com.jfoenix.controls.JFXButton?>
+<?import com.jfoenix.controls.JFXTreeTableView?>
 <GridPane fx:id="gridPane" xmlns="http://javafx.com/javafx"
           xmlns:fx="http://javafx.com/fxml"
           fx:controller="org.jsack.tifsa.Controllers.SideMenuItems.ReportsController"
@@ -35,7 +36,7 @@
         <JFXComboBox maxWidth="Infinity" promptText="Report" fx:id="reportSelection"/>
     </VBox>
     <VBox GridPane.rowIndex="0" GridPane.columnIndex="1" GridPane.rowSpan="3" >
-        <TableView fx:id="reportTable"  GridPane.rowSpan="4" />
+        <JFXTreeTableView fx:id="reportTable"  GridPane.rowSpan="4" />
     </VBox>
     <VBox GridPane.rowIndex="1" GridPane.columnIndex="0" fx:id="customControls" />
     <VBox GridPane.rowIndex="2" GridPane.columnIndex="0">

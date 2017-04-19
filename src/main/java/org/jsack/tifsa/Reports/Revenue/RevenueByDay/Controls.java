@@ -1,11 +1,9 @@
-package org.jsack.tifsa.Reports.Order.OrdersBySpecificDay;
+package org.jsack.tifsa.Reports.Revenue.RevenueByDay;
 
 import com.jfoenix.controls.JFXDatePicker;
-import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import org.joda.time.LocalDateTime;
 import org.jsack.tifsa.Reports.Interfaces.IControl;
-import org.jsack.tifsa.Utility;
 
 import java.net.URL;
 import java.util.HashMap;
