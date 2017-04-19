@@ -1,4 +1,4 @@
-package org.jsack.tifsa.Reports.Revenue.ShowProductRevenueByYear;
+package org.jsack.tifsa.Reports.Discount.ShowTotalDiscountsGivenByYear;
 
 import org.jsack.tifsa.Reports.ColumnFormats.CurrencyColumn;
 import org.jsack.tifsa.Reports.ColumnFormats.IntegerColumn;
@@ -22,14 +22,12 @@ public class ReportModel extends ReportModelBase {
         row = new ArrayList<>();
         columns = new LinkedHashMap<>();
 
-        //columns added by steven
+        //Columns added by Steven
         columns.put("Year", new ColumnInfo("Year", IntegerColumn.class));
-        columns.put("ProductDescription", new ColumnInfo("Product Description", StringColumn.class));
-        columns.put("ProductSKU", new ColumnInfo("Product SKU", IntegerColumn.class));
-        columns.put("Revenue", new ColumnInfo("Revenue", CurrencyColumn.class));
-        columns.put("VendorName", new ColumnInfo("Vendor Name", StringColumn.class));
-        columns.put("BrandName", new ColumnInfo("Brand Name", StringColumn.class));
-        columns.put("ManufacturerName", new ColumnInfo("Manufacturer Name", StringColumn.class));
+        columns.put("TotalDiscountsGiven", new ColumnInfo("Total Discounts", CurrencyColumn.class));
+        columns.put("EmployeeFirst", new ColumnInfo("Employee First", StringColumn.class));
+        columns.put("EmployeeLast", new ColumnInfo("Employee Last", StringColumn.class));
+        columns.put("EmployeeTypeDescription", new ColumnInfo("Employee Type", IntegerColumn.class));
 
     }
 
