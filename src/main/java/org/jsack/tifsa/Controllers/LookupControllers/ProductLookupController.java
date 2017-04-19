@@ -70,11 +70,10 @@ public class ProductLookupController {
             }
         });
     }
-    private <T> void setupCell
     private class ProductReportItemWrapper implements RowMapper<ProductReportItem> {
         @Override
         public ProductReportItem mapRow(ResultSet rs, int rowNum) throws SQLException {
-            return new ProductReportItem(rs.getString("ProductSKU"), rs.getString("ProductDescription"), rs.getString("BrandName") rs.getDouble("ProductPrice"));
+            return new ProductReportItem(rs.getString("ProductSKU"), rs.getString("ProductDescription"), rs.getString("BrandName"), rs.getDouble("ProductPrice"));
         }
     }
     private static final class ProductReportItem extends RecursiveTreeObject<ProductReportItem> {
