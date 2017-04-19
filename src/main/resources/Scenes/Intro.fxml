@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<?import javafx.geometry.Insets?>
+<BorderPane xmlns:fx="http://javafx.com/fxml" prefHeight="750.0" prefWidth="650.0">
+    <top>
+
+    </top>
+    <center>
+        <VBox alignment="CENTER" spacing="10">
+            <Label text="TiFSA" />
+            <Label text="by jSack-Tech" />
+        </VBox>
+    </center>
+</BorderPane>
