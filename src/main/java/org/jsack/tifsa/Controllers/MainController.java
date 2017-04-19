@@ -46,7 +46,6 @@ public class MainController {
         new Thread( () -> {
            JdbcTemplate template = Utility.getJdbcTemplate();
         }).start();
-        System.out.println(context);
         final Duration containerAnimationDuration = Duration.millis(320);
         Flow innerFlow = new Flow(IntroController.class);
         final FlowHandler flowHandler = innerFlow.createHandler(context);
