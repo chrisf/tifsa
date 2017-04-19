@@ -1,6 +1,7 @@
 .root {
     -fx-font-family: "Roboto";
     -fx-background-color: #bbdefb;
+    -fx-prompt-text-fill: #e3f2fd;
 }
 
 .main-menu {
@@ -9,6 +10,7 @@
 
 .main-menu .jfx-tool-bar {
     -fx-background-color: #01579b;
+    -fx-padding: 5 5 5 5;
 }
 
 .main-menu .jfx-tool-bar .jfx-hamburger StackPane {
@@ -38,11 +40,13 @@
 }
 
 .back-button{
+    -fx-padding: 5 5 5 5%;
     -fx-background-color: #1976d2;
     -fx-text-fill: WHITE;
-    -fx-text-alignment: left;
+    -fx-text-alignment: center;
     -fx-pref-height: 35;
     -fx-pref-width: 75;
+    -fx-font-size: 18;
 }
 
 .sidebar-menu {
