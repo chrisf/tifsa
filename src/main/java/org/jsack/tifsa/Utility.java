@@ -5,11 +5,15 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import org.joda.time.LocalDateTime;
 import org.joda.time.format.DateTimeFormat;
+import org.jsack.tifsa.Database.CustomerStatus.CustomerStatus;
+import org.jsack.tifsa.Database.CustomerStatus.CustomerStatusSchema;
+import org.jsack.tifsa.Database.DBSelect;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
 
+import java.util.List;
 import java.util.concurrent.Semaphore;
 
 /**
@@ -108,4 +112,8 @@ public class Utility {
         NamedParameterJdbcTemplate namedTemplate = (NamedParameterJdbcTemplate) appContext.getBean("jdbcNamedTemplate");
         return namedTemplate;
     }
+    public static List<CustomerStatus> getAllCustomerStatus() {
+        return new DBSelect().selectAll(new CustomerStatusSchema());
+    }
+
 }
