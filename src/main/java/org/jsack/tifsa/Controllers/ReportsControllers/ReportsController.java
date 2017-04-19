@@ -1,4 +1,4 @@
-package org.jsack.tifsa.Controllers.SideMenuItems;
+package org.jsack.tifsa.Controllers.ReportsControllers;
 
 import com.jfoenix.controls.*;
 import com.jfoenix.controls.cells.editors.base.JFXTreeTableCell;
@@ -11,14 +11,10 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
-import javafx.fxml.Initializable;
-import javafx.geometry.Pos;
-import javafx.scene.control.TableCell;
 import javafx.scene.control.TreeItem;
 import javafx.scene.control.TreeTableView;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.VBox;
-import javafx.scene.text.TextAlignment;
 import org.jsack.tifsa.Reports.ColumnFormats.ColumnFormat;
 import org.jsack.tifsa.Reports.ColumnInfo;
 import org.jsack.tifsa.Reports.Interfaces.IControl;
@@ -27,18 +23,17 @@ import org.jsack.tifsa.Reports.ReportManager;
 import org.jsack.tifsa.Reports.ReportModelBase;
 import org.jsack.tifsa.Utility;
 
+import javax.annotation.PostConstruct;
 import java.lang.reflect.Constructor;
-import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
-import java.util.ResourceBundle;
 
 /**
  * Created by aaron on 4/9/17.
  */
 @ViewController("/Scenes/Reports/ReportsMain.fxml")
-public class ReportsController implements Initializable {
+public class ReportsController{
     @FXML
     JFXComboBox reportType, reportSelection;
     @FXML
@@ -62,8 +57,8 @@ public class ReportsController implements Initializable {
 
     private ReportManager reports;
 
-    @Override
-    public void initialize(URL location, ResourceBundle resources) {
+    @PostConstruct
+    public void initialize() {
         reports = new ReportManager();
 
         categorySelectionList = FXCollections.observableArrayList(
@@ -86,6 +81,14 @@ public class ReportsController implements Initializable {
         // add change listeners for dropdowns
         reportType.valueProperty().addListener(this::onReportTypeChange);
         reportSelection.valueProperty().addListener(this::onReportSelectionChange);
+
+        refreshButton.setOnMouseClicked(e -> {
+           new Thread(() -> {
+               Utility.runOnGuiAndWait(() -> {
+                   refreshClick();
+               });
+           }).start();
+        });
     }
 
     public void initializeTableView() {
