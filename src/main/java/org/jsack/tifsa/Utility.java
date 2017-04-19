@@ -77,6 +77,15 @@ public class Utility {
         );
     }
 
+    public static ObservableList<String> getCustomerStatuses() {
+        return FXCollections.observableArrayList(
+                "Deceased",
+                "Alive",
+                "Frequent",
+                "Active"
+        );
+    }
+
     public static boolean isNumber(String input) {
         return input.matches("[-+]?\\d*\\.?\\d+");
     }
