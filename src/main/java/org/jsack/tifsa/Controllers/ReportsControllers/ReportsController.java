@@ -33,7 +33,7 @@ import java.util.Map;
  * Created by aaron on 4/9/17.
  */
 @ViewController("/Scenes/Reports/ReportsMain.fxml")
-public class ReportsController{
+public class ReportsController {
     @FXML
     JFXComboBox reportType, reportSelection;
     @FXML
@@ -83,11 +83,11 @@ public class ReportsController{
         reportSelection.valueProperty().addListener(this::onReportSelectionChange);
 
         refreshButton.setOnMouseClicked(e -> {
-           new Thread(() -> {
-               Utility.runOnGuiAndWait(() -> {
-                   refreshClick();
-               });
-           }).start();
+            new Thread(() -> {
+                Utility.runOnGuiAndWait(() -> {
+                    refreshClick();
+                });
+            }).start();
         });
     }
 
@@ -141,18 +141,16 @@ public class ReportsController{
             column.setCellFactory((model -> {
                 JFXTreeTableCell<ReportModelBase, String> cell = new JFXTreeTableCell<ReportModelBase, String>() {
                     @Override
-                    protected void updateItem(String item, boolean empty)
-                    {
+                    protected void updateItem(String item, boolean empty) {
                         super.updateItem(item, empty);
 
-                        if(item == null || empty) {
+                        if (item == null || empty) {
                             setText(null);
                             setStyle("");
-                        }
-                        else {
+                        } else {
                             setText(item);
 
-                            if(item.startsWith("$") || Utility.isNumber(item)) {
+                            if (item.startsWith("$") || Utility.isNumber(item)) {
                                 setStyle("-fx-alignment: CENTER-RIGHT");
                             }
                         }
@@ -176,13 +174,18 @@ public class ReportsController{
         }
 
         // load controls for the report
-        try {
-            currentLoader = currentReport.getControls();
-            customControls.getChildren().clear();
-            customControls.getChildren().add(currentLoader.load());
-        } catch (Exception ex) {
-            ex.printStackTrace();
-        }
+        new Thread(() -> {
+            Utility.runOnGuiAndWait(() -> {
+                        try {
+                            currentLoader = currentReport.getControls();
+                            customControls.getChildren().clear();
+                            customControls.getChildren().add(currentLoader.load());
+                        } catch (Exception ex) {
+                            ex.printStackTrace();
+                        }
+                    }
+            );
+        }).start();
     }
 
     public void refreshClick() {
