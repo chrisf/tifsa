@@ -5,6 +5,10 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import org.joda.time.LocalDateTime;
 import org.joda.time.format.DateTimeFormat;
+import org.springframework.context.ApplicationContext;
+import org.springframework.context.support.ClassPathXmlApplicationContext;
+import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
 
 import java.util.concurrent.Semaphore;
 
@@ -12,6 +16,7 @@ import java.util.concurrent.Semaphore;
  * Created by cfitz on 4/18/17.
  */
 public class Utility {
+    private static ApplicationContext appContext = new ClassPathXmlApplicationContext("applicationContext.xml");
     public static void runOnGuiAndWait(Runnable func) {
         try {
             Semaphore semaphore = new Semaphore(0);
@@ -84,5 +89,14 @@ public class Utility {
     public static String monthToNumber(String month)
     {
         return String.valueOf(getMonths().indexOf(month) + 1);
+    }
+
+    public static JdbcTemplate getJdbcTemplate() {
+        JdbcTemplate template = (JdbcTemplate) appContext.getBean("jdbcTemplate");
+        return template;
+    }
+    public static NamedParameterJdbcTemplate getJdbcNamedTemplat() {
+        NamedParameterJdbcTemplate namedTemplate = (NamedParameterJdbcTemplate) appContext.getBean("jdbcNamedTemplate");
+        return namedTemplate;
     }
 }

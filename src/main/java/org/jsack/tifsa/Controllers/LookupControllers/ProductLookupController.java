@@ -16,10 +16,7 @@ import javafx.fxml.FXML;
 import javafx.scene.control.TreeTableColumn;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import org.jsack.tifsa.Database.DBSelect;
 import org.jsack.tifsa.Utility;
-import org.springframework.context.ApplicationContext;
-import org.springframework.context.support.ClassPathXmlApplicationContext;
 import org.springframework.jdbc.core.RowMapper;
 
 import javax.annotation.PostConstruct;
@@ -63,8 +60,6 @@ public class ProductLookupController {
     ViewFlowContext context;
 
     private ObservableList<ProductReportItem> products;
-    private DBSelect dbSelector;
-
     @PostConstruct
     public void init() {
         setupCellValueFactory(productSkuColumn, e -> e.sku);
@@ -72,8 +67,6 @@ public class ProductLookupController {
         setupCellValueFactory(productBrandColumn, e -> e.brand);
         setupCellValueFactory(productPriceColumn, e -> e.price);
 
-        ApplicationContext applicationContext = new ClassPathXmlApplicationContext("applicationContext.xml");
-        dbSelector = (DBSelect) applicationContext.getBean("dbSelect");
         filterText.textProperty().addListener((o, oldVal, newVal) -> {
             new Thread(() -> {
                productTable.setPredicate(productProp -> {
@@ -95,6 +88,9 @@ public class ProductLookupController {
                             productView.setImage(prodImage);
                         } catch( Exception ex ) { }
                    }
+                   else {
+                        productView.setImage(null);
+                    }
                 })
         );
         refresh.setOnMouseClicked(e -> {
@@ -105,12 +101,11 @@ public class ProductLookupController {
         new Thread(() -> { updateProducts(); }).start();
     }
     private void updateProducts() {
-        List<ProductReportItem> newItems = dbSelector.getTemplate().query("SELECT ProductSKU, ProductDescription, ProductPrice, BrandName, PictureData " +
+        List<ProductReportItem> newItems = Utility.getJdbcTemplate().query("SELECT ProductSKU, ProductDescription, ProductPrice, BrandName, PictureData " +
                 "FROM Product " +
                 "INNER JOIN Brand ON Product.BrandID = Brand.BrandID "+
                 "FULL JOIN Picture ON Picture.ProductID = Product.ProductID"
                 ,new ProductReportItemWrapper());
-        System.out.println(newItems);
         products = FXCollections.observableArrayList(newItems);
         Utility.runOnGuiAndWait(() -> {
             productTable.setRoot(new RecursiveTreeItem<>(products, RecursiveTreeObject::getChildren));
