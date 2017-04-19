@@ -14,6 +14,7 @@ import javafx.animation.Transition;
 import javafx.fxml.FXML;
 import javafx.scene.layout.StackPane;
 import javafx.util.Duration;
+import org.jsack.tifsa.Controllers.LookupControllers.IntroController;
 import org.jsack.tifsa.Controllers.SideMenuItems.SideBarController;
 
 import javax.annotation.PostConstruct;
@@ -83,7 +84,6 @@ public class MainController {
                 ex.printStackTrace();
             }
         };
-        drawer.setOnDrawe
         innerFlow.addGlobalAction("lastFlow", backAction);
         drawer.setContent(flowHandler.start(new ExtendedAnimatedFlowContainer(containerAnimationDuration, ContainerAnimations.SWIPE_LEFT)));
         drawer.setSidePane(sideBarHandler.start(new ExtendedAnimatedFlowContainer(containerAnimationDuration, ContainerAnimations.SWIPE_LEFT)));
