@@ -16,7 +16,6 @@ import org.jsack.tifsa.Controllers.ReportsControllers.ReportsController;
 
 import javax.annotation.PostConstruct;
 import java.util.Objects;
-
 /**
  * Created by aaron on 4/17/17.
  */
@@ -61,7 +60,7 @@ public class SideBarController {
                 try {
                     parentHandler.handle(newVal.getId());
                     JFXButton backButton = (JFXButton) context.getRegisteredObject("BackButton");
-                    if(backButton != null && !backButton.isVisible()) {
+                    if (backButton != null && !backButton.isVisible()) {
                         backButton.setVisible(true);
                     }
                 } catch (Exception ex) {
