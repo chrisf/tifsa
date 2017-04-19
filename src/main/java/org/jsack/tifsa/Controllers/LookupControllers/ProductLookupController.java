@@ -1,9 +1,6 @@
 package org.jsack.tifsa.Controllers.LookupControllers;
 
-import com.jfoenix.controls.JFXButton;
-import com.jfoenix.controls.JFXTextField;
-import com.jfoenix.controls.JFXTreeTableColumn;
-import com.jfoenix.controls.JFXTreeTableView;
+import com.jfoenix.controls.*;
 import com.jfoenix.controls.datamodels.treetable.RecursiveTreeObject;
 import io.datafx.controller.ViewController;
 import io.datafx.controller.flow.context.FXMLViewFlowContext;
@@ -13,15 +10,20 @@ import javafx.beans.property.SimpleDoubleProperty;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
 import javafx.beans.value.ObservableValue;
+import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.control.TreeTableColumn;
 import javafx.scene.image.ImageView;
+import org.jsack.tifsa.Database.DBSelect;
+import org.springframework.context.ApplicationContext;
+import org.springframework.context.support.ClassPathXmlApplicationContext;
 import org.springframework.jdbc.core.RowMapper;
 
 import javax.annotation.PostConstruct;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.List;
 import java.util.function.Function;
 
 /**
@@ -36,13 +38,19 @@ public class ProductLookupController {
     ImageView productView;
 
     @FXML
-    JFXTreeTableView productTable;
+    JFXTreeTableView<ProductReportItem> productTable;
 
     @FXML
     JFXButton refresh;
 
     @FXML
-    JFXTreeTableColumn<ProductReportItem, String> productSkuColumn, productNameColumn, productBrandColumn;
+    JFXTreeTableColumn<ProductReportItem, String> productSkuColumn;
+
+    @FXML
+    JFXTreeTableColumn<ProductReportItem, String> productNameColumn;
+
+    @FXML
+    JFXTreeTableColumn<ProductReportItem, String> productBrandColumn;
 
     @FXML
     JFXTreeTableColumn<ProductReportItem, Number> productPriceColumn;
@@ -60,7 +68,26 @@ public class ProductLookupController {
         setupCellValueFactory(productBrandColumn, e -> e.brand);
         setupCellValueFactory(productPriceColumn, e -> e.price);
 
+        ApplicationContext applicationContext = new ClassPathXmlApplicationContext("applicationContext.xml");
+        DBSelect dbSelector = (DBSelect) applicationContext.getBean("dbSelect");
+        List<ProductReportItem> newItems = dbSelector.getTemplate().query("SELECT ProductSKU, ProductDescription, ProductPrice, BrandName FROM Product INNER JOIN Brand ON Product.BrandID = Brand.BrandID;", new ProductReportItemWrapper());
+        System.out.println(newItems);
+        products = FXCollections.observableArrayList(newItems);
+        productTable.setRoot(new RecursiveTreeItem<>(products, RecursiveTreeObject::getChildren));
+        productTable.setShowRoot(false);
+
+        filterText.textProperty().addListener(
+                (observable, oldValue, newValue) -> productTable.setPredicate(
+                        product -> {
+                            final ProductReportItem p = product.getValue();
+                            return p.sku.get().contains(newValue) ||
+                                    p.name.get().contains(newValue) ||
+                                    p.brand.get().contains(newValue);
+                        }
+                )
+        );
     }
+    
     private <T> void setupCellValueFactory(JFXTreeTableColumn<ProductReportItem, T> column, Function<ProductReportItem, ObservableValue<T>> mapper) {
         column.setCellValueFactory((TreeTableColumn.CellDataFeatures<ProductReportItem, T> param) -> {
             if (column.validateValue(param)) {
@@ -76,7 +103,7 @@ public class ProductLookupController {
             return new ProductReportItem(rs.getString("ProductSKU"), rs.getString("ProductDescription"), rs.getString("BrandName"), rs.getDouble("ProductPrice"));
         }
     }
-    private static final class ProductReportItem extends RecursiveTreeObject<ProductReportItem> {
+    static final class ProductReportItem extends RecursiveTreeObject<ProductReportItem> {
        final StringProperty sku;
        final StringProperty name;
        final StringProperty brand;

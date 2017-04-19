@@ -29,10 +29,10 @@
             </HBox>
                 <JFXTreeTableView fx:id="productTable">
                     <columns>
-                        <JFXTreeTableColumn prefWidth="150" fx:id="productSkuColumn" text="ProductSKU" />
-                        <JFXTreeTableColumn prefWidth="150" fx:id="productNameColumn" text="ProductName" />
-                        <JFXTreeTableColumn prefWidth="150" fx:id="productPriceColumn" text="Price" />
-                        <JFXTreeTableColumn prefWidth="150" fx:id="productBrandColumn" text="Brand" />
+                        <JFXTreeTableColumn prefWidth="250" fx:id="productSkuColumn" text="ProductSKU" />
+                        <JFXTreeTableColumn prefWidth="250" fx:id="productNameColumn" text="ProductName" />
+                        <JFXTreeTableColumn prefWidth="250" fx:id="productPriceColumn" text="Price" />
+                        <JFXTreeTableColumn prefWidth="250" fx:id="productBrandColumn" text="Brand" />
                     </columns>
                 </JFXTreeTableView>
             <HBox>
