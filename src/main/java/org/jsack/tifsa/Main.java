@@ -3,7 +3,6 @@ package org.jsack.tifsa;
 import com.jfoenix.controls.JFXDecorator;
 import io.datafx.controller.context.FXMLViewContext;
 import io.datafx.controller.flow.Flow;
-import io.datafx.controller.flow.action.ActionMethod;
 import io.datafx.controller.flow.container.DefaultFlowContainer;
 import io.datafx.controller.flow.context.ViewFlowContext;
 import javafx.application.Application;
@@ -18,6 +17,7 @@ public class Main extends Application {
 
     @Override
     public void start(Stage primaryStage) throws Exception{
+        primaryStage.setTitle("TiFSA - By: jSack-Tech");
         Flow flow = new Flow(MainController.class);
         DefaultFlowContainer container = new DefaultFlowContainer();
         flowContext = new ViewFlowContext();
@@ -26,7 +26,7 @@ public class Main extends Application {
 
         JFXDecorator decorator = new JFXDecorator(primaryStage, container.getView());
         decorator.setCustomMaximize(true);
-        Scene scene = new Scene(decorator, 800, 850);
+        Scene scene = new Scene(decorator, 1250, 900);
         final ObservableList<String> styles = scene.getStylesheets();
         styles.add(getClass().getResource("/styles.css").toExternalForm());
 
@@ -39,8 +39,5 @@ public class Main extends Application {
         launch(args);
     }
 
-    @ActionMethod("backButton")
-    public void backButtonClick() {
-        System.out.println("You were right..");
-    }
+
 }

@@ -3,48 +3,55 @@ package org.jsack.tifsa.Controllers;
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXDrawer;
 import com.jfoenix.controls.JFXHamburger;
-import io.datafx.controller.FXMLController;
+import io.datafx.controller.ViewController;
 import io.datafx.controller.flow.Flow;
 import io.datafx.controller.flow.FlowHandler;
-import io.datafx.controller.flow.action.ActionTrigger;
+import io.datafx.controller.flow.action.FlowAction;
+import io.datafx.controller.flow.container.ContainerAnimations;
 import io.datafx.controller.flow.context.FXMLViewFlowContext;
 import io.datafx.controller.flow.context.ViewFlowContext;
 import javafx.animation.Transition;
 import javafx.fxml.FXML;
 import javafx.scene.layout.StackPane;
+import javafx.util.Duration;
+import org.jsack.tifsa.Controllers.SideMenuItems.SideBarController;
 
 import javax.annotation.PostConstruct;
 
-@FXMLController(value = "/Scenes/Main.fxml", title = "TiFSA | Main Menu")
+@ViewController("/Scenes/Main.fxml")
 public class MainController {
-
-    @FXMLViewFlowContext
-    private ViewFlowContext context;
-
-    @FXML
-    StackPane root;
 
     @FXML
     StackPane titleBurgerContainer;
 
     @FXML
-    JFXHamburger titleBurger;
+    StackPane backButtonContainer;
 
     @FXML
     JFXButton backButton;
 
     @FXML
-    JFXDrawer drawer;
+    JFXHamburger titleBurger;
 
     @FXML
-    @ActionTrigger("backButton")
-    StackPane backButtonContainer;
+    JFXDrawer drawer;
+
+    @FXMLViewFlowContext
+    ViewFlowContext context;
 
     @PostConstruct
-    public void initialize() throws Exception {
-        context = new ViewFlowContext();
+    public void init() throws Exception {
+        System.out.println(context);
+        // context = new ViewFlowContext();
+        final Duration containerAnimationDuration = Duration.millis(320);
         Flow innerFlow = new Flow(IntroController.class);
         final FlowHandler flowHandler = innerFlow.createHandler(context);
+
+        context.register("ContentFlowHandler", flowHandler);
+        context.register("ContentFlow", innerFlow);
+
+        Flow sideBarFlow = new Flow(SideBarController.class);
+        final FlowHandler sideBarHandler = sideBarFlow.createHandler(context);
 
         drawer.setOnDrawerOpening(e -> {
             final Transition animation = titleBurger.getAnimation();
@@ -57,7 +64,7 @@ public class MainController {
             animation.play();
         });
         titleBurgerContainer.setOnMouseClicked(e -> {
-            if (drawer.isHidding() || drawer.isHidden()) {
+            if (drawer.isHidden() || drawer.isHidding()) {
                 drawer.open();
             } else {
                 drawer.close();
@@ -65,20 +72,23 @@ public class MainController {
         });
         backButtonContainer.setOnMouseClicked(e -> {
             try {
-                FlowHandler handler = (FlowHandler) context.getRegisteredObject("ContentFlowHandler");
-                handler.handle("previousFlow");
-            }
-            catch(Exception ex) { }
+                flowHandler.navigateBack();
+                final Class<?> currentFlow
+            } catch (Exception ex) { }
         });
-
-        context.register("ContentFlowHandler", flowHandler);
-        context.register("ContentFlow", innerFlow);
-        innerFlow.withGlobalLink("previousFlow", this.getClass());
-        drawer.setContent(flowHandler.start());
+        final FlowAction backAction = (h, e) -> {
+            try {
+                flowHandler.navigateBack();
+            } catch (Exception ex) {
+                ex.printStackTrace();
+            }
+        };
+        drawer.setOnDrawe
+        innerFlow.addGlobalAction("lastFlow", backAction);
+        drawer.setContent(flowHandler.start(new ExtendedAnimatedFlowContainer(containerAnimationDuration, ContainerAnimations.SWIPE_LEFT)));
+        drawer.setSidePane(sideBarHandler.start(new ExtendedAnimatedFlowContainer(containerAnimationDuration, ContainerAnimations.SWIPE_LEFT)));
         context.register("ContentPane", drawer.getContent().get(0));
-
-        Flow sideMenuFlow = new Flow(MainMenuSideBarController.class);
-        final FlowHandler sideMenuFlowHandler = sideMenuFlow.createHandler(context);
-        drawer.setSidePane(sideMenuFlowHandler.start());
+        context.register("LastFlow", innerFlow);
     }
+
 }
