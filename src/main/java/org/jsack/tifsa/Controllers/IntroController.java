@@ -1,4 +1,4 @@
-package org.jsack.tifsa.Controllers;
+package org.jsack.tifsa.Controllers.LookupControllers;
 
 import io.datafx.controller.ViewController;
 
@@ -7,11 +7,12 @@ import javax.annotation.PostConstruct;
 /**
  * Created by aaron on 4/18/17.
  */
-@ViewController("/Scenes/Intro.fxml")
+@ViewController(value= "/Scenes/Intro.fxml", title="Home")
 public class IntroController {
 
     @PostConstruct
     public void init() {
-
     }
+
+
 }

@@ -1,5 +1,6 @@
 package org.jsack.tifsa.Controllers.SideMenuItems;
 
+import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXListView;
 import io.datafx.controller.ViewController;
 import io.datafx.controller.flow.Flow;
@@ -48,7 +49,6 @@ public class SideBarController {
 
     @PostConstruct
     public void init() {
-
         Objects.requireNonNull(context, "Context null");
         parentHandler = (FlowHandler) context.getRegisteredObject("ContentFlowHandler");
         parentFlow = (Flow) context.getRegisteredObject("ContentFlow");
@@ -57,13 +57,18 @@ public class SideBarController {
         navList.getSelectionModel().selectedItemProperty().addListener((o, oldVal, newVal) -> {
             if (newVal != null) {
                 try {
-                    context.register("LastFlow", parentFlow.getStartViewControllerClass());
                     parentHandler.handle(newVal.getId());
+                    JFXButton backButton = (JFXButton) context.getRegisteredObject("BackButton");
+                    if(backButton != null && !backButton.isVisible()) {
+                        backButton.setVisible(true);
+                    }
                 } catch (Exception ex) {
                     ex.printStackTrace();
                 }
             }
         });
+        System.out.println(context);
+        context.register("SideMenuNav", navList);
         parentFlow.withGlobalLink(lookup.getId(), LookupController.class);
         parentFlow.withGlobalLink(home.getId(), IntroController.class);
     }
