@@ -1,4 +1,4 @@
-package org.jsack.tifsa.Reports.Customer.CustomerOrderByYear;
+package org.jsack.tifsa.Reports.Employee.EmployeeRevenueByDay;
 
 import org.jsack.tifsa.Reports.ColumnFormats.CurrencyColumn;
 import org.jsack.tifsa.Reports.ColumnFormats.StringColumn;
@@ -21,14 +21,12 @@ public class ReportModel extends ReportModelBase {
         row = new ArrayList<>();
         columns = new LinkedHashMap<>();
 
-
         //Columns added by Steven
-        columns.put("Year", new ColumnInfo("Year", StringColumn.class));
-        columns.put("CustomerFirst", new ColumnInfo("Customer First", StringColumn.class));
-        columns.put("CustomerLast", new ColumnInfo("Customer Last", StringColumn.class));
-        columns.put("ContactInfo", new ColumnInfo("Contact Info", StringColumn.class));
-        columns.put("OrderTotal", new ColumnInfo("Order Total", CurrencyColumn.class));
-        columns.put("OrderDiscount", new ColumnInfo("Order Discount", CurrencyColumn.class));
+
+        columns.put("EmployeeTypeDescription", new ColumnInfo("Employee Type", StringColumn.class));
+        columns.put("EmployeeFirst", new ColumnInfo("Employee First", StringColumn.class));
+        columns.put("EmployeeLast", new ColumnInfo("Employee Last", StringColumn.class));
+        columns.put("Total", new ColumnInfo("Total", CurrencyColumn.class));
     }
 
     @Override
