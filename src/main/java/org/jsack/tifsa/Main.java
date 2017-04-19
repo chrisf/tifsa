@@ -17,6 +17,7 @@ public class Main extends Application {
 
     @Override
     public void start(Stage primaryStage) throws Exception{
+
         primaryStage.setTitle("TiFSA - By: jSack-Tech");
         Flow flow = new Flow(MainController.class);
         DefaultFlowContainer container = new DefaultFlowContainer();

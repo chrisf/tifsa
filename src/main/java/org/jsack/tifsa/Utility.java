@@ -30,4 +30,8 @@ public class Utility {
             e.printStackTrace();
         }
     }
+
+    public static boolean containsIgnoreCase(final String s1, final String s2) {
+       return s1.toLowerCase().contains(s2.toLowerCase());
+    }
 }
