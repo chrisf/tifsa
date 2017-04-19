@@ -2,8 +2,8 @@ package org.jsack.tifsa.Reports.Order.OrdersBySpecificDay;
 
 import javafx.fxml.FXMLLoader;
 import org.jsack.tifsa.Reports.Interfaces.IReport;
-import org.jsack.tifsa.Reports.Interfaces.IReportModel;
 import org.jsack.tifsa.Reports.ReportCategory;
+import org.jsack.tifsa.Reports.ReportModelBase;
 import org.jsack.tifsa.Reports.ReportWrapper;
 import org.springframework.jdbc.core.RowMapper;
 
@@ -28,7 +28,7 @@ public class Report implements IReport{
             "INNER JOIN OrderStatus ON [Order].OrderStatusID = OrderStatus.OrderStatusID " +
             "INNER JOIN Customer ON [Order].CustomerID = Customer.CustomerID " +
             "INNER JOIN CustomerType ON Customer.CustomerTypeID = CustomerType.CustomerTypeID " +
-            "WHERE [Order].OrderDate >= '2009-09-14' AND OrderDate <= '2009-09-14 23:59:59' " +
+            "WHERE [Order].OrderDate >= :dayStart AND OrderDate <= :dayEnd " +
             "AND [Order].Deleted = 0 " +
             "ORDER BY [Order].OrderID";
 
@@ -52,7 +52,7 @@ public class Report implements IReport{
     private ReportCategory reportCategory = ReportCategory.Order;
 
     @Override
-    public IReportModel getModel() {
+    public ReportModelBase getModel() {
         return new ReportModel();
     }
 
@@ -84,6 +84,6 @@ public class Report implements IReport{
      */
     @Override
     public FXMLLoader getControls() throws IOException {
-        return new FXMLLoader(getClass().getResource("/ReportControls/Template.fxml"));
+        return new FXMLLoader(getClass().getResource("/ReportControls/OrdersBySpecificDay.fxml"));
     }
 }

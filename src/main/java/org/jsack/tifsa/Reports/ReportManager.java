@@ -1,7 +1,6 @@
 package org.jsack.tifsa.Reports;
 
 import org.jsack.tifsa.Reports.Interfaces.IReport;
-import org.jsack.tifsa.Reports.Interfaces.IReportModel;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 import org.springframework.jdbc.core.JdbcTemplate;
@@ -43,6 +42,12 @@ public class ReportManager {
 
         // Order reports
         reports.add(new org.jsack.tifsa.Reports.Order.OrdersBySpecificDay.Report());
+        reports.add(new org.jsack.tifsa.Reports.Order.OrdersBySpecificWeek.Report());
+        reports.add(new org.jsack.tifsa.Reports.Order.OrdersBySpecificMonth.Report());
+        reports.add(new org.jsack.tifsa.Reports.Order.OrdersBySpecificYear.Report());
+
+        // Revenue reports
+        reports.add(new org.jsack.tifsa.Reports.Revenue.RevenueByDay.Report());
     }
 
     public IReport getReportByName(String name) {
@@ -68,11 +73,11 @@ public class ReportManager {
         });
         return reportNames;
     }
-    public List<IReportModel> runReport(IReport report) {
+    public List<ReportModelBase> runReport(IReport report) {
 
         return template.query(report.getSql(), report.getMapper());
     }
-    public List<IReportModel> runReport(IReport report, Map<String,Object> attributes) {
+    public List<ReportModelBase> runReport(IReport report, Map<String,Object> attributes) {
         return namedTemplate.query(report.getSql(), attributes, report.getMapper());
     }
 }
