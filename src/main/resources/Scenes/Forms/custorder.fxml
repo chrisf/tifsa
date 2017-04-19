@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="592.0" prefWidth="849.0" xmlns="http://javafx.com/javafx/8.0.60" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+    <AnchorPane layoutX="1.0" layoutY="-3.0" minHeight="0.0" minWidth="0.0" prefHeight="595.0" prefWidth="847.0">
+         <children>
+            <Text layoutX="14.0" layoutY="32.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Customer Order ">
+               <font>
+                  <Font size="26.0" />
+               </font>
+            </Text>
+            <Text layoutX="32.0" layoutY="109.0" strokeType="OUTSIDE" strokeWidth="0.0" text="First Name" />
+            <Text layoutX="305.0" layoutY="109.0" strokeType="OUTSIDE" strokeWidth="0.0" text="M.I" wrappingWidth="16.5703125" />
+            <Text layoutX="418.0" layoutY="109.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Last Name " />
+            <TextField layoutX="110.0" layoutY="92.0" />
+            <TextField layoutX="493.0" layoutY="92.0" />
+            <TextField layoutX="352.0" layoutY="92.0" prefHeight="25.0" prefWidth="33.0" />
+            <Text layoutX="568.0" layoutY="38.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Date " />
+            <TextField layoutX="619.0" layoutY="21.0" prefHeight="25.0" prefWidth="86.0" />
+            <Text layoutX="24.0" layoutY="157.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Address 1" />
+            <TextField layoutX="110.0" layoutY="140.0" />
+            <TextField layoutX="110.0" layoutY="186.0" prefHeight="25.0" prefWidth="149.0" />
+            <Text layoutX="290.0" layoutY="157.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Country " />
+            <Text layoutX="54.0" layoutY="203.0" strokeType="OUTSIDE" strokeWidth="0.0" text="City " />
+            <Text layoutX="315.0" layoutY="203.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Zip " />
+            <ComboBox layoutX="346.0" layoutY="140.0" prefHeight="25.0" prefWidth="143.0" />
+            <ComboBox layoutX="559.0" layoutY="140.0" prefHeight="25.0" prefWidth="55.0" />
+            <TextField layoutX="349.0" layoutY="186.0" prefHeight="25.0" prefWidth="87.0" />
+            <Button layoutX="219.0" layoutY="309.0" mnemonicParsing="false" text="Same as Billing" />
+            <Text layoutX="14.0" layoutY="70.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Billing Information ">
+               <font>
+                  <Font size="17.0" />
+               </font>
+            </Text>
+            <Text layoutX="513.0" layoutY="157.0" strokeType="OUTSIDE" strokeWidth="0.0" text="State " />
+            <Text layoutX="14.0" layoutY="329.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Shipping Information ">
+               <font>
+                  <Font size="17.0" />
+               </font>
+            </Text>
+            <Text layoutX="30.0" layoutY="385.0" strokeType="OUTSIDE" strokeWidth="0.0" text="First Name " />
+            <Text layoutX="406.0" layoutY="385.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Last Name " />
+            <Text layoutX="39.0" layoutY="436.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Address 2" />
+            <Text layoutX="292.0" layoutY="436.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Country " />
+            <TextField layoutX="110.0" layoutY="368.0" />
+            <TextField layoutX="494.0" layoutY="368.0" />
+            <TextField layoutX="110.0" layoutY="419.0" />
+            <ComboBox layoutX="347.0" layoutY="419.0" prefHeight="25.0" prefWidth="143.0" />
+            <Text layoutX="513.0" layoutY="436.0" strokeType="OUTSIDE" strokeWidth="0.0" text="State " />
+            <ComboBox layoutX="570.0" layoutY="419.0" prefHeight="25.0" prefWidth="52.0" />
+            <Text layoutX="64.0" layoutY="478.0" strokeType="OUTSIDE" strokeWidth="0.0" text="City " />
+            <Text layoutX="309.0" layoutY="478.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Zip" wrappingWidth="31.611318826675415" />
+            <TextField layoutX="110.0" layoutY="461.0" prefHeight="25.0" prefWidth="149.0" />
+            <TextField layoutX="346.0" layoutY="461.0" prefHeight="25.0" prefWidth="79.0" />
+            <Text layoutX="307.0" layoutY="385.0" strokeType="OUTSIDE" strokeWidth="0.0" text="M.I" wrappingWidth="16.5703125" />
+            <TextField layoutX="352.0" layoutY="368.0" prefHeight="25.0" prefWidth="33.0" />
+         </children>
+      </AnchorPane>
+   </children>
+</AnchorPane>
