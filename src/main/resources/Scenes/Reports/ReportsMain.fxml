@@ -17,8 +17,7 @@
 <?import com.jfoenix.controls.JFXTreeTableView?>
 <GridPane fx:id="gridPane" xmlns="http://javafx.com/javafx"
           xmlns:fx="http://javafx.com/fxml"
-          fx:controller="org.jsack.tifsa.Controllers.SideMenuItems.ReportsController"
-          prefHeight="650" prefWidth="1300">
+          >
     <padding>
         <Insets top="10" right="10" left="10" bottom="10" />
     </padding>
@@ -40,6 +39,6 @@
     </VBox>
     <VBox GridPane.rowIndex="1" GridPane.columnIndex="0" fx:id="customControls" />
     <VBox GridPane.rowIndex="2" GridPane.columnIndex="0">
-        <JFXButton text="Refresh" fx:id="refreshButton" buttonType="RAISED" style="-fx-background-color: #00bcd4" maxWidth="Infinity" onAction="#refreshClick"/>
+        <JFXButton text="Refresh" fx:id="refreshButton" buttonType="RAISED" style="-fx-background-color: #00bcd4" maxWidth="Infinity" />
     </VBox>
 </GridPane>

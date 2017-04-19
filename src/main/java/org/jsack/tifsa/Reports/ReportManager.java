@@ -1,8 +1,8 @@
 package org.jsack.tifsa.Reports;
 
 import org.jsack.tifsa.Reports.Interfaces.IReport;
+import org.jsack.tifsa.Utility;
 import org.springframework.context.ApplicationContext;
-import org.springframework.context.support.ClassPathXmlApplicationContext;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
 
@@ -20,16 +20,8 @@ public class ReportManager {
     private NamedParameterJdbcTemplate namedTemplate;
 
     public ReportManager() {
-        String dataSource = System.getProperty("dataSource");
-
-        // set default data source bean
-        if(dataSource == null) {
-            dataSource = "dataSource";
-        }
-
-        this.context = new ClassPathXmlApplicationContext("applicationContext.xml");
-        template = new JdbcTemplate((javax.sql.DataSource)this.context.getBean(dataSource));
-        namedTemplate = new NamedParameterJdbcTemplate(template);
+        template = Utility.getJdbcTemplate();
+        namedTemplate = Utility.getJdbcNamedTemplat();
 
         reports = new ArrayList<>();
 
