@@ -1,10 +1,11 @@
 package org.jsack.tifsa.Database;
 
 import org.jsack.tifsa.Database.Interfaces.ISchema;
+import org.springframework.context.ApplicationContext;
+import org.springframework.context.support.ClassPathXmlApplicationContext;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
 
-import javax.sql.DataSource;
 import java.util.List;
 
 /**
@@ -13,18 +14,11 @@ import java.util.List;
 public class DBSelect {
     private JdbcTemplate template;
     private NamedParameterJdbcTemplate namedTemplate;
-    private DataSource dataSource;
 
     public DBSelect () {
-
-    }
-    public JdbcTemplate getTemplate() {
-        return template;
-    }
-    public void setDataSource(DataSource dataSource) {
-        this.dataSource = dataSource;
-        template = new JdbcTemplate(dataSource);
-        namedTemplate = new NamedParameterJdbcTemplate(template);
+        ApplicationContext applicationContext = new ClassPathXmlApplicationContext("applicationContext.xml");
+        template = (JdbcTemplate) applicationContext.getBean("jdbcTemplate");
+        namedTemplate = (NamedParameterJdbcTemplate) applicationContext.getBean("jdbcNamedTemplate");
     }
     public List selectAll(ISchema schema) {
         String sql = String.format("SELECT * FROM %s", schema.getName());
