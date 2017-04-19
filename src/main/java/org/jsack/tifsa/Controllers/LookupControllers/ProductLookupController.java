@@ -12,14 +12,17 @@ import javafx.beans.property.DoubleProperty;
 import javafx.beans.property.SimpleDoubleProperty;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
+import javafx.beans.value.ObservableValue;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
+import javafx.scene.control.TreeTableColumn;
 import javafx.scene.image.ImageView;
 import org.springframework.jdbc.core.RowMapper;
 
 import javax.annotation.PostConstruct;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.function.Function;
 
 /**
  * Created by Admin on 4/19/2017.
@@ -39,7 +42,10 @@ public class ProductLookupController {
     JFXButton refresh;
 
     @FXML
-    JFXTreeTableColumn productSkuColumn, productNameColumn, productPriceColumn, productBrandColumn;
+    JFXTreeTableColumn<ProductReportItem, String> productSkuColumn, productNameColumn, productBrandColumn;
+
+    @FXML
+    JFXTreeTableColumn<ProductReportItem, Number> productPriceColumn;
 
 
     @FXMLViewFlowContext
@@ -49,10 +55,22 @@ public class ProductLookupController {
 
     @PostConstruct
     public void init() {
-        
+        setupCellValueFactory(productSkuColumn, e -> e.sku);
+        setupCellValueFactory(productNameColumn, e -> e.name);
+        setupCellValueFactory(productBrandColumn, e -> e.brand);
+        setupCellValueFactory(productPriceColumn, e -> e.price);
 
     }
-
+    private <T> void setupCellValueFactory(JFXTreeTableColumn<ProductReportItem, T> column, Function<ProductReportItem, ObservableValue<T>> mapper) {
+        column.setCellValueFactory((TreeTableColumn.CellDataFeatures<ProductReportItem, T> param) -> {
+            if (column.validateValue(param)) {
+                return mapper.apply(param.getValue().getValue());
+            } else {
+                return column.getComputedValue(param);
+            }
+        });
+    }
+    private <T> void setupCell
     private class ProductReportItemWrapper implements RowMapper<ProductReportItem> {
         @Override
         public ProductReportItem mapRow(ResultSet rs, int rowNum) throws SQLException {
