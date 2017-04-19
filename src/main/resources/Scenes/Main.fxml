@@ -30,7 +30,7 @@
                         <JFXRippler maskType="CIRCLE" style="-fx-ripple-color: WHITE;"
                                     xmlns="http://javafx.com/javafx/8.0.121" xmlns:fx="http://javafx.com/fxml/1">
                             <StackPane fx:id="backButtonContainer">
-                                <JFXButton styleClass="back-button" alignment="TOP_RIGHT" text="Back" fx:id="backButton"
+                                <JFXButton styleClass="back-button" visible="false" alignment="TOP_RIGHT" text="Back" fx:id="backButton"
                                            buttonType="RAISED"/>
                             </StackPane>
                         </JFXRippler>

@@ -3,10 +3,10 @@ package org.jsack.tifsa.Controllers;
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXDrawer;
 import com.jfoenix.controls.JFXHamburger;
+import com.jfoenix.controls.JFXListView;
 import io.datafx.controller.ViewController;
 import io.datafx.controller.flow.Flow;
 import io.datafx.controller.flow.FlowHandler;
-import io.datafx.controller.flow.action.FlowAction;
 import io.datafx.controller.flow.container.ContainerAnimations;
 import io.datafx.controller.flow.context.FXMLViewFlowContext;
 import io.datafx.controller.flow.context.ViewFlowContext;
@@ -43,7 +43,6 @@ public class MainController {
     @PostConstruct
     public void init() throws Exception {
         System.out.println(context);
-        // context = new ViewFlowContext();
         final Duration containerAnimationDuration = Duration.millis(320);
         Flow innerFlow = new Flow(IntroController.class);
         final FlowHandler flowHandler = innerFlow.createHandler(context);
@@ -64,6 +63,12 @@ public class MainController {
             animation.setRate(-1);
             animation.play();
         });
+        drawer.setOnDrawerClosed(e -> {
+            JFXListView navList = (JFXListView) context.getRegisteredObject("NavList");
+            if(navList != null) {
+                navList.getSelectionModel().clearSelection();
+            }
+        });
         titleBurgerContainer.setOnMouseClicked(e -> {
             if (drawer.isHidden() || drawer.isHidding()) {
                 drawer.open();
@@ -74,21 +79,17 @@ public class MainController {
         backButtonContainer.setOnMouseClicked(e -> {
             try {
                 flowHandler.navigateBack();
-                final Class<?> currentFlow
+                if(flowHandler.getCurrentViewControllerClass() == IntroController.class) {
+                    backButton.setVisible(false);
+                }
             } catch (Exception ex) { }
         });
-        final FlowAction backAction = (h, e) -> {
-            try {
-                flowHandler.navigateBack();
-            } catch (Exception ex) {
-                ex.printStackTrace();
-            }
-        };
-        innerFlow.addGlobalAction("lastFlow", backAction);
+
         drawer.setContent(flowHandler.start(new ExtendedAnimatedFlowContainer(containerAnimationDuration, ContainerAnimations.SWIPE_LEFT)));
         drawer.setSidePane(sideBarHandler.start(new ExtendedAnimatedFlowContainer(containerAnimationDuration, ContainerAnimations.SWIPE_LEFT)));
         context.register("ContentPane", drawer.getContent().get(0));
         context.register("LastFlow", innerFlow);
+        context.register("BackButton", backButton);
     }
 
 }

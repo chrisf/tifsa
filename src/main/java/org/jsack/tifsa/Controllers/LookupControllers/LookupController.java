@@ -41,7 +41,19 @@ public class LookupController  {
             } catch (Exception ex) {
             }
         });
+        productLookup.setOnMouseClicked(e -> {
+            try {
+                flowHandler.handle(productLookup.getId());
+            } catch (Exception ex) { }
+        });
+        orderLookup.setOnMouseClicked(e -> {
+            try{
+                flowHandler.handle(orderLookup.getId());
+            } catch (Exception ex) { }
+        });
         flow.withGlobalLink(customerLookup.getId(), CustomerLookupController.class);
+        flow.withGlobalLink(productLookup.getId(), ProductLookupController.class);
+        flow.withGlobalLink(orderLookup.getId(), OrderLookupController.class);
     }
 
 

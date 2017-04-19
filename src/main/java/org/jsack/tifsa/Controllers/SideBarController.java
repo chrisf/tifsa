@@ -53,6 +53,7 @@ public class SideBarController {
         parentHandler = (FlowHandler) context.getRegisteredObject("ContentFlowHandler");
         parentFlow = (Flow) context.getRegisteredObject("ContentFlow");
 
+        context.register("NavList", navList);
         navList.propagateMouseEventsToParent();
         navList.getSelectionModel().selectedItemProperty().addListener((o, oldVal, newVal) -> {
             if (newVal != null) {
@@ -67,11 +68,7 @@ public class SideBarController {
                 }
             }
         });
-        System.out.println(context);
-        context.register("SideMenuNav", navList);
         parentFlow.withGlobalLink(lookup.getId(), LookupController.class);
         parentFlow.withGlobalLink(home.getId(), IntroController.class);
     }
-
-
 }

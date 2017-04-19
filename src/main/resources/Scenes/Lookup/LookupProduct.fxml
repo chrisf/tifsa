@@ -1,8 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import com.jfoenix.controls.JFXTextArea?>
-<?import javafx.scene.layout.BorderPane?>
-<?import javafx.scene.layout.VBox?>
+<?import com.jfoenix.controls.JFXTextField?>
+<?import com.jfoenix.controls.JFXTreeTableView?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.*?>
+<?import com.jfoenix.controls.JFXTreeTableColumn?>
+<?import com.jfoenix.controls.JFXButton?>
+<?import javafx.geometry.Insets?>
 <BorderPane xmlns:fx="http://javafx.com/fxml"
             xmlns="http://javafx.com/javafx">
     <top>
@@ -10,7 +14,34 @@
     </top>
     <center>
         <VBox spacing="10.0" alignment="CENTER">
-            <JFXTextArea labelFloat="true" promptText="Number"/>
+            <HBox spacing="5">
+               <StackPane HBox.hgrow="ALWAYS">
+                   <padding>
+                       <Insets top="5" right="5" bottom="5" left="5" />
+                   </padding>
+                  <StackPane maxWidth="250" StackPane.alignment="CENTER_RIGHT">
+                      <JFXTextField fx:id="filterText" labelFloat="true" promptText="Filter.." editable="true" />
+                  </StackPane>
+                  <StackPane StackPane.alignment="CENTER_LEFT">
+                       <ImageView fx:id="productView" />
+                   </StackPane>
+               </StackPane>
+            </HBox>
+                <JFXTreeTableView fx:id="productTable">
+                    <columns>
+                        <JFXTreeTableColumn prefWidth="150" fx:id="productSkuColumn" text="ProductSKU" />
+                        <JFXTreeTableColumn prefWidth="150" fx:id="productNameColumn" text="ProductName" />
+                        <JFXTreeTableColumn prefWidth="150" fx:id="productPriceColumn" text="Price" />
+                        <JFXTreeTableColumn prefWidth="150" fx:id="productBrandColumn" text="Brand" />
+                    </columns>
+                </JFXTreeTableView>
+            <HBox>
+                <StackPane HBox.hgrow="ALWAYS" >
+                    <StackPane maxWidth="150" StackPane.alignment="CENTER_RIGHT">
+                       <JFXButton text="Refresh" fx:id="refresh" buttonType="RAISED" />
+                    </StackPane>
+                </StackPane>
+            </HBox>
         </VBox>
     </center>
 </BorderPane>
