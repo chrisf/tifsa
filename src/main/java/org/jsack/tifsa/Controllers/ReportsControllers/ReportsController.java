@@ -3,6 +3,7 @@ package org.jsack.tifsa.Controllers.SideMenuItems;
 import com.jfoenix.controls.*;
 import com.jfoenix.controls.cells.editors.base.JFXTreeTableCell;
 import com.jfoenix.controls.datamodels.treetable.RecursiveTreeObject;
+import io.datafx.controller.ViewController;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
 import javafx.beans.value.ObservableValue;
@@ -36,6 +37,7 @@ import java.util.ResourceBundle;
 /**
  * Created by aaron on 4/9/17.
  */
+@ViewController("/Scenes/Reports/ReportsMain.fxml")
 public class ReportsController implements Initializable {
     @FXML
     JFXComboBox reportType, reportSelection;
