@@ -1,4 +1,4 @@
-package org.jsack.tifsa.Controllers.SideMenuItems;
+package org.jsack.tifsa.Controllers;
 
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXListView;
@@ -12,6 +12,7 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import org.jsack.tifsa.Controllers.LookupControllers.IntroController;
 import org.jsack.tifsa.Controllers.LookupControllers.LookupController;
+import org.jsack.tifsa.Controllers.ReportsControllers.ReportsController;
 
 import javax.annotation.PostConstruct;
 import java.util.Objects;
@@ -70,5 +71,6 @@ public class SideBarController {
         });
         parentFlow.withGlobalLink(lookup.getId(), LookupController.class);
         parentFlow.withGlobalLink(home.getId(), IntroController.class);
+        parentFlow.withGlobalLink(reports.getId(), ReportsController.class);
     }
 }
