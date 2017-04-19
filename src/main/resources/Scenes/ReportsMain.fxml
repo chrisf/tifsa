@@ -16,7 +16,7 @@
 <?import com.jfoenix.controls.JFXButton?>
 <GridPane fx:id="gridPane" xmlns="http://javafx.com/javafx"
           xmlns:fx="http://javafx.com/fxml"
-          fx:controller="org.jsack.tifsa.Controllers.ReportsController"
+          fx:controller="org.jsack.tifsa.Controllers.SideMenuItems.ReportsController"
           prefHeight="650" prefWidth="1300">
     <padding>
         <Insets top="10" right="10" left="10" bottom="10" />

@@ -1,4 +1,4 @@
-package org.jsack.tifsa.Controllers;
+package org.jsack.tifsa.Controllers.SideMenuItems;
 
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXComboBox;

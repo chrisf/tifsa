@@ -1,26 +1,80 @@
-.button {
-    -fx-font-family: sans-serif;
-    -fx-color: #006064;
-    -fx-font-size: 150%;
-    -fx-border-color: #000000;
-    -fx-border-width: 1px;
-    -fx-background-color: #e0f7fa;
-    -fx-text-fill: #000000;
-}
-.jfx-button {
-
-}
-.jfx-snackbar-content {
-    -fx-border-width: 1px;
-    -fx-border-color: #80deea;
-    -fx-border-radius: 2%;
-}
-.jfx-snackbar-toast {
-    -fx-text-fill: white;
-    -fx-font-size: 150%;
-    -fx-border-radius: 150%;
-}
-
 .root {
-    -fx-background-color: #00bcd4;
+    -fx-font-family: "Roboto";
+    -fx-background-color: #bbdefb;
+}
+
+.main-menu {
+
+}
+
+.main-menu .jfx-tool-bar {
+    -fx-background-color: #01579b;
+}
+
+.main-menu .jfx-tool-bar .jfx-hamburger StackPane {
+    -fx-background-color: WHITE;
+}
+
+.jfx-decorator {
+    -fx-decorator-color: #2196f3;
+}
+
+.jfx-decorator .jfx-decorator-buttons-container {
+    -fx-background-color: -fx-decorator-color;
+}
+
+.jfx-decorator .resize-border {
+    -fx-border-color: -fx-decorator-color;
+    -fx-border-width: 0 2 2 2;
+}
+
+.lookup-menu .jfx-button {
+    -jfx-button-type: RAISED;
+    -fx-text-fill: WHITE;
+    -fx-background-color: #64b5f6;
+    -fx-pref-width: 300;
+    -fx-pref-height: 60;
+    -fx-font-size: 26;
+}
+
+.back-button{
+    -fx-background-color: #1976d2;
+    -fx-text-fill: WHITE;
+    -fx-text-alignment: left;
+    -fx-pref-height: 35;
+    -fx-pref-width: 75;
+}
+
+.sidebar-menu {
+    -fx-font-size: 16;
+    -fx-border-style: none;
+    -fx-text-alignment: center;
+    -fx-background-color: #e3f2fd;
+    -fx-padding: 0;
+}
+.sidebar-menu StackPane {
+    -fx-background-color: #e3f2fd;
+    -fx-background-insets: 0.0;
+    -fx-padding: 0;
+}
+.sidebar-menu .jfx-list-cell {
+    -fx-background-insets: 0.0;
+    -fx-text-fill: BLACK;
+    -fx-text-alignment: center;
+}
+.sidebar-menu .jfx-list-cell:odd, .jfx-list-cell:even {
+   -fx-background-color: #e3f2fd;
+}
+.sidebar-menu .jfx-list-view {
+    -fx-background-insets: 0.0;
+    -fx-padding: 0;
+    -jfx-cell-horizontal-margin: 0.0;
+    -jfx-cell-vertical-margin: 5.0;
+    -jfx-vertical-gap: 10.0;
+    -jfx-expanded: false;
+}
+
+.sidebar-menu .jfx-list-cell:odd:selected > .jfx-rippler > StackPane,
+.sidebar-menu .jfx-list-cell:even:selected > .jfx-rippler > StackPane {
+    -fx-background-color: rgba(0.0, 0.0, 255, 0.2);
 }
