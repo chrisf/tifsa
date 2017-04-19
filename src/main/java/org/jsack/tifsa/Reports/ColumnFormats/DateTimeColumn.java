@@ -1,12 +1,9 @@
 package org.jsack.tifsa.Reports.ColumnFormats;
 
-import javafx.beans.property.SimpleStringProperty;
-import javafx.beans.value.ObservableValue;
+import org.joda.time.DateTime;
+import org.joda.time.format.DateTimeFormat;
+import org.joda.time.format.DateTimeFormatter;
 
-import java.text.NumberFormat;
-import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
-import java.util.Locale;
 
 public class DateTimeColumn extends ColumnFormat
 {
@@ -19,7 +16,8 @@ public class DateTimeColumn extends ColumnFormat
 
     @Override
     public String getValue() {
-        LocalDateTime dt = LocalDateTime.parse(value);
-        return DateTimeFormatter.ISO_LOCAL_DATE_TIME.format(dt);
+        DateTimeFormatter dtf = DateTimeFormat.forPattern("yyyy-MM-dd HH:mm:ss.SSS");
+        DateTime dt = dtf.parseDateTime(value);
+        return DateTimeFormat.forPattern("MM-dd-yyyy HH:mm").print(dt);
     }
 }

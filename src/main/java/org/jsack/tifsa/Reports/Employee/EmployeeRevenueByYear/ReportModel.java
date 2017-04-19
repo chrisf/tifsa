@@ -3,21 +3,21 @@ package org.jsack.tifsa.Reports.Employee.EmployeeRevenueByYear;
 import org.jsack.tifsa.Reports.ColumnFormats.CurrencyColumn;
 import org.jsack.tifsa.Reports.ColumnFormats.StringColumn;
 import org.jsack.tifsa.Reports.ColumnInfo;
-import org.jsack.tifsa.Reports.Interfaces.IReportModel;
+import org.jsack.tifsa.Reports.ReportModelBase;
 
 import java.util.*;
 
 /**
  * Created by aaron on 4/11/17.
  */
-public class ReportModel implements IReportModel {
+public class ReportModel extends ReportModelBase {
 
     private List<String> row;
-    private Map<String, ColumnInfo> columns;
+    private LinkedHashMap<String, ColumnInfo> columns;
 
     public ReportModel() {
         row = new ArrayList<>();
-        columns = new HashMap<>();
+        columns = new LinkedHashMap<>();
 
         columns.put("EmployeeTypeDescription", new ColumnInfo("Employee Type", StringColumn.class));
         columns.put("EmployeeFirst", new ColumnInfo("Employee First", StringColumn.class));
@@ -31,7 +31,7 @@ public class ReportModel implements IReportModel {
     }
 
     @Override
-    public Map<String, ColumnInfo> getColumns() {
+    public LinkedHashMap<String, ColumnInfo> getColumns() {
         return columns;
     }
 }

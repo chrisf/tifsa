@@ -1,7 +1,7 @@
-package org.jsack.tifsa.Reports.Order.OrdersBySpecificDay;
+package org.jsack.tifsa.Reports.Order.OrdersBySpecificYear;
 
+import com.jfoenix.controls.JFXComboBox;
 import com.jfoenix.controls.JFXDatePicker;
-import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import org.joda.time.LocalDateTime;
 import org.jsack.tifsa.Reports.Interfaces.IControl;
@@ -13,22 +13,20 @@ import java.util.Map;
 import java.util.ResourceBundle;
 
 public class Controls implements Initializable, IControl {
-
-    public JFXDatePicker dayPicker;
+    public JFXComboBox<String> yearSelection;
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
+        yearSelection.setItems(Utility.getYears());
     }
 
     @Override
     public Map<String, Object> getAttributes() {
         Map<String, Object> attributes = new HashMap<>();
+        LocalDateTime d = Utility.parseDateString("January", "1", yearSelection.getValue());
 
-        LocalDateTime dt = LocalDateTime.parse(dayPicker.getValue().toString());
-
-        attributes.put("dayStart", dt.dayOfWeek().withMinimumValue().toString());
-        attributes.put("dayEnd", dt.withHourOfDay(23).withMinuteOfHour(59).toString());
-
+        attributes.put("dayStart", d.dayOfYear().withMinimumValue().toString());
+        attributes.put("dayEnd", d.dayOfYear().withMaximumValue().toString());
         return attributes;
     }
 }

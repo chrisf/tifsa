@@ -1,4 +1,4 @@
-package org.jsack.tifsa.Reports.Order.OrdersBySpecificDay;
+package org.jsack.tifsa.Reports.Order.OrdersBySpecificWeek;
 
 import org.jsack.tifsa.Reports.ColumnFormats.CurrencyColumn;
 import org.jsack.tifsa.Reports.ColumnFormats.DateColumn;
@@ -6,7 +6,9 @@ import org.jsack.tifsa.Reports.ColumnFormats.StringColumn;
 import org.jsack.tifsa.Reports.ColumnInfo;
 import org.jsack.tifsa.Reports.ReportModelBase;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.LinkedHashMap;
+import java.util.List;
 
 /**
  * Created by aaron on 4/11/17.

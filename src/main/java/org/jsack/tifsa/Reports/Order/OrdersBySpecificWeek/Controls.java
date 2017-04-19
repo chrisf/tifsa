@@ -1,11 +1,11 @@
-package org.jsack.tifsa.Reports.Order.OrdersBySpecificDay;
+package org.jsack.tifsa.Reports.Order.OrdersBySpecificWeek;
 
 import com.jfoenix.controls.JFXDatePicker;
-import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import org.joda.time.DateTimeConstants;
+import org.joda.time.LocalDate;
 import org.joda.time.LocalDateTime;
 import org.jsack.tifsa.Reports.Interfaces.IControl;
-import org.jsack.tifsa.Utility;
 
 import java.net.URL;
 import java.util.HashMap;
@@ -23,12 +23,9 @@ public class Controls implements Initializable, IControl {
     @Override
     public Map<String, Object> getAttributes() {
         Map<String, Object> attributes = new HashMap<>();
-
-        LocalDateTime dt = LocalDateTime.parse(dayPicker.getValue().toString());
-
-        attributes.put("dayStart", dt.dayOfWeek().withMinimumValue().toString());
-        attributes.put("dayEnd", dt.withHourOfDay(23).withMinuteOfHour(59).toString());
-
+        LocalDateTime d = LocalDateTime.parse(String.valueOf(dayPicker.getValue()));
+        attributes.put("dayStart", d.dayOfWeek().withMinimumValue().toString());
+        attributes.put("dayEnd", d.dayOfWeek().withMaximumValue().toString());
         return attributes;
     }
 }
