@@ -15,10 +15,8 @@ import javafx.fxml.FXML;
 import javafx.scene.layout.StackPane;
 import javafx.util.Duration;
 import org.jsack.tifsa.Controllers.LookupControllers.IntroController;
-import org.jsack.tifsa.Controllers.SideMenuItems.SideBarController;
-import org.jsack.tifsa.Database.DBSelect;
-import org.springframework.context.ApplicationContext;
-import org.springframework.context.support.ClassPathXmlApplicationContext;
+import org.jsack.tifsa.Utility;
+import org.springframework.jdbc.core.JdbcTemplate;
 
 import javax.annotation.PostConstruct;
 
@@ -45,10 +43,9 @@ public class MainController {
 
     @PostConstruct
     public void init() throws Exception {
-        ApplicationContext appcontext = new ClassPathXmlApplicationContext("applicationContext.xml");
         new Thread( () -> {
-            DBSelect dbSelect = (DBSelect) appcontext.getBean("dbSelect");
-        });
+           JdbcTemplate template = Utility.getJdbcTemplate();
+        }).start();
         System.out.println(context);
         final Duration containerAnimationDuration = Duration.millis(320);
         Flow innerFlow = new Flow(IntroController.class);
