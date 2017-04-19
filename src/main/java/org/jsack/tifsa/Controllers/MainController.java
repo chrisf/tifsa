@@ -15,7 +15,6 @@ import javafx.fxml.FXML;
 import javafx.scene.layout.StackPane;
 import javafx.util.Duration;
 import org.jsack.tifsa.Controllers.LookupControllers.IntroController;
-import org.jsack.tifsa.Controllers.SideMenuItems.SideBarController;
 import org.jsack.tifsa.Utility;
 import org.springframework.jdbc.core.JdbcTemplate;
 
