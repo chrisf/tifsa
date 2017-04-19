@@ -44,6 +44,6 @@ public class Utility {
     }
 
     public static String monthToNumber(String month) {
-        return String.valueOf(Cache.getMonths().indexOf(month) + 1);
+        return String.valueOf(Julius.getMonths().indexOf(month) + 1);
     }
 }

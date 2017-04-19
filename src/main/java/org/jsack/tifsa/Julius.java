@@ -17,7 +17,7 @@ import java.util.List;
 /**
  * Created by aaron on 4/19/17.
  */
-public class Cache {
+public class Julius {
     private static ApplicationContext appContext = new ClassPathXmlApplicationContext("applicationContext.xml");
     private static ObservableList<State> states = null;
     private static ObservableList<CustomerStatus> customerStatuses = null;
