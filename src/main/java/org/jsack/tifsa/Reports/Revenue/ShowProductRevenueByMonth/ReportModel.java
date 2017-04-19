@@ -28,7 +28,7 @@ public class ReportModel extends ReportModelBase {
         columns.put("Month", new ColumnInfo("Month", StringColumn.class));
         columns.put("ProductDescription", new ColumnInfo("Product Description", StringColumn.class));
         columns.put("ProductSKU", new ColumnInfo("Product SKU", IntegerColumn.class));
-        columns.put("ProductPrice", new ColumnInfo("Revenue", CurrencyColumn.class));
+        columns.put("Revenue", new ColumnInfo("Revenue", CurrencyColumn.class));
         columns.put("VendorName", new ColumnInfo("Vendor Name", StringColumn.class));
         columns.put("BrandName", new ColumnInfo("Brand Name", StringColumn.class));
         columns.put("ManufacturerName", new ColumnInfo("Manufacturer Name", StringColumn.class));
