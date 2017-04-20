@@ -1,6 +1,7 @@
 package org.jsack.tifsa.Reports.Customer.CustomerOrderByMonth;
 
 import org.jsack.tifsa.Reports.ColumnFormats.CurrencyColumn;
+import org.jsack.tifsa.Reports.ColumnFormats.DateColumn;
 import org.jsack.tifsa.Reports.ColumnFormats.StringColumn;
 import org.jsack.tifsa.Reports.ColumnInfo;
 import org.jsack.tifsa.Reports.ReportModelBase;
@@ -24,8 +25,7 @@ public class ReportModel extends ReportModelBase {
 
 
         //Columns by Steven
-        columns.put("Year", new ColumnInfo("Year", StringColumn.class));
-        columns.put("Month", new ColumnInfo("Month", StringColumn.class));
+        columns.put("OrderDate", new ColumnInfo("Date", DateColumn.class));
         columns.put("CustomerFirst", new ColumnInfo("Customer First", StringColumn.class));
         columns.put("CustomerLast", new ColumnInfo("CustomerLast", StringColumn.class));
         columns.put("ContactInfo", new ColumnInfo("Contact Info", StringColumn.class));

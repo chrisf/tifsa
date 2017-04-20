@@ -7,7 +7,9 @@ import javafx.collections.FXCollections;
 import javafx.fxml.Initializable;
 import org.jsack.tifsa.Database.Country.Country;
 import org.jsack.tifsa.Database.State.State;
+import org.jsack.tifsa.Julius;
 import org.jsack.tifsa.Reports.Interfaces.IControl;
+import org.jsack.tifsa.Utility;
 
 import java.net.URL;
 import java.util.HashMap;
@@ -21,11 +23,17 @@ public class Controls implements Initializable, IControl {
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-
+        stateSelection.setItems(Julius.getAllStates());
     }
 
     @Override
     public Map<String, Object> getAttributes() {
-        return null;
+        HashMap<String, Object> attributes = new HashMap<>();
+
+        long stateId = stateSelection.getValue().getStateId();
+
+        attributes.put("stateId", stateId);
+
+        return attributes;
     }
 }

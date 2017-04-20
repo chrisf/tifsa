@@ -19,10 +19,8 @@ public class Report implements IReport{
         If you already created your reports using the previous method, just copy and paste it into here.
         If you haven't, copy and paste it from Drive and replace all the "\n" with a space.
      */
-    private final String sql = "SELECT DATEPART(year, dbo.[Order].OrderDate) AS 'Year',  \n" +
-            "DATEPART(WEEK, dbo.[Order].OrderDate) AS Week,\n" +
-            "DATEPART(DAY, dbo.[Order].OrderDate) AS Day,\n" +
-            "dbo.Customer.CustomerFirst, \n" +
+    private final String sql = "SELECT OrderDate,\n" +
+            "dbo.Customer.CustomerFirst,\n" +
             "dbo.Customer.CustomerLast,\n" +
             "dbo.CustomerContact.customercontactinfo AS ContactInfo,\n" +
             "dbo.[Order].OrderTotal AS OrderTotal,\n" +
@@ -31,19 +29,19 @@ public class Report implements IReport{
             "\n" +
             "FROM Customer\n" +
             "\n" +
-            "INNER JOIN [Order] ON [Order].CustomerID = Customer.CustomerId \n" +
-            "FULL JOIN OrderDiscount ON OrderDiscount.OrderID = [order].OrderID\n" +
+            "INNER JOIN [Order] ON [Order].CustomerID = Customer.CustomerId\n" +
+            "FULL JOIN OrderDiscount ON OrderDiscount.OrderID = [Order].OrderID\n" +
             "INNER JOIN customercontact ON customercontact.customercontactID = customer.customerID\n" +
             "\n" +
-            "WHERE DATEPART(Year, dbo.[Order].OrderDate) = '2009'AND dbo.Customer.Deleted = 0\n" +
+            "WHERE OrderDate > :dayStart AND OrderDate < :dayEnd AND dbo.Customer.Deleted = 0\n" +
             "\n" +
-            "order by DATEPART(DAY, dbo.[Order].OrderDate);";
+            "order by DATEPART(DAY, dbo.[Order].OrderDate);\n";
 
     /*
         TODO: Name your report.
         Set the name of your report here. Make it unique.
      */
-    private final String name = "Customer Order By Day";
+    private final String name = "Customer Orders By Day";
 
     /*
         TODO: Set report Category.
