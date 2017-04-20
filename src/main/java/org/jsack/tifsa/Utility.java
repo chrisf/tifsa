@@ -6,8 +6,10 @@ import javafx.application.Platform;
 import javafx.scene.layout.Pane;
 import org.joda.time.LocalDateTime;
 import org.joda.time.format.DateTimeFormat;
+import org.jsack.tifsa.Database.State.State;
 
 import java.util.concurrent.Semaphore;
+import java.util.stream.Collectors;
 
 /**
  * Created by cfitz on 4/18/17.
@@ -35,6 +37,16 @@ public class Utility {
 
     public static boolean containsIgnoreCase(final String s1, final String s2) {
         return s1.toLowerCase().contains(s2.toLowerCase());
+    }
+
+    public static State getState(String stateName) {
+        return Julius.getAllStates().stream()
+                .filter(s -> s.getStateName().equalsIgnoreCase(stateName))
+                .collect(Collectors.toList()).get(0);
+    }
+
+    public static long getStateId(String stateName) {
+        return getState(stateName).getStateId();
     }
 
     public static boolean isNumber(String input) {

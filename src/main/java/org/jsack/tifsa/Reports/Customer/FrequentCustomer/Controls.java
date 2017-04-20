@@ -8,6 +8,7 @@ import javafx.fxml.Initializable;
 import org.jsack.tifsa.Database.State.State;
 import org.jsack.tifsa.Julius;
 import org.jsack.tifsa.Reports.Interfaces.IControl;
+import org.jsack.tifsa.Utility;
 
 import java.net.URL;
 import java.util.HashMap;

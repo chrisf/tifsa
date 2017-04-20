@@ -34,7 +34,6 @@ public class Report implements IReport{
             "\n" +
             "WHERE State.StateID = :stateId AND CustomerStatus.CustomerStatusDescription = 'Frequent' AND dbo.Customer.Deleted = 0\n" +
             "ORDER BY CustomerFirst;\n";
-
     /*
         TODO: Name your report.
         Set the name of your report here. Make it unique.
