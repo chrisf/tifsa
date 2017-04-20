@@ -13,6 +13,7 @@ import org.jsack.tifsa.Database.Employee.Employee;
 import org.jsack.tifsa.Database.Order.Order;
 import org.jsack.tifsa.Database.OrderLine.OrderLine;
 import org.jsack.tifsa.Database.State.State;
+import org.springframework.dao.DataAccessException;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -122,6 +123,15 @@ public class Utility {
         }
 
         return total;
+    }
+
+    public static long queryForLong(String sql, Object... args) throws DataAccessException {
+        Number number = Julius.getJdbcTemplate().queryForObject(sql, args, Long.class);
+        return (number != null ? number.longValue() : 0);
+    }
+
+    public static long getLatestOrderId() {
+        return queryForLong("SELECT TOP 1 OrderID FROM [Order] ORDER BY OrderID DESC");
     }
 
     public static double calculateOrderTotal(List<Double> prices) {

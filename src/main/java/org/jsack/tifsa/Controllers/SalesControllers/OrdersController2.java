@@ -93,6 +93,7 @@ public class OrdersController2 {
             order.setOrderShippingCity(shippingCity.getText());
             order.setOrderShippingZip(shippingZip.getText());
             order.setSoldByEmployeeId(Utility.getEmployeeIdByName(employeeSelect.getSelectionModel().getSelectedItem().toString()));
+            order.setOrderCashOnDelivery("1");
 
             context.register("NewOrderIsDelivery", deliverySelected.isSelected());
 

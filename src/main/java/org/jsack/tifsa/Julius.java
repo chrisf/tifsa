@@ -16,6 +16,7 @@ import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
+import org.springframework.jdbc.core.simple.SimpleJdbcInsert;
 
 import java.util.HashMap;
 import java.util.List;
@@ -98,6 +99,11 @@ public class Julius {
 
     public static int runQuery(String query, HashMap<String, Object> attributes) {
         return Julius.getJdbcNamedTemplate().update(query, attributes);
+    }
+
+    public static SimpleJdbcInsert insert(String table, String pkColumn) {
+        SimpleJdbcInsert insert = new SimpleJdbcInsert(getJdbcTemplate()).withTableName(table).usingGeneratedKeyColumns(pkColumn);
+        return insert;
     }
 
     public static ObservableList<CustomerStatus> getAllCustomerStatus() {

@@ -18,15 +18,20 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.text.Text;
 import org.jsack.tifsa.Database.Order.Order;
+import org.jsack.tifsa.Database.OrderLine.OrderLine;
+import org.jsack.tifsa.Database.Product.Product;
 import org.jsack.tifsa.Julius;
 import org.jsack.tifsa.Reports.ColumnFormats.CurrencyColumn;
 import org.jsack.tifsa.Utility;
+import org.springframework.jdbc.core.PreparedStatementCreator;
 import org.springframework.jdbc.core.RowMapper;
+import org.springframework.jdbc.support.GeneratedKeyHolder;
+import org.springframework.jdbc.support.KeyHolder;
 
 import javax.annotation.PostConstruct;
 import java.io.ByteArrayInputStream;
-import java.sql.ResultSet;
-import java.sql.SQLException;
+import java.sql.*;
+import java.time.LocalDateTime;
 import java.util.HashMap;
 import java.util.List;
 import java.util.function.Function;
@@ -78,7 +83,7 @@ public class OrdersController3 {
     JFXButton addButton;
 
     @FXML
-    JFXButton createOrderButton;
+    JFXButton createOrder;
 
     @FXML
     Text subTotal;
@@ -122,8 +127,11 @@ public class OrdersController3 {
 
         setTotals();
 
-        createOrderButton.setOnMouseClicked(e -> {
-            insertOrder();
+        createOrder.setOnMouseClicked(e -> {
+            new Thread(() -> {
+                insertOrder();
+                insertOrderLines();
+            }).run();
         });
 
         addButton.setOnMouseClicked(e -> {
@@ -193,7 +201,7 @@ public class OrdersController3 {
     }
 
     private void updateProducts() {
-        List<ProductReportItem> newItems = Julius.getJdbcTemplate().query("SELECT ProductSKU, ProductDescription, ProductPrice, BrandName, PictureData " +
+        List<ProductReportItem> newItems = Julius.getJdbcTemplate().query("SELECT ProductSKU, ProductDescription, ProductPrice, BrandName, PictureData, Product.ProductID " +
                 "FROM Product " +
                 "INNER JOIN Brand ON Product.BrandID = Brand.BrandID "+
                 "FULL JOIN Picture ON Picture.ProductID = Product.ProductID"
@@ -219,7 +227,7 @@ public class OrdersController3 {
         @Override
         public ProductReportItem mapRow(ResultSet rs, int rowNum) throws SQLException {
             return new ProductReportItem(rs.getString("ProductSKU"), rs.getString("ProductDescription"),
-                    rs.getString("BrandName"), rs.getDouble("ProductPrice"), rs.getBytes("PictureData"));
+                    rs.getString("BrandName"), rs.getDouble("ProductPrice"), rs.getBytes("PictureData"), rs.getLong("ProductID"));
 
         }
     }
@@ -228,7 +236,7 @@ public class OrdersController3 {
         HashMap<String, Object> attributes = new HashMap<>();
 
         String sql = "INSERT INTO [Order] (\n" +
-                "  CustomerID BIGINT,\n" +
+                "  CustomerID, \n" +
                 "  OrderBillingFirst,\n" +
                 "  OrderBillingLast,\n" +
                 "  OrderBillingStreet,\n" +
@@ -248,35 +256,65 @@ public class OrdersController3 {
                 ":orderBillingState, :orderBillingCity, :orderBillingZip, :orderCashOnDelivery, :soldByEmployeeId, " +
                 ":orderShippingStreet, :orderShippingStreet2, :orderShippingState, :orderShippingCity, :orderShippingZip);";
 
-        attributes.put(":customerId", order.getCustomerId());
-        attributes.put(":orderBillingFirst", order.getOrderBillingFirst());
-        attributes.put(":orderBillingLast", order.getOrderBillingLast());
-        attributes.put(":orderBillingStreet", order.getOrderBillingStreet());
-        attributes.put(":orderBillingStreet2", order.getOrderBillingStreet2());
-        attributes.put(":orderBillingState", order.getOrderBillingState());
-        attributes.put(":orderBillingCity", order.getOrderBillingCity());
-        attributes.put(":orderBillingZip", order.getOrderBillingZip());
-        attributes.put(":orderCashOnDelivery", order.getOrderCashOnDelivery());
-        attributes.put(":soldByEmployeeId", order.getSoldByEmployeeId());
-        attributes.put(":orderShippingStreet", order.getOrderShippingStreet());
-        attributes.put(":orderShippingStreet2", order.getOrderShippingStreet2());
-        attributes.put(":orderShippingState", order.getOrderShippingState());
-        attributes.put(":orderShippingCity", order.getOrderShippingCity());
-        attributes.put(":orderShippingZip", order.getOrderShippingZip());
+        attributes.put("customerId", order.getCustomerId());
+        attributes.put("orderBillingFirst", order.getOrderBillingFirst());
+        attributes.put("orderBillingLast", order.getOrderBillingLast());
+        attributes.put("orderBillingStreet", order.getOrderBillingStreet());
+        attributes.put("orderBillingStreet2", order.getOrderBillingStreet2());
+        attributes.put("orderBillingState", order.getOrderBillingState());
+        attributes.put("orderBillingCity", order.getOrderBillingCity());
+        attributes.put("orderBillingZip", order.getOrderBillingZip());
+        attributes.put("orderCashOnDelivery", order.getOrderCashOnDelivery());
+        attributes.put("soldByEmployeeId", order.getSoldByEmployeeId());
+        attributes.put("orderShippingStreet", order.getOrderShippingStreet());
+        attributes.put("orderShippingStreet2", order.getOrderShippingStreet2());
+        attributes.put("orderShippingState", order.getOrderShippingState());
+        attributes.put("orderShippingCity", order.getOrderShippingCity());
+        attributes.put("orderShippingZip", order.getOrderShippingZip());
 
         Julius.runQuery(sql, attributes);
+        long orderId = Utility.getLatestOrderId();
+        order.setOrderId(orderId);
     }
 
     private void insertOrderLines() {
-//        HashMap<String, Object> attributes = new HashMap<>();
-//
-//
-//        String sql = "INSERT INTO OrderLine";
-//
-//
-//        attributes.put()
-//
-//        Julius.runQuery(sql, attributes);
+        for(ProductReportItem product: orderProducts) {
+
+            OrderLine orderLine = new OrderLine();
+            orderLine.setOrderId(order.getOrderId());
+            orderLine.setProductId(product.getProductId());
+            orderLine.setOrderLineQuantity(1L);
+            orderLine.setOrderLineDiscount(0D);
+            orderLine.setOrderLineDeliveryTypeId(1L);
+            orderLine.setOrderLineStatusId(1L);
+            orderLine.setOrderLineDeliverOn(Timestamp.valueOf(LocalDateTime.now().plusWeeks(2)));
+
+
+
+            HashMap<String, Object> attributes = new HashMap<>();
+            String sql = "INSERT INTO OrderLine (\n" +
+                    "  OrderID, \n" +
+                    "  ProductID,\n" +
+                    "  OrderLineQuantity,\n" +
+                    "  OrderLineDiscount,\n" +
+                    "  OrderLineDeliveryTypeID,\n" +
+                    "  OrderLineStatusID,\n" +
+                    "  OrderLineDeliverOn\n" +
+                    ") VALUES(" +
+                    ":orderId, :productId, :orderLineQuantity, :orderLineDiscount, " +
+                    ":orderLineDeliveryTypeId, :orderLineStatusId, :orderLineDeliverOn" +
+                    " );";
+
+            attributes.put("orderId", orderLine.getOrderId());
+            attributes.put("productId", orderLine.getProductId());
+            attributes.put("orderLineQuantity", orderLine.getOrderLineQuantity());
+            attributes.put("orderLineDiscount", orderLine.getOrderLineDiscount());
+            attributes.put("orderLineDeliveryTypeId", orderLine.getOrderLineDeliveryTypeId());
+            attributes.put("orderLineStatusId", orderLine.getOrderLineStatusId());
+            attributes.put("orderLineDeliverOn", orderLine.getOrderLineDeliverOn());
+
+            Julius.runQuery(sql, attributes);
+        }
     }
 
 
@@ -285,15 +323,19 @@ public class OrdersController3 {
        final StringProperty name;
        final StringProperty brand;
        final DoubleProperty price;
+       long productId;
+
        final byte[] imageData;
-       ProductReportItem(String sku, String name, String brand, Double price, byte[] imageData) {
+       ProductReportItem(String sku, String name, String brand, Double price, byte[] imageData, long productId) {
            this.sku = sku != null ?  new SimpleStringProperty(sku) : new SimpleStringProperty("");
            this.name = name != null ? new SimpleStringProperty(name): new SimpleStringProperty("");
            this.brand = brand != null ?  new SimpleStringProperty(brand) : new SimpleStringProperty("");
            this.price = price != null ? new SimpleDoubleProperty(price) : new SimpleDoubleProperty(0.0);
            this.imageData = imageData;
+           this.productId = productId;
        }
 
        public double getPrice() { return price.get(); }
+       public long getProductId() { return productId; }
     }
 }
