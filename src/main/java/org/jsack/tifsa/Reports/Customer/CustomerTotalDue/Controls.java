@@ -7,6 +7,7 @@ import javafx.fxml.Initializable;
 import org.jsack.tifsa.Database.CustomerStatus.CustomerStatus;
 import org.jsack.tifsa.Database.CustomerStatus.CustomerStatusSchema;
 import org.jsack.tifsa.Database.DBSelect;
+import org.jsack.tifsa.Julius;
 import org.jsack.tifsa.Reports.Interfaces.IControl;
 import org.jsack.tifsa.Utility;
 
@@ -20,14 +21,14 @@ import java.util.ResourceBundle;
  * Created by aaron on 4/11/17.
  */
 public class Controls implements Initializable, IControl {
-    public JFXComboBox<String> customerStatusSelection;
+    public JFXComboBox<CustomerStatus> customerStatusSelection;
 
     @FXMLViewFlowContext
     ViewFlowContext context;
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        customerStatusSelection.setItems(FXCollections.observableArrayList(Utility.getCustomerStatuses()));
+        customerStatusSelection.setItems(Julius.getAllCustomerStatus());
     }
 
     @Override
