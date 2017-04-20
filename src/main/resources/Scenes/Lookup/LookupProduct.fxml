@@ -9,7 +9,7 @@
     <top>
     </top>
     <center>
-        <VBox spacing="10.0" alignment="CENTER">
+        <VBox alignment="CENTER">
             <HBox spacing="5">
                 <padding>
                     <Insets top="5" right="5" bottom="5" left="5"/>

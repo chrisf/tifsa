@@ -42,7 +42,7 @@ public class SalesController  {
                 flowHandler.handle(updateOrder.getId());
             } catch (Exception ex) { }
         });
-        flow.withGlobalLink(newOrder.getId(), null);
+        flow.withGlobalLink(newOrder.getId(), OrdersController0.class);
         flow.withGlobalAction(updateOrder.getId(), ((flowHandler1, handle) -> {
             Utility.notifyTrial(context);
         }));

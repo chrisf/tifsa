@@ -3,6 +3,13 @@
     -fx-background-color: #bbdefb;
     -fx-prompt-text-fill: #e3f2fd;
 }
+StackPane .jfx-button {
+    -jfx-button-type: RAISED;
+    -fx-background-color: #01579b;
+    -fx-text-fill: WHITE;
+    -fx-font-size: 16;
+}
+
 
 .jfx-text-field {
 
