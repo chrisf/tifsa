@@ -30,8 +30,8 @@ import java.util.function.Function;
 /**
  * Created by Admin on 4/19/2017.
  */
-@ViewController("/Scenes/Sales/OrderForm3.fxml")
-public class OrdersController3 {
+@ViewController("/Scenes/Lookup/LookupOrder.fxml")
+public class OrderLookup {
     @FXML
     JFXTextField filterText;
 
@@ -44,6 +44,7 @@ public class OrdersController3 {
     @FXML
     JFXButton refresh;
 
+
     @FXML
     JFXTreeTableColumn<ProductReportItem, String> productSkuColumn;
 
@@ -55,83 +56,61 @@ public class OrdersController3 {
 
     @FXML
     JFXTreeTableColumn<ProductReportItem, Number> productPriceColumn;
-
-
-    @FXML
-    JFXTreeTableColumn<ProductReportItem, String> orderSkuColumn;
-
-    @FXML
-    JFXTreeTableColumn<ProductReportItem, String> orderNameColumn;
-
-    @FXML
-    JFXTreeTableColumn<ProductReportItem, String> orderBrandColumn;
-
-    @FXML
-    JFXTreeTableColumn<ProductReportItem, Number> orderPriceColumn;
-
-    @FXML
-    JFXButton addButton;
-
     @FXMLViewFlowContext
     ViewFlowContext context;
 
     private ObservableList<ProductReportItem> products, orderProducts;
+
     @PostConstruct
     public void init() {
         orderProducts = FXCollections.observableArrayList();
 
-        setupCellValueFactory(orderSkuColumn, e -> e.sku);
-        setupCellValueFactory(orderNameColumn, e -> e.name);
-        setupCellValueFactory(orderBrandColumn, e -> e.brand);
-        setupCellValueFactory(orderPriceColumn, e -> e.price);
-        setupCellValueFactory(orderSkuColumn, e -> e.sku);
-        setupCellValueFactory(orderNameColumn, e -> e.name);
-        setupCellValueFactory(orderBrandColumn, e -> e.brand);
-        setupCellValueFactory(orderPriceColumn, e -> e.price);
-
-        addButton.setOnMouseClicked(e -> {
-            orderProducts.add(productTable.getSelectionModel().getSelectedItem().getValue());
-        });
-
+        setupCellValueFactory(productSkuColumn, e -> e.sku);
+        setupCellValueFactory(productNameColumn, e -> e.name);
+        setupCellValueFactory(productBrandColumn, e -> e.brand);
+        setupCellValueFactory(productPriceColumn, e -> e.price);
         filterText.textProperty().addListener((o, oldVal, newVal) -> {
             new Thread(() -> {
-               productTable.setPredicate(productProp -> {
-                 final ProductReportItem product = productProp.getValue();
+                productTable.setPredicate(productProp -> {
+                    final ProductReportItem product = productProp.getValue();
 
-                 return  Utility.containsIgnoreCase(product.name.get(), newVal)||
-                         Utility.containsIgnoreCase(product.brand.get(), newVal) || Utility.containsIgnoreCase(product.sku.get(),newVal);
-               });
+                    return Utility.containsIgnoreCase(product.name.get(), newVal) ||
+                            Utility.containsIgnoreCase(product.brand.get(), newVal) || Utility.containsIgnoreCase(product.sku.get(), newVal);
+                });
             }).start();
         });
         productTable.getSelectionModel().selectedItemProperty().addListener(
                 ((observable, oldValue, newValue) -> {
                     byte[] imageData = newValue.getValue().imageData;
-                    if(imageData != null) {
+                    if (imageData != null) {
                         try {
-                            javafx.scene.image.Image prodImage = new Image(new ByteArrayInputStream(imageData));
+                            Image prodImage = new Image(new ByteArrayInputStream(imageData));
                             productView.setFitWidth(150);
                             productView.setFitHeight(150);
                             productView.setImage(prodImage);
-                        } catch( Exception ex ) { }
-                   }
-                   else {
+                        } catch (Exception ex) {
+                        }
+                    } else {
                         productView.setImage(null);
                     }
                 })
         );
         refresh.setOnMouseClicked(e -> {
-           new Thread(() -> {
-               updateProducts();
+            new Thread(() -> {
+                updateProducts();
             }).start();
         });
-        new Thread(() -> { updateProducts(); }).start();
+        new Thread(() -> {
+            updateProducts();
+        }).start();
     }
+
     private void updateProducts() {
         List<ProductReportItem> newItems = Julius.getJdbcTemplate().query("SELECT ProductSKU, ProductDescription, ProductPrice, BrandName, PictureData " +
-                "FROM Product " +
-                "INNER JOIN Brand ON Product.BrandID = Brand.BrandID "+
-                "FULL JOIN Picture ON Picture.ProductID = Product.ProductID"
-                ,new ProductReportItemWrapper());
+                        "FROM Product " +
+                        "INNER JOIN Brand ON Product.BrandID = Brand.BrandID " +
+                        "FULL JOIN Picture ON Picture.ProductID = Product.ProductID"
+                , new ProductReportItemWrapper());
         products = FXCollections.observableArrayList(newItems);
         Utility.runOnGuiAndWait(() -> {
             productTable.setRoot(new RecursiveTreeItem<>(products, RecursiveTreeObject::getChildren));
@@ -139,6 +118,7 @@ public class OrdersController3 {
         });
 
     }
+
     private <T> void setupCellValueFactory(JFXTreeTableColumn<ProductReportItem, T> column, Function<ProductReportItem, ObservableValue<T>> mapper) {
         column.setCellValueFactory((TreeTableColumn.CellDataFeatures<ProductReportItem, T> param) -> {
             if (column.validateValue(param)) {
@@ -148,6 +128,7 @@ public class OrdersController3 {
             }
         });
     }
+
     private class ProductReportItemWrapper implements RowMapper<ProductReportItem> {
         @Override
         public ProductReportItem mapRow(ResultSet rs, int rowNum) throws SQLException {
@@ -156,18 +137,20 @@ public class OrdersController3 {
 
         }
     }
+
     static final class ProductReportItem extends RecursiveTreeObject<ProductReportItem> {
-       final StringProperty sku;
-       final StringProperty name;
-       final StringProperty brand;
-       final DoubleProperty price;
-       final byte[] imageData;
-       ProductReportItem(String sku, String name, String brand, Double price, byte[] imageData) {
-           this.sku = sku != null ?  new SimpleStringProperty(sku) : new SimpleStringProperty("");
-           this.name = name != null ? new SimpleStringProperty(name): new SimpleStringProperty("");
-           this.brand = brand != null ?  new SimpleStringProperty(brand) : new SimpleStringProperty("");
-           this.price = price != null ? new SimpleDoubleProperty(price) : new SimpleDoubleProperty(0.0);
-           this.imageData = imageData;
-       }
+        final StringProperty sku;
+        final StringProperty name;
+        final StringProperty brand;
+        final DoubleProperty price;
+        final byte[] imageData;
+
+        ProductReportItem(String sku, String name, String brand, Double price, byte[] imageData) {
+            this.sku = sku != null ? new SimpleStringProperty(sku) : new SimpleStringProperty("");
+            this.name = name != null ? new SimpleStringProperty(name) : new SimpleStringProperty("");
+            this.brand = brand != null ? new SimpleStringProperty(brand) : new SimpleStringProperty("");
+            this.price = price != null ? new SimpleDoubleProperty(price) : new SimpleDoubleProperty(0.0);
+            this.imageData = imageData;
+        }
     }
 }

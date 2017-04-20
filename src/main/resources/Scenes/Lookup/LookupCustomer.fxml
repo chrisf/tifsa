@@ -21,9 +21,6 @@
                     <StackPane maxWidth="250" StackPane.alignment="BOTTOM_RIGHT">
                         <JFXTextField fx:id="filterText" labelFloat="true" promptText="Filter.." editable="true"/>
                     </StackPane>
-                    <StackPane maxWidth="250" StackPane.alignment="BOTTOM_LEFT">
-                        <ImageView fx:id="productView" fitWidth="200" fitHeight="200"/>
-                    </StackPane>
                 </StackPane>
             </HBox>
             <JFXTreeTableView fx:id="productTable">

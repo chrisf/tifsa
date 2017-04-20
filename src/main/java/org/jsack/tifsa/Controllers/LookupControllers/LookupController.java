@@ -49,11 +49,11 @@ public class LookupController  {
         orderLookup.setOnMouseClicked(e -> {
             try{
                 flowHandler.handle(orderLookup.getId());
-            } catch (Exception ex) { }
+            } catch (Exception ex) { ex.printStackTrace(); }
         });
         flow.withGlobalLink(customerLookup.getId(), CustomerLookupController.class);
         flow.withGlobalLink(productLookup.getId(), ProductLookupController.class);
-        flow.withGlobalLink(orderLookup.getId(), OrderLookupController.class);
+        flow.withGlobalLink(orderLookup.getId(), OrderLookup.class);
     }
 
 

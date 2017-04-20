@@ -32,10 +32,15 @@
                     <JFXTreeTableColumn prefWidth="100" fx:id="contactColumn" text="Contact Info" />
                 </columns>
             </JFXTreeTableView>
-            <HBox>
+            <HBox spacing="5">
                 <StackPane HBox.hgrow="ALWAYS">
-                    <StackPane maxWidth="250" StackPane.alignment="BOTTOM_RIGHT">
+                    <StackPane maxWidth="150" StackPane.alignment="BOTTOM_RIGHT">
                         <JFXButton text="Create New.." fx:id="createCustomer"/>
+                    </StackPane>
+                </StackPane>
+                <StackPane HBox.hgrow="ALWAYS">
+                    <StackPane maxWidth="150" StackPane.alignment="BOTTOM_RIGHT">
+                       <JFXButton text="Next.." fx:id="nextButton" />
                     </StackPane>
                 </StackPane>
             </HBox>

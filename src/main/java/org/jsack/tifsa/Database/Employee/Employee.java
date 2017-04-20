@@ -49,4 +49,5 @@ public class Employee {
     public void setDeleted(boolean deleted) {
         this.deleted = deleted;
     }
+    public String toString() { return String.format("%s %s",this.employeeFirst, this.employeeLast); }
 }

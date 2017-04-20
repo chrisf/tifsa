@@ -3,11 +3,18 @@ package org.jsack.tifsa;
 import com.jfoenix.controls.JFXSnackbar;
 import io.datafx.controller.flow.context.ViewFlowContext;
 import javafx.application.Platform;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableArray;
+import javafx.collections.ObservableList;
 import javafx.scene.layout.Pane;
 import org.joda.time.LocalDateTime;
 import org.joda.time.format.DateTimeFormat;
+import org.jsack.tifsa.Database.Employee.Employee;
 import org.jsack.tifsa.Database.State.State;
 
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Observable;
 import java.util.concurrent.Semaphore;
 import java.util.stream.Collectors;
 
@@ -64,15 +71,38 @@ public class Utility {
 
     public static void notify(final ViewFlowContext context, String message) {
         Pane pane = (Pane) context.getRegisteredObject("ContentPane");
-        if(pane != null) {
+        if (pane != null) {
             JFXSnackbar snackbar = new JFXSnackbar(pane);
             snackbar.enqueue(new JFXSnackbar.SnackbarEvent(message));
         }
     }
+
     public static void notifyTrial(final ViewFlowContext context) {
         notify(context, "Not available in the current version\nPlease update to TiFSA Full for more features!");
     }
+  
     public static String blankIfNull(Object s) {
         return s == null ? "" : s.toString();
+    }
+
+    public static long getStateIdByName(String name) {
+        return Julius.getAllStates().stream().filter(e -> e.getStateName().equals(name)).findAny().get().getStateId();
+    }
+    public static String getStateNameById(long id) {
+        return Julius.getAllStates().stream().filter(e -> e.getStateId() == id).findFirst().get().getStateName();
+    }
+
+    public static List<String> getAllStateNames() {
+        List<String> statenames = new ArrayList<>();
+        Julius.getAllStates().forEach(state -> statenames.add(state.getStateName()));
+        return statenames;
+    }
+
+    public static Employee getEmployeeByID(long id) {
+        return Julius.getAllEmployees().stream().filter(e -> e.getEmployeeId() == id).findFirst().get();
+    }
+
+    public static long getEmployeeIdByName(String name) {
+        return Julius.getAllEmployees().stream().filter(e -> e.toString().equalsIgnoreCase(name)).findFirst().get().getEmployeeId();
     }
 }
