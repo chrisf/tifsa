@@ -25,6 +25,8 @@ public class ReportManager {
 
         reports = new ArrayList<>();
 
+        //Add new reports to the correct category here when finished
+
         // Employee reports
         reports.add(new org.jsack.tifsa.Reports.Employee.EmployeeRevenueByYear.Report());
 
@@ -32,6 +34,29 @@ public class ReportManager {
         reports.add(new org.jsack.tifsa.Reports.Customer.CustomerUnpaidBalances.Report());
         reports.add(new org.jsack.tifsa.Reports.Customer.CustomerIncidentReport.Report());
         reports.add(new org.jsack.tifsa.Reports.Customer.CustomerTotalDue.Report());
+        reports.add(new org.jsack.tifsa.Reports.Customer.FrequentCustomer.Report());
+      
+        reports.add(new org.jsack.tifsa.Reports.Customer.CustomerOrderByDay.Report());
+        reports.add(new org.jsack.tifsa.Reports.Customer.CustomerOrderByMonth.Report());
+        reports.add(new org.jsack.tifsa.Reports.Customer.CustomerOrderByWeek.Report());
+        reports.add(new org.jsack.tifsa.Reports.Customer.CustomerOrderByYear.Report());
+        reports.add(new org.jsack.tifsa.Reports.Customer.CustomerOrderTotals.Report());
+
+        // Discounts
+        reports.add(new org.jsack.tifsa.Reports.Discount.DiscountsByEmployee.Report());
+        reports.add(new org.jsack.tifsa.Reports.Discount.ShowTotalDiscountsGivenByYear.Report());
+        reports.add(new org.jsack.tifsa.Reports.Discount.ShowTotalDiscountsGivenPerDay.Report());
+        reports.add(new org.jsack.tifsa.Reports.Discount.ShowTotalDiscountsGivenPerMonth.Report());
+        reports.add(new org.jsack.tifsa.Reports.Discount.ShowTotalDiscountsGivenPerWeek.Report());
+
+        //Delivery reports
+        reports.add(new org.jsack.tifsa.Reports.Delivery.DailyDeliveryReport.Report());
+        reports.add(new org.jsack.tifsa.Reports.Delivery.DailyPickupItems.Report());
+        reports.add(new org.jsack.tifsa.Reports.Delivery.MonthlyOutsourcedDeliveries.Report());
+        reports.add(new org.jsack.tifsa.Reports.Delivery.ShowPastDeliveries.Report());
+        reports.add(new org.jsack.tifsa.Reports.Delivery.ShowUnsuccessfulDeliveries.Report());
+        reports.add(new org.jsack.tifsa.Reports.Delivery.WeeklyDeliveryReport.Report());
+        reports.add(new org.jsack.tifsa.Reports.Delivery.WeeklyPickupItems.Report());
 
         // Order reports
         reports.add(new org.jsack.tifsa.Reports.Order.OrdersBySpecificDay.Report());

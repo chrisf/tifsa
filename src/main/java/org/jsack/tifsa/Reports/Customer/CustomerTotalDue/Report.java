@@ -33,7 +33,7 @@ public class Report implements IReport{
             "INNER JOIN [Order] ON [order].CustomerID = Customer.CustomerID\n" +
             "INNER JOIN CustomerType ON CustomerType.CustomerTypeID = Customer.CustomerTypeID\n" +
             "\n" +
-            "WHERE CustomerStatus.CustomerStatusID = 4 And dbo.Customer.Deleted =0\n" +
+            "WHERE CustomerStatus.CustomerStatusID = :customerStatusId And dbo.Customer.Deleted =0\n" +
             "ORDER BY CustomerFirst;\n";
 
     /*
