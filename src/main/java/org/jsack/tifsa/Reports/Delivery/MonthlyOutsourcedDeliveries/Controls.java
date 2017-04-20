@@ -1,7 +1,8 @@
-package org.jsack.tifsa.Reports.Delivery.DailyDeliveryReport;
+package org.jsack.tifsa.Reports.Delivery.MonthlyOutsourcedDeliveries;
 
 import javafx.fxml.Initializable;
 import org.jsack.tifsa.Reports.Interfaces.IControl;
+
 import java.net.URL;
 import java.util.Map;
 import java.util.ResourceBundle;
