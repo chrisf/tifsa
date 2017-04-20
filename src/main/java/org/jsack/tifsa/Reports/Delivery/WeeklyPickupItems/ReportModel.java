@@ -24,10 +24,10 @@ public class ReportModel extends ReportModelBase {
 
 
         columns.put("Date", new ColumnInfo("Date", DateTimeColumn.class));
-        columns.put("CustomerFirst", new ColumnInfo("First Name", StringColumn.class));
-        columns.put("CustomerLast", new ColumnInfo("Last Name", StringColumn.class));
+        columns.put("First Name", new ColumnInfo("First Name", StringColumn.class));
+        columns.put("Last Name", new ColumnInfo("Last Name", StringColumn.class));
         columns.put("Contact Information", new ColumnInfo("Contact Info", StringColumn.class));
-        columns.put("Poduct Description", new ColumnInfo("Product Description", StringColumn.class));
+        columns.put("Product Description", new ColumnInfo("Product Description", StringColumn.class));
         columns.put("Price", new ColumnInfo("Price", CurrencyColumn.class));
 
     }
