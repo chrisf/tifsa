@@ -23,7 +23,7 @@ public class ReportModel extends ReportModelBase {
 
 
         //columns added by Steven
-        columns.put("Year", new ColumnInfo("Year", IntegerColumn.class));
+        columns.put("Year", new ColumnInfo("Year", StringColumn.class));
         columns.put("Month", new ColumnInfo("Month", StringColumn.class));
         columns.put("Date", new ColumnInfo("Date", IntegerColumn.class));
         columns.put("TotalProductsInDay", new ColumnInfo("Total Products", IntegerColumn.class));

@@ -73,6 +73,13 @@ public class ReportManager {
         reports.add(new org.jsack.tifsa.Reports.Order.OrdersBySpecificMonth.Report());
         reports.add(new org.jsack.tifsa.Reports.Order.OrdersBySpecificYear.Report());
 
+        //Product Reports
+        reports.add(new org.jsack.tifsa.Reports.Product.ShowProductByVendor.Report());
+        reports.add(new org.jsack.tifsa.Reports.Product.ShowTotalProductsSoldByDate.Report());
+        reports.add(new org.jsack.tifsa.Reports.Product.ShowTotalProductsSoldByMonth.Report());
+        reports.add(new org.jsack.tifsa.Reports.Product.ShowTotalProductsSoldByWeek.Report());
+        reports.add(new org.jsack.tifsa.Reports.Product.ShowTotalProductsSoldByYear.Report());
+
         // Revenue reports
         reports.add(new org.jsack.tifsa.Reports.Revenue.RevenueByDay.Report());
         reports.add(new org.jsack.tifsa.Reports.Revenue.RevenueByWeek.Report());
