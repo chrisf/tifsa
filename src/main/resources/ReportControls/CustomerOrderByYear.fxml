@@ -14,5 +14,5 @@
 <VBox xmlns="http://javafx.com/javafx"
       xmlns:fx="http://javafx.com/fxml"
       fx:controller="org.jsack.tifsa.Reports.Customer.CustomerOrderByYear.Controls">
-    <JFXComboBox fx:id="yearSelection" promptText="Enter a year..." prefWidth="Infinity" />
+    <JFXComboBox fx:id="yearSelection" promptText="Enter a year..." prefWidth="Infinity" labelFloat="true"  />
 </VBox>

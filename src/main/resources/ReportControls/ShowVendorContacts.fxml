@@ -14,5 +14,5 @@
 <VBox xmlns="http://javafx.com/javafx"
       xmlns:fx="http://javafx.com/fxml"
       fx:controller="org.jsack.tifsa.Reports.Vendor.ShowVendorContacts.Controls">
-    <JFXComboBox fx:id="vendorSelection" promptText="Choose vendor..." prefWidth="Infinity" />
+    <JFXComboBox fx:id="vendorSelection" promptText="Choose vendor..." prefWidth="Infinity" labelFloat="true"  />
 </VBox>

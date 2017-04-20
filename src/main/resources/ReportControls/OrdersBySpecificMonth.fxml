@@ -15,7 +15,7 @@
 <VBox xmlns="http://javafx.com/javafx"
       xmlns:fx="http://javafx.com/fxml"
       fx:controller="org.jsack.tifsa.Reports.Order.OrdersBySpecificMonth.Controls">
-    <JFXComboBox fx:id="monthSelection" promptText="Choose month" maxWidth="Infinity" />
-    <JFXComboBox fx:id="yearSelection" promptText="Choose year" maxWidth="Infinity" />
+    <JFXComboBox fx:id="monthSelection" promptText="Choose month" maxWidth="Infinity" labelFloat="true"  />
+    <JFXComboBox fx:id="yearSelection" promptText="Choose year" maxWidth="Infinity" labelFloat="true"  />
 
 </VBox>
