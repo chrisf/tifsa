@@ -1,9 +1,10 @@
-package org.jsack.tifsa.Reports.Customer.CustomerTotalDue;
+package org.jsack.tifsa.Reports.Customer.FrequentCustomer;
 
 import javafx.fxml.FXMLLoader;
 import org.jsack.tifsa.Reports.Interfaces.IReport;
 import org.jsack.tifsa.Reports.ReportCategory;
 import org.jsack.tifsa.Reports.ReportModelBase;
+import org.jsack.tifsa.Reports.ReportTemplate.ReportModel;
 import org.jsack.tifsa.Reports.ReportWrapper;
 import org.springframework.jdbc.core.RowMapper;
 
@@ -19,28 +20,13 @@ public class Report implements IReport{
         If you already created your reports using the previous method, just copy and paste it into here.
         If you haven't, copy and paste it from Drive and replace all the "\n" with a space.
      */
-    private final String sql = "SELECT\n" +
-            "\n" +
-            "dbo.Customer.CustomerFirst AS 'First Name', \n" +
-            "dbo.Customer.CustomerLast AS 'Last Name', \n" +
-            "dbo.CustomerType.CustomerTypeName AS 'Customer Type',\n" +
-            "dbo.CustomerStatus.CustomerStatusDescription AS 'Customer Status', \n" +
-            "dbo.[order].OrderTotal\n" +
-            "\n" +
-            "FROM Customer\n" +
-            "\n" +
-            "INNER JOIN CustomerStatus ON Customer.CustomerStatusID = CustomerStatus.CustomerStatusID\n" +
-            "INNER JOIN [Order] ON [order].CustomerID = Customer.CustomerID\n" +
-            "INNER JOIN CustomerType ON CustomerType.CustomerTypeID = Customer.CustomerTypeID\n" +
-            "\n" +
-            "WHERE CustomerStatus.CustomerStatusID = :customerStatusId And dbo.Customer.Deleted =0\n" +
-            "ORDER BY CustomerFirst;\n";
+    private final String sql = "";
 
     /*
         TODO: Name your report.
         Set the name of your report here. Make it unique.
      */
-    private final String name = "Customer Total Amount Due";
+    private final String name = "Frequent Customer";
 
     /*
         TODO: Set report Category.
@@ -81,13 +67,13 @@ public class Report implements IReport{
     }
 
     /*
-        TODO: Change the "OrdersBySpecificDay" portion of the file path to your Report Path.
-        If my report was in a new Directory called "EmployeeRevenueByYear" I would change OrdersBySpecificDay to EmployeeRevenueByYear
-        ex: ../java/org/jsack/tifsa/Reports/OrdersBySpecificDay/EmployeeRevenueByYear.fxml would translate to
-            ../java/org/jsack/tifsa/Reports/EmployeeRevenueByYear/EmployeeRevenueByYear.fxml
+        TODO: Change to the path of your .fxml file for your controls
+        This should be the FXML file you create in the /resources/ReportControls/ directory following the template there.
+        This is what enables each report to have custom controls.
+        Change the "template.fxml" to the correct name of your template. Look at reports I have created for examples.
      */
     @Override
     public FXMLLoader getControls() throws IOException {
-        return new FXMLLoader(getClass().getResource("/ReportControls/CustomerTotalDue.fxml"));
+        return new FXMLLoader(getClass().getResource("/ReportControls/FrequentCustomer.fxml"));
     }
 }

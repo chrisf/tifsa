@@ -32,6 +32,7 @@ public class ReportManager {
         reports.add(new org.jsack.tifsa.Reports.Customer.CustomerUnpaidBalances.Report());
         reports.add(new org.jsack.tifsa.Reports.Customer.CustomerIncidentReport.Report());
         reports.add(new org.jsack.tifsa.Reports.Customer.CustomerTotalDue.Report());
+        reports.add(new org.jsack.tifsa.Reports.Customer.FrequentCustomer.Report());
 
         // Order reports
         reports.add(new org.jsack.tifsa.Reports.Order.OrdersBySpecificDay.Report());

@@ -1,6 +1,8 @@
 package org.jsack.tifsa;
 
 import javafx.application.Platform;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import org.joda.time.LocalDateTime;
 import org.joda.time.format.DateTimeFormat;
 

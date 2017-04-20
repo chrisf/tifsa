@@ -56,8 +56,6 @@ public class Julius {
         );
     }
 
-
-
     public static void Julius() {
         new Thread(() -> {
             JdbcTemplate template = getJdbcTemplate();
@@ -81,10 +79,10 @@ public class Julius {
         return namedTemplate;
     }
 
-    public static List<CustomerStatus> getAllCustomerStatus() {
+    public static ObservableList<CustomerStatus> getAllCustomerStatus() {
         return customerStatuses;
     }
-    public static List<State> getAllStates() {
+    public static ObservableList<State> getAllStates() {
         return states;
     }
 
