@@ -12,8 +12,11 @@ import io.datafx.controller.flow.context.FXMLViewFlowContext;
 import io.datafx.controller.flow.context.ViewFlowContext;
 import javafx.animation.Transition;
 import javafx.fxml.FXML;
+import javafx.scene.control.Label;
+import javafx.scene.layout.Pane;
 import javafx.scene.layout.StackPane;
 import javafx.util.Duration;
+import org.jsack.tifsa.Utility;
 
 import javax.annotation.PostConstruct;
 
@@ -35,6 +38,9 @@ public class MainController {
     @FXML
     JFXDrawer drawer;
 
+    @FXML
+    Label currentMenu;
+
     @FXMLViewFlowContext
     ViewFlowContext context;
 
@@ -46,7 +52,7 @@ public class MainController {
 
         context.register("ContentFlowHandler", flowHandler);
         context.register("ContentFlow", innerFlow);
-
+        context.register("MenuLabel", currentMenu);
         Flow sideBarFlow = new Flow(SideBarController.class);
         final FlowHandler sideBarHandler = sideBarFlow.createHandler(context);
 
@@ -62,7 +68,7 @@ public class MainController {
         });
         drawer.setOnDrawerClosed(e -> {
             JFXListView navList = (JFXListView) context.getRegisteredObject("NavList");
-            if(navList != null) {
+            if (navList != null) {
                 navList.getSelectionModel().clearSelection();
             }
         });
@@ -76,17 +82,21 @@ public class MainController {
         backButtonContainer.setOnMouseClicked(e -> {
             try {
                 flowHandler.navigateBack();
-                if(flowHandler.getCurrentViewControllerClass() == IntroController.class) {
+                if (flowHandler.getCurrentViewControllerClass() == IntroController.class) {
                     backButton.setVisible(false);
                 }
-            } catch (Exception ex) { }
+            } catch (Exception ex) {
+            }
         });
 
-        drawer.setContent(flowHandler.start(new ExtendedAnimatedFlowContainer(containerAnimationDuration, ContainerAnimations.SWIPE_LEFT)));
+        final Pane innerPane = flowHandler.start(new ExtendedAnimatedFlowContainer(containerAnimationDuration, ContainerAnimations.SWIPE_LEFT));
+        drawer.setContent(innerPane);
         drawer.setSidePane(sideBarHandler.start(new ExtendedAnimatedFlowContainer(containerAnimationDuration, ContainerAnimations.SWIPE_LEFT)));
-        context.register("ContentPane", drawer.getContent().get(0));
+        context.register("ContentPane", innerPane);
         context.register("LastFlow", innerFlow);
         context.register("BackButton", backButton);
+        context.register("BackButtonContainer", backButtonContainer);
+        Utility.notifyTrial(context);
     }
 
 }

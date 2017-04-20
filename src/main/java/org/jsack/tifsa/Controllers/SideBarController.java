@@ -10,8 +10,10 @@ import io.datafx.controller.flow.context.FXMLViewFlowContext;
 import io.datafx.controller.flow.context.ViewFlowContext;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
+import javafx.scene.layout.StackPane;
 import org.jsack.tifsa.Controllers.LookupControllers.LookupController;
 import org.jsack.tifsa.Controllers.ReportsControllers.ReportsController;
+import org.jsack.tifsa.Controllers.SalesControllers.SalesController;
 
 import javax.annotation.PostConstruct;
 import java.util.Objects;
@@ -59,8 +61,13 @@ public class SideBarController {
             if (newVal != null) {
                 try {
                     parentHandler.handle(newVal.getId());
+                    Label menuLabel = (Label) context.getRegisteredObject("MenuLabel");
+                    if(menuLabel != null ) {
+                        menuLabel.setText(newVal.getText());
+                    }
                     JFXButton backButton = (JFXButton) context.getRegisteredObject("BackButton");
-                    if (backButton != null && !backButton.isVisible()) {
+                    StackPane backButtonContainer = (StackPane) context.getRegisteredObject("BackButtonContainer");
+                    if (backButton != null && !backButton.isVisible() && newVal.getId() != home.getId()) {
                         backButton.setVisible(true);
                     }
                 } catch (Exception ex) {
@@ -71,5 +78,6 @@ public class SideBarController {
         parentFlow.withGlobalLink(lookup.getId(), LookupController.class);
         parentFlow.withGlobalLink(home.getId(), IntroController.class);
         parentFlow.withGlobalLink(reports.getId(), ReportsController.class);
+        parentFlow.withGlobalLink(sales.getId(), SalesController.class);
     }
 }
