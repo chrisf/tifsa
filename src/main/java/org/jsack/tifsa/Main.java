@@ -31,9 +31,11 @@ public class Main extends Application {
         final ObservableList<String> styles = scene.getStylesheets();
         styles.add(getClass().getResource("/styles.css").toExternalForm());
 
+
         primaryStage.setMinWidth(800);
         primaryStage.setMinHeight(850);
         primaryStage.setScene(scene);
+        // Daddy Julius
         Julius.Julius();
         primaryStage.show();
     }
