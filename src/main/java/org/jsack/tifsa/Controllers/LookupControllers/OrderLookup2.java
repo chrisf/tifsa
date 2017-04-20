@@ -13,9 +13,14 @@ import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
+import javafx.scene.control.Label;
 import javafx.scene.control.TreeTableColumn;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import jdk.internal.org.objectweb.asm.tree.JumpInsnNode;
+import org.jsack.tifsa.Database.DBSelect;
+import org.jsack.tifsa.Database.Order.Order;
+import org.jsack.tifsa.Database.Order.OrderSchema;
 import org.jsack.tifsa.Julius;
 import org.jsack.tifsa.Utility;
 import org.springframework.jdbc.core.RowMapper;
@@ -61,6 +66,9 @@ public class OrderLookup2 {
     @FXMLViewFlowContext
     ViewFlowContext context;
 
+    @FXML
+    Label customerName, orderTotal;
+
     private ObservableList<ProductReportItem> products;
     private long orderId = 174;
 
@@ -72,6 +80,10 @@ public class OrderLookup2 {
         setupCellValueFactory(productPriceColumn, e -> e.price);
 
         orderId = (long) context.getRegisteredObject("OrderLookupId");
+        Order o1 = (Order)Julius.getJdbcTemplate().queryForObject("SELECT * FROM [Order] WHERE OrderID = ?", new Object[] { orderId }, new OrderSchema().getWrapper());
+
+        customerName.setText("Name: " + o1.getOrderBillingFirst() + " " + o1.getOrderBillingLast());
+        orderTotal.setText("Total: " + o1.getOrderTotal().toString());
 
         productTable.getSelectionModel().selectedItemProperty().addListener(
                 ((observable, oldValue, newValue) -> {
@@ -79,8 +91,8 @@ public class OrderLookup2 {
                     if(imageData != null) {
                         try {
                             javafx.scene.image.Image prodImage = new Image(new ByteArrayInputStream(imageData));
-                            productView.setFitWidth(150);
-                            productView.setFitHeight(150);
+                            productView.setFitWidth(250);
+                            productView.setFitHeight(250);
                             productView.setImage(prodImage);
                         } catch( Exception ex ) { }
                     }
