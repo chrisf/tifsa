@@ -1,4 +1,4 @@
-package org.jsack.tifsa.Controllers.SalesControllers;
+package org.jsack.tifsa.Controllers.LookupControllers;
 
 import com.jfoenix.controls.*;
 import com.jfoenix.controls.datamodels.treetable.RecursiveTreeObject;
@@ -13,9 +13,14 @@ import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
+import javafx.scene.control.Label;
 import javafx.scene.control.TreeTableColumn;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import jdk.internal.org.objectweb.asm.tree.JumpInsnNode;
+import org.jsack.tifsa.Database.DBSelect;
+import org.jsack.tifsa.Database.Order.Order;
+import org.jsack.tifsa.Database.Order.OrderSchema;
 import org.jsack.tifsa.Julius;
 import org.jsack.tifsa.Utility;
 import org.springframework.jdbc.core.RowMapper;
@@ -30,8 +35,9 @@ import java.util.function.Function;
 /**
  * Created by Admin on 4/19/2017.
  */
-@ViewController("/Scenes/Sales/OrderForm3.fxml")
-public class OrdersController3 {
+@ViewController("/Scenes/Lookup/LookupOrder2.fxml")
+public class OrderLookup2 {
+
     @FXML
     JFXTextField filterText;
 
@@ -39,7 +45,7 @@ public class OrdersController3 {
     ImageView productView;
 
     @FXML
-    JFXTreeTableView<ProductReportItem> productTable, orderTable;
+    JFXTreeTableView<ProductReportItem> productTable;
 
     @FXML
     JFXButton refresh;
@@ -57,87 +63,61 @@ public class OrdersController3 {
     JFXTreeTableColumn<ProductReportItem, Number> productPriceColumn;
 
 
-    @FXML
-    JFXTreeTableColumn<ProductReportItem, String> orderSkuColumn;
-
-    @FXML
-    JFXTreeTableColumn<ProductReportItem, String> orderNameColumn;
-
-    @FXML
-    JFXTreeTableColumn<ProductReportItem, String> orderBrandColumn;
-
-    @FXML
-    JFXTreeTableColumn<ProductReportItem, Number> orderPriceColumn;
-
-    @FXML
-    JFXButton addButton;
-
     @FXMLViewFlowContext
     ViewFlowContext context;
 
-    private ObservableList<ProductReportItem> products, orderProducts;
+    @FXML
+    Label customerName, orderTotal;
+
+    private ObservableList<ProductReportItem> products;
+    private long orderId = 174;
+
     @PostConstruct
     public void init() {
-        orderProducts = FXCollections.observableArrayList();
+        setupCellValueFactory(productSkuColumn, e -> e.sku);
+        setupCellValueFactory(productNameColumn, e -> e.name);
+        setupCellValueFactory(productBrandColumn, e -> e.brand);
+        setupCellValueFactory(productPriceColumn, e -> e.price);
 
-        setupCellValueFactory(orderSkuColumn, e -> e.sku);
-        setupCellValueFactory(orderNameColumn, e -> e.name);
-        setupCellValueFactory(orderBrandColumn, e -> e.brand);
-        setupCellValueFactory(orderPriceColumn, e -> e.price);
-        setupCellValueFactory(orderSkuColumn, e -> e.sku);
-        setupCellValueFactory(orderNameColumn, e -> e.name);
-        setupCellValueFactory(orderBrandColumn, e -> e.brand);
-        setupCellValueFactory(orderPriceColumn, e -> e.price);
+        orderId = (long) context.getRegisteredObject("OrderLookupId");
+        Order o1 = (Order)Julius.getJdbcTemplate().queryForObject("SELECT * FROM [Order] WHERE OrderID = ?", new Object[] { orderId }, new OrderSchema().getWrapper());
 
-        addButton.setOnMouseClicked(e -> {
-            orderProducts.add(productTable.getSelectionModel().getSelectedItem().getValue());
-        });
+        customerName.setText("Name: " + o1.getOrderBillingFirst() + " " + o1.getOrderBillingLast());
+        orderTotal.setText("Total: " + o1.getOrderTotal().toString());
 
-        filterText.textProperty().addListener((o, oldVal, newVal) -> {
-            new Thread(() -> {
-               productTable.setPredicate(productProp -> {
-                 final ProductReportItem product = productProp.getValue();
-
-                 return  Utility.containsIgnoreCase(product.name.get(), newVal)||
-                         Utility.containsIgnoreCase(product.brand.get(), newVal) || Utility.containsIgnoreCase(product.sku.get(),newVal);
-               });
-            }).start();
-        });
         productTable.getSelectionModel().selectedItemProperty().addListener(
                 ((observable, oldValue, newValue) -> {
                     byte[] imageData = newValue.getValue().imageData;
                     if(imageData != null) {
                         try {
                             javafx.scene.image.Image prodImage = new Image(new ByteArrayInputStream(imageData));
-                            productView.setFitWidth(150);
-                            productView.setFitHeight(150);
+                            productView.setFitWidth(250);
+                            productView.setFitHeight(250);
                             productView.setImage(prodImage);
                         } catch( Exception ex ) { }
-                   }
-                   else {
+                    }
+                    else {
                         productView.setImage(null);
                     }
                 })
         );
-        refresh.setOnMouseClicked(e -> {
-           new Thread(() -> {
-               updateProducts();
-            }).start();
-        });
-        new Thread(() -> { updateProducts(); }).start();
+        new Thread( () ->{
+            orderId = (long) context.getRegisteredObject("OrderLookupId");
+            updateProducts();
+        }).start();
     }
     private void updateProducts() {
-        List<ProductReportItem> newItems = Julius.getJdbcTemplate().query("SELECT ProductSKU, ProductDescription, ProductPrice, BrandName, PictureData " +
-                "FROM Product " +
-                "INNER JOIN Brand ON Product.BrandID = Brand.BrandID "+
-                "FULL JOIN Picture ON Picture.ProductID = Product.ProductID"
-                ,new ProductReportItemWrapper());
+        List<ProductReportItem> newItems = Julius.getJdbcTemplate().query("SELECT ProductSKU, ProductDescription, ProductPrice, BrandName, PictureData  " +
+                        "FROM Product " +
+                        "INNER JOIN ( SELECT * FROM OrderLine WHERE OrderID = ?) as o1 ON Product.ProductID = o1.ProductID " +
+                        "INNER JOIN Brand ON Product.BrandID = Brand.BrandID " +
+                        "LEFT JOIN Picture ON Picture.ProductID = Product.ProductID",
+                new Object[] { orderId } , new ProductReportItemWrapper());
         products = FXCollections.observableArrayList(newItems);
         Utility.runOnGuiAndWait(() -> {
             productTable.setRoot(new RecursiveTreeItem<>(products, RecursiveTreeObject::getChildren));
             productTable.setShowRoot(false);
         });
-
     }
     private <T> void setupCellValueFactory(JFXTreeTableColumn<ProductReportItem, T> column, Function<ProductReportItem, ObservableValue<T>> mapper) {
         column.setCellValueFactory((TreeTableColumn.CellDataFeatures<ProductReportItem, T> param) -> {
@@ -156,18 +136,20 @@ public class OrdersController3 {
 
         }
     }
+
     static final class ProductReportItem extends RecursiveTreeObject<ProductReportItem> {
-       final StringProperty sku;
-       final StringProperty name;
-       final StringProperty brand;
-       final DoubleProperty price;
-       final byte[] imageData;
-       ProductReportItem(String sku, String name, String brand, Double price, byte[] imageData) {
-           this.sku = sku != null ?  new SimpleStringProperty(sku) : new SimpleStringProperty("");
-           this.name = name != null ? new SimpleStringProperty(name): new SimpleStringProperty("");
-           this.brand = brand != null ?  new SimpleStringProperty(brand) : new SimpleStringProperty("");
-           this.price = price != null ? new SimpleDoubleProperty(price) : new SimpleDoubleProperty(0.0);
-           this.imageData = imageData;
-       }
+        final StringProperty sku;
+        final StringProperty name;
+        final StringProperty brand;
+        final DoubleProperty price;
+        final byte[] imageData;
+
+        ProductReportItem(String sku, String name, String brand, Double price, byte[] imageData) {
+            this.sku = sku != null ? new SimpleStringProperty(sku) : new SimpleStringProperty("");
+            this.name = name != null ? new SimpleStringProperty(name) : new SimpleStringProperty("");
+            this.brand = brand != null ? new SimpleStringProperty(brand) : new SimpleStringProperty("");
+            this.price = price != null ? new SimpleDoubleProperty(price) : new SimpleDoubleProperty(0.0);
+            this.imageData = imageData;
+        }
     }
 }
