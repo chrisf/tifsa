@@ -94,9 +94,11 @@ public class OrdersController2 {
             order.setOrderShippingZip(shippingZip.getText());
             order.setSoldByEmployeeId(Utility.getEmployeeIdByName(employeeSelect.getSelectionModel().getSelectedItem().toString()));
 
+            context.register("NewOrderIsDelivery", deliverySelected.isSelected());
+
             // TODO: create order in database
            try {
-               flowHandler.navigateTo(OrderLookup.class);
+               flowHandler.navigateTo(OrdersController3.class);
            } catch (Exception ex) { }
 
         });

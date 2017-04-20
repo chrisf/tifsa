@@ -2,6 +2,7 @@ package org.jsack.tifsa;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import org.jsack.tifsa.Controllers.SalesControllers.OrdersController3;
 import org.jsack.tifsa.Database.CustomerStatus.CustomerStatus;
 import org.jsack.tifsa.Database.CustomerStatus.CustomerStatusSchema;
 import org.jsack.tifsa.Database.DBSelect;
@@ -16,6 +17,7 @@ import org.springframework.context.support.ClassPathXmlApplicationContext;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Observable;
 
@@ -92,6 +94,10 @@ public class Julius {
     public static NamedParameterJdbcTemplate getJdbcNamedTemplate() {
         NamedParameterJdbcTemplate namedTemplate = (NamedParameterJdbcTemplate) appContext.getBean("jdbcNamedTemplate");
         return namedTemplate;
+    }
+
+    public static int runQuery(String query, HashMap<String, Object> attributes) {
+        return Julius.getJdbcNamedTemplate().update(query, attributes);
     }
 
     public static ObservableList<CustomerStatus> getAllCustomerStatus() {

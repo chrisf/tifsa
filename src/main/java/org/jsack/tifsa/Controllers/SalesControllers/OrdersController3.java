@@ -1,4 +1,4 @@
-package org.jsack.tifsa.Controllers.LookupControllers;
+package org.jsack.tifsa.Controllers.SalesControllers;
 
 import com.jfoenix.controls.*;
 import com.jfoenix.controls.datamodels.treetable.RecursiveTreeObject;
@@ -16,7 +16,10 @@ import javafx.fxml.FXML;
 import javafx.scene.control.TreeTableColumn;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.text.Text;
+import org.jsack.tifsa.Database.Order.Order;
 import org.jsack.tifsa.Julius;
+import org.jsack.tifsa.Reports.ColumnFormats.CurrencyColumn;
 import org.jsack.tifsa.Utility;
 import org.springframework.jdbc.core.RowMapper;
 
@@ -24,8 +27,10 @@ import javax.annotation.PostConstruct;
 import java.io.ByteArrayInputStream;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.HashMap;
 import java.util.List;
 import java.util.function.Function;
+import java.util.stream.Collectors;
 
 /**
  * Created by Admin on 4/19/2017.
@@ -72,39 +77,77 @@ public class OrdersController3 {
     @FXML
     JFXButton addButton;
 
+    @FXML
+    JFXButton createOrderButton;
+
+    @FXML
+    Text subTotal;
+
+    @FXML
+    Text deliveryFee;
+
+    @FXML
+    Text tax;
+
+    @FXML
+    Text invoiceTotal;
+
+    Order order;
+    boolean isDelivery = false;
+
     @FXMLViewFlowContext
     ViewFlowContext context;
 
     private ObservableList<ProductReportItem> products, orderProducts;
     @PostConstruct
     public void init() {
+        order = (Order) context.getRegisteredObject("NewOrderCustomer");
+        isDelivery = (Boolean) context.getRegisteredObject("NewOrderIsDelivery");
+
         orderProducts = FXCollections.observableArrayList();
+
+        orderTable.setRoot(new RecursiveTreeItem<>(orderProducts, RecursiveTreeObject::getChildren));
+        orderTable.setShowRoot(false);;
 
         setupCellValueFactory(orderSkuColumn, e -> e.sku);
         setupCellValueFactory(orderNameColumn, e -> e.name);
         setupCellValueFactory(orderBrandColumn, e -> e.brand);
         setupCellValueFactory(orderPriceColumn, e -> e.price);
-        setupCellValueFactory(orderSkuColumn, e -> e.sku);
-        setupCellValueFactory(orderNameColumn, e -> e.name);
-        setupCellValueFactory(orderBrandColumn, e -> e.brand);
-        setupCellValueFactory(orderPriceColumn, e -> e.price);
+
+
+        setupCellValueFactory(productSkuColumn, e -> e.sku);
+        setupCellValueFactory(productNameColumn, e -> e.name);
+        setupCellValueFactory(productBrandColumn, e -> e.brand);
+        setupCellValueFactory(productPriceColumn, e -> e.price);
+
+        setTotals();
+
+        createOrderButton.setOnMouseClicked(e -> {
+            insertOrder();
+        });
 
         addButton.setOnMouseClicked(e -> {
             orderProducts.add(productTable.getSelectionModel().getSelectedItem().getValue());
+
+            setTotals();
         });
 
         filterText.textProperty().addListener((o, oldVal, newVal) -> {
             new Thread(() -> {
-               productTable.setPredicate(productProp -> {
-                 final ProductReportItem product = productProp.getValue();
+                productTable.setPredicate(productProp -> {
+                    final ProductReportItem product = productProp.getValue();
 
-                 return  Utility.containsIgnoreCase(product.name.get(), newVal)||
-                         Utility.containsIgnoreCase(product.brand.get(), newVal) || Utility.containsIgnoreCase(product.sku.get(),newVal);
-               });
+                    return  Utility.containsIgnoreCase(product.name.get(), newVal)||
+                            Utility.containsIgnoreCase(product.brand.get(), newVal) || Utility.containsIgnoreCase(product.sku.get(),newVal);
+                });
             }).start();
         });
         productTable.getSelectionModel().selectedItemProperty().addListener(
                 ((observable, oldValue, newValue) -> {
+                    if(newValue == null) {
+                        return;
+                    }
+
                     byte[] imageData = newValue.getValue().imageData;
                     if(imageData != null) {
                         try {
@@ -126,12 +169,36 @@ public class OrdersController3 {
         });
         new Thread(() -> { updateProducts(); }).start();
     }
+
+    private void setTotals() {
+        List<Double> prices = orderProducts.stream()
+                .map(ProductReportItem::getPrice)
+                .collect(Collectors.toList());
+
+        double deliveryFeeValue = isDelivery ? 119.95 : 0;
+        double orderTotal = Utility.calculateOrderTotal(prices) + deliveryFeeValue;
+        double orderSubTotal = Utility.calculateOrderSubTotal(prices);
+        double orderTax = Utility.calculateOrderTax(orderSubTotal);
+
+        CurrencyColumn orderTotalFormatted = new CurrencyColumn(String.valueOf(orderTotal));
+        CurrencyColumn orderSubTotalFormatted = new CurrencyColumn(String.valueOf(orderSubTotal));
+        CurrencyColumn orderTaxFormatted = new CurrencyColumn(String.valueOf(orderTax));
+        CurrencyColumn deliveryFeeFormatted = new CurrencyColumn(String.valueOf(deliveryFeeValue));
+
+
+        subTotal.setText(orderSubTotalFormatted.getValue());
+        deliveryFee.setText(deliveryFeeFormatted.getValue());
+        tax.setText(orderTaxFormatted.getValue());
+        invoiceTotal.setText(orderTotalFormatted.getValue());
+    }
+
     private void updateProducts() {
         List<ProductReportItem> newItems = Julius.getJdbcTemplate().query("SELECT ProductSKU, ProductDescription, ProductPrice, BrandName, PictureData " +
                 "FROM Product " +
                 "INNER JOIN Brand ON Product.BrandID = Brand.BrandID "+
                 "FULL JOIN Picture ON Picture.ProductID = Product.ProductID"
                 ,new ProductReportItemWrapper());
+
         products = FXCollections.observableArrayList(newItems);
         Utility.runOnGuiAndWait(() -> {
             productTable.setRoot(new RecursiveTreeItem<>(products, RecursiveTreeObject::getChildren));
@@ -156,6 +223,63 @@ public class OrdersController3 {
 
         }
     }
+
+    private void insertOrder() {
+        HashMap<String, Object> attributes = new HashMap<>();
+
+        String sql = "INSERT INTO [Order] (\n" +
+                "  CustomerID BIGINT,\n" +
+                "  OrderBillingFirst,\n" +
+                "  OrderBillingLast,\n" +
+                "  OrderBillingStreet,\n" +
+                "  OrderBillingStreet2,\n" +
+                "  OrderBillingState,\n" +
+                "  OrderBillingCity,\n" +
+                "  OrderBillingZip,\n" +
+                "  OrderCashOnDelivery,\n" +
+                "  SoldByEmployeeID,\n" +
+                "  OrderShippingStreet,\n" +
+                "  OrderShippingStreet2,\n" +
+                "  OrderShippingState,\n" +
+                "  OrderShippingCity,\n" +
+                "  OrderShippingZip\n" +
+                ") VALUES(" +
+                ":customerId, :orderBillingFirst, :orderBillingLast, :orderBillingStreet, :orderBillingStreet2, " +
+                ":orderBillingState, :orderBillingCity, :orderBillingZip, :orderCashOnDelivery, :soldByEmployeeId, " +
+                ":orderShippingStreet, :orderShippingStreet2, :orderShippingState, :orderShippingCity, :orderShippingZip);";
+
+        attributes.put(":customerId", order.getCustomerId());
+        attributes.put(":orderBillingFirst", order.getOrderBillingFirst());
+        attributes.put(":orderBillingLast", order.getOrderBillingLast());
+        attributes.put(":orderBillingStreet", order.getOrderBillingStreet());
+        attributes.put(":orderBillingStreet2", order.getOrderBillingStreet2());
+        attributes.put(":orderBillingState", order.getOrderBillingState());
+        attributes.put(":orderBillingCity", order.getOrderBillingCity());
+        attributes.put(":orderBillingZip", order.getOrderBillingZip());
+        attributes.put(":orderCashOnDelivery", order.getOrderCashOnDelivery());
+        attributes.put(":soldByEmployeeId", order.getSoldByEmployeeId());
+        attributes.put(":orderShippingStreet", order.getOrderShippingStreet());
+        attributes.put(":orderShippingStreet2", order.getOrderShippingStreet2());
+        attributes.put(":orderShippingState", order.getOrderShippingState());
+        attributes.put(":orderShippingCity", order.getOrderShippingCity());
+        attributes.put(":orderShippingZip", order.getOrderShippingZip());
+
+        Julius.runQuery(sql, attributes);
+    }
+
+    private void insertOrderLines() {
+//        HashMap<String, Object> attributes = new HashMap<>();
+//
+//
+//        String sql = "INSERT INTO OrderLine";
+//
+//
+//        attributes.put()
+//
+//        Julius.runQuery(sql, attributes);
+    }
+
+
     static final class ProductReportItem extends RecursiveTreeObject<ProductReportItem> {
        final StringProperty sku;
        final StringProperty name;
@@ -169,5 +293,7 @@ public class OrdersController3 {
            this.price = price != null ? new SimpleDoubleProperty(price) : new SimpleDoubleProperty(0.0);
            this.imageData = imageData;
        }
+
+       public double getPrice() { return price.get(); }
     }
 }

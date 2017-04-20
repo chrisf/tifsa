@@ -10,6 +10,8 @@ import javafx.scene.layout.Pane;
 import org.joda.time.LocalDateTime;
 import org.joda.time.format.DateTimeFormat;
 import org.jsack.tifsa.Database.Employee.Employee;
+import org.jsack.tifsa.Database.Order.Order;
+import org.jsack.tifsa.Database.OrderLine.OrderLine;
 import org.jsack.tifsa.Database.State.State;
 
 import java.util.ArrayList;
@@ -110,5 +112,25 @@ public class Utility {
 
     public static long getEmployeeIdByName(String name) {
         return Julius.getAllEmployees().stream().filter(e -> e.toString().equalsIgnoreCase(name)).findFirst().get().getEmployeeId();
+    }
+
+    public static double calculateOrderSubTotal(List<Double> prices) {
+        double total = 0;
+
+        for(double price: prices) {
+            total += price;
+        }
+
+        return total;
+    }
+
+    public static double calculateOrderTotal(List<Double> prices) {
+        double subTotal = calculateOrderSubTotal(prices);
+        return subTotal + calculateOrderTax(subTotal);
+    }
+
+    public static double calculateOrderTax(double orderTotal) {
+        double TAX_RATE = 0.0725;
+        return orderTotal * TAX_RATE;
     }
 }
