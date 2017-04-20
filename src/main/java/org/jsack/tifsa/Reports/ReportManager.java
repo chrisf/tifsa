@@ -25,6 +25,8 @@ public class ReportManager {
 
         reports = new ArrayList<>();
 
+        //Add new reports to the correct category here when finished
+
         // Employee reports
         reports.add(new org.jsack.tifsa.Reports.Employee.EmployeeRevenueByYear.Report());
 
@@ -33,6 +35,11 @@ public class ReportManager {
         reports.add(new org.jsack.tifsa.Reports.Customer.CustomerIncidentReport.Report());
         reports.add(new org.jsack.tifsa.Reports.Customer.CustomerTotalDue.Report());
         reports.add(new org.jsack.tifsa.Reports.Customer.FrequentCustomer.Report());
+        reports.add(new org.jsack.tifsa.Reports.Customer.CustomerOrderByDay.Report());
+        reports.add(new org.jsack.tifsa.Reports.Customer.CustomerOrderByMonth.Report());
+        reports.add(new org.jsack.tifsa.Reports.Customer.CustomerOrderByWeek.Report());
+        reports.add(new org.jsack.tifsa.Reports.Customer.CustomerOrderByYear.Report());
+        reports.add(new org.jsack.tifsa.Reports.Customer.CustomerOrderTotals.Report());
 
         //Delivery reports
         reports.add(new org.jsack.tifsa.Reports.Delivery.DailyDeliveryReport.Report());
