@@ -1,8 +1,9 @@
 package org.jsack.tifsa;
 
+import com.jfoenix.controls.JFXSnackbar;
+import io.datafx.controller.flow.context.ViewFlowContext;
 import javafx.application.Platform;
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
+import javafx.scene.layout.Pane;
 import org.joda.time.LocalDateTime;
 import org.joda.time.format.DateTimeFormat;
 
@@ -47,5 +48,19 @@ public class Utility {
 
     public static String monthToNumber(String month) {
         return String.valueOf(Julius.getMonths().indexOf(month) + 1);
+    }
+
+    public static void notify(final ViewFlowContext context, String message) {
+        Pane pane = (Pane) context.getRegisteredObject("ContentPane");
+        if(pane != null) {
+            JFXSnackbar snackbar = new JFXSnackbar(pane);
+            snackbar.enqueue(new JFXSnackbar.SnackbarEvent(message));
+        }
+    }
+    public static void notifyTrial(final ViewFlowContext context) {
+        notify(context, "Not available in the current version\nPlease update to TiFSA Full for more features!");
+    }
+    public static String blankIfNull(String s) {
+        return s != null ? s : "";
     }
 }

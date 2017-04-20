@@ -3,6 +3,29 @@
     -fx-background-color: #bbdefb;
     -fx-prompt-text-fill: #e3f2fd;
 }
+StackPane .jfx-button {
+    -jfx-button-type: RAISED;
+    -fx-background-color: #01579b;
+    -fx-text-fill: WHITE;
+    -fx-font-size: 16;
+}
+
+
+.jfx-text-field {
+
+}
+
+.jfx-snackbar-toast {
+    -fx-background-color: #2196f3;
+    -fx-text-fill: WHITE;
+    -fx-font-size: 20;
+    -fx-text-alignment: center;
+    -fx-background-insets: 0.0;
+}
+
+.jfx-snackbar-content {
+    -fx-border-style: solid;
+}
 
 .main-menu {
 
@@ -11,6 +34,11 @@
 .main-menu .jfx-tool-bar {
     -fx-background-color: #01579b;
     -fx-padding: 5 5 5 5;
+}
+
+.currentMenu-label {
+    -fx-font-size: 20;
+    -fx-text-fill: WHITE;
 }
 
 .main-menu .jfx-tool-bar .jfx-hamburger StackPane {
@@ -39,7 +67,7 @@
     -fx-font-size: 26;
 }
 
-.back-button{
+.back-button {
     -fx-padding: 5 5 5 5%;
     -fx-background-color: #1976d2;
     -fx-text-fill: WHITE;
@@ -56,19 +84,23 @@
     -fx-background-color: #e3f2fd;
     -fx-padding: 0;
 }
+
 .sidebar-menu StackPane {
     -fx-background-color: #e3f2fd;
     -fx-background-insets: 0.0;
     -fx-padding: 0;
 }
+
 .sidebar-menu .jfx-list-cell {
     -fx-background-insets: 0.0;
     -fx-text-fill: BLACK;
     -fx-text-alignment: center;
 }
+
 .sidebar-menu .jfx-list-cell:odd, .jfx-list-cell:even {
-   -fx-background-color: #e3f2fd;
+    -fx-background-color: #e3f2fd;
 }
+
 .sidebar-menu .jfx-list-view {
     -fx-background-insets: 0.0;
     -fx-padding: 0;
