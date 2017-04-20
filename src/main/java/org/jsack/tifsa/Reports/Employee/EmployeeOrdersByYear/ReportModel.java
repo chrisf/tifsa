@@ -24,7 +24,7 @@ public class ReportModel extends ReportModelBase {
         columns = new LinkedHashMap<>();
 
 
-        columns.put("Year", new ColumnInfo("Year", IntegerColumn.class));
+        columns.put("Year", new ColumnInfo("Year", StringColumn.class));
         columns.put("EmployeeID", new ColumnInfo("Employee ID", IntegerColumn.class));
         columns.put("First Name", new ColumnInfo("First Name", StringColumn.class));
         columns.put("Last Name", new ColumnInfo("Last Name", StringColumn.class));
