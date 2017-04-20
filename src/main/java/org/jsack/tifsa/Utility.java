@@ -63,4 +63,7 @@ public class Utility {
     public static String blankIfNull(String s) {
         return s != null ? s : "";
     }
+    public static long getStateIdByName(String name) {
+        return Julius.getAllStates().stream().filter(e -> e.getStateName().equalsIgnoreCase(name)).findFirst().get().getStateId();
+    }
 }
