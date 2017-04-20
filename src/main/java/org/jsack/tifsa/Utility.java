@@ -72,7 +72,7 @@ public class Utility {
     public static void notifyTrial(final ViewFlowContext context) {
         notify(context, "Not available in the current version\nPlease update to TiFSA Full for more features!");
     }
-    public static String blankIfNull(String s) {
-        return s != null ? s : "";
+    public static String blankIfNull(Object s) {
+        return s == null ? "" : s.toString();
     }
 }
