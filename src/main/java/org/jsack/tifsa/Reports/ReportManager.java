@@ -26,9 +26,7 @@ public class ReportManager {
         reports = new ArrayList<>();
 
         //Add new reports to the correct category here when finished
-
-        // Employee reports
-        reports.add(new org.jsack.tifsa.Reports.Employee.EmployeeRevenueByYear.Report());
+        
 
         // Customer reports
         reports.add(new org.jsack.tifsa.Reports.Customer.CustomerUnpaidBalances.Report());
@@ -49,6 +47,17 @@ public class ReportManager {
         reports.add(new org.jsack.tifsa.Reports.Discount.ShowTotalDiscountsGivenPerMonth.Report());
         reports.add(new org.jsack.tifsa.Reports.Discount.ShowTotalDiscountsGivenPerWeek.Report());
 
+
+        //Employee
+        reports.add(new org.jsack.tifsa.Reports.Employee.EmployeeHistory.Report());
+        reports.add(new org.jsack.tifsa.Reports.Employee.EmployeeRevenueByDay.Report());
+        reports.add(new org.jsack.tifsa.Reports.Employee.EmployeeRevenueByWeek.Report());
+        reports.add(new org.jsack.tifsa.Reports.Employee.EmployeeRevenueByYear.Report());
+        reports.add(new org.jsack.tifsa.Reports.Employee.EmployeeOrdersByYear.Report());
+        reports.add(new org.jsack.tifsa.Reports.Employee.EmployeeRoles.Report());
+        reports.add(new org.jsack.tifsa.Reports.Employee.IncidentsByEmployee.Report());
+        reports.add(new org.jsack.tifsa.Reports.Employee.TotalEmployeeIncident.Report());
+
         //Delivery reports
         reports.add(new org.jsack.tifsa.Reports.Delivery.DailyDeliveryReport.Report());
         reports.add(new org.jsack.tifsa.Reports.Delivery.DailyPickupItems.Report());
@@ -63,6 +72,24 @@ public class ReportManager {
         reports.add(new org.jsack.tifsa.Reports.Order.OrdersBySpecificWeek.Report());
         reports.add(new org.jsack.tifsa.Reports.Order.OrdersBySpecificMonth.Report());
         reports.add(new org.jsack.tifsa.Reports.Order.OrdersBySpecificYear.Report());
+        reports.add(new org.jsack.tifsa.Reports.Order.DailyTotalOrdersByEmployee.Report());
+        reports.add(new org.jsack.tifsa.Reports.Order.WeeklyTotalOrdersByEmployee.Report());
+        reports.add(new org.jsack.tifsa.Reports.Order.MonthlyTotalOrdersByEmployee.Report());
+        reports.add(new org.jsack.tifsa.Reports.Order.ShowCanceledOrders.Report());
+        reports.add(new org.jsack.tifsa.Reports.Order.ShowOrdersCompletedByMonth.Report());
+        reports.add(new org.jsack.tifsa.Reports.Order.ShowOrdersCompletedByWeek.Report());
+        reports.add(new org.jsack.tifsa.Reports.Order.ShowOrderTotalAboveSpecificAmount.Report());
+        reports.add(new org.jsack.tifsa.Reports.Order.ShowTotalOrdersCompletedOnDay.Report());
+        reports.add(new org.jsack.tifsa.Reports.Order.ShowTotalOrdersCompletedOnYear.Report());
+        reports.add(new org.jsack.tifsa.Reports.Order.ShowUnpaidOrders.Report());
+
+
+        //Product Reports
+        reports.add(new org.jsack.tifsa.Reports.Product.ShowProductByVendor.Report());
+        reports.add(new org.jsack.tifsa.Reports.Product.ShowTotalProductsSoldByDate.Report());
+        reports.add(new org.jsack.tifsa.Reports.Product.ShowTotalProductsSoldByMonth.Report());
+        reports.add(new org.jsack.tifsa.Reports.Product.ShowTotalProductsSoldByWeek.Report());
+        reports.add(new org.jsack.tifsa.Reports.Product.ShowTotalProductsSoldByYear.Report());
 
         // Revenue reports
         reports.add(new org.jsack.tifsa.Reports.Revenue.RevenueByDay.Report());

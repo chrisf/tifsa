@@ -30,7 +30,7 @@ public class ReportModel extends ReportModelBase {
         columns.put("EmployeeLast", new ColumnInfo("Employee Last", StringColumn.class));
         columns.put("EmployeeTypeDescription", new ColumnInfo("Employee Type", StringColumn.class));
 
-        columns.put("NameOfColumn", new ColumnInfo("", StringColumn.class));
+
     }
 
     @Override

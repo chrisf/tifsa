@@ -22,7 +22,7 @@ public class ReportModel extends ReportModelBase {
         columns = new LinkedHashMap<>();
 
 
-        columns.put("Year", new ColumnInfo("Year", IntegerColumn.class));
+        columns.put("Year", new ColumnInfo("Year", StringColumn.class));
         columns.put("TotalProductsInYear", new ColumnInfo("Total Products", IntegerColumn.class));
         columns.put("ProductDescription", new ColumnInfo("Product Description", StringColumn.class));
         columns.put("BrandName", new ColumnInfo("Brand", StringColumn.class));
