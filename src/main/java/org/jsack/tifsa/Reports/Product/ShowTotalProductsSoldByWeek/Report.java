@@ -1,4 +1,4 @@
-package org.jsack.tifsa.Reports.Customer.FrequentCustomer;
+package org.jsack.tifsa.Reports.Product.ShowTotalProductsSoldByWeek;
 
 import javafx.fxml.FXMLLoader;
 import org.jsack.tifsa.Reports.Interfaces.IReport;
@@ -19,26 +19,26 @@ public class Report implements IReport{
         If you already created your reports using the previous method, just copy and paste it into here.
         If you haven't, copy and paste it from Drive and replace all the "\n" with a space.
      */
-    private final String sql = "SELECT\n" +
-            "dbo.Customer.CustomerFirst AS 'First Name', \n" +
-            "dbo.Customer.CustomerLast AS 'Last Name', \n" +
-            "dbo.CustomerStatus.CustomerStatusDescription AS 'Status', \n" +
-            "dbo.State.StateName AS 'State',  \n" +
-            "dbo.Country.CountryName AS 'Country'\n" +
+    private final String sql = "SELECT DATEPART(year, dbo.[Order].OrderDate) AS Year,\n" +
+            "DATEPART(week, dbo.[Order].OrderDate) AS Week,\n" +
+            "SUM(dbo.OrderLine.OrderLineQuantity) AS TotalProductsInWeek,\n" +
+            "dbo.Product.ProductDescription,\n" +
+            "dbo.Brand.BrandName FROM [Order]\n" +
             "\n" +
-            "FROM Customer\n" +
+            "INNER JOIN OrderLine ON [Order].OrderID = OrderLine.OrderID\n" +
+            "INNER JOIN Product ON OrderLine.ProductID = Product.ProductID\n" +
+            "INNER JOIN Brand ON Product.BrandID = Brand.BrandID\n" +
             "\n" +
-            "Inner Join State ON Customer.StateID = State.StateID\n" +
-            "Inner Join Country ON Country.CountryID = State.CountryID\n" +
-            "Inner Join CustomerStatus ON Customer.CustomerStatusID = CustomerStatus.CustomerStatusID\n" +
+            "WHERE dbo.[Order].OrderDate BETWEEN '2016-05-08' AND '2016-05-14' AND [Order].Deleted ='0'\n" +
             "\n" +
-            "WHERE State.StateID = :stateId AND CustomerStatus.CustomerStatusDescription = 'Frequent' AND dbo.Customer.Deleted = 0\n" +
-            "ORDER BY CustomerFirst;\n";
+            "GROUP BY [Order].OrderDate, \n" +
+            "Product.ProductDescription, Brand.BrandName\n";
+
     /*
         TODO: Name your report.
         Set the name of your report here. Make it unique.
      */
-    private final String name = "Frequent Customer";
+    private final String name = "Show Total Products Sold By Week";
 
     /*
         TODO: Set report Category.
@@ -51,7 +51,7 @@ public class Report implements IReport{
             Employee,
             Product
      */
-    private ReportCategory reportCategory = ReportCategory.Customer;
+    private ReportCategory reportCategory = ReportCategory.Product;
 
     @Override
     public ReportModelBase getModel() {
@@ -86,6 +86,6 @@ public class Report implements IReport{
      */
     @Override
     public FXMLLoader getControls() throws IOException {
-        return new FXMLLoader(getClass().getResource("/ReportControls/FrequentCustomer.fxml"));
+        return new FXMLLoader(getClass().getResource("/ReportControls/ShowTotalProductsSoldByWeek.fxml"));
     }
 }

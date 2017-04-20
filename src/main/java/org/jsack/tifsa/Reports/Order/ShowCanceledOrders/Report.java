@@ -1,4 +1,4 @@
-package org.jsack.tifsa.Reports.Customer.FrequentCustomer;
+package org.jsack.tifsa.Reports.Order.ShowCanceledOrders;
 
 import javafx.fxml.FXMLLoader;
 import org.jsack.tifsa.Reports.Interfaces.IReport;
@@ -19,26 +19,30 @@ public class Report implements IReport{
         If you already created your reports using the previous method, just copy and paste it into here.
         If you haven't, copy and paste it from Drive and replace all the "\n" with a space.
      */
-    private final String sql = "SELECT\n" +
-            "dbo.Customer.CustomerFirst AS 'First Name', \n" +
-            "dbo.Customer.CustomerLast AS 'Last Name', \n" +
-            "dbo.CustomerStatus.CustomerStatusDescription AS 'Status', \n" +
-            "dbo.State.StateName AS 'State',  \n" +
-            "dbo.Country.CountryName AS 'Country'\n" +
+    private final String sql = "SELECT DATENAME (year, dbo.[Order].OrderDate) AS Year,\n" +
+            "DATENAME (month, dbo.[Order].OrderDate) AS Month,\n" +
+            "DATEPART(day, dbo.[Order].OrderDate) AS Day,\n" +
+            "COUNT(case when dbo.[Order].OrderStatusID = '3' then 1 else null end) AS OrdersCanceled,\n" +
+            "dbo.[Order].OrderID, dbo.Customer.CustomerFirst, dbo.Customer.CustomerLast,\n" +
+            "dbo.Employee.EmployeeFirst, dbo.Employee.EmployeeLast FROM [Order]\n" +
             "\n" +
-            "FROM Customer\n" +
+            "INNER JOIN Employee ON [Order].SoldByEmployeeID = Employee.EmployeeID\n" +
+            "INNER JOIN Customer on [Order].CustomerID = Customer.CustomerID\n" +
+            "INNER JOIN OrderStatus on OrderStatus.OrderStatusID = [Order].OrderStatusID\n" +
             "\n" +
-            "Inner Join State ON Customer.StateID = State.StateID\n" +
-            "Inner Join Country ON Country.CountryID = State.CountryID\n" +
-            "Inner Join CustomerStatus ON Customer.CustomerStatusID = CustomerStatus.CustomerStatusID\n" +
+            "WHERE OrderStatus.OrderStatusID ='3' AND [Order].Deleted = 0\n" +
             "\n" +
-            "WHERE State.StateID = :stateId AND CustomerStatus.CustomerStatusDescription = 'Frequent' AND dbo.Customer.Deleted = 0\n" +
-            "ORDER BY CustomerFirst;\n";
+            "GROUP BY [Order].OrderDate, [Order].OrderID,\n" +
+            "Customer.CustomerFirst, Customer.CustomerLast,\n" +
+            "Employee.EmployeeFirst, Employee.EmployeeLast\n" +
+            "\n" +
+            "ORDER BY dbo.[Order].OrderDate DESC\n";
+
     /*
         TODO: Name your report.
         Set the name of your report here. Make it unique.
      */
-    private final String name = "Frequent Customer";
+    private final String name = "Show Canceled Orders";
 
     /*
         TODO: Set report Category.
@@ -51,7 +55,7 @@ public class Report implements IReport{
             Employee,
             Product
      */
-    private ReportCategory reportCategory = ReportCategory.Customer;
+    private ReportCategory reportCategory = ReportCategory.Order;
 
     @Override
     public ReportModelBase getModel() {
@@ -86,6 +90,6 @@ public class Report implements IReport{
      */
     @Override
     public FXMLLoader getControls() throws IOException {
-        return new FXMLLoader(getClass().getResource("/ReportControls/FrequentCustomer.fxml"));
+        return new FXMLLoader(getClass().getResource("/ReportControls/ShowCanceledOrders.fxml"));
     }
 }

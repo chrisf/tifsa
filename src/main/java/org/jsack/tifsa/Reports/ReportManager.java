@@ -72,10 +72,32 @@ public class ReportManager {
         reports.add(new org.jsack.tifsa.Reports.Order.OrdersBySpecificWeek.Report());
         reports.add(new org.jsack.tifsa.Reports.Order.OrdersBySpecificMonth.Report());
         reports.add(new org.jsack.tifsa.Reports.Order.OrdersBySpecificYear.Report());
+        reports.add(new org.jsack.tifsa.Reports.Order.DailyTotalOrdersByEmployee.Report());
+        reports.add(new org.jsack.tifsa.Reports.Order.WeeklyTotalOrdersByEmployee.Report());
+        reports.add(new org.jsack.tifsa.Reports.Order.MonthlyTotalOrdersByEmployee.Report());
+        reports.add(new org.jsack.tifsa.Reports.Order.ShowCanceledOrders.Report());
+        reports.add(new org.jsack.tifsa.Reports.Order.ShowOrdersCompletedByMonth.Report());
+        reports.add(new org.jsack.tifsa.Reports.Order.ShowOrdersCompletedByWeek.Report());
+        reports.add(new org.jsack.tifsa.Reports.Order.ShowOrderTotalAboveSpecificAmount.Report());
+        reports.add(new org.jsack.tifsa.Reports.Order.ShowTotalOrdersCompletedOnDay.Report());
+        reports.add(new org.jsack.tifsa.Reports.Order.ShowTotalOrdersCompletedOnYear.Report());
+        reports.add(new org.jsack.tifsa.Reports.Order.ShowUnpaidOrders.Report());
+
+
+        //Product Reports
+        reports.add(new org.jsack.tifsa.Reports.Product.ShowProductByVendor.Report());
+        reports.add(new org.jsack.tifsa.Reports.Product.ShowTotalProductsSoldByDate.Report());
+        reports.add(new org.jsack.tifsa.Reports.Product.ShowTotalProductsSoldByMonth.Report());
+        reports.add(new org.jsack.tifsa.Reports.Product.ShowTotalProductsSoldByWeek.Report());
+        reports.add(new org.jsack.tifsa.Reports.Product.ShowTotalProductsSoldByYear.Report());
 
         // Revenue reports
         reports.add(new org.jsack.tifsa.Reports.Revenue.RevenueByDay.Report());
         reports.add(new org.jsack.tifsa.Reports.Revenue.RevenueByWeek.Report());
+
+        // Vendor reports
+        reports.add(new org.jsack.tifsa.Reports.Vendor.ShowAllVendors.Report());
+        reports.add(new org.jsack.tifsa.Reports.Vendor.ShowVendorContacts.Report());
     }
 
     public IReport getReportByName(String name) {

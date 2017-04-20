@@ -1,4 +1,4 @@
-package org.jsack.tifsa.Reports.Customer.FrequentCustomer;
+package org.jsack.tifsa.Reports.Vendor.ShowVendorContacts;
 
 import javafx.fxml.FXMLLoader;
 import org.jsack.tifsa.Reports.Interfaces.IReport;
@@ -20,25 +20,25 @@ public class Report implements IReport{
         If you haven't, copy and paste it from Drive and replace all the "\n" with a space.
      */
     private final String sql = "SELECT\n" +
-            "dbo.Customer.CustomerFirst AS 'First Name', \n" +
-            "dbo.Customer.CustomerLast AS 'Last Name', \n" +
-            "dbo.CustomerStatus.CustomerStatusDescription AS 'Status', \n" +
-            "dbo.State.StateName AS 'State',  \n" +
-            "dbo.Country.CountryName AS 'Country'\n" +
+            "dbo.Vendor.VendorName AS 'Vendor',\n" +
+            "dbo.VendorContact.VendorContactInfo AS 'Contact', \n" +
+            "dbo.VendorContactType.VendorContactTypeID AS 'Type',\n" +
+            "dbo.VendorContactCategory.VendorContactCategoryDescription AS 'Department',\n" +
             "\n" +
-            "FROM Customer\n" +
+            "CASE WHEN VendorContactPrimary = 1 THEN 'Yes' ELSE 'No' END AS 'Primary'\n" +
             "\n" +
-            "Inner Join State ON Customer.StateID = State.StateID\n" +
-            "Inner Join Country ON Country.CountryID = State.CountryID\n" +
-            "Inner Join CustomerStatus ON Customer.CustomerStatusID = CustomerStatus.CustomerStatusID\n" +
+            "FROM Vendor\n" +
+            "JOIN VendorContact ON Vendor.VendorID = VendorContact.VendorID\n" +
+            "JOIN VendorContactType ON VendorContact.VendorContactTypeID = VendorContactType.VendorContactTypeID\n" +
+            "JOIN VendorContactCategory ON VendorContactCategory.VendorContactCategoryID = VendorContact.VendorContactID\n" +
             "\n" +
-            "WHERE State.StateID = :stateId AND CustomerStatus.CustomerStatusDescription = 'Frequent' AND dbo.Customer.Deleted = 0\n" +
-            "ORDER BY CustomerFirst;\n";
+            "WHERE VendorContact.VendorID = :vendorId AND VendorContact.Deleted = 0;\n";
+
     /*
         TODO: Name your report.
         Set the name of your report here. Make it unique.
      */
-    private final String name = "Frequent Customer";
+    private final String name = "Show Vendor Contacts";
 
     /*
         TODO: Set report Category.
@@ -51,7 +51,7 @@ public class Report implements IReport{
             Employee,
             Product
      */
-    private ReportCategory reportCategory = ReportCategory.Customer;
+    private ReportCategory reportCategory = ReportCategory.Vendor;
 
     @Override
     public ReportModelBase getModel() {
@@ -86,6 +86,6 @@ public class Report implements IReport{
      */
     @Override
     public FXMLLoader getControls() throws IOException {
-        return new FXMLLoader(getClass().getResource("/ReportControls/FrequentCustomer.fxml"));
+        return new FXMLLoader(getClass().getResource("/ReportControls/ShowVendorContacts.fxml"));
     }
 }

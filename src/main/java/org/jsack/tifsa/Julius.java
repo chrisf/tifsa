@@ -7,6 +7,8 @@ import org.jsack.tifsa.Database.CustomerStatus.CustomerStatusSchema;
 import org.jsack.tifsa.Database.DBSelect;
 import org.jsack.tifsa.Database.State.State;
 import org.jsack.tifsa.Database.State.StateSchema;
+import org.jsack.tifsa.Database.Vendor.Vendor;
+import org.jsack.tifsa.Database.Vendor.VendorSchema;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 import org.springframework.jdbc.core.JdbcTemplate;
@@ -21,6 +23,7 @@ public class Julius {
     private static ApplicationContext appContext = new ClassPathXmlApplicationContext("applicationContext.xml");
     private static ObservableList<State> states = null;
     private static ObservableList<CustomerStatus> customerStatuses = null;
+    private static ObservableList<Vendor> vendors = null;
 
     public static ObservableList<String> getYears() {
         return FXCollections.observableArrayList(
@@ -67,6 +70,9 @@ public class Julius {
             customerStatuses = FXCollections.observableArrayList(
                     new DBSelect().selectAll(new CustomerStatusSchema())
             );
+            vendors = FXCollections.observableArrayList(
+                    new DBSelect().selectAll(new VendorSchema())
+            );
         }).start();
     }
     public static JdbcTemplate getJdbcTemplate() {
@@ -85,5 +91,6 @@ public class Julius {
     public static ObservableList<State> getAllStates() {
         return states;
     }
+    public static ObservableList<Vendor> getAllVendors() { return vendors; }
 
 }

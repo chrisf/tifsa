@@ -1,4 +1,4 @@
-package org.jsack.tifsa.Reports.Customer.FrequentCustomer;
+package org.jsack.tifsa.Reports.Order.WeeklyTotalOrdersByEmployee;
 
 import javafx.fxml.FXMLLoader;
 import org.jsack.tifsa.Reports.Interfaces.IReport;
@@ -19,26 +19,27 @@ public class Report implements IReport{
         If you already created your reports using the previous method, just copy and paste it into here.
         If you haven't, copy and paste it from Drive and replace all the "\n" with a space.
      */
-    private final String sql = "SELECT\n" +
-            "dbo.Customer.CustomerFirst AS 'First Name', \n" +
-            "dbo.Customer.CustomerLast AS 'Last Name', \n" +
-            "dbo.CustomerStatus.CustomerStatusDescription AS 'Status', \n" +
-            "dbo.State.StateName AS 'State',  \n" +
-            "dbo.Country.CountryName AS 'Country'\n" +
+    private final String sql = "SELECT e1.EmployeeFirst AS 'First Name', e1.EmployeeLast AS 'Last Name', o1.Total as 'Total Orders',\n" +
+            "o1.TotalPrice AS 'Total Price of Orders' ,\n" +
+            "a1.OrderStatusDescription AS 'Status'\n" +
             "\n" +
-            "FROM Customer\n" +
+            "FROM Employee e1\n" +
+            "INNER JOIN (\n" +
+            "    SELECT Count([Order].SoldByEmployeeID) AS Total, SUM([Order].OrderTotal) AS TotalPrice, [Order].SoldByEmployeeID, [Order].OrderStatusID\n" +
+            "    FROM dbo.[Order]\n" +
+            "\tWHERE (dbo.[Order].OrderDate >= '2009-09-14' AND OrderDate <= '2009-09-21 23:59:59')\n" +
+            "    GROUP BY [Order].SoldByEmployeeID, [Order].OrderStatusID\n" +
+            "    ) AS o1 ON e1.EmployeeID = o1.SoldByEmployeeID\n" +
+            "INNER JOIN OrderStatus as a1 ON o1.OrderStatusID = a1.OrderStatusID\n" +
             "\n" +
-            "Inner Join State ON Customer.StateID = State.StateID\n" +
-            "Inner Join Country ON Country.CountryID = State.CountryID\n" +
-            "Inner Join CustomerStatus ON Customer.CustomerStatusID = CustomerStatus.CustomerStatusID\n" +
-            "\n" +
-            "WHERE State.StateID = :stateId AND CustomerStatus.CustomerStatusDescription = 'Frequent' AND dbo.Customer.Deleted = 0\n" +
-            "ORDER BY CustomerFirst;\n";
+            "WHERE [e1].Deleted = 0\n" +
+            "ORDER BY e1.EmployeeFirst ASC;\n";
+
     /*
         TODO: Name your report.
         Set the name of your report here. Make it unique.
      */
-    private final String name = "Frequent Customer";
+    private final String name = "Weekly Total Orders By Employee";
 
     /*
         TODO: Set report Category.
@@ -51,7 +52,7 @@ public class Report implements IReport{
             Employee,
             Product
      */
-    private ReportCategory reportCategory = ReportCategory.Customer;
+    private ReportCategory reportCategory = ReportCategory.Order;
 
     @Override
     public ReportModelBase getModel() {
@@ -86,6 +87,6 @@ public class Report implements IReport{
      */
     @Override
     public FXMLLoader getControls() throws IOException {
-        return new FXMLLoader(getClass().getResource("/ReportControls/FrequentCustomer.fxml"));
+        return new FXMLLoader(getClass().getResource("/ReportControls/WeeklyTotalOrdersByEmployee.fxml"));
     }
 }

@@ -1,4 +1,4 @@
-package org.jsack.tifsa.Reports.Customer.FrequentCustomer;
+package org.jsack.tifsa.Reports.Order.ShowUnpaidOrders;
 
 import javafx.fxml.FXMLLoader;
 import org.jsack.tifsa.Reports.Interfaces.IReport;
@@ -20,25 +20,26 @@ public class Report implements IReport{
         If you haven't, copy and paste it from Drive and replace all the "\n" with a space.
      */
     private final String sql = "SELECT\n" +
-            "dbo.Customer.CustomerFirst AS 'First Name', \n" +
-            "dbo.Customer.CustomerLast AS 'Last Name', \n" +
-            "dbo.CustomerStatus.CustomerStatusDescription AS 'Status', \n" +
-            "dbo.State.StateName AS 'State',  \n" +
-            "dbo.Country.CountryName AS 'Country'\n" +
+            "  Customer.CustomerFirst,\n" +
+            "  Customer.CustomerLast,\n" +
+            "  OrderBalance,\n" +
+            "  [Order].OrderID,\n" +
+            "  COUNT([Order].OrderID) as 'Number of products',\n" +
+            "  CustomerStatus.CustomerStatusDescription\n" +
+            "FROM [Order]\n" +
+            "  INNER JOIN Customer ON [Order].CustomerID = Customer.CustomerID\n" +
+            "  INNER JOIN OrderLine ON [Order].OrderID = OrderLine.OrderID\n" +
+            "  INNER JOIN CustomerStatus ON Customer.CustomerStatusID = CustomerStatus.CustomerStatusID\n" +
             "\n" +
-            "FROM Customer\n" +
-            "\n" +
-            "Inner Join State ON Customer.StateID = State.StateID\n" +
-            "Inner Join Country ON Country.CountryID = State.CountryID\n" +
-            "Inner Join CustomerStatus ON Customer.CustomerStatusID = CustomerStatus.CustomerStatusID\n" +
-            "\n" +
-            "WHERE State.StateID = :stateId AND CustomerStatus.CustomerStatusDescription = 'Frequent' AND dbo.Customer.Deleted = 0\n" +
-            "ORDER BY CustomerFirst;\n";
+            "WHERE OrderBalance > 0 AND [Order].Deleted = 0\n" +
+            "GROUP BY Customer.CustomerFirst, Customer.CustomerLast, OrderBalance, [Order].OrderID, CustomerStatus.CustomerStatusDescription\n" +
+            "ORDER BY [Order].OrderBalance\n";
+
     /*
         TODO: Name your report.
         Set the name of your report here. Make it unique.
      */
-    private final String name = "Frequent Customer";
+    private final String name = "Show Unpaid Orders";
 
     /*
         TODO: Set report Category.
@@ -51,7 +52,7 @@ public class Report implements IReport{
             Employee,
             Product
      */
-    private ReportCategory reportCategory = ReportCategory.Customer;
+    private ReportCategory reportCategory = ReportCategory.Order;
 
     @Override
     public ReportModelBase getModel() {
@@ -86,6 +87,6 @@ public class Report implements IReport{
      */
     @Override
     public FXMLLoader getControls() throws IOException {
-        return new FXMLLoader(getClass().getResource("/ReportControls/FrequentCustomer.fxml"));
+        return new FXMLLoader(getClass().getResource("/ReportControls/ShowUnpaidOrders.fxml"));
     }
 }

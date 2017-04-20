@@ -1,4 +1,4 @@
-package org.jsack.tifsa.Reports.Customer.FrequentCustomer;
+package org.jsack.tifsa.Reports.Order.ShowTotalOrdersCompletedOnYear;
 
 import javafx.fxml.FXMLLoader;
 import org.jsack.tifsa.Reports.Interfaces.IReport;
@@ -19,26 +19,26 @@ public class Report implements IReport{
         If you already created your reports using the previous method, just copy and paste it into here.
         If you haven't, copy and paste it from Drive and replace all the "\n" with a space.
      */
-    private final String sql = "SELECT\n" +
-            "dbo.Customer.CustomerFirst AS 'First Name', \n" +
-            "dbo.Customer.CustomerLast AS 'Last Name', \n" +
-            "dbo.CustomerStatus.CustomerStatusDescription AS 'Status', \n" +
-            "dbo.State.StateName AS 'State',  \n" +
-            "dbo.Country.CountryName AS 'Country'\n" +
+    private final String sql = "SELECT YEAR(dbo.[Order].OrderDate) AS Year,\n" +
+            "COUNT(case when dbo.[Order].OrderStatusID = '4' then 1 else null end) AS TotalOrdersCompleted,\n" +
+            "dbo.Employee.EmployeeFirst, dbo.Employee.EmployeeLast,\n" +
+            "dbo.EmployeeType.EmployeeTypeDescription FROM [Order]\n" +
             "\n" +
-            "FROM Customer\n" +
+            "INNER JOIN Employee ON [Order].SoldByEmployeeID = Employee.EmployeeID\n" +
+            "INNER JOIN EmployeeRole ON Employee.EmployeeID = EmployeeRole.EmployeeID\n" +
+            "INNER JOIN EmployeeType ON EmployeeRole.EmployeeTypeID = EmployeeType.EmployeeTypeID\n" +
             "\n" +
-            "Inner Join State ON Customer.StateID = State.StateID\n" +
-            "Inner Join Country ON Country.CountryID = State.CountryID\n" +
-            "Inner Join CustomerStatus ON Customer.CustomerStatusID = CustomerStatus.CustomerStatusID\n" +
+            "WHERE (EmployeeType.EmployeeTypeID='4' OR EmployeeType.EmployeeTypeID='5' OR EmployeeType.EmployeeTypeID='6') AND (DATEPART(year, dbo.[Order].OrderDate) = '2008') AND [Order].Deleted = 0\n" +
             "\n" +
-            "WHERE State.StateID = :stateId AND CustomerStatus.CustomerStatusDescription = 'Frequent' AND dbo.Customer.Deleted = 0\n" +
-            "ORDER BY CustomerFirst;\n";
+            "GROUP BY YEAR([Order].OrderDate),\n" +
+            "Employee.EmployeeFirst, Employee.EmployeeLast,\n" +
+            "EmployeeType.EmployeeTypeDescription\n";
+
     /*
         TODO: Name your report.
         Set the name of your report here. Make it unique.
      */
-    private final String name = "Frequent Customer";
+    private final String name = "Show Total Orders Completed On Year";
 
     /*
         TODO: Set report Category.
@@ -51,7 +51,7 @@ public class Report implements IReport{
             Employee,
             Product
      */
-    private ReportCategory reportCategory = ReportCategory.Customer;
+    private ReportCategory reportCategory = ReportCategory.Order;
 
     @Override
     public ReportModelBase getModel() {
@@ -86,6 +86,6 @@ public class Report implements IReport{
      */
     @Override
     public FXMLLoader getControls() throws IOException {
-        return new FXMLLoader(getClass().getResource("/ReportControls/FrequentCustomer.fxml"));
+        return new FXMLLoader(getClass().getResource("/ReportControls/ShowTotalOrdersCompletedOnYear.fxml"));
     }
 }
