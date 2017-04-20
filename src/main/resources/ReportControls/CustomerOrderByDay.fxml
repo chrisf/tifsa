@@ -14,6 +14,6 @@
 <VBox xmlns="http://javafx.com/javafx"
       xmlns:fx="http://javafx.com/fxml"
       fx:controller="org.jsack.tifsa.Reports.Customer.CustomerOrderByDay.Controls">
-    <JFXDatePicker fx:id="dayPicker" promptText="Choose day..." />
+    <JFXDatePicker fx:id="dayPicker" promptText="Choose day..."  />
 
 </VBox>
