@@ -1,4 +1,4 @@
-package org.jsack.tifsa.Reports.Revenue.ShowProductRevenueByYear;
+package org.jsack.tifsa.Reports.Order.WeeklyTotalOrdersByEmployee;
 
 import org.jsack.tifsa.Reports.ColumnFormats.CurrencyColumn;
 import org.jsack.tifsa.Reports.ColumnFormats.IntegerColumn;
@@ -22,15 +22,12 @@ public class ReportModel extends ReportModelBase {
         row = new ArrayList<>();
         columns = new LinkedHashMap<>();
 
-        //columns added by steven
-        columns.put("Year", new ColumnInfo("Year", IntegerColumn.class));
-        columns.put("ProductDescription", new ColumnInfo("Product Description", StringColumn.class));
-        columns.put("ProductSKU", new ColumnInfo("Product SKU", IntegerColumn.class));
-        columns.put("Revenue", new ColumnInfo("Revenue", CurrencyColumn.class));
-        columns.put("VendorName", new ColumnInfo("Vendor Name", StringColumn.class));
-        columns.put("BrandName", new ColumnInfo("Brand Name", StringColumn.class));
-        columns.put("ManufacturerName", new ColumnInfo("Manufacturer Name", StringColumn.class));
 
+        columns.put("First Name", new ColumnInfo("First Name", StringColumn.class));
+        columns.put("Last Name", new ColumnInfo("Last Name", StringColumn.class));
+        columns.put("Total Orders", new ColumnInfo("Number of Orders", IntegerColumn.class));
+        columns.put("Total Amount of Orders", new ColumnInfo("Order Totals", CurrencyColumn.class));
+        columns.put("Status", new ColumnInfo("Status", StringColumn.class));
     }
 
     @Override
