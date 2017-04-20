@@ -34,6 +34,7 @@ public class Main extends Application {
         primaryStage.setMinWidth(800);
         primaryStage.setMinHeight(850);
         primaryStage.setScene(scene);
+        Julius.Julius();
         primaryStage.show();
     }
     public static void main(String[] args) {

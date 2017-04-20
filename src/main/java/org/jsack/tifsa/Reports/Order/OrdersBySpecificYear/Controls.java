@@ -1,9 +1,9 @@
 package org.jsack.tifsa.Reports.Order.OrdersBySpecificYear;
 
 import com.jfoenix.controls.JFXComboBox;
-import com.jfoenix.controls.JFXDatePicker;
 import javafx.fxml.Initializable;
 import org.joda.time.LocalDateTime;
+import org.jsack.tifsa.Julius;
 import org.jsack.tifsa.Reports.Interfaces.IControl;
 import org.jsack.tifsa.Utility;
 
@@ -17,7 +17,7 @@ public class Controls implements Initializable, IControl {
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        yearSelection.setItems(Utility.getYears());
+        yearSelection.setItems(Julius.getYears());
     }
 
     @Override

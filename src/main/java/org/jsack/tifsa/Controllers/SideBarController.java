@@ -13,9 +13,11 @@ import javafx.scene.control.Label;
 import org.jsack.tifsa.Controllers.LookupControllers.IntroController;
 import org.jsack.tifsa.Controllers.LookupControllers.LookupController;
 import org.jsack.tifsa.Controllers.ReportsControllers.ReportsController;
+import org.jsack.tifsa.Julius;
 
 import javax.annotation.PostConstruct;
 import java.util.Objects;
+
 /**
  * Created by aaron on 4/17/17.
  */
@@ -68,6 +70,13 @@ public class SideBarController {
                 }
             }
         });
+        parentFlow.withGlobalAction(sales.getId(), ((a, b) -> {
+                    Julius.getAllStates().forEach(e -> {
+                        System.out.println(e.getStateName());
+                    });
+                })
+        );
+
         parentFlow.withGlobalLink(lookup.getId(), LookupController.class);
         parentFlow.withGlobalLink(home.getId(), IntroController.class);
         parentFlow.withGlobalLink(reports.getId(), ReportsController.class);

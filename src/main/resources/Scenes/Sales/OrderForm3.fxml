@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="595.0" prefWidth="859.0" xmlns="http://javafx.com/javafx/8.0.60" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+      <Text layoutX="43.0" layoutY="51.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Customer Order Information " wrappingWidth="443.88873291015625">
+         <font>
+            <Font size="26.0" />
+         </font>
+      </Text>
+      <Text layoutX="32.0" layoutY="109.0" strokeType="OUTSIDE" strokeWidth="0.0" text="S.O/MFG" />
+      <TextField layoutX="349.0" layoutY="92.0" />
+      <TextField layoutX="88.0" layoutY="92.0" />
+      <Text layoutX="265.0" layoutY="109.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Salesperson " />
+      <TableView layoutX="41.0" layoutY="172.0" prefHeight="340.0" prefWidth="777.0">
+        <columns>
+          <TableColumn prefWidth="75.0" text="C1" />
+          <TableColumn prefWidth="75.0" text="C2" />
+        </columns>
+      </TableView>
+      <Button layoutX="551.0" layoutY="92.0" mnemonicParsing="false" text="Look Up" />
+      <Button layoutX="730.0" layoutY="546.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="83.0" text="Next " />
+   </children>
+</AnchorPane>

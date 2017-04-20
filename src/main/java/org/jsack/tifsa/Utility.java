@@ -1,26 +1,15 @@
 package org.jsack.tifsa;
 
 import javafx.application.Platform;
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
 import org.joda.time.LocalDateTime;
 import org.joda.time.format.DateTimeFormat;
-import org.jsack.tifsa.Database.CustomerStatus.CustomerStatus;
-import org.jsack.tifsa.Database.CustomerStatus.CustomerStatusSchema;
-import org.jsack.tifsa.Database.DBSelect;
-import org.springframework.context.ApplicationContext;
-import org.springframework.context.support.ClassPathXmlApplicationContext;
-import org.springframework.jdbc.core.JdbcTemplate;
-import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
 
-import java.util.List;
 import java.util.concurrent.Semaphore;
 
 /**
  * Created by cfitz on 4/18/17.
  */
 public class Utility {
-    private static ApplicationContext appContext = new ClassPathXmlApplicationContext("applicationContext.xml");
     public static void runOnGuiAndWait(Runnable func) {
         try {
             Semaphore semaphore = new Semaphore(0);
@@ -28,57 +17,21 @@ public class Utility {
             Platform.runLater(() -> {
                 try {
                     func.run();
-                }
-                catch (Exception e) {
+                } catch (Exception e) {
                     e.printStackTrace();
-                }
-                finally {
+                } finally {
                     semaphore.release();
                 }
             });
 
             semaphore.acquire();
-        }
-        catch(Exception e) {
+        } catch (Exception e) {
             e.printStackTrace();
         }
     }
 
     public static boolean containsIgnoreCase(final String s1, final String s2) {
-       return s1.toLowerCase().contains(s2.toLowerCase());
-    }
-    public static ObservableList<String> getYears() {
-        return FXCollections.observableArrayList(
-                "2017",
-                "2016",
-                "2015",
-                "2014",
-                "2013",
-                "2012",
-                "2011",
-                "2010",
-                "2009",
-                "2008",
-                "2007",
-                "2006"
-        );
-    }
-
-    public static ObservableList<String> getMonths() {
-        return FXCollections.observableArrayList(
-                "January",
-                "February",
-                "March",
-                "April",
-                "May",
-                "June",
-                "July",
-                "August",
-                "September",
-                "October",
-                "November",
-                "December"
-        );
+        return s1.toLowerCase().contains(s2.toLowerCase());
     }
 
     public static ObservableList<String> getCustomerStatuses() {
@@ -99,21 +52,7 @@ public class Utility {
         return LocalDateTime.parse(date, DateTimeFormat.forPattern("MM/dd/yyyy"));
     }
 
-    public static String monthToNumber(String month)
-    {
-        return String.valueOf(getMonths().indexOf(month) + 1);
+    public static String monthToNumber(String month) {
+        return String.valueOf(Julius.getMonths().indexOf(month) + 1);
     }
-
-    public static JdbcTemplate getJdbcTemplate() {
-        JdbcTemplate template = (JdbcTemplate) appContext.getBean("jdbcTemplate");
-        return template;
-    }
-    public static NamedParameterJdbcTemplate getJdbcNamedTemplat() {
-        NamedParameterJdbcTemplate namedTemplate = (NamedParameterJdbcTemplate) appContext.getBean("jdbcNamedTemplate");
-        return namedTemplate;
-    }
-    public static List<CustomerStatus> getAllCustomerStatus() {
-        return new DBSelect().selectAll(new CustomerStatusSchema());
-    }
-
 }
