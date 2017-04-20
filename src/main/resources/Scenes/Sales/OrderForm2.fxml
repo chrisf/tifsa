@@ -4,41 +4,49 @@
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.layout.*?>
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="592.0"
-            prefWidth="849.0" xmlns="http://javafx.com/javafx/8.0.121" xmlns:fx="http://javafx.com/fxml/1">
+<BorderPane xmlns="http://javafx.com/javafx/8.0.121" xmlns:fx="http://javafx.com/fxml/1">
     <center>
-        <VBox spacing="10">
+        <VBox spacing="30">
             <padding>
                 <Insets bottom="10" left="10" right="10" top="10"/>
             </padding>
             <HBox>
                 <StackPane HBox.hgrow="ALWAYS">
-                    <StackPane maxWidth="150" StackPane.alignment="TOP_RIGHT">
-                        <Label text="Today's Date: "/>
+                    <StackPane maxWidth="150" StackPane.alignment="TOP_LEFT">
+                        <Label text="Today's Date: " fx:id="dateLabel" StackPane.alignment="TOP_LEFT"/>
+                    </StackPane>
+                    <StackPane StackPane.alignment="TOP_RIGHT">
+                        <JFXComboBox fx:id="employeeSelect" promptText="Employee Name" labelFloat="true" StackPane.alignment="TOP_RIGHT" />
                     </StackPane>
                 </StackPane>
             </HBox>
             <HBox>
                 <StackPane HBox.hgrow="ALWAYS">
-                    <HBox alignment="TOP_RIGHT" spacing="15">
+                    <HBox alignment="TOP_LEFT" spacing="15">
+                        <StackPane maxWidth="100">
+                            <JFXRadioButton StackPane.alignment="TOP_LEFT" fx:id="pickupSelected"
+                                            text="Pickup"/>
+                        </StackPane>
+                        <StackPane maxWidth="100">
+                            <JFXRadioButton StackPane.alignment="TOP_LEFT" fx:id="deliverySelected"
+                                            text="Delivery"/>
+                        </StackPane>
                         <padding>
                             <Insets bottom="5" left="10" right="10" top="5"/>
                         </padding>
-                        <StackPane maxWidth="100">
-                            <JFXRadioButton fx:id="pickupSelected" text="Pickup"/>
-                        </StackPane>
-                        <StackPane maxWidth="100">
-                            <JFXRadioButton fx:id="deliverySelected" text="Delivery"/>
-                        </StackPane>
+
                     </HBox>
                 </StackPane>
             </HBox>
             <HBox>
                 <StackPane HBox.hgrow="ALWAYS">
-                    <StackPane maxWidth="150" StackPane.alignment="TOP_LEFT">
-                        <Label text="Billing Information"/>
+                    <StackPane maxWidth="350" StackPane.alignment="TOP_LEFT">
+                        <Label text="Billing Information" StackPane.alignment="TOP_LEFT"/>
                     </StackPane>
                 </StackPane>
+                <padding>
+                    <Insets bottom="25" top="15"/>
+                </padding>
             </HBox>
             <HBox>
                 <StackPane HBox.hgrow="ALWAYS">
@@ -80,37 +88,51 @@
                             <JFXTextField fx:id="billingCity" labelFloat="true" promptText="City"/>
                         </StackPane>
                         <StackPane maxWidth="250" prefWidth="250">
-                            <JFXComboBox promptText="State" labelFloat="true"/>
+                            <JFXComboBox promptText="billingState" fx:id="billingState" labelFloat="true"/>
                         </StackPane>
                         <StackPane maxWidth="150" prefWidth="150">
-                            <JFXTextField promptText="Zip" labelFloat="true"/>
+                            <JFXTextField promptText="billingZip" fx:id="billingZip" labelFloat="true"/>
                         </StackPane>
                     </HBox>
                 </StackPane>
             </HBox>
             <HBox>
+                <padding>
+                    <Insets top="15" bottom="35"/>
+                </padding>
+            </HBox>
+            <HBox>
                 <StackPane HBox.hgrow="ALWAYS">
-                    <HBox alignment="TOP_LEFT" spacing="55">
+                    <HBox alignment="TOP_LEFT">
                         <StackPane maxWidth="350" StackPane.alignment="TOP_LEFT">
                             <Label text="Shipping Information"/>
                         </StackPane>
-                        <StackPane maxWidth="250" >
-                            <JFXButton text="Same as billing" fx:id="billingSame" />
+                        <StackPane>
+                            <padding>
+                                <Insets left="45" right="45"/>
+                            </padding>
                         </StackPane>
+                        <StackPane maxWidth="250">
+                            <JFXButton text="Same as billing" fx:id="billingSame"/>
+                        </StackPane>
+                        <padding>
+                            <Insets bottom="25" top="15"/>
+                        </padding>
                     </HBox>
                 </StackPane>
             </HBox>
+
             <HBox>
-                <StackPane HBox.hgrow StackPane.alignment="TOP_RIGHT"="ALWAYS">
+                <StackPane HBox.hgrow="ALWAYS">
                     <HBox alignment="TOP_LEFT" spacing="35">
                         <StackPane maxWidth="250" prefWidth="250">
-                            <JFXTextField fx:id="billingFirst" labelFloat="true" promptText="First Name"/>
+                            <JFXTextField fx:id="shippingFirst" labelFloat="true" promptText="First Name"/>
                         </StackPane>
                         <StackPane maxWidth="50" prefWidth="50">
-                            <JFXTextField fx:id="billingMid" labelFloat="true" promptText="M."/>
+                            <JFXTextField fx:id="shippingMid" labelFloat="true" promptText="M."/>
                         </StackPane>
                         <StackPane maxWidth="250" prefWidth="250">
-                            <JFXTextField fx:id="billingLast" labelFloat="true" promptText="Last Name"/>
+                            <JFXTextField fx:id="shippingLast" labelFloat="true" promptText="Last Name"/>
                         </StackPane>
                     </HBox>
                 </StackPane>
@@ -119,7 +141,7 @@
                 <StackPane HBox.hgrow="ALWAYS">
                     <HBox alignment="TOP_LEFT" spacing="35">
                         <StackPane maxWidth="450" prefWidth="450">
-                            <JFXTextField fx:id="billingAddress1" labelFloat="true" promptText="Address Line 1"/>
+                            <JFXTextField fx:id="shippingAddress1" labelFloat="true" promptText="Address Line 1"/>
                         </StackPane>
                     </HBox>
                 </StackPane>
@@ -128,7 +150,7 @@
                 <StackPane HBox.hgrow="ALWAYS">
                     <HBox alignment="TOP_LEFT" spacing="35">
                         <StackPane maxWidth="450" prefWidth="450">
-                            <JFXTextField fx:id="billingAddress2" labelFloat="true" promptText="Address Line 2"/>
+                            <JFXTextField fx:id="shippingAddress2" labelFloat="true" promptText="Address Line 2"/>
                         </StackPane>
                     </HBox>
                 </StackPane>
@@ -137,18 +159,25 @@
                 <StackPane HBox.hgrow="ALWAYS">
                     <HBox alignment="TOP_LEFT" spacing="5">
                         <StackPane maxWidth="250" prefWidth="250">
-                            <JFXTextField fx:id="billingCity" labelFloat="true" promptText="City"/>
+                            <JFXTextField fx:id="shippingCity" labelFloat="true" promptText="City"/>
                         </StackPane>
                         <StackPane maxWidth="250" prefWidth="250">
-                            <JFXComboBox promptText="State" labelFloat="true"/>
+                            <JFXComboBox promptText="State" fx:id="shippingState" labelFloat="true"/>
                         </StackPane>
                         <StackPane maxWidth="150" prefWidth="150">
-                            <JFXTextField promptText="Zip" labelFloat="true"/>
+                            <JFXTextField promptText="Zip" fx:id="shippingZip" labelFloat="true"/>
                         </StackPane>
                     </HBox>
                 </StackPane>
             </HBox>
 
+            <HBox>
+                <StackPane HBox.hgrow="ALWAYS">
+                    <HBox alignment="CENTER_RIGHT">
+                        <JFXButton text="Next" fx:id="nextButton" />
+                    </HBox>
+                </StackPane>
+            </HBox>
         </VBox>
     </center>
 </BorderPane>

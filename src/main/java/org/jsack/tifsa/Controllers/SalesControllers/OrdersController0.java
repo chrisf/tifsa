@@ -95,7 +95,7 @@ public class OrdersController0 {
                     order.setOrderShippingStreet(selectedCustomer.address.get());
                     context.register("NewOrderCustomer", order);
                     flowHandler.navigateTo(OrdersController2.class);
-                } catch (Exception ex) {}
+                } catch (Exception ex) { ex.printStackTrace();}
             }
         });
         new Thread(() -> {

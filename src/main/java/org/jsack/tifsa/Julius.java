@@ -5,6 +5,8 @@ import javafx.collections.ObservableList;
 import org.jsack.tifsa.Database.CustomerStatus.CustomerStatus;
 import org.jsack.tifsa.Database.CustomerStatus.CustomerStatusSchema;
 import org.jsack.tifsa.Database.DBSelect;
+import org.jsack.tifsa.Database.Employee.Employee;
+import org.jsack.tifsa.Database.Employee.EmployeeSchema;
 import org.jsack.tifsa.Database.State.State;
 import org.jsack.tifsa.Database.State.StateSchema;
 import org.springframework.context.ApplicationContext;
@@ -13,6 +15,7 @@ import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
 
 import java.util.List;
+import java.util.Observable;
 
 /**
  * Created by aaron on 4/19/17.
@@ -21,6 +24,7 @@ public class Julius {
     private static ApplicationContext appContext = new ClassPathXmlApplicationContext("applicationContext.xml");
     private static ObservableList<State> states = null;
     private static ObservableList<CustomerStatus> customerStatuses = null;
+    private static ObservableList<Employee> employees = null;
 
     public static ObservableList<String> getYears() {
         return FXCollections.observableArrayList(
@@ -67,6 +71,10 @@ public class Julius {
             customerStatuses = FXCollections.observableArrayList(
                     new DBSelect().selectAll(new CustomerStatusSchema())
             );
+
+            employees = FXCollections.observableArrayList(
+                    new DBSelect().selectAll(new EmployeeSchema())
+            );
         }).start();
     }
     public static JdbcTemplate getJdbcTemplate() {
@@ -85,5 +93,5 @@ public class Julius {
     public static ObservableList<State> getAllStates() {
         return states;
     }
-
+    public static ObservableList<Employee> getAllEmployees() { return employees;}
 }

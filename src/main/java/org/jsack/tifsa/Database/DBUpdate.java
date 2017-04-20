@@ -1,9 +1,13 @@
 package org.jsack.tifsa.Database;
 
 import org.jsack.tifsa.Database.Interfaces.ISchema;
+import org.jsack.tifsa.Julius;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
+import org.springframework.jdbc.core.simple.SimpleJdbcInsert;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -13,9 +17,15 @@ public class DBUpdate {
     private JdbcTemplate template;
     private NamedParameterJdbcTemplate namedTemplate;
 
-    public DBUpdate(JdbcTemplate template) {
-        this.template = template;
-        this.namedTemplate = new NamedParameterJdbcTemplate(template);
+    public DBUpdate() {
+        this.template = Julius.getJdbcTemplate();
+        this.namedTemplate = Julius.getJdbcNamedTemplate();
+    }
+    public long createAndRetrieve(ISchema schema, Map<String, Object> attributes) {
+        List<String> columns = new ArrayList<>();
+        attributes.forEach((s, o) -> columns.add(s));
+        SimpleJdbcInsert insert = new SimpleJdbcInsert(template).withTableName(schema.getName()).usingColumns(columns.toArray(new String[columns.size()])).usingGeneratedKeyColumns(schema.getIdColumn());
+        return insert.executeAndReturnKey(attributes).longValue();
     }
         public int update(ISchema schema, Long id, Map<String,Object> attributes) {
           //creates our initial sql statement
