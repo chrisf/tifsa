@@ -82,7 +82,10 @@ public class Julius {
     }
 
     public static List<CustomerStatus> getAllCustomerStatus() {
-        return new DBSelect().selectAll(new CustomerStatusSchema());
+        return customerStatuses;
+    }
+    public static List<State> getAllStates() {
+        return states;
     }
 
 }
