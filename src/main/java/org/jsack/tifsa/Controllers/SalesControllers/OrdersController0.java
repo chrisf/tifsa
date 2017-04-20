@@ -3,6 +3,7 @@ package org.jsack.tifsa.Controllers.SalesControllers;
 import com.jfoenix.controls.*;
 import com.jfoenix.controls.datamodels.treetable.RecursiveTreeObject;
 import io.datafx.controller.ViewController;
+import io.datafx.controller.flow.Flow;
 import io.datafx.controller.flow.FlowHandler;
 import io.datafx.controller.flow.context.FXMLViewFlowContext;
 import io.datafx.controller.flow.context.ViewFlowContext;
@@ -77,8 +78,12 @@ public class OrdersController0 {
         customerTable.getSelectionModel().selectedItemProperty().addListener(((observable, oldValue, newValue) -> {
             selectedCustomer = newValue.getValue();
         }));
+
+        FlowHandler flowHandler = (FlowHandler) context.getRegisteredObject("ContentFlowHandler");
+        Flow flow = (Flow) context.getRegisteredObject("ContentFlow");
+
+
         nextButton.setOnMouseClicked(e -> {
-            FlowHandler flowHandler = (FlowHandler) context.getRegisteredObject("ContentFlowHandler");
             if(flowHandler != null) {
                 try {
                     Order order = new Order();
@@ -98,6 +103,16 @@ public class OrdersController0 {
                 } catch (Exception ex) { ex.printStackTrace();}
             }
         });
+
+        createCustomer.setOnMouseClicked(e -> {
+            try {
+                flowHandler.handle(createCustomer.getId());
+            } catch (Exception ex) { }
+        });
+        flow.withGlobalAction(createCustomer.getId(), ((flowHandler1, handle) -> {
+            Utility.notifyTrial(context);
+        }));
+
         new Thread(() -> {
             loadCustomers();
         }).start();
