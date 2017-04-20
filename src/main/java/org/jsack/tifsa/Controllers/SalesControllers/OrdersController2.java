@@ -14,7 +14,6 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.control.ToggleGroup;
-import org.jsack.tifsa.Controllers.LookupControllers.OrderLookup;
 import org.jsack.tifsa.Database.Customer.Customer;
 import org.jsack.tifsa.Database.Customer.CustomerSchema;
 import org.jsack.tifsa.Database.DBSelect;

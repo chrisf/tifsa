@@ -96,7 +96,6 @@ public class MainController {
         context.register("LastFlow", innerFlow);
         context.register("BackButton", backButton);
         context.register("BackButtonContainer", backButtonContainer);
-        Utility.notifyTrial(context);
     }
 
 }
