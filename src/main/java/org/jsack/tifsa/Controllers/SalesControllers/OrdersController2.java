@@ -8,6 +8,9 @@ import io.datafx.controller.ViewController;
 import io.datafx.controller.flow.FlowHandler;
 import io.datafx.controller.flow.context.FXMLViewFlowContext;
 import io.datafx.controller.flow.context.ViewFlowContext;
+import javafx.beans.property.Property;
+import javafx.beans.property.SimpleObjectProperty;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.control.ToggleGroup;
@@ -15,7 +18,9 @@ import org.jsack.tifsa.Controllers.LookupControllers.OrderLookup;
 import org.jsack.tifsa.Database.Customer.Customer;
 import org.jsack.tifsa.Database.Customer.CustomerSchema;
 import org.jsack.tifsa.Database.DBSelect;
+import org.jsack.tifsa.Database.Employee.Employee;
 import org.jsack.tifsa.Database.Order.Order;
+import org.jsack.tifsa.Database.State.State;
 import org.jsack.tifsa.Julius;
 import org.jsack.tifsa.Utility;
 
@@ -37,7 +42,11 @@ public class OrdersController2 {
             billingZip, shippingFirst, shippingMid, shippingLast, shippingAddress1, shippingAddress2, shippingCity, shippingZip;
 
     @FXML
-    JFXComboBox billingState, shippingState, employeeSelect;
+    JFXComboBox<Employee> employeeSelect;
+
+    @FXML
+    JFXComboBox<State> billingState, shippingState;
+
     @FXML
     JFXButton billingSame, nextButton;
 
@@ -45,6 +54,8 @@ public class OrdersController2 {
     ViewFlowContext context;
     final ToggleGroup toggleGroup = new ToggleGroup();
     private Order order = null;
+
+    Property<State> selectedBillingState = new SimpleObjectProperty<>();
 
     @PostConstruct
     public void init() {
@@ -56,6 +67,7 @@ public class OrdersController2 {
         billingState.setItems(Julius.getAllStates());
         shippingState.setItems(Julius.getAllStates());
         employeeSelect.setItems(Julius.getAllEmployees());
+        billingState.valueProperty().bindBidirectional(selectedBillingState);
         billingSame.setOnMouseClicked(e -> {
             shippingFirst.setText(billingFirst.getText());
             shippingMid.setText(billingMid.getText());
@@ -63,6 +75,7 @@ public class OrdersController2 {
             shippingAddress1.setText(billingAddress1.getText());
             shippingAddress2.setText(billingAddress2.getText());
             shippingCity.setText(billingCity.getText());
+            shippingState.setValue(billingState.getValue());
             shippingZip.setText(billingZip.getText());
             shippingState.getSelectionModel().select(billingState.getSelectionModel().getSelectedIndex());
         });
@@ -80,6 +93,8 @@ public class OrdersController2 {
             order.setOrderShippingCity(shippingCity.getText());
             order.setOrderShippingZip(shippingZip.getText());
             order.setSoldByEmployeeId(Utility.getEmployeeIdByName(employeeSelect.getSelectionModel().getSelectedItem().toString()));
+
+            // TODO: create order in database
            try {
                flowHandler.navigateTo(OrderLookup.class);
            } catch (Exception ex) { }
@@ -99,7 +114,9 @@ public class OrdersController2 {
             billingAddress2.setText(Utility.blankIfNull(cust.getCustomerAddressStreet2()));
             billingCity.setText(Utility.blankIfNull(cust.getCustomerAddressCity()));
             billingZip.setText(Utility.blankIfNull(cust.getCustomerAddressZip()));
-            billingState.getSelectionModel().select(Utility.getStateNameById(cust.getStateId()));
+
+            selectedBillingState.setValue(Utility.getStateById(cust.getStateId()));
+            billingState.setPromptText("");
         }
     }
 }

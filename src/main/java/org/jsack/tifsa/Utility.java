@@ -16,6 +16,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Observable;
 import java.util.concurrent.Semaphore;
+import java.util.function.Predicate;
 import java.util.stream.Collectors;
 
 /**
@@ -44,16 +45,6 @@ public class Utility {
 
     public static boolean containsIgnoreCase(final String s1, final String s2) {
         return s1.toLowerCase().contains(s2.toLowerCase());
-    }
-
-    public static State getState(String stateName) {
-        return Julius.getAllStates().stream()
-                .filter(s -> s.getStateName().equalsIgnoreCase(stateName))
-                .collect(Collectors.toList()).get(0);
-    }
-
-    public static long getStateId(String stateName) {
-        return getState(stateName).getStateId();
     }
 
     public static boolean isNumber(String input) {
@@ -85,12 +76,27 @@ public class Utility {
         return s == null ? "" : s.toString();
     }
 
+    public static State getStateBy(Predicate<State> p) {
+        return Julius.getAllStates().stream()
+                .filter(s -> p.test(s))
+                .collect(Collectors.toList()).get(0);
+    }
+
+    public static State getStateByName(String stateName) {
+        return getStateBy(s -> s.getStateName().equalsIgnoreCase(stateName));
+    }
+
+    public static State getStateById(long stateId) {
+        return getStateBy(s -> s.getStateId() == stateId);
+    }
+
     public static long getStateIdByName(String name) {
-        return Julius.getAllStates().stream().filter(e -> e.getStateName().equals(name)).findAny().get().getStateId();
+        return getStateByName(name).getStateId();
     }
     public static String getStateNameById(long id) {
-        return Julius.getAllStates().stream().filter(e -> e.getStateId() == id).findFirst().get().getStateName();
+        return getStateById(id).getStateName();
     }
+
 
     public static List<String> getAllStateNames() {
         List<String> statenames = new ArrayList<>();
