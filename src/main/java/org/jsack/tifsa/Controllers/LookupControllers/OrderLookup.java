@@ -3,6 +3,7 @@ package org.jsack.tifsa.Controllers.LookupControllers;
 import com.jfoenix.controls.*;
 import com.jfoenix.controls.datamodels.treetable.RecursiveTreeObject;
 import io.datafx.controller.ViewController;
+import io.datafx.controller.flow.FlowHandler;
 import io.datafx.controller.flow.context.FXMLViewFlowContext;
 import io.datafx.controller.flow.context.ViewFlowContext;
 import javafx.beans.property.LongProperty;
@@ -77,6 +78,13 @@ public class OrderLookup {
                             Utility.containsIgnoreCase(product.lastName.get(), newValue) || contact.stream().anyMatch(e -> Utility.containsIgnoreCase(e.getCustomerContactInfo(), newValue)) || Utility.containsIgnoreCase(String.valueOf(product.orderId.get()), newValue);
                 });
             }).start();
+        });
+        nextButton.setOnMouseClicked(e -> {
+            try {
+           context.register("OrderLookupId", orderTable.getSelectionModel().getSelectedItem().getValue().orderId.get());
+            FlowHandler flowHandler = (FlowHandler) context.getRegisteredObject("ContentFlowHandler");
+            flowHandler.navigateTo(OrderLookup2.class); }
+            catch (Exception ex) {ex.printStackTrace(); }
         });
         new Thread(() -> {
             loadOrders();
