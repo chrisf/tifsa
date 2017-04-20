@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+
+<?import com.jfoenix.controls.*?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.*?>
+<BorderPane
+        xmlns="http://javafx.com/javafx/8.0.60" xmlns:fx="http://javafx.com/fxml/1">
+    <center>
+        <VBox spacing="10">
+            <HBox>
+                <StackPane HBox.hgrow="ALWAYS">
+                    <StackPane maxWidth="250" StackPane.alignment="BOTTOM_RIGHT">
+                        <JFXTextField fx:id="filterText" labelFloat="true" promptText="Filter.." editable="true"/>
+                    </StackPane>
+                    <StackPane maxWidth="250" StackPane.alignment="BOTTOM_LEFT">
+                        <Label text="Lookup an order.."/>
+                    </StackPane>
+                </StackPane>
+                <StackPane>
+
+                </StackPane>
+            </HBox>
+            <JFXTreeTableView fx:id="orderTable">
+                <columns>
+                    <JFXTreeTableColumn prefWidth="150" fx:id="orderIdColumn" text="OrderID"/>
+                    <JFXTreeTableColumn prefWidth="150" fx:id="firstNameColumn" text="First"/>
+                    <JFXTreeTableColumn prefWidth="150" fx:id="lastNameColumn" text="Last"/>
+                    <JFXTreeTableColumn prefWidth="100" fx:id="addressColumn" text="Address"/>
+                    <JFXTreeTableColumn prefWidth="100" fx:id="orderDateColumn" text="City"/>
+                    <JFXTreeTableColumn prefWidth="50" fx:id="stateColumn" text="State"/>
+                    <JFXTreeTableColumn prefWidth="100" fx:id="orderStatusColumn" text="Status"/>
+                    <JFXTreeTableColumn prefWidth="100" fx:id="contactColumn" text="Contact Info" />
+                </columns>
+            </JFXTreeTableView>
+            <HBox spacing="5">
+                <StackPane HBox.hgrow="ALWAYS">
+                    <StackPane maxWidth="150" StackPane.alignment="BOTTOM_RIGHT">
+                       <JFXButton text="Next.." fx:id="nextButton" />
+                    </StackPane>
+                </StackPane>
+            </HBox>
+        </VBox>
+
+    </center>
+</BorderPane>

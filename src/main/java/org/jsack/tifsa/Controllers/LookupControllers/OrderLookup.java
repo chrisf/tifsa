@@ -5,8 +5,8 @@ import com.jfoenix.controls.datamodels.treetable.RecursiveTreeObject;
 import io.datafx.controller.ViewController;
 import io.datafx.controller.flow.context.FXMLViewFlowContext;
 import io.datafx.controller.flow.context.ViewFlowContext;
-import javafx.beans.property.DoubleProperty;
-import javafx.beans.property.SimpleDoubleProperty;
+import javafx.beans.property.LongProperty;
+import javafx.beans.property.SimpleLongProperty;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
 import javafx.beans.value.ObservableValue;
@@ -14,113 +14,105 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.control.TreeTableColumn;
-import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
+import org.joda.time.DateTime;
+import org.joda.time.format.DateTimeFormat;
+import org.jsack.tifsa.Database.CustomerContact.CustomerContact;
+import org.jsack.tifsa.Database.CustomerContact.CustomerContactSchema;
+import org.jsack.tifsa.Database.DBSelect;
 import org.jsack.tifsa.Julius;
 import org.jsack.tifsa.Utility;
 import org.springframework.jdbc.core.RowMapper;
 
 import javax.annotation.PostConstruct;
-import java.io.ByteArrayInputStream;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.List;
 import java.util.function.Function;
 
 /**
- * Created by Admin on 4/19/2017.
+ * Created by aaron on 4/19/17.
  */
-@ViewController("/Scenes/Lookup/LookupOrder.fxml")
+@ViewController("/Scenes/Lookup/LookupOrder0.fxml")
 public class OrderLookup {
+
     @FXML
     JFXTextField filterText;
 
     @FXML
-    ImageView productView;
+    JFXTreeTableColumn<OrderRecord, String> firstNameColumn, lastNameColumn, addressColumn, orderDateColumn, stateColumn, orderStatusColumn, contactColumn;
 
     @FXML
-    JFXTreeTableView<ProductReportItem> productTable, orderTable;
+    JFXTreeTableColumn<OrderRecord, Number> orderIdColumn;
+    @FXML
+    JFXButton nextButton;
 
     @FXML
-    JFXButton refresh;
+    JFXTreeTableView<OrderRecord> orderTable;
 
-
-    @FXML
-    JFXTreeTableColumn<ProductReportItem, String> productSkuColumn;
-
-    @FXML
-    JFXTreeTableColumn<ProductReportItem, String> productNameColumn;
-
-    @FXML
-    JFXTreeTableColumn<ProductReportItem, String> productBrandColumn;
-
-    @FXML
-    JFXTreeTableColumn<ProductReportItem, Number> productPriceColumn;
     @FXMLViewFlowContext
     ViewFlowContext context;
 
-    private ObservableList<ProductReportItem> products, orderProducts;
+    private ObservableList<OrderRecord> orderRecords;
+    private ObservableList<CustomerContact> customerContacts;
+    private OrderRecord selectedCustomer = null;
 
     @PostConstruct
     public void init() {
-        orderProducts = FXCollections.observableArrayList();
+        setupCellValueFactory(orderIdColumn, e -> e.orderId);
+        setupCellValueFactory(firstNameColumn, e -> e.firstName);
+        setupCellValueFactory(lastNameColumn, e -> e.lastName);
+        setupCellValueFactory(addressColumn, e -> e.address);
+        setupCellValueFactory(orderDateColumn, e -> e.date);
+        setupCellValueFactory(stateColumn, e -> e.state);
+        setupCellValueFactory(orderStatusColumn, e -> e.status);
+        setupCellValueFactory(contactColumn, e -> e.contactInfo);
 
-        setupCellValueFactory(productSkuColumn, e -> e.sku);
-        setupCellValueFactory(productNameColumn, e -> e.name);
-        setupCellValueFactory(productBrandColumn, e -> e.brand);
-        setupCellValueFactory(productPriceColumn, e -> e.price);
-        filterText.textProperty().addListener((o, oldVal, newVal) -> {
+        filterText.textProperty().addListener((observable, oldValue, newValue) ->
+        {
             new Thread(() -> {
-                productTable.setPredicate(productProp -> {
-                    final ProductReportItem product = productProp.getValue();
-
-                    return Utility.containsIgnoreCase(product.name.get(), newVal) ||
-                            Utility.containsIgnoreCase(product.brand.get(), newVal) || Utility.containsIgnoreCase(product.sku.get(), newVal);
+                orderTable.setPredicate(productProp -> {
+                    final OrderRecord product = productProp.getValue();
+                    final List<CustomerContact> contact = customerContacts.filtered(c -> c.getCustomerId() == product.customerId.get());
+                    return Utility.containsIgnoreCase(product.firstName.get(), newValue) ||
+                            Utility.containsIgnoreCase(product.lastName.get(), newValue) || contact.stream().anyMatch(e -> Utility.containsIgnoreCase(e.getCustomerContactInfo(), newValue)) || Utility.containsIgnoreCase(String.valueOf(product.orderId.get()), newValue);
                 });
             }).start();
         });
-        productTable.getSelectionModel().selectedItemProperty().addListener(
-                ((observable, oldValue, newValue) -> {
-                    byte[] imageData = newValue.getValue().imageData;
-                    if (imageData != null) {
-                        try {
-                            Image prodImage = new Image(new ByteArrayInputStream(imageData));
-                            productView.setFitWidth(150);
-                            productView.setFitHeight(150);
-                            productView.setImage(prodImage);
-                        } catch (Exception ex) {
-                        }
-                    } else {
-                        productView.setImage(null);
-                    }
-                })
-        );
-        refresh.setOnMouseClicked(e -> {
-            new Thread(() -> {
-                updateProducts();
-            }).start();
-        });
         new Thread(() -> {
-            updateProducts();
+            loadOrders();
         }).start();
     }
 
-    private void updateProducts() {
-        List<ProductReportItem> newItems = Julius.getJdbcTemplate().query("SELECT ProductSKU, ProductDescription, ProductPrice, BrandName, PictureData " +
-                        "FROM Product " +
-                        "INNER JOIN Brand ON Product.BrandID = Brand.BrandID " +
-                        "FULL JOIN Picture ON Picture.ProductID = Product.ProductID"
-                , new ProductReportItemWrapper());
-        products = FXCollections.observableArrayList(newItems);
-        Utility.runOnGuiAndWait(() -> {
-            productTable.setRoot(new RecursiveTreeItem<>(products, RecursiveTreeObject::getChildren));
-            productTable.setShowRoot(false);
-        });
+    private void loadOrders() {
+        orderRecords = FXCollections.observableArrayList(Julius.getJdbcTemplate().query("" +
+                "SELECT OrderID, OrderBillingFirst, OrderBillingLast, OrderBillingStreet, [Order].CustomerID, State.StateName, OrderDate, " +
+                "OrderStatus.OrderStatusDescription, o1.CustomerContactInfo " +
+                "FROM [Order] " +
+                "FULL JOIN OrderStatus ON OrderStatus.OrderStatusID = [Order].OrderStatusID " +
+                "INNER JOIN State ON [Order].OrderBillingState=State.StateID " +
+                "LEFT JOIN ( SELECT * FROM CustomerContact WHERE CustomerContact.CustomerContactPrimary = '1') " +
+                "AS o1 ON [Order].CustomerID = o1.CustomerID " +
+                "ORDER BY [Order].OrderID ASC", new OrderRecordWrapper()
+        ));
+        customerContacts = FXCollections.observableArrayList(
+                new DBSelect().selectAll(new CustomerContactSchema()));
 
+        Utility.runOnGuiAndWait(() -> {
+            orderTable.setRoot(new RecursiveTreeItem<>(orderRecords, RecursiveTreeObject::getChildren));
+            orderTable.setShowRoot(false);
+        });
     }
 
-    private <T> void setupCellValueFactory(JFXTreeTableColumn<ProductReportItem, T> column, Function<ProductReportItem, ObservableValue<T>> mapper) {
-        column.setCellValueFactory((TreeTableColumn.CellDataFeatures<ProductReportItem, T> param) -> {
+    private class OrderRecordWrapper implements RowMapper<OrderRecord> {
+        @Override
+        public OrderRecord mapRow(ResultSet rs, int rowNum) throws SQLException {
+            return new OrderRecord(rs.getLong("OrderID"), rs.getString("OrderBillingFirst"), rs.getString("OrderBillingLast"), rs.getString("OrderBillingStreet"),
+                    rs.getString("StateName"), rs.getString("CustomerContactInfo"), rs.getString("OrderDate").toString(), rs.getString("OrderStatusDescription"), rs.getLong("CustomerID"));
+        }
+    }
+
+    private <T> void setupCellValueFactory(JFXTreeTableColumn<OrderRecord, T> column, Function<OrderRecord, ObservableValue<T>> mapper) {
+        column.setCellValueFactory((TreeTableColumn.CellDataFeatures<OrderRecord, T> param) -> {
             if (column.validateValue(param)) {
                 return mapper.apply(param.getValue().getValue());
             } else {
@@ -129,28 +121,23 @@ public class OrderLookup {
         });
     }
 
-    private class ProductReportItemWrapper implements RowMapper<ProductReportItem> {
-        @Override
-        public ProductReportItem mapRow(ResultSet rs, int rowNum) throws SQLException {
-            return new ProductReportItem(rs.getString("ProductSKU"), rs.getString("ProductDescription"),
-                    rs.getString("BrandName"), rs.getDouble("ProductPrice"), rs.getBytes("PictureData"));
+    private static final class OrderRecord extends RecursiveTreeObject<OrderRecord> {
+        final StringProperty firstName, lastName, address, state, contactInfo, date, status;
+        final LongProperty orderId, customerId;
 
+        OrderRecord(long orderId, String firstName, String lastName, String address, String state, String contactInfo, String date, String status, long customerId) {
+            this.firstName = new SimpleStringProperty(Utility.blankIfNull(firstName));
+            this.lastName = new SimpleStringProperty(Utility.blankIfNull(lastName));
+            this.address = new SimpleStringProperty(Utility.blankIfNull(address));
+            this.state = new SimpleStringProperty(Utility.blankIfNull(state));
+            this.contactInfo = new SimpleStringProperty(Utility.blankIfNull(contactInfo));
+            this.orderId = new SimpleLongProperty(orderId);
+            this.customerId = new SimpleLongProperty(customerId);
+            this.status = new SimpleStringProperty(Utility.blankIfNull(status));
+            org.joda.time.format.DateTimeFormatter dtf = DateTimeFormat.forPattern("yyyy-MM-dd HH:mm:ss.SSS");
+            DateTime dt = dtf.parseDateTime(date);
+            this.date = new SimpleStringProperty(DateTimeFormat.forPattern("MM-dd-yyyy").print(dt));
         }
     }
 
-    static final class ProductReportItem extends RecursiveTreeObject<ProductReportItem> {
-        final StringProperty sku;
-        final StringProperty name;
-        final StringProperty brand;
-        final DoubleProperty price;
-        final byte[] imageData;
-
-        ProductReportItem(String sku, String name, String brand, Double price, byte[] imageData) {
-            this.sku = sku != null ? new SimpleStringProperty(sku) : new SimpleStringProperty("");
-            this.name = name != null ? new SimpleStringProperty(name) : new SimpleStringProperty("");
-            this.brand = brand != null ? new SimpleStringProperty(brand) : new SimpleStringProperty("");
-            this.price = price != null ? new SimpleDoubleProperty(price) : new SimpleDoubleProperty(0.0);
-            this.imageData = imageData;
-        }
-    }
 }
