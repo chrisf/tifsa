@@ -4,6 +4,8 @@ import com.jfoenix.controls.*;
 import com.jfoenix.controls.cells.editors.base.JFXTreeTableCell;
 import com.jfoenix.controls.datamodels.treetable.RecursiveTreeObject;
 import io.datafx.controller.ViewController;
+import io.datafx.controller.flow.context.FXMLViewFlowContext;
+import io.datafx.controller.flow.context.ViewFlowContext;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
 import javafx.beans.value.ObservableValue;
@@ -45,10 +47,14 @@ public class ReportsController {
     @FXML
     JFXButton refreshButton;
 
+    @FXMLViewFlowContext
+    ViewFlowContext context;
+
     //Lists for report types
     ObservableList<String> categorySelectionList, reportSelectionList;
     ObservableList<ReportModelBase> tableItems;
     IReport currentReport;
+
     FXMLLoader currentLoader;
     IControl currentController;
 
@@ -194,19 +200,21 @@ public class ReportsController {
         if (currentReport == null) {
             return;
         }
+        new Thread(() ->
+        Utility.runOnGuiAndWait(() -> {
+            try {
+                List<ReportModelBase> items = new ArrayList<>();
+                if (currentLoader.<IControl>getController().getAttributes() == null) {
+                    items = reports.runReport(currentReport);
+                } else {
+                    items = reports.runReport(currentReport, currentLoader.<IControl>getController().getAttributes());
+                }
 
-        try {
-            List<ReportModelBase> items = new ArrayList<>();
-            if (currentLoader.<IControl>getController().getAttributes() == null) {
-                items = reports.runReport(currentReport);
-            } else {
-                items = reports.runReport(currentReport, currentLoader.<IControl>getController().getAttributes());
+                tableItems.addAll(items);
+            } catch (Exception ex) {
+                ex.printStackTrace();
             }
-
-            tableItems.addAll(items);
-        } catch (Exception ex) {
-            ex.printStackTrace();
-        }
+        })).start();
 
     }
 }

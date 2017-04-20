@@ -1,12 +1,9 @@
 package org.jsack.tifsa.Reports.Order.OrdersBySpecificMonth;
 
 import com.jfoenix.controls.JFXComboBox;
-import com.jfoenix.controls.JFXDatePicker;
 import javafx.fxml.Initializable;
-import org.joda.time.DateTimeConstants;
 import org.joda.time.LocalDateTime;
-import org.joda.time.format.DateTimeFormat;
-import org.joda.time.format.DateTimeFormatter;
+import org.jsack.tifsa.Julius;
 import org.jsack.tifsa.Reports.Interfaces.IControl;
 import org.jsack.tifsa.Utility;
 
@@ -22,8 +19,8 @@ public class Controls implements Initializable, IControl {
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        yearSelection.setItems(Utility.getYears());
-        monthSelection.setItems(Utility.getMonths());
+        yearSelection.setItems(Julius.getYears());
+        monthSelection.setItems(Julius.getMonths());
     }
 
     @Override
