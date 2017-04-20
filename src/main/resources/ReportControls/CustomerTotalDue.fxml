@@ -6,5 +6,5 @@
             xmlns:fx="http://javafx.com/fxml"
             fx:controller="org.jsack.tifsa.Reports.Customer.CustomerTotalDue.Controls"
             prefHeight="400.0" prefWidth="600.0">
-    <JFXComboBox fx:id="customerStatusSelection" promptText="Choose customer status..." maxWidth="Infinity" />
+    <JFXComboBox fx:id="customerStatusSelection" promptText="Choose customer status..." maxWidth="Infinity" labelFloat="true" />
 </AnchorPane>
