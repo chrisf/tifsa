@@ -11,22 +11,15 @@
 <?import javafx.scene.layout.StackPane?>
 <?import javafx.scene.layout.VBox?>
 
+<?import javafx.scene.text.Text?>
 <BorderPane xmlns="http://javafx.com/javafx/8.0.112" xmlns:fx="http://javafx.com/fxml/1">
     <top>
     </top>
     <center>
-        <VBox alignment="CENTER">
-            <JFXTreeTableView fx:id="orderTable" prefHeight="200">
-                <columns>
-                    <JFXTreeTableColumn fx:id="orderSkuColumn" prefWidth="250" text="ProductSKU" />
-                    <JFXTreeTableColumn fx:id="orderNameColumn" prefWidth="250" text="ProductName" />
-                    <JFXTreeTableColumn fx:id="orderPriceColumn" prefWidth="250" text="Price" />
-                    <JFXTreeTableColumn fx:id="orderBrandColumn" prefWidth="250" text="Brand" />
-                </columns>
-            </JFXTreeTableView>
+        <VBox alignment="CENTER" spacing="10">
             <HBox>
                 <StackPane HBox.hgrow="ALWAYS">
-                    <StackPane maxWidth="250" StackPane.alignment="BOTTOM_LEFT">
+                    <StackPane maxWidth="250" StackPane.alignment="TOP_CENTER">
                         <ImageView fx:id="productView" fitHeight="200" fitWidth="300" />
                     </StackPane>
                 </StackPane>
@@ -41,12 +34,17 @@
                     </StackPane>
                 </StackPane>
                 <StackPane>
+                    <StackPane maxWidth="150">
+                        <JFXButton fx:id="refresh" buttonType="RAISED" text="Refresh" />
+                    </StackPane>
+                </StackPane>
+                <StackPane>
                     <StackPane maxWidth="250">
                         <JFXTextField fx:id="filterText" editable="true" labelFloat="true" promptText="Filter.." />
                     </StackPane>
                 </StackPane>
-
             </HBox>
+            <Text>Product List</Text>
             <JFXTreeTableView fx:id="productTable">
                 <columns>
                     <JFXTreeTableColumn fx:id="productSkuColumn" prefWidth="250" text="ProductSKU" />
@@ -55,12 +53,42 @@
                     <JFXTreeTableColumn fx:id="productBrandColumn" prefWidth="250" text="Brand" />
                 </columns>
             </JFXTreeTableView>
-            <HBox>
-                <StackPane HBox.hgrow="ALWAYS">
-                    <StackPane maxWidth="150" StackPane.alignment="CENTER_RIGHT">
-                        <JFXButton fx:id="refresh" buttonType="RAISED" text="Refresh" />
+            <Text>Selected Products</Text>
+            <JFXTreeTableView fx:id="orderTable" prefHeight="200">
+                <columns>
+                    <JFXTreeTableColumn fx:id="orderSkuColumn" prefWidth="250" text="ProductSKU" />
+                    <JFXTreeTableColumn fx:id="orderNameColumn" prefWidth="250" text="ProductName" />
+                    <JFXTreeTableColumn fx:id="orderPriceColumn" prefWidth="250" text="Price" />
+                    <JFXTreeTableColumn fx:id="orderBrandColumn" prefWidth="250" text="Brand" />
+                </columns>
+            </JFXTreeTableView>
+            <HBox alignment="TOP_RIGHT">
+                <padding>
+                    <Insets bottom="5" left="10" right="10" top="15" />
+                </padding>
+                <VBox spacing="5">
+                    <HBox spacing="10">
+                        <Text>Sub Total:</Text>
+                        <Text fx:id="subTotal"></Text>
+                    </HBox>
+                    <HBox spacing="10">
+                        <Text>Delivery Fee:</Text>
+                        <Text fx:id="deliveryFee"></Text>
+                    </HBox>
+                    <HBox spacing="10">
+                        <Text>Tax:</Text>
+                        <Text fx:id="tax"></Text>
+                    </HBox>
+                    <HBox spacing="10">
+                        <Text>Invoice Total:</Text>
+                        <Text fx:id="invoiceTotal"></Text>
+                    </HBox>
+                    <StackPane>
+                        <StackPane maxWidth="150">
+                            <JFXButton fx:id="createOrder" text="Create Order" />
+                        </StackPane>
                     </StackPane>
-                </StackPane>
+                </VBox>
             </HBox>
         </VBox>
     </center>

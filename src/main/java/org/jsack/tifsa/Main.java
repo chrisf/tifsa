@@ -27,7 +27,7 @@ public class Main extends Application {
 
         JFXDecorator decorator = new JFXDecorator(primaryStage, container.getView());
         decorator.setCustomMaximize(true);
-        Scene scene = new Scene(decorator, 1250, 900);
+        Scene scene = new Scene(decorator, 1250, 1000);
         final ObservableList<String> styles = scene.getStylesheets();
         styles.add(getClass().getResource("/styles.css").toExternalForm());
 

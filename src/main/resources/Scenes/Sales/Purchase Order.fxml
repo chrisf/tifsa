@@ -1,0 +1,180 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.CheckBox?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.TextArea?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.control.TitledPane?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="895.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+      <TitledPane prefHeight="275.0" prefWidth="600.0" />
+      <ImageView fitHeight="59.0" fitWidth="200.0" layoutX="13.0" layoutY="71.0">
+         <image>
+            <Image url="@CIS%203365/tlogo.png" />
+         </image>
+      </ImageView>
+      <Text layoutX="216.0" layoutY="96.0" strokeType="OUTSIDE" strokeWidth="0.0" text="403 W. Grand Parkway South - Suite P - Katy, TX  77494" wrappingWidth="362.13677978515625" />
+      <Text layoutX="216.0" layoutY="112.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Tel: 281-347-KATY (5289) - Fax: 281-347-5291" wrappingWidth="362.13677978515625" />
+      <Text layoutX="216.0" layoutY="126.0" strokeType="OUTSIDE" strokeWidth="0.0" text="E-mail: tistasdecor@aol.com - www.TistasHome.com" wrappingWidth="362.13677978515625" />
+      <Text layoutX="14.0" layoutY="54.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Delivery Date" />
+      <TextField layoutX="88.0" layoutY="37.0" prefHeight="25.0" prefWidth="106.0" />
+      <Text layoutX="203.0" layoutY="54.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Day" />
+      <TextField layoutX="226.0" layoutY="37.0" prefHeight="25.0" prefWidth="106.0" />
+      <Text layoutX="339.0" layoutY="54.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Time" />
+      <TextField layoutX="368.0" layoutY="37.0" prefHeight="25.0" prefWidth="106.0" />
+      <Text layoutX="481.0" layoutY="54.0" strokeType="OUTSIDE" strokeWidth="0.0" text="COD" />
+      <TextField layoutX="509.0" layoutY="37.0" prefHeight="25.0" prefWidth="73.0" />
+      <Text layoutX="14.0" layoutY="160.0" strokeType="OUTSIDE" strokeWidth="0.0" text="First Name" />
+      <TextField layoutX="78.0" layoutY="143.0" prefHeight="25.0" prefWidth="106.0" />
+      <Text layoutX="194.0" layoutY="160.0" strokeType="OUTSIDE" strokeWidth="0.0" text="M.I." />
+      <TextField layoutX="217.0" layoutY="143.0" prefHeight="25.0" prefWidth="40.0" />
+      <Text layoutX="267.0" layoutY="160.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Last Name" />
+      <TextField layoutX="328.0" layoutY="143.0" prefHeight="25.0" prefWidth="106.0" />
+      <Text layoutX="445.0" layoutY="160.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Date" />
+      <TextField layoutX="477.0" layoutY="143.0" prefHeight="25.0" prefWidth="106.0" />
+      <Text layoutX="13.0" layoutY="191.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Address 1" />
+      <TextField layoutX="78.0" layoutY="174.0" prefHeight="25.0" prefWidth="210.0" />
+      <Text layoutX="303.0" layoutY="191.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Address 2" />
+      <TextField layoutX="362.0" layoutY="174.0" prefHeight="25.0" prefWidth="220.0" />
+      <Text layoutX="12.0" layoutY="223.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Country" />
+      <ComboBox layoutX="60.0" layoutY="206.0" prefHeight="25.0" prefWidth="123.0" />
+      <Text layoutX="190.0" layoutY="223.0" strokeType="OUTSIDE" strokeWidth="0.0" text="State" />
+      <ComboBox layoutX="226.0" layoutY="206.0" prefHeight="25.0" prefWidth="42.0" />
+      <Text layoutX="286.0" layoutY="223.0" strokeType="OUTSIDE" strokeWidth="0.0" text="City" />
+      <ComboBox layoutX="315.0" layoutY="206.0" prefHeight="25.0" prefWidth="123.0" />
+      <Text layoutX="447.0" layoutY="223.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Zip" />
+      <TextField layoutX="469.0" layoutY="206.0" prefHeight="25.0" prefWidth="114.0" />
+      <Text layoutX="13.0" layoutY="257.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Telephone" />
+      <TextField layoutX="74.0" layoutY="240.0" prefHeight="25.0" prefWidth="114.0" />
+      <Text layoutX="198.0" layoutY="257.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Cellphone" />
+      <TextField layoutX="260.0" layoutY="240.0" prefHeight="25.0" prefWidth="114.0" />
+      <Text layoutX="383.0" layoutY="257.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Email" />
+      <TextField layoutX="418.0" layoutY="240.0" prefHeight="25.0" prefWidth="165.0" />
+      <Text layoutX="16.0" layoutY="295.0" strokeType="OUTSIDE" strokeWidth="0.0" text="S.O. / MFG." />
+      <TextField layoutX="16.0" layoutY="299.0" prefHeight="25.0" prefWidth="149.0" />
+      <Text layoutX="174.0" layoutY="295.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Salesperson" />
+      <TextField layoutX="174.0" layoutY="299.0" prefHeight="25.0" prefWidth="138.0" />
+      <Text layoutX="333.0" layoutY="295.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Directions:" />
+      <TextField layoutX="322.0" layoutY="299.0" prefHeight="25.0" prefWidth="261.0" />
+      <CheckBox layoutX="17.0" layoutY="333.0" mnemonicParsing="false" text="Check" />
+      <CheckBox layoutX="84.0" layoutY="333.0" mnemonicParsing="false" text="Cash" />
+      <CheckBox layoutX="146.0" layoutY="333.0" mnemonicParsing="false" text="Credit Card" />
+      <CheckBox layoutX="244.0" layoutY="333.0" mnemonicParsing="false" text="Finance" />
+      <Text layoutX="22.0" layoutY="376.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Vendor" />
+      <TextField layoutX="16.0" layoutY="380.0" prefHeight="25.0" prefWidth="114.0" />
+      <Text layoutX="135.0" layoutY="376.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Item #" />
+      <TextField layoutX="129.0" layoutY="380.0" prefHeight="25.0" prefWidth="114.0" />
+      <Text layoutX="248.0" layoutY="376.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Qty" />
+      <TextField layoutX="242.0" layoutY="380.0" prefHeight="25.0" prefWidth="39.0" />
+      <Text layoutX="286.0" layoutY="376.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Description" />
+      <TextField layoutX="280.0" layoutY="380.0" prefHeight="25.0" prefWidth="157.0" />
+      <Text layoutX="442.0" layoutY="376.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Price" />
+      <TextField layoutX="436.0" layoutY="380.0" prefHeight="25.0" prefWidth="53.0" />
+      <Text layoutX="494.0" layoutY="376.0" strokeType="OUTSIDE" strokeWidth="0.0" text="LOC" />
+      <TextField layoutX="488.0" layoutY="380.0" prefHeight="25.0" prefWidth="39.0" />
+      <Text layoutX="533.0" layoutY="376.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Price" />
+      <TextField layoutX="526.0" layoutY="380.0" prefHeight="25.0" prefWidth="53.0" />
+      <TextField layoutX="16.0" layoutY="404.0" prefHeight="25.0" prefWidth="114.0" />
+      <TextField layoutX="129.0" layoutY="404.0" prefHeight="25.0" prefWidth="114.0" />
+      <TextField layoutX="242.0" layoutY="404.0" prefHeight="25.0" prefWidth="39.0" />
+      <TextField layoutX="280.0" layoutY="404.0" prefHeight="25.0" prefWidth="157.0" />
+      <TextField layoutX="436.0" layoutY="404.0" prefHeight="25.0" prefWidth="53.0" />
+      <TextField layoutX="488.0" layoutY="404.0" prefHeight="25.0" prefWidth="39.0" />
+      <TextField layoutX="526.0" layoutY="404.0" prefHeight="25.0" prefWidth="53.0" />
+      <TextField layoutX="16.0" layoutY="428.0" prefHeight="25.0" prefWidth="114.0" />
+      <TextField layoutX="129.0" layoutY="428.0" prefHeight="25.0" prefWidth="114.0" />
+      <TextField layoutX="242.0" layoutY="428.0" prefHeight="25.0" prefWidth="39.0" />
+      <TextField layoutX="280.0" layoutY="428.0" prefHeight="25.0" prefWidth="157.0" />
+      <TextField layoutX="436.0" layoutY="428.0" prefHeight="25.0" prefWidth="53.0" />
+      <TextField layoutX="488.0" layoutY="428.0" prefHeight="25.0" prefWidth="39.0" />
+      <TextField layoutX="526.0" layoutY="428.0" prefHeight="25.0" prefWidth="53.0" />
+      <TextField layoutX="16.0" layoutY="452.0" prefHeight="25.0" prefWidth="114.0" />
+      <TextField layoutX="129.0" layoutY="452.0" prefHeight="25.0" prefWidth="114.0" />
+      <TextField layoutX="242.0" layoutY="452.0" prefHeight="25.0" prefWidth="39.0" />
+      <TextField layoutX="280.0" layoutY="452.0" prefHeight="25.0" prefWidth="157.0" />
+      <TextField layoutX="436.0" layoutY="452.0" prefHeight="25.0" prefWidth="53.0" />
+      <TextField layoutX="488.0" layoutY="452.0" prefHeight="25.0" prefWidth="39.0" />
+      <TextField layoutX="526.0" layoutY="452.0" prefHeight="25.0" prefWidth="53.0" />
+      <Button layoutX="469.0" layoutY="856.0" mnemonicParsing="false" text="Create" />
+      <Button layoutX="533.0" layoutY="856.0" mnemonicParsing="false" text="Cancel" />
+      <Text layoutX="78.0" layoutY="497.0" strokeType="OUTSIDE" strokeWidth="0.0" text="All floor models sold as is" />
+      <Text layoutX="37.0" layoutY="513.0" strokeType="OUTSIDE" strokeWidth="0.0" text="All delivery charges to be paid by customer" />
+      <Text layoutX="87.0" layoutY="530.0" strokeType="OUTSIDE" strokeWidth="0.0" text="&amp; must be paid in full." />
+      <TextArea layoutX="282.0" layoutY="486.0" prefHeight="115.0" prefWidth="296.0" text="    SPECIAL ORDERS ARE NOT SUBJECT TO CANCELLATION&#10;Availability orf merchandise is estimate to information on &#10;hand at the time order is written. Seller shall not be responsible &#10;for delays in delivery of merchandise by manufacturer's &#10;scheduling, stock on hand, availibity of materials, transportation&#10;difficulty or any other cause beyond the control of the seller.">
+         <font>
+            <Font size="10.0" />
+         </font>
+      </TextArea>
+      <TextArea layoutX="9.0" layoutY="536.0" prefHeight="235.0" prefWidth="274.0" text="              ALL SALES ARE FINAL - NO REFUNDS&#10;A minimum free of 25% of the purchase will be assesssed &#10;(re-stocking fee) on seller transporation of merchandise&#10;pick-up. Buyer agrees to measure doorways and &#10;stairways before ordering as seller is not responsible for&#10;merchandise purchase that is too large to fit. SELLER &#10;CAN DESIGNATE A DAY FOR DELIVERY, but not a &#10;specific time. Seller cannot move, haul, or rearrange old&#10;furniture. Seller makes no warranty beyond any written &#10;description itemized on this order. Such disclaimer does &#10;not effect manufacturer warranties. BUYER LAYAWAYS &#10;ARE NOT SUBJECT TO CANCELLATION. Buyer agree to &#10;complete payment on schedule or proceeds or prior &#10;payment(s) toward layway may be forfeited.&#10;">
+         <font>
+            <Font size="10.0" />
+         </font>
+      </TextArea>
+      <Text layoutX="289.0" layoutY="629.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Subtotal Goods:">
+         <font>
+            <Font size="14.0" />
+         </font>
+      </Text>
+      <Text layoutX="310.0" layoutY="655.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Delivery Fee:">
+         <font>
+            <Font size="14.0" />
+         </font>
+      </Text>
+      <Text layoutX="308.0" layoutY="681.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Inv. Subtotal:">
+         <font>
+            <Font size="14.0" />
+         </font>
+      </Text>
+      <Text layoutX="314.0" layoutY="709.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Tax (8.25%):">
+         <font>
+            <Font size="14.0" />
+         </font>
+      </Text>
+      <Text layoutX="306.0" layoutY="737.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Invoice Total:">
+         <font>
+            <Font size="14.0" />
+         </font>
+      </Text>
+      <Text layoutX="300.0" layoutY="765.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Amound Paid:">
+         <font>
+            <Font size="14.0" />
+         </font>
+      </Text>
+      <Text layoutX="337.0" layoutY="793.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Balance:">
+         <font>
+            <Font size="14.0" />
+         </font>
+      </Text>
+      <TextField layoutX="397.0" layoutY="610.0" prefHeight="25.0" prefWidth="182.0" />
+      <TextField layoutX="397.0" layoutY="637.0" prefHeight="25.0" prefWidth="182.0" />
+      <TextField layoutX="397.0" layoutY="664.0" prefHeight="25.0" prefWidth="182.0" />
+      <TextField layoutX="397.0" layoutY="691.0" prefHeight="25.0" prefWidth="182.0" />
+      <TextField layoutX="397.0" layoutY="719.0" prefHeight="25.0" prefWidth="182.0" />
+      <TextField layoutX="397.0" layoutY="747.0" prefHeight="25.0" prefWidth="182.0" />
+      <TextField layoutX="397.0" layoutY="775.0" prefHeight="25.0" prefWidth="182.0" />
+      <Text layoutX="11.0" layoutY="791.0" strokeType="OUTSIDE" strokeWidth="0.0" text="BUYER AUTHORIZES ABOVE ORDER">
+         <font>
+            <Font size="10.0" />
+         </font>
+      </Text>
+      <Text layoutX="178.0" layoutY="791.0" strokeType="OUTSIDE" strokeWidth="0.0" text="MERCHANDISE RECEIVED">
+         <font>
+            <Font size="10.0" />
+         </font>
+      </Text>
+      <Text layoutX="12.0" layoutY="843.0" strokeType="OUTSIDE" strokeWidth="0.0" text="ALL SALES FINAL                         NO EXCHANGES                        NO REFUNDS" wrappingWidth="577.9049987792969">
+         <font>
+            <Font name="System Bold" size="16.0" />
+         </font>
+      </Text>
+      <TextField layoutX="11.0" layoutY="794.0" prefHeight="25.0" prefWidth="158.0" />
+      <TextField layoutX="169.0" layoutY="794.0" prefHeight="25.0" prefWidth="123.0" />
+   </children>
+</AnchorPane>
