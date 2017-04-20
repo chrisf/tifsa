@@ -54,6 +54,7 @@
       <element id="library" level="project" name="Maven: io.datafx:datafx:8.0.1" />
       <element id="library" level="project" name="Maven: io.datafx:core:8.0.1" />
       <element id="library" level="project" name="Maven: io.datafx:flow:8.0.1" />
+      <element id="library" level="project" name="Maven: org.webjars:font-awesome:4.7.0" />
     </root>
   </artifact>
 </component>
