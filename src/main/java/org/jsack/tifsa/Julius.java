@@ -77,6 +77,8 @@ public class Julius {
 
             employees = FXCollections.observableArrayList(
                     new DBSelect().selectAll(new EmployeeSchema())
+            );
+            
             vendors = FXCollections.observableArrayList(
                     new DBSelect().selectAll(new VendorSchema())
             );
