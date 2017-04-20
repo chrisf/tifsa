@@ -37,10 +37,10 @@ public class Report implements IReport{
             ") as o1 ON o1.EmployeeID = Employee.EmployeeID \n" +
             "\n" +
             "\n" +
-            "WHERE DATEPART(year, dbo.[Order].OrderDate) = '2008' AND DATEPART(month, dbo.[Order].OrderDate) ='4' AND [OrderDiscount].Deleted = 0\n" +
+            "WHERE [Order].OrderDate BETWEEN '2015-06-01' AND '2015-07-01' AND [OrderDiscount].Deleted = 0\n" +
             "\n" +
             "GROUP BY [Order].OrderDate,\n" +
-            "Employee.EmployeeFirst, Employee.EmployeeLast, o1.RoleCount\n";
+            "Employee.EmployeeFirst, Employee.EmployeeLast, o1.RoleCount";
 
     /*
         TODO: Name your report.
