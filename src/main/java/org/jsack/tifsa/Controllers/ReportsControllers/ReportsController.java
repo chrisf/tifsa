@@ -143,7 +143,7 @@ public class ReportsController {
         // load all the columns for the table based on the selected report
         for (Map.Entry<String, ColumnInfo> entry : currentReport.getModel().getColumns().entrySet()) {
             final int i = idx;
-            JFXTreeTableColumn<ReportModelBase, String> column = new JFXTreeTableColumn<>(entry.getValue().columnLabel);
+            final JFXTreeTableColumn<ReportModelBase, String> column = new JFXTreeTableColumn<>(entry.getValue().columnLabel);
             column.setCellFactory((model -> {
                 JFXTreeTableCell<ReportModelBase, String> cell = new JFXTreeTableCell<ReportModelBase, String>() {
                     @Override
@@ -157,7 +157,9 @@ public class ReportsController {
                             setText(item);
 
                             if (item.startsWith("$") || Utility.isNumber(item)) {
-                                setStyle("-fx-alignment: CENTER-RIGHT");
+                                if(!Utility.containsIgnoreCase(column.getText(), "sku")) {
+                                    setStyle("-fx-alignment: CENTER-RIGHT");
+                                }
                             }
                         }
                     }
