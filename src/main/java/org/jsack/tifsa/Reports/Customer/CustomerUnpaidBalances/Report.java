@@ -19,16 +19,18 @@ public class Report implements IReport{
         If you already created your reports using the previous method, just copy and paste it into here.
         If you haven't, copy and paste it from Drive and replace all the "\n" with a space.
      */
-    public final String sql = "SELECT " +
-            "dbo.Customer.CustomerFirst, dbo.Customer.CustomerLast," +
-            "dbo.CustomerContact.CustomerContactInfo," +
-            "dbo.CustomerContactType.CustomerContactTypeDescription," +
-            "dbo.[Order].OrderBalance " +
-            "FROM Customer " +
-            "INNER JOIN CustomerContact ON Customer.CustomerID = CustomerContact.CustomerID " +
-            "INNER JOIN CustomerContactType ON CustomerContactType.CustomerContactTypeID = CustomerContact.CustomerContactTypeID " +
-            "INNER JOIN [Order] ON [Order].CustomerID = CustomerContact.CustomerContactID " +
-            "WHERE CustomerContact.[CustomerContactPrimary] = 1 AND OrderBalance > 0";
+    public final String sql = "SELECT\n" +
+            "dbo.Customer.CustomerFirst, dbo.Customer.CustomerLast,\n" +
+            "dbo.CustomerContact.CustomerContactInfo,\n" +
+            "dbo.CustomerContactType.CustomerContactTypeDescription,\n" +
+            "SUM(dbo.[Order].OrderBalance) AS OrderBalance\n" +
+            "FROM Customer\n" +
+            "INNER JOIN CustomerContact ON Customer.CustomerID = CustomerContact.CustomerID\n" +
+            "INNER JOIN CustomerContactType ON CustomerContactType.CustomerContactTypeID = CustomerContact.CustomerContactTypeID\n" +
+            "INNER JOIN [Order] ON [Order].CustomerID = CustomerContact.CustomerContactID\n" +
+            "WHERE CustomerContact.[CustomerContactPrimary] = 1 AND OrderBalance > 0\n" +
+            "AND Customer.Deleted = 0\n" +
+            "GROUP BY Customer.CustomerID, CustomerFirst, CustomerLast, CustomerContactInfo, CustomerContactTypeDescription;";
 
     /*
         TODO: Name your report.

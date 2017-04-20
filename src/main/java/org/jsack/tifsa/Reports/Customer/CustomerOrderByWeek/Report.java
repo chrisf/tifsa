@@ -19,8 +19,7 @@ public class Report implements IReport{
         If you already created your reports using the previous method, just copy and paste it into here.
         If you haven't, copy and paste it from Drive and replace all the "\n" with a space.
      */
-    private final String sql = "SELECT DATEPART(year, dbo.[Order].OrderDate) AS 'Year', \n" +
-            "DATENAME(MONTH, dbo.[Order].OrderDate) AS Month, \n" +
+    private final String sql = "SELECT OrderDate,\n" +
             "dbo.Customer.CustomerFirst, \n" +
             "dbo.Customer.CustomerLast,\n" +
             "dbo.CustomerContact.customercontactinfo AS ContactInfo,\n" +
@@ -33,11 +32,8 @@ public class Report implements IReport{
             "FULL JOIN OrderDiscount ON OrderDiscount.OrderID = [Order].OrderID\n" +
             "INNER JOIN customercontact ON customercontact.customercontactID = customer.customerID\n" +
             "\n" +
-            "WHERE DATEPART(year, dbo.[Order].OrderDate) = '2008'\n" +
-            "AND DATENAME(MONTH, dbo.[Order].OrderDate)= 'April' \n" +
-            "AND dbo.Customer.Deleted = 0\n" +
-            "\n" +
-            "order by CustomerFirst;\n";
+            "WHERE dbo.[Order].OrderDate BETWEEN :dayStart AND :dayEnd \n" +
+            "AND dbo.Customer.Deleted = 0";
 
     /*
         TODO: Name your report.

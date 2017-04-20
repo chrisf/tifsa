@@ -30,4 +30,7 @@ public class Vendor {
     public void setDeleted(boolean deleted) {
         this.deleted = deleted;
     }
+
+    @Override
+    public String toString() { return getVendorName(); }
 }

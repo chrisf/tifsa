@@ -23,7 +23,7 @@ public class Report implements IReport{
             "FROM Customer " +
             "INNER JOIN CustomerType ON Customer.CustomerTypeID = CustomerType.CustomerTypeID " +
             "INNER JOIN CustomerIncident ON Customer.CustomerID = CustomerIncident.CustomerID " +
-            "INNER JOIN IncidentType ON CustomerIncident.IncidentTypeID = IncidentType.IncidentTypeID";
+            "INNER JOIN IncidentType ON CustomerIncident.IncidentTypeID = IncidentType.IncidentTypeID WHERE Customer.Deleted = 0";
 
     /*
         TODO: Name your report.

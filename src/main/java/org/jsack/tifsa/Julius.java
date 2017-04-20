@@ -9,6 +9,8 @@ import org.jsack.tifsa.Database.Employee.Employee;
 import org.jsack.tifsa.Database.Employee.EmployeeSchema;
 import org.jsack.tifsa.Database.State.State;
 import org.jsack.tifsa.Database.State.StateSchema;
+import org.jsack.tifsa.Database.Vendor.Vendor;
+import org.jsack.tifsa.Database.Vendor.VendorSchema;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 import org.springframework.jdbc.core.JdbcTemplate;
@@ -25,6 +27,7 @@ public class Julius {
     private static ObservableList<State> states = null;
     private static ObservableList<CustomerStatus> customerStatuses = null;
     private static ObservableList<Employee> employees = null;
+    private static ObservableList<Vendor> vendors = null;
 
     public static ObservableList<String> getYears() {
         return FXCollections.observableArrayList(
@@ -74,6 +77,8 @@ public class Julius {
 
             employees = FXCollections.observableArrayList(
                     new DBSelect().selectAll(new EmployeeSchema())
+            vendors = FXCollections.observableArrayList(
+                    new DBSelect().selectAll(new VendorSchema())
             );
         }).start();
     }
@@ -94,4 +99,5 @@ public class Julius {
         return states;
     }
     public static ObservableList<Employee> getAllEmployees() { return employees;}
+    public static ObservableList<Vendor> getAllVendors() { return vendors; }
 }

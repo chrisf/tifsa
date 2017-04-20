@@ -26,7 +26,7 @@ public class ReportModel extends ReportModelBase {
         columns.put("First Name", new ColumnInfo("First Name", StringColumn.class));
         columns.put("Last Name", new ColumnInfo("Last Name", StringColumn.class));
         columns.put("Total Orders", new ColumnInfo("Number of Orders", IntegerColumn.class));
-        columns.put("Total Amount of Orders", new ColumnInfo("Order Totals", CurrencyColumn.class));
+        columns.put("Total Price of Orders", new ColumnInfo("Order Totals", CurrencyColumn.class));
         columns.put("Status", new ColumnInfo("Status", StringColumn.class));
 
 

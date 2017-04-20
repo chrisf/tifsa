@@ -1,6 +1,7 @@
 package org.jsack.tifsa.Reports;
 
 import org.jsack.tifsa.Reports.Interfaces.IReport;
+import org.jsack.tifsa.Utility;
 import org.springframework.jdbc.core.RowMapper;
 
 import java.sql.ResultSet;
@@ -21,7 +22,9 @@ public class ReportWrapper implements RowMapper<ReportModelBase> {
         reportModel.getColumns().entrySet().forEach((entry) ->
         {
             try {
-                reportModel.getRow().add(resultSet.getObject(entry.getKey()).toString());
+                String result = Utility.blankIfNull(resultSet.getObject(entry.getKey()));
+
+                reportModel.getRow().add(result);
            } catch (SQLException e) {
                 e.printStackTrace();
             }

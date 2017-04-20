@@ -10,6 +10,7 @@ import javafx.scene.layout.Pane;
 import org.joda.time.LocalDateTime;
 import org.joda.time.format.DateTimeFormat;
 import org.jsack.tifsa.Database.Employee.Employee;
+import org.jsack.tifsa.Database.State.State;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -45,6 +46,16 @@ public class Utility {
         return s1.toLowerCase().contains(s2.toLowerCase());
     }
 
+    public static State getState(String stateName) {
+        return Julius.getAllStates().stream()
+                .filter(s -> s.getStateName().equalsIgnoreCase(stateName))
+                .collect(Collectors.toList()).get(0);
+    }
+
+    public static long getStateId(String stateName) {
+        return getState(stateName).getStateId();
+    }
+
     public static boolean isNumber(String input) {
         return input.matches("[-+]?\\d*\\.?\\d+");
     }
@@ -69,9 +80,9 @@ public class Utility {
     public static void notifyTrial(final ViewFlowContext context) {
         notify(context, "Not available in the current version\nPlease update to TiFSA Full for more features!");
     }
-
-    public static String blankIfNull(String s) {
-        return s != null ? s : "";
+  
+    public static String blankIfNull(Object s) {
+        return s == null ? "" : s.toString();
     }
 
     public static long getStateIdByName(String name) {

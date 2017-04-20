@@ -10,8 +10,9 @@
     TODO: Change the fx:controller portion to the path to your controller!
     you should only have to change the ReportTemplate part of this path to the directory of your Report.
 -->
+<?import com.jfoenix.controls.JFXComboBox?>
 <VBox xmlns="http://javafx.com/javafx"
-            xmlns:fx="http://javafx.com/fxml"
-            fx:controller="org.jsack.tifsa.Reports.Customer.CustomerOrderByYear.Controls">
-
+      xmlns:fx="http://javafx.com/fxml"
+      fx:controller="org.jsack.tifsa.Reports.Customer.CustomerOrderByYear.Controls">
+    <JFXComboBox fx:id="yearSelection" promptText="Enter a year..." prefWidth="Infinity" />
 </VBox>

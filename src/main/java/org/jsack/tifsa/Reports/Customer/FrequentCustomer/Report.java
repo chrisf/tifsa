@@ -4,7 +4,6 @@ import javafx.fxml.FXMLLoader;
 import org.jsack.tifsa.Reports.Interfaces.IReport;
 import org.jsack.tifsa.Reports.ReportCategory;
 import org.jsack.tifsa.Reports.ReportModelBase;
-import org.jsack.tifsa.Reports.ReportTemplate.ReportModel;
 import org.jsack.tifsa.Reports.ReportWrapper;
 import org.springframework.jdbc.core.RowMapper;
 
@@ -20,8 +19,21 @@ public class Report implements IReport{
         If you already created your reports using the previous method, just copy and paste it into here.
         If you haven't, copy and paste it from Drive and replace all the "\n" with a space.
      */
-    private final String sql = "";
-
+    private final String sql = "SELECT\n" +
+            "dbo.Customer.CustomerFirst AS 'First Name', \n" +
+            "dbo.Customer.CustomerLast AS 'Last Name', \n" +
+            "dbo.CustomerStatus.CustomerStatusDescription AS 'Status', \n" +
+            "dbo.State.StateName AS 'State',  \n" +
+            "dbo.Country.CountryName AS 'Country'\n" +
+            "\n" +
+            "FROM Customer\n" +
+            "\n" +
+            "Inner Join State ON Customer.StateID = State.StateID\n" +
+            "Inner Join Country ON Country.CountryID = State.CountryID\n" +
+            "Inner Join CustomerStatus ON Customer.CustomerStatusID = CustomerStatus.CustomerStatusID\n" +
+            "\n" +
+            "WHERE State.StateID = :stateId AND CustomerStatus.CustomerStatusDescription = 'Frequent' AND dbo.Customer.Deleted = 0\n" +
+            "ORDER BY CustomerFirst;\n";
     /*
         TODO: Name your report.
         Set the name of your report here. Make it unique.
