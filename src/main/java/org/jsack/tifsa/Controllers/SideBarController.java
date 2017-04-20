@@ -10,10 +10,8 @@ import io.datafx.controller.flow.context.FXMLViewFlowContext;
 import io.datafx.controller.flow.context.ViewFlowContext;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
-import org.jsack.tifsa.Controllers.LookupControllers.IntroController;
 import org.jsack.tifsa.Controllers.LookupControllers.LookupController;
 import org.jsack.tifsa.Controllers.ReportsControllers.ReportsController;
-import org.jsack.tifsa.Julius;
 
 import javax.annotation.PostConstruct;
 import java.util.Objects;
@@ -70,13 +68,6 @@ public class SideBarController {
                 }
             }
         });
-        parentFlow.withGlobalAction(sales.getId(), ((a, b) -> {
-                    Julius.getAllStates().forEach(e -> {
-                        System.out.println(e.getStateName());
-                    });
-                })
-        );
-
         parentFlow.withGlobalLink(lookup.getId(), LookupController.class);
         parentFlow.withGlobalLink(home.getId(), IntroController.class);
         parentFlow.withGlobalLink(reports.getId(), ReportsController.class);

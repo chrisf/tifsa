@@ -14,7 +14,6 @@ import javafx.animation.Transition;
 import javafx.fxml.FXML;
 import javafx.scene.layout.StackPane;
 import javafx.util.Duration;
-import org.jsack.tifsa.Controllers.LookupControllers.IntroController;
 
 import javax.annotation.PostConstruct;
 
