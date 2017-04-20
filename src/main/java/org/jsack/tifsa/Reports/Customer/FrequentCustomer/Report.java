@@ -4,7 +4,6 @@ import javafx.fxml.FXMLLoader;
 import org.jsack.tifsa.Reports.Interfaces.IReport;
 import org.jsack.tifsa.Reports.ReportCategory;
 import org.jsack.tifsa.Reports.ReportModelBase;
-import org.jsack.tifsa.Reports.ReportTemplate.ReportModel;
 import org.jsack.tifsa.Reports.ReportWrapper;
 import org.springframework.jdbc.core.RowMapper;
 

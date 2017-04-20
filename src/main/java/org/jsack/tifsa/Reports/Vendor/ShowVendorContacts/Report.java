@@ -4,7 +4,6 @@ import javafx.fxml.FXMLLoader;
 import org.jsack.tifsa.Reports.Interfaces.IReport;
 import org.jsack.tifsa.Reports.ReportCategory;
 import org.jsack.tifsa.Reports.ReportModelBase;
-import org.jsack.tifsa.Reports.ReportTemplate.ReportModel;
 import org.jsack.tifsa.Reports.ReportWrapper;
 import org.springframework.jdbc.core.RowMapper;
 
@@ -52,7 +51,7 @@ public class Report implements IReport{
             Employee,
             Product
      */
-    private ReportCategory reportCategory = ReportCategory.Customer;
+    private ReportCategory reportCategory = ReportCategory.Vendor;
 
     @Override
     public ReportModelBase getModel() {
@@ -87,6 +86,6 @@ public class Report implements IReport{
      */
     @Override
     public FXMLLoader getControls() throws IOException {
-        return new FXMLLoader(getClass().getResource("/ReportControls/Template.fxml"));
+        return new FXMLLoader(getClass().getResource("/ReportControls/ShowVendorContacts.fxml"));
     }
 }

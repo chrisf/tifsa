@@ -12,7 +12,7 @@ import java.util.Map;
 import java.util.ResourceBundle;
 
 public class Controls implements Initializable, IControl {
-    JFXComboBox<Vendor> vendorSelection;
+    public JFXComboBox<Vendor> vendorSelection;
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
