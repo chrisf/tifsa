@@ -3,6 +3,9 @@ package org.jsack.tifsa.Controllers.SalesControllers;
 import com.jfoenix.controls.*;
 import com.jfoenix.controls.datamodels.treetable.RecursiveTreeObject;
 import io.datafx.controller.ViewController;
+import io.datafx.controller.flow.FlowHandler;
+import io.datafx.controller.flow.context.FXMLViewFlowContext;
+import io.datafx.controller.flow.context.ViewFlowContext;
 import javafx.beans.property.LongProperty;
 import javafx.beans.property.SimpleLongProperty;
 import javafx.beans.property.SimpleStringProperty;
@@ -15,6 +18,7 @@ import javafx.scene.control.TreeTableColumn;
 import org.jsack.tifsa.Database.CustomerContact.CustomerContact;
 import org.jsack.tifsa.Database.CustomerContact.CustomerContactSchema;
 import org.jsack.tifsa.Database.DBSelect;
+import org.jsack.tifsa.Database.Order.Order;
 import org.jsack.tifsa.Julius;
 import org.jsack.tifsa.Utility;
 import org.springframework.jdbc.core.RowMapper;
@@ -38,14 +42,17 @@ public class OrdersController0 {
     JFXTreeTableColumn<CustomerRecord, String> businessNameColumn, firstNameColumn, lastNameColumn, addressColumn, cityColumn, stateColumn, contactColumn;
 
     @FXML
-    JFXButton createCustomer;
+    JFXButton createCustomer, nextButton;
 
     @FXML
     JFXTreeTableView<CustomerRecord> customerTable;
 
+    @FXMLViewFlowContext
+    ViewFlowContext context;
+
     private ObservableList<CustomerRecord> customerRecords;
     private ObservableList<CustomerContact> customerContacts;
-
+    private CustomerRecord selectedCustomer = null;
     @PostConstruct
     public void init() {
         setupCellValueFactory(businessNameColumn, c -> c.businessName);
@@ -66,6 +73,30 @@ public class OrdersController0 {
                             contact.stream().anyMatch(e -> Utility.containsIgnoreCase(e.getCustomerContactInfo(), newVal));
                 });
             }).start();
+        });
+        customerTable.getSelectionModel().selectedItemProperty().addListener(((observable, oldValue, newValue) -> {
+            selectedCustomer = newValue.getValue();
+        }));
+        nextButton.setOnMouseClicked(e -> {
+            FlowHandler flowHandler = (FlowHandler) context.getRegisteredObject("ContentFlowHandler");
+            if(flowHandler != null) {
+                try {
+                    Order order = new Order();
+                    order.setCustomerId(selectedCustomer.customerId.get());
+                    order.setOrderBillingCity(selectedCustomer.city.get());
+                    order.setOrderShippingCity(selectedCustomer.city.get());
+                    order.setOrderBillingFirst(selectedCustomer.firstName.get());
+                    order.setOrderBillingLast(selectedCustomer.lastName.get());
+                    order.setOrderBillingState(Utility.getStateIdByName(selectedCustomer.state.get()));
+                    order.setOrderShippingState(Utility.getStateIdByName(selectedCustomer.state.get()));
+                    order.setOrderBillingCity(selectedCustomer.city.get());
+                    order.setOrderShippingCity(selectedCustomer.city.get());
+                    order.setOrderBillingStreet(selectedCustomer.address.get());
+                    order.setOrderShippingStreet(selectedCustomer.address.get());
+                    context.register("NewOrderCustomer", order);
+                    flowHandler.navigateTo(OrdersController2.class);
+                } catch (Exception ex) {}
+            }
         });
         new Thread(() -> {
             loadCustomers();
