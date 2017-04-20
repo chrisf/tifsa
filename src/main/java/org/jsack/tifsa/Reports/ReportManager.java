@@ -94,6 +94,11 @@ public class ReportManager {
         // Revenue reports
         reports.add(new org.jsack.tifsa.Reports.Revenue.RevenueByDay.Report());
         reports.add(new org.jsack.tifsa.Reports.Revenue.RevenueByWeek.Report());
+        reports.add(new org.jsack.tifsa.Reports.Revenue.ShowProductRevenueByMonth.Report());
+        reports.add(new org.jsack.tifsa.Reports.Revenue.ShowProductRevenueByDate.Report());
+        reports.add(new org.jsack.tifsa.Reports.Revenue.ShowProductRevenueByWeek.Report());
+        reports.add(new org.jsack.tifsa.Reports.Revenue.ShowProductRevenueByYear.Report());
+
 
         // Vendor reports
         reports.add(new org.jsack.tifsa.Reports.Vendor.ShowAllVendors.Report());
