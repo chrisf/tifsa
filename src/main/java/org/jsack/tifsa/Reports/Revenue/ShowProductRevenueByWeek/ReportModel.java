@@ -46,11 +46,11 @@ public class ReportModel extends ReportModelBase {
                 date/time   => DateTimeColumn.class
          */
         //columns added by steven
-        columns.put("Year", new ColumnInfo("Year", IntegerColumn.class));
+        columns.put("Year", new ColumnInfo("Year", StringColumn.class));
         columns.put("Month", new ColumnInfo("Month", StringColumn.class));
         columns.put("Week", new ColumnInfo("Week", IntegerColumn.class));
         columns.put("ProductDescription", new ColumnInfo("Product Description", StringColumn.class));
-        columns.put("ProductSKU", new ColumnInfo("Product SKU", IntegerColumn.class));
+        columns.put("ProductSKU", new ColumnInfo("Product SKU", StringColumn.class));
         columns.put("Revenue", new ColumnInfo("Revenue", CurrencyColumn.class));
         columns.put("VendorName", new ColumnInfo("Vendor Name", StringColumn.class));
         columns.put("BrandName", new ColumnInfo("Brand Name", StringColumn.class));
