@@ -10,6 +10,6 @@
 <VBox GridPane.rowIndex="1" GridPane.columnIndex="0" xmlns="http://javafx.com/javafx"
             xmlns:fx="http://javafx.com/fxml"
             fx:controller="org.jsack.tifsa.Reports.Employee.EmployeeRevenueByYear.Controls">
-    <JFXComboBox fx:id="yearSelection" promptText="Choose year..." maxWidth="Infinity" />
-    <JFXComboBox fx:id="employeeSelection" promptText="Choose employee type" maxWidth="Infinity" />
+    <JFXComboBox fx:id="yearSelection" promptText="Choose year..." maxWidth="Infinity" labelFloat="true"  />
+    <JFXComboBox fx:id="employeeSelection" promptText="Choose employee type" maxWidth="Infinity" labelFloat="true"  />
 </VBox>
